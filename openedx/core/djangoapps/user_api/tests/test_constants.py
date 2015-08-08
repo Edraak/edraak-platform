@@ -109,7 +109,6 @@ SORTED_COUNTRIES = [
     (u"IQ", u"Iraq"),
     (u"IE", u"Ireland"),
     (u"IM", u"Isle of Man"),
-    (u"IL", u"Israel"),
     (u"IT", u"Italy"),
     (u"JM", u"Jamaica"),
     (u"JP", u"Japan"),

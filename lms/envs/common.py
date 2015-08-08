@@ -2638,6 +2638,7 @@ COUNTRIES_OVERRIDE = {
     # Taiwan is specifically not translated to avoid it being translated as "Taiwan (Province of China)"
     "TW": "Taiwan",
     'XK': _('Kosovo'),
+    "IL": None,  # Edraak (countries): Excluding Israel from country list
 }
 
 # which access.py permission name to check in order to determine if a course is visible in
