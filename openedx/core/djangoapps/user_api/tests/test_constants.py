@@ -246,7 +246,6 @@ SORTED_COUNTRIES = [
     (u"VG", u"Virgin Islands (British)"),
     (u"VI", u"Virgin Islands (U.S.)"),
     (u"WF", u"Wallis and Futuna"),
-    (u"EH", u"Western Sahara"),
     (u"YE", u"Yemen"),
     (u"ZM", u"Zambia"),
     (u"ZW", u"Zimbabwe"),
