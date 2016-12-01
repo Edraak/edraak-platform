@@ -523,7 +523,10 @@ MONGODB_LOG = {
     'db': 'xlog',
 }
 
-NOTES_DISABLED_TABS = []
+
+# ForUs variables
+FORUS_AUTH_SECRET_KEY = 'dummy_auth_secret_key'
+FORUS_BASE_URL = 'http://forus.jo'
 
 # Enable EdxNotes for tests.
 FEATURES['ENABLE_EDXNOTES'] = True

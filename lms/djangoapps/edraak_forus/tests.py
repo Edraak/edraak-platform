@@ -24,7 +24,11 @@ PAST_WEEK = datetime.now(pytz.UTC) - timedelta(days=7)
 NEXT_MONTH = datetime.now(pytz.UTC) + timedelta(days=30)
 YESTERDAY = datetime.now(pytz.UTC) - timedelta(days=1)
 
-TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+
+class ForusAuthTest(ModuleStoreTestCase):
+    """
+    Test the ForUs auth.
+    """
 
 
 def build_forus_params(**kwargs):
@@ -81,6 +85,8 @@ class ForusAuthTest(ModuleStoreTestCase):
         path_b = urlparse(url_b).path
         self.assertEquals(path_a, path_b, 'Paths are not equal `{}` != `{}`'.format(path_a, path_b))
 
+
+    @patch('edraak_forus.helpers.calculate_hmac', Mock(return_value='dummy_hmac'))
     @patch('openedx.core.djangoapps.user_api.views.set_logged_in_cookies')
     def test_open_enrolled_upcoming_course(self, mock_set_logged_in_cookies):
         # TODO: Split into more than one test case
@@ -120,20 +126,25 @@ class ForusAuthTest(ModuleStoreTestCase):
 
         self._assertLoggedIn(msg_prefix='The user is not logged in after clicking the form another time')
 
-    def test_custom_registration_messages(self):
-        res = self.client.get(self.auth_url, self._build_forus_params())
-        self.assertNotContains(res, 'Create a new account')
-        self.assertContains(res, 'Edraak account using ForUs')
+    def _build_forus_params(self, forus_hmac, **kwargs):
+        defaults = {
+            'course_id': unicode(self.course.id),
+            'email': self.user_email,
+            'name': 'Abdulrahman (ForUs)',
+            'enrollment_action': 'enroll',
+            'country': 'JO',
+            'level_of_education': 'hs',
+            'gender': 'm',
+            'year_of_birth': '1989',
+            'lang': 'ar',
+            'time': datetime.utcnow().strftime(self.TIME_FORMAT),
+        }
 
-        self.assertNotContains(res, 'Create your account')
-        self.assertContains(res, 'Create your Edraak account')
+        values = defaults.copy()
+        values.update(kwargs)
+        values['forus_hmac'] = forus_hmac
 
-        self.assertContains(res, 'toggle-form hidden')
-
-    def _build_forus_params(self, **kwargs):
-        params = build_forus_params(course_id=unicode(self.course.id), email=self.user_email, forus_hmac='dummy_hmac')
-        params.update(**kwargs)
-        return params
+        return values
 
 
 class ForUsMessagePageTest(TestCase):
@@ -154,178 +165,3 @@ class ForUsMessagePageTest(TestCase):
 
         self.assertContains(res, message, msg_prefix='The message is missing from the page')
         self.assertNotContains(res, 'error', msg_prefix='The page contains the work `error` which is confusing')
-
-    def test_no_xss(self):
-        message = '<script>alert("Hello")</script>'
-        escaped_message = html_escape(message)
-
-        self.assertNotEqual(message, escaped_message, 'Something is wrong, message is not being escaped!')
-        self.assertNotIn('<script>', escaped_message, 'Something is wrong, message is not being escaped!')
-
-        res = self.client.get(self.url, {
-            'message': message,
-        })
-
-        self.assertNotContains(res, message, msg_prefix='The page is XSS vulnerable')
-        self.assertContains(res, escaped_message, msg_prefix='The page encodes the message incorrectly')
-
-
-@ddt.ddt
-class ParamValidatorTest(ModuleStoreTestCase):
-    """
-    Tests for the params validator functions.
-    """
-
-    user_email = 'forus.user.faramvalidatortest@example.com'
-
-    def setUp(self):
-        super(ParamValidatorTest, self).setUp()
-
-        self.draft_course = CourseFactory.create(
-            start=NEXT_WEEK,
-            enrollment_start=NEXT_WEEK,
-            end=NEXT_WEEK,
-            enrollment_end=NEXT_WEEK,
-        )
-
-        self.upcoming_course = CourseFactory.create(
-            start=NEXT_WEEK,
-            enrollment_start=YESTERDAY,
-            end=NEXT_MONTH,
-            enrollment_end=NEXT_WEEK,
-        )
-
-        self.current_course = CourseFactory.create(
-            start=PAST_WEEK,
-            enrollment_start=PAST_WEEK,
-            end=NEXT_MONTH,
-            enrollment_end=NEXT_WEEK,
-        )
-
-        self.closed_course = CourseFactory.create(
-            start=PAST_WEEK,
-            enrollment_start=PAST_WEEK,
-            end=YESTERDAY,
-            enrollment_end=YESTERDAY,
-        )
-
-    def test_sanity_check(self):
-        """
-        The user shouldn't exist, so the whole test case succeeds.
-        """
-        with self.assertRaises(User.DoesNotExist):
-            User.objects.get(email=self.user_email)
-
-    def test_closed_course(self):
-        with self.assertRaisesRegexp(ValidationError, 'Enrollment.*closed.*go.*ForUs') as cm:
-            self._validate_params(course_id=unicode(self.closed_course.id))
-
-        self._assertErrorCount(cm.exception, 1)
-
-    def test_current_course(self):
-        try:
-            self._validate_params(course_id=unicode(self.current_course.id))
-        except ValidationError as exc:
-            self.fail('The course is open and everything is fine, yet there is an error: `{}`'.format(exc))
-
-    def test_upcoming_course(self):
-        try:
-            self._validate_params(course_id=unicode(self.upcoming_course.id))
-        except ValidationError as exc:
-            self.fail('The course is upcoming and everything is fine, yet there is an error: `{}`'.format(exc))
-
-    def test_draft_course(self):
-        with self.assertRaisesRegexp(ValidationError, '.*not.*opened.*go.*ForUs') as cm:
-            self._validate_params(course_id=unicode(self.draft_course.id))
-
-        self._assertErrorCount(cm.exception, 1)
-
-    @ddt.data('', ' ', 'XZ')
-    def test_invalid_country(self, bad_value):
-        self._assertValidateData(
-            field_id='country',
-            bad_value=bad_value,
-            exception_regexp='.*Invalid.*country.*',
-        )
-
-    @ddt.data('', ' ')
-    def test_invalid_name(self, bad_value):
-        self._assertValidateData(
-            field_id='name',
-            bad_value=bad_value,
-            exception_regexp='.*Invalid.*name.*',
-        )
-
-    @ddt.data('', ' ', 'hello')
-    def test_invalid_level_of_education(self, bad_value):
-        self._assertValidateData(
-            field_id='level_of_education',
-            bad_value=bad_value,
-            exception_regexp='.*Invalid.*level of education.*',
-        )
-
-    @ddt.data('', ' ', 'o', 'hello')
-    def test_invalid_gender(self, bad_value):
-        self._assertValidateData(
-            field_id='gender',
-            bad_value=bad_value,
-            exception_regexp='.*Invalid.*gender.*',
-        )
-
-    def _assertValidateData(self, field_id, bad_value, exception_regexp):
-        with self.assertRaisesRegexp(ValidationError, exception_regexp) as cm:
-            params = {field_id: bad_value}
-            self._validate_params(course_id=unicode(self.upcoming_course.id), **params)
-
-        self._assertErrorCount(cm.exception, 1)
-        self.assertIn(field_id, cm.exception.message_dict)
-
-    def _assertErrorCount(self, exception, expected_count):
-        count = len(exception.messages)
-        message = 'There should be one error instead of `{count}` in exception `{exception}`'.format(
-            count=count,
-            exception=exception,
-        )
-        self.assertEquals(count, expected_count, message)
-
-    @patch('edraak_forus.helpers.calculate_hmac', Mock(return_value='dummy_hmac'))
-    def _validate_params(self, **kwargs):
-        params = build_forus_params(email=self.user_email)
-        params.update(**kwargs)
-        return validate_forus_params(params)
-
-
-class RegistrationApiViewTest(ModuleStoreTestCase):
-    wanted_hidden_fields = sorted([
-        'course_id',
-        'enrollment_action',
-        'forus_hmac',
-        'lang',
-        'time',
-        'country',
-        'is_third_party_auth',
-        'email',
-        'gender',
-        'level_of_education',
-        'name',
-        'year_of_birth',
-        'password',
-        'goals',
-    ])
-
-    def setUp(self):
-        super(RegistrationApiViewTest, self).setUp()
-        self.url = reverse('forus_v1_reg_api')
-
-    @patch.dict(settings.REGISTRATION_EXTRA_FIELDS, {'country': 'required'})
-    def test_hidden_fields(self):
-        res = self.client.get(self.url)
-
-        form = json.loads(res.content)
-
-        hidden_fields = sorted([
-            str(field['name']) for field in form['fields']
-            if field['type'] == 'hidden'
-        ])
-
-        self.assertListEqual(hidden_fields, self.wanted_hidden_fields)
