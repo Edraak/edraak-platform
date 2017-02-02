@@ -58,7 +58,7 @@ define(
         problemId = $(value).attr('data-plain-id');
         if (typeof problemId !== 'string') {
             console.log('ERROR: Could not find the ID of the problem DOM element.');
-
+            console.log('just a line');
             return;
         }
 
