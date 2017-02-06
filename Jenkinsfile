@@ -1,8 +1,6 @@
 #!groovy
 
 def stepsForParallel = [:]
-def ENABLE_BOK_CHOY = false
-def RUN_ONLY_JS_UNIT_AND_COMMONLIB = true
 
 def makeNode(suite, shard) {
   return {
@@ -25,6 +23,9 @@ def makeNode(suite, shard) {
 }
 
 def getSuites() {
+  def ENABLE_BOK_CHOY = false
+  def RUN_ONLY_JS_UNIT_AND_COMMONLIB = true
+
   def suites = [
     [name: 'js-unit', 'shards': 1],
     [name: 'commonlib-unit', 'shards': 1],
