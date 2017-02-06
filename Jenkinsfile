@@ -2,6 +2,7 @@
 
 def stepsForParallel = [:]
 def ENABLE_BOK_CHOY = false
+def RUN_ONLY_JS_UNIT = true
 
 stage('Prepare') {
   def makeNode = { suite, shard ->
@@ -24,34 +25,49 @@ stage('Prepare') {
     }
   }
 
-  def suites = [
-    [name: 'quality', 'shards': 1],
-    [name: 'lms-unit', 'shards': 4],
-    [name: 'cms-unit', 'shards': 1],
-    [name: 'commonlib-unit', 'shards': 1],
-    [name: 'js-unit', 'shards': 1],
-    [name: 'commonlib-js-unit', 'shards': 1],
-    [name: 'lms-acceptance', 'shards': 1],
-    [name: 'cms-acceptance', 'shards': 1],
-  ]
+  def getSuites = {
+    def suites = [
+      [name: 'js-unit', 'shards': 1],
+    ]
 
-  if (ENABLE_BOK_CHOY) {
-    suites.add([name: 'bok-choy', 'shards': 9])
+    if (!RUN_ONLY_JS_UNIT) {
+      suites.addAll([
+        [name: 'quality', 'shards': 1],
+        [name: 'lms-unit', 'shards': 4],
+        [name: 'cms-unit', 'shards': 1],
+        [name: 'commonlib-unit', 'shards': 1],
+        [name: 'commonlib-js-unit', 'shards': 1],
+        [name: 'lms-acceptance', 'shards': 1],
+        [name: 'cms-acceptance', 'shards': 1],
+      ])
+    }
+
+    if (ENABLE_BOK_CHOY) {
+      suites.add([name: 'bok-choy', 'shards': 9])
+    }
+
+    return suites
   }
 
-  for (def suite in suites) {
-    def name = suite['name']
-    def shards = suite['shards']
+  def buildParallelSteps = {
+    def suites = getSuites()
 
-    if (shards == 1) {
-      stepsForParallel["${name}_all"] = makeNode(name, 'all')
-    } else {
-      for (int i=1; i<=shards; i++) {
-        stepsForParallel["${name}_shard_${i}"] = makeNode(name, i)
+    for (int suiteId=0; suiteId<suites.size(); suiteId++) {
+      def suite = suites.get(suiteId)
+      def name = suite['name']
+      def shards = suite['shards']
+
+      if (shards > 1) {
+        for (int shardIndex=1; shardIndex<=shards; shardIndex++) {
+          stepsForParallel["${name}_shard_${shardIndex}"] = makeNode(name, shardIndex)
+        }
+      } else {
+        stepsForParallel["${name}_all"] = makeNode(name, 'all')
       }
     }
   }
 
+  buildParallelSteps()
   echo 'Starting the build...'
 }
 
