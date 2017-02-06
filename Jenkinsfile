@@ -27,7 +27,7 @@ def makeNode(suite, shard) {
 
 def getSuites() {
   def ENABLE_BOK_CHOY = false
-  def RUN_ONLY_JS_UNIT_AND_COMMONLIB = true
+  def RUN_ONLY_JS_UNIT_AND_COMMONLIB = false
 
   def suites = [
     [name: 'js-unit', 'shards': 1],
