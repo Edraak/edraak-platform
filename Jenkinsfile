@@ -10,12 +10,17 @@ def makeNode(suite, shard) {
 
         git 'https://github.com/Edraak/jenkins-edx-platform.git'
 
-        withEnv(["TEST_SUITE=${suite}", "SHARD=${shard}"]) {
-          sh './scripts/all-tests.sh'
+        try {
+          withEnv(["TEST_SUITE=${suite}", "SHARD=${shard}"]) {
+            sh './scripts/all-tests.sh'
+          }
+        } catch (e) {
+            // if any exception occurs, mark the build as failed
+            throw e
+        } finally {
+            archiveArtifacts 'reports/*, test_root/log/*'
         }
       }
-
-      archiveArtifacts 'reports/*, test_root/log/*'
     }
   }
 }
