@@ -28,16 +28,23 @@ def makeNode(suite, shard) {
 def getSuites() {
   def ENABLE_BOK_CHOY = false
   def RUN_ONLY_JS_UNIT_AND_COMMONLIB = false
+  def RUN_ONLY_LMS_UNIT = true
 
-  def suites = [
-    [name: 'js-unit', 'shards': 1],
-    [name: 'commonlib-unit', 'shards': 1],
-  ]
-
-  if (!RUN_ONLY_JS_UNIT_AND_COMMONLIB) {
+  def suites = []
+  if (RUN_ONLY_JS_UNIT_AND_COMMONLIB) {
+    suites.addAll([
+        [name: 'lms-unit', 'shards': 4],
+    ])
+  }
+  if (!RUN_ONLY_LMS_UNIT && RUN_ONLY_JS_UNIT_AND_COMMONLIB) {
+    suites.addAll([
+      [name: 'js-unit', 'shards': 1],
+      [name: 'commonlib-unit', 'shards': 1],
+    ])
+  }
+  if (!RUN_ONLY_JS_UNIT_AND_COMMONLIB && !RUN_ONLY_LMS_UNIT) {
     suites.addAll([
       [name: 'quality', 'shards': 1],
-      [name: 'lms-unit', 'shards': 4],
       [name: 'cms-unit', 'shards': 1],
       [name: 'lms-acceptance', 'shards': 1],
       [name: 'cms-acceptance', 'shards': 1],

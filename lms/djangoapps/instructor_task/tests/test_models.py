@@ -60,7 +60,7 @@ class ReportStoreTestMixin(object):
         report_store.store(self.course_id, 'new_file', StringIO())
 
         self.assertEqual(
-            [link[0] for link in report_store.links_for(self.course_id)],
+            [link for link in report_store.links_for(self.course_id)],
             ['new_file', 'middle_file', 'old_file']
         )
 
