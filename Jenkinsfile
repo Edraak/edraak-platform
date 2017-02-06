@@ -2,7 +2,7 @@
 
 def stepsForParallel = [:]
 def ENABLE_BOK_CHOY = false
-def RUN_ONLY_JS_UNIT = true
+def RUN_ONLY_JS_UNIT_AND_COMMONLIB = true
 
 stage('Prepare') {
   def makeNode = { suite, shard ->
@@ -11,7 +11,7 @@ stage('Prepare') {
 
       node('worker-ami') {
         timeout(time: 55, unit: 'MINUTES') {
-          echo "Hi, it is me ${suite}:${shard} again, the workeer just started!"
+          echo "Hi, it is me ${suite}:${shard} again, the worker just started!"
 
           git 'https://github.com/Edraak/jenkins-edx-platform.git'
 
@@ -28,15 +28,14 @@ stage('Prepare') {
   def getSuites = {
     def suites = [
       [name: 'js-unit', 'shards': 1],
+      [name: 'commonlib-unit', 'shards': 1],
     ]
 
-    if (!RUN_ONLY_JS_UNIT) {
+    if (!RUN_ONLY_JS_UNIT_AND_COMMONLIB) {
       suites.addAll([
         [name: 'quality', 'shards': 1],
         [name: 'lms-unit', 'shards': 4],
         [name: 'cms-unit', 'shards': 1],
-        [name: 'commonlib-unit', 'shards': 1],
-        [name: 'commonlib-js-unit', 'shards': 1],
         [name: 'lms-acceptance', 'shards': 1],
         [name: 'cms-acceptance', 'shards': 1],
       ])
