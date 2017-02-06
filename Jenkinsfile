@@ -1,7 +1,5 @@
 #!groovy
 
-def stepsForParallel = [:]
-
 def makeNode(suite, shard) {
   return {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
@@ -49,27 +47,31 @@ def getSuites() {
 }
 
 def buildParallelSteps() {
+  def parallelSteps = [:]
+
   for (suite in getSuites()) {
     def name = suite['name']
     def shards = suite['shards']
 
     if (shards > 1) {
       for (int i=1; i<=shards; i++) {
-        stepsForParallel["${name}_shard_${i}"] = makeNode(name, i)
+        parallelSteps["${name}_shard_${i}"] = makeNode(name, i)
       }
     } else {
-      stepsForParallel["${name}_all"] = makeNode(name, 'all')
+      parallelSteps["${name}_all"] = makeNode(name, 'all')
     }
   }
+
+  return parallelSteps
 }
 
 stage('Prepare') {
-  buildParallelSteps()
   echo 'Starting the build...'
+  echo 'It it always nice to have a green checkmark :D'
 }
 
 stage('Test') {
-  parallel stepsForParallel
+  parallel buildParallelSteps()
 }
 
 stage('Done') {
