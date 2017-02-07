@@ -72,8 +72,8 @@ pipeline {
       steps {
         node('master') {
           // TODO: This might be a bottleneck, but that's ok for now!
-          echo 'Starting the build...'
-          echo 'It it always nice to have a green checkmark :D'
+          sh 'echo "Starting the build..."'
+          sh 'echo "It it always nice to have a green checkmark :D"'
         }
       }
     }
@@ -87,7 +87,7 @@ pipeline {
     stage('Done') {
       node('master') {
         // TODO: This might be a bottleneck, but that's ok for now!
-        echo 'I am done, hurray!'
+        sh 'echo "I am done, hurray!"'
       }
     }
   }
