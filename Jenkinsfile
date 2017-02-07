@@ -85,9 +85,11 @@ pipeline {
     }
 
     stage('Done') {
-      node('master') {
-        // TODO: This might be a bottleneck, but that's ok for now!
-        sh 'echo "I am done, hurray!"'
+      steps {
+        node('master') {
+          // TODO: This might be a bottleneck, but that's ok for now!
+          sh 'echo "I am done, hurray!"'
+        }        
       }
     }
   }
