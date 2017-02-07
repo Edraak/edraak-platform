@@ -2,14 +2,11 @@
 
 def makeNode(suite, shard) {
   return {
-    echo "I am ${suite}:${shard}, and the worker is yet to be started!"
-
     node('worker-ami') {
-      checkout scm
-
-      sh 'git log --oneline | head'
-
       timeout(time: 55, unit: 'MINUTES') {
+        checkout scm
+        sh 'git log --oneline | head'
+
         echo "Hi, it is me ${suite}:${shard} again, the worker just started!"
 
         try {
@@ -67,15 +64,23 @@ def buildParallelSteps() {
   return parallelSteps
 }
 
-stage('Prepare') {
-  echo 'Starting the build...'
-  echo 'It it always nice to have a green checkmark :D'
-}
+pipeline {
+  agent any
 
-stage('Test') {
-  parallel buildParallelSteps()
-}
+  stages {
+    stage('Prepare') {
+      echo 'Starting the build...'
+      echo 'It it always nice to have a green checkmark :D'
+    }
 
-stage('Done') {
-  echo 'I am done, hurray!'
+    stage('Test') {
+      steps {
+        parallel buildParallelSteps()
+      }
+    }
+
+    stage('Done') {
+      echo 'I am done, hurray!'
+    }
+  }
 }
