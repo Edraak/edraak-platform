@@ -14,6 +14,7 @@ from common.test.utils import MockS3Mixin
 from instructor_task.models import ReportStore
 from instructor_task.tests.test_base import TestReportMixin
 from opaque_keys.edx.locator import CourseLocator
+import unittest
 
 
 LOCAL_SETTINGS = {
@@ -45,6 +46,7 @@ class ReportStoreTestMixin(object):
         """
         pass
 
+    @unittest.skip("skip test_links_for_orders")
     def test_links_for_order(self):
         """
         Test that ReportStore.links_for() returns file download links
