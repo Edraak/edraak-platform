@@ -37,7 +37,7 @@ def getSuites() {
       // 4,
     ]],
     // [name: 'cms-unit', 'shards': ['all']],
-    // [name: 'lms-acceptance', 'shards': ['all']],
+    [name: 'lms-acceptance', 'shards': ['all']],
     // [name: 'cms-acceptance', 'shards': ['all']],
     [name: 'bok-choy', 'shards': [
       // 1,
