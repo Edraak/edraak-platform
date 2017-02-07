@@ -26,12 +26,12 @@ pipeline {
               junit 'reports/**/*.xml'
             }
           }
-        }, commonlib_unit: {
+        }, lms_unit_4: {
           timeout(time: 55, unit: 'MINUTES') {
             node('worker-ami') {
               checkout scm
 
-              sh 'TEST_SUITE=commontlib-unit SHARD=4 ./scripts/all-tests.sh'
+              sh 'TEST_SUITE=lms-unit SHARD=4 ./scripts/all-tests.sh'
 
               archiveArtifacts 'reports/**, test_root/log/**'
               junit 'reports/**/*.xml'
