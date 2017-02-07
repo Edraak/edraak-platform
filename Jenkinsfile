@@ -20,7 +20,7 @@ pipeline {
             node('worker-ami') {
               checkout scm
 
-              sh 'TEST_SUITE=commontlib-unit ./scripts/all-tests.sh'
+              sh 'bash -c "TEST_SUITE=commontlib-unit ./scripts/all-tests.sh"'
 
               archiveArtifacts 'reports/**, test_root/log/**'
               junit 'reports/**/*.xml'
@@ -31,7 +31,7 @@ pipeline {
             node('worker-ami') {
               checkout scm
 
-              sh 'TEST_SUITE=lms-unit SHARD=4 ./scripts/all-tests.sh'
+              sh 'bash -c "TEST_SUITE=lms-unit SHARD=4 ./scripts/all-tests.sh"'
 
               archiveArtifacts 'reports/**, test_root/log/**'
               junit 'reports/**/*.xml'
