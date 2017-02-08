@@ -27,7 +27,7 @@ def makeNode(suite, shard) {
 
 def getSuites() {
   return [
-    // [name: 'js-unit', 'shards': ['all']],
+    [name: 'js-unit', 'shards': ['all']],
     [name: 'commonlib-unit', 'shards': ['all']],
     // [name: 'quality', 'shards': ['all']],
     [name: 'lms-unit', 'shards': [
