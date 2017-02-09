@@ -1,5 +1,18 @@
 #!groovy
 
+def postBuildSteps() {
+  try {
+    archiveArtifacts 'reports/**, test_root/log/**'
+    node {
+      withCredentials([string(credentialsId: 'CODECOV_TOKEN', variable: 'CODECOV_TOKEN')]) {
+        sh 'bash <(curl -s https://codecov.io/bash) || echo "codecov exited with \$?"'
+      }
+    }
+  } finally {
+    junit 'reports/**/*.xml'
+  }
+}
+
 def makeNode(suite, shard) {
   return {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
@@ -17,8 +30,7 @@ def makeNode(suite, shard) {
             sh './scripts/all-tests.sh'
           }
         } finally {
-          archiveArtifacts 'reports/**, test_root/log/**'
-          junit 'reports/**/*.xml'
+          postBuildSteps()
         }
       }
     }
@@ -31,7 +43,7 @@ def getSuites() {
     [name: 'commonlib-unit', 'shards': ['all']],
     // [name: 'quality', 'shards': ['all']],
     [name: 'lms-unit', 'shards': [
-      1,
+      // 1,
       // 2,
       // 3,
       // 4,
