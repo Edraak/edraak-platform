@@ -5,7 +5,7 @@ def postBuildSteps() {
     archiveArtifacts 'reports/**, test_root/log/**'
     node {
       withCredentials([string(credentialsId: 'CODECOV_TOKEN', variable: 'CODECOV_TOKEN')]) {
-        sh 'bash <(curl -s https://codecov.io/bash) || echo "codecov exited with \$?"'
+        sh 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN || echo "codecov exited with \$?"'
       }
     }
   } finally {
@@ -27,7 +27,7 @@ def makeNode(suite, shard) {
 
         try {
           withEnv(["TEST_SUITE=${suite}", "SHARD=${shard}"]) {
-            sh './scripts/all-tests.sh'
+            sh 'ls'
           }
         } finally {
           postBuildSteps()
