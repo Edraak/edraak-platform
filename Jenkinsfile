@@ -9,7 +9,11 @@ def postBuildSteps() {
       }
     }
   } finally {
-    junit 'reports/**/*.xml'
+    try {
+      junit 'reports/**/*.xml'      
+    } finally {
+      deleteDir()
+    }
   }
 }
 
@@ -27,7 +31,7 @@ def makeNode(suite, shard) {
 
         try {
           withEnv(["TEST_SUITE=${suite}", "SHARD=${shard}"]) {
-            sh 'ls'
+            sh './scripts/all-tests.sh'
           }
         } finally {
           postBuildSteps()
