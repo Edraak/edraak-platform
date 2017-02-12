@@ -4,8 +4,8 @@ def postBuildSteps() {
   try {
     archiveArtifacts 'reports/**, test_root/log/**'
     node {
-      withCredentials([string(credentialsId: 'CODECOV_TOKEN', variable: 'CODECOV_TOKEN')]) {
-        sh 'curl -s https://edraak.github.io/codecov-bash/codecov | bash'
+      withCredentials([string(credentialsId: 'COVERALLS_REPO_TOKEN', variable: 'COVERALLS_REPO_TOKEN')]) {
+        sh './scripts/jenkins-report.sh $COVERALLS_REPO_TOKEN $BRANCH_NAME'
       }
     }
   } finally {
