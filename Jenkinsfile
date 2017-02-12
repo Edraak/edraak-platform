@@ -5,7 +5,7 @@ def postBuildSteps() {
     archiveArtifacts 'reports/**, test_root/log/**'
     node {
       withCredentials([string(credentialsId: 'CODECOV_TOKEN', variable: 'CODECOV_TOKEN')]) {
-        sh 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN || echo "codecov exited with \$?"'
+        sh 'curl -s https://codecov.io/bash | bash'
       }
     }
   } finally {
