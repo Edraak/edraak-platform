@@ -9,11 +9,7 @@ def postBuildSteps() {
       }
     }
   } finally {
-    try {
-      junit 'reports/**/*.xml'      
-    } finally {
-      deleteDir()
-    }
+    junit 'reports/**/*.xml'
   }
 }
 
@@ -22,6 +18,8 @@ def makeNode(suite, shard) {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
     node('worker-ami') {
+      deleteDir()
+
       checkout scm
 
       sh 'git log --oneline | head'
