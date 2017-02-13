@@ -1,10 +1,25 @@
 #!groovy
 
+def postBuildSteps() {
+  try {
+    archiveArtifacts 'reports/**, test_root/log/**'
+    node {
+      withCredentials([string(credentialsId: 'COVERALLS_REPO_TOKEN', variable: 'COVERALLS_REPO_TOKEN')]) {
+        sh './scripts/jenkins-report.sh $COVERALLS_REPO_TOKEN $BRANCH_NAME'
+      }
+    }
+  } finally {
+    junit 'reports/**/*.xml'
+  }
+}
+
 def makeNode(suite, shard) {
   return {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
     node('worker-ami') {
+      deleteDir()
+
       checkout scm
 
       sh 'git log --oneline | head'
@@ -17,8 +32,7 @@ def makeNode(suite, shard) {
             sh './scripts/all-tests.sh'
           }
         } finally {
-          archiveArtifacts 'reports/**, test_root/log/**'
-          junit 'reports/**/*.xml'
+          postBuildSteps()
         }
       }
     }
@@ -27,7 +41,7 @@ def makeNode(suite, shard) {
 
 def getSuites() {
   return [
-    [name: 'js-unit', 'shards': ['all']],
+    // [name: 'js-unit', 'shards': ['all']],
     [name: 'commonlib-unit', 'shards': ['all']],
     [name: 'quality', 'shards': ['all']],
     [name: 'lms-unit', 'shards': [
