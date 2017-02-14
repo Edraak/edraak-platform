@@ -5,6 +5,8 @@ def makeNode(suite, shard) {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
     node('worker-ami') {
+      step([$class: 'WsCleanup'])
+
       checkout scm
 
       sh 'git log --oneline | head'
