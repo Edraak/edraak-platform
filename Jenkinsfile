@@ -5,6 +5,7 @@ def makeNode(suite, shard) {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
     node('worker-ami') {
+      // Heads up! Not sure if `WsCleanup` works
       step([$class: 'WsCleanup'])
 
       checkout scm
@@ -20,7 +21,12 @@ def makeNode(suite, shard) {
           }
         } finally {
           archiveArtifacts 'reports/**, test_root/log/**'
-          junit 'reports/**/*.xml'
+
+          try {
+            junit 'reports/**/*.xml'
+          } finally {
+            deleteDir()
+          }
         }
       }
     }
