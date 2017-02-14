@@ -11,10 +11,12 @@ from logging import getLogger
 from django.core.management import call_command
 from django.conf import settings
 from selenium.common.exceptions import WebDriverException
+from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import requests
 from base64 import encodestring
 from json import dumps
+from os import environ
 
 import xmodule.modulestore.django
 from xmodule.contentstore.django import _CONTENTSTORE
@@ -84,6 +86,11 @@ def initial_setup(server):
         else:
             desired_capabilities = {}
 
+        browser_options = None
+        if browser_driver == 'chrome' and environ.get('JENKINS_HOME'):
+            browser_options = webdriver.ChromeOptions()
+            browser_options.add_argument('--no-sandbox')
+
         # There is an issue with ChromeDriver2 r195627 on Ubuntu
         # in which we sometimes get an invalid browser session.
         # This is a work-around to ensure that we get a valid session.
@@ -102,7 +109,11 @@ def initial_setup(server):
                     # sending desired_capabilities.
                     world.browser = Browser(browser_driver)
                 else:
-                    world.browser = Browser(browser_driver, desired_capabilities=desired_capabilities)
+                    world.browser = Browser(
+                        driver_name=browser_driver,
+                        options=browser_options,
+                        desired_capabilities=desired_capabilities,
+                    )
                 world.browser.driver.set_script_timeout(GLOBAL_SCRIPT_TIMEOUT)
                 world.visit('/')
 
