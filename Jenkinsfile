@@ -5,6 +5,9 @@ def makeNode(suite, shard) {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
     node('worker-ami') {
+      // Heads up! Not sure if `WsCleanup` works
+      step([$class: 'WsCleanup'])
+
       checkout scm
 
       sh 'git log --oneline | head'
@@ -18,7 +21,12 @@ def makeNode(suite, shard) {
           }
         } finally {
           archiveArtifacts 'reports/**, test_root/log/**'
-          junit 'reports/**/*.xml'
+
+          try {
+            junit 'reports/**/*.xml'
+          } finally {
+            deleteDir()
+          }
         }
       }
     }
@@ -37,8 +45,8 @@ def getSuites() {
       4,
     ]],
     [name: 'cms-unit', 'shards': ['all']],
-    // [name: 'lms-acceptance', 'shards': ['all']],
-    // [name: 'cms-acceptance', 'shards': ['all']],
+    [name: 'lms-acceptance', 'shards': ['all']],
+    [name: 'cms-acceptance', 'shards': ['all']],
     [name: 'bok-choy', 'shards': [
       1,
       2,
