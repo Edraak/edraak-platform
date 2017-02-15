@@ -5,7 +5,7 @@ def makeNode(suite, shard) {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
     node('worker-ami') {
-      // Heads up! Not sure if `WsCleanup` works
+      // Cleaning up previous builds. Heads up! Not sure if `WsCleanup` actually works.
       step([$class: 'WsCleanup'])
 
       checkout scm
@@ -16,8 +16,12 @@ def makeNode(suite, shard) {
         echo "Hi, it is me ${suite}:${shard} again, the worker just started!"
 
         try {
-          withEnv(["TEST_SUITE=${suite}", "SHARD=${shard}"]) {
-            sh './scripts/all-tests.sh'
+          if (suite == 'accessibility') {
+            sh './scripts/accessibility-tests.sh'
+          } else {
+            withEnv(["TEST_SUITE=${suite}", "SHARD=${shard}"]) {
+              sh './scripts/all-tests.sh'
+            }
           }
         } finally {
           archiveArtifacts 'reports/**, test_root/log/**'
@@ -25,6 +29,7 @@ def makeNode(suite, shard) {
           try {
             junit 'reports/**/*.xml'
           } finally {
+            // This works, but only for the current build files.
             deleteDir()
           }
         }
@@ -45,6 +50,7 @@ def getSuites() {
       4,
     ]],
     [name: 'cms-unit', 'shards': ['all']],
+    [name: 'accessibility', 'shards': ['all']],
     [name: 'lms-acceptance', 'shards': ['all']],
     [name: 'cms-acceptance', 'shards': ['all']],
     [name: 'bok-choy', 'shards': [
