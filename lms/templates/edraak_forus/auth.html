@@ -1,0 +1,52 @@
+<%!
+    import json
+    from django.utils.translation import ugettext as _
+    from openedx.core.lib.js_utils import escape_json_dumps
+%>
+<%namespace name='static' file='/static_content.html'/>
+
+<%inherit file="../main.html" />
+
+<%block name="pagetitle">${_("Sign in or Register")}</%block>
+
+<%block name="js_extra">
+    <%static:require_module module_name="js/student_account/logistration_factory" class_name="LogistrationFactory">
+        var options = ${ escape_json_dumps(data) | n };
+        LogistrationFactory(options);
+    </%static:require_module>
+</%block>
+
+<%block name="header_extras">
+    ## This file is to provide custom messages for ForUs users.
+    ## The file is adopted from
+    <script type="text/template" id="register-tpl">
+        <%static:include path="edraak_forus/register.underscore" />
+    </script>
+
+    % for template_name in ["account", "access", "form_field", "login", "institution_login", "institution_register", "password_reset", "hinted_login"]:
+        <script type="text/template" id="${template_name}-tpl">
+            <%static:include path="student_account/${template_name}.underscore" />
+        </script>
+    % endfor
+</%block>
+
+<style>
+    /* TODO: Move this into a CSS file */
+    .form-field[class*=hidden] {
+        display: none;
+    }
+
+    .forus-notes {
+        margin-bottom: 20px;
+    }
+
+    .forus-notes p {
+        font-size: .85em;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="section-bkg-wrapper">
+    <div id="login-and-registration-container" class="login-register" />
+</div>

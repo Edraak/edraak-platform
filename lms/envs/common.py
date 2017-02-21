@@ -2018,6 +2018,9 @@ INSTALLED_APPS = (
     # Surveys
     'survey',
 
+    # Edraak specific modules
+    'edraak_forus',
+
     'lms.djangoapps.lms_xblock',
 
     # Course data caching

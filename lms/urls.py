@@ -72,6 +72,8 @@ urlpatterns = (
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+    url(r'^forus/', include('edraak_forus.urls')),
+
     # Feedback Form endpoint
     url(r'^submit_feedback$', 'util.views.submit_feedback'),
 
