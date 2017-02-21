@@ -163,6 +163,11 @@ if settings.FEATURES["ENABLE_SYSADMIN_DASHBOARD"]:
         url(r'^sysadmin/', include('dashboard.sysadmin_urls')),
     )
 
+if settings.FEATURES.get("EDRAAK_FORUS_APP"):
+    urlpatterns += (
+        url(r'^forus/v1/', include('edraak_forus.urls', namespace='forus_v1')),
+    )
+
 urlpatterns += (
     url(r'^support/', include('support.urls', app_name="support", namespace='support')),
 )
