@@ -69,6 +69,7 @@ class ForusAuthTest(ModuleStoreTestCase):
 
     def _assertLoggedIn(self, msg_prefix=None):
         res_dashboard = self.client.get(self.dashboard_url)
+        ## testing dashboard url to see if user is logged in
         self.assertContains(res_dashboard, 'dashboard-main', msg_prefix=msg_prefix)
 
     def _assertLoggedOut(self):
@@ -93,13 +94,19 @@ class ForusAuthTest(ModuleStoreTestCase):
 
         self.assertContains(res_auth_1, 'login-and-registration-container')
 
-        self.client.post(self.register_url, self._build_forus_params(
-            username='The Best ForUs User',
+        res = self.client.post(self.register_url, self._build_forus_params(
+            username='The_Best_ForUs_User',
             password='random_password',
             honor_code=True,
         ))
 
-        user = User.objects.get(email=self.user_email)
+        self.assertContains(res, 'success', msg_prefix='The user should be regsitered')
+
+        try:
+            user = User.objects.get(email=self.user_email)
+        except User.objects.DoesNotExist as exc:
+            self.fail('The user was not created {exc}'.format(exc=exc))
+
         self.assertTrue(ForusProfile.is_forus_user(user), 'This user is not a ForUs user.')
 
         self.assertTrue(mock_set_logged_in_cookies.called, 'Login cookies was not set!')

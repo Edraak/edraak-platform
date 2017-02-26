@@ -109,7 +109,6 @@ class AuthView(View):
 
     def enroll(self, request, user, course_key):
         try:
-            enroll(user, course_key, request, check_access=True)
             course_url = get_mktg_for_course(SUCCESS_ENROLL_PAGE, unicode(course_key))
             return redirect(course_url)
         except AlreadyEnrolledError:

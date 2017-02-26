@@ -13,6 +13,7 @@ import third_party_auth
 from lms.djangoapps.verify_student.models import VerificationDeadline, SoftwareSecurePhotoVerification
 
 from course_modes.models import CourseMode
+from django.conf import settings
 
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils.translation import ugettext as _

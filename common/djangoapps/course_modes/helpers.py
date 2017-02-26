@@ -1,5 +1,7 @@
 """ Helper methods for CourseModes. """
 from django.utils.translation import get_language, ugettext_lazy as _
+from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from course_modes.models import CourseMode
 from student.helpers import (
