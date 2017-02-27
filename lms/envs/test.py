@@ -523,6 +523,7 @@ MONGODB_LOG = {
     'db': 'xlog',
 }
 
+NOTES_DISABLED_TABS = []
 
 # ForUs variables
 FORUS_AUTH_SECRET_KEY = 'dummy_auth_secret_key'
