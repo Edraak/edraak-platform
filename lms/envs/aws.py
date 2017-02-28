@@ -367,6 +367,15 @@ if FEATURES.get('AUTH_USE_CAS'):
             CAS_ATTRIBUTE_CALLBACK['function']
         )
 
+
+if FEATURES.get('EDRAAK_RATELIMIT_APP'):
+    # Keep in sync with {cms,lms}/envs/{test,aws}.py
+    INSTALLED_APPS += ('edraak_ratelimit',)
+
+    import edraak_ratelimit.helpers
+    AUTHENTICATION_BACKENDS = edraak_ratelimit.helpers.update_authentication_backends(AUTHENTICATION_BACKENDS)
+
+
 # Video Caching. Pairing country codes with CDN URLs.
 # Example: {'CN': 'http://api.xuetangx.com/edx/video?s3_url='}
 VIDEO_CDN_URL = ENV_TOKENS.get('VIDEO_CDN_URL', {})

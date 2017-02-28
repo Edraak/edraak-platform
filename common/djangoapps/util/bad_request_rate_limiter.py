@@ -2,10 +2,10 @@
 A utility class which wraps the RateLimitMixin 3rd party class to do bad request counting
 which can be used for rate limiting
 """
-from ratelimitbackend.backends import RateLimitMixin
+from edraak_ratelimit.backends import EdraakRateLimitMixin
 
 
-class BadRequestRateLimiter(RateLimitMixin):
+class BadRequestRateLimiter(EdraakRateLimitMixin):
     """
     Use the 3rd party RateLimitMixin to help do rate limiting on the Password Reset flows
     """
@@ -15,7 +15,12 @@ class BadRequestRateLimiter(RateLimitMixin):
         Returns if the client has been rated limited
         """
         counts = self.get_counters(request)
-        return sum(counts.values()) >= self.requests
+        is_exceeded = sum(counts.values()) >= self.requests
+
+        if is_exceeded:
+            self.db_log_failed_attempt(request)
+
+        return is_exceeded
 
     def tick_bad_request_counter(self, request):
         """
