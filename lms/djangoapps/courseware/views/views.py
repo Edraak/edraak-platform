@@ -76,6 +76,7 @@ from openedx.core.djangoapps.credit.api import (
     is_user_eligible_for_credit,
     is_credit_course
 )
+from edraak_university.helpers import university_id_is_required
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from shoppingcart.utils import is_shopping_cart_enabled
 from openedx.core.djangoapps.self_paced.models import SelfPacedConfiguration
@@ -289,6 +290,10 @@ def course_info(request, course_id):
 
         staff_access = has_access(request.user, 'staff', course)
         masquerade, user = setup_masquerade(request, course_key, staff_access, reset_masquerade_data=True)
+
+        # If the user has to have a valid university ID before continuing to the course.
+        if not staff_access and university_id_is_required(request.user, course):
+            return redirect(reverse('edraak_university:id', args=[unicode(course.id)]))
 
         # if user is not enrolled in a course then app will show enroll/get register link inside course info page.
         show_enroll_banner = request.user.is_authenticated() and not CourseEnrollment.is_enrolled(user, course.id)
@@ -546,6 +551,10 @@ def course_about(request, course_id):
 
         staff_access = bool(has_access(request.user, 'staff', course))
         studio_url = get_studio_url(course, 'settings/details')
+
+        # If the user has to have a valid university ID before continuing to the course.
+        if not staff_access and university_id_is_required(request.user, course):
+            return redirect(reverse('edraak_university:id', args=[unicode(course.id)]))
 
         if has_access(request.user, 'load', course):
             course_target = reverse('info', args=[course.id.to_deprecated_string()])

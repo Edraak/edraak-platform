@@ -385,6 +385,10 @@ if FEATURES.get('EDRAAK_I18N_APP'):
     MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
 
 
+if FEATURES.get('EDRAAK_UNIVERSITY_APP'):
+    INSTALLED_APPS += ('edraak_university',)
+
+
 # Video Caching. Pairing country codes with CDN URLs.
 # Example: {'CN': 'http://api.xuetangx.com/edx/video?s3_url='}
 VIDEO_CDN_URL = ENV_TOKENS.get('VIDEO_CDN_URL', {})

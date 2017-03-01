@@ -203,7 +203,8 @@ class PrimitiveTabEdit(ModuleStoreTestCase):
         with self.assertRaises(ValueError):
             tabs.primitive_delete(course, 1)
         with self.assertRaises(IndexError):
-            tabs.primitive_delete(course, 6)
+            # Edraak (university): Included university_id tab in edX tests
+            tabs.primitive_delete(course, 7)
         tabs.primitive_delete(course, 2)
         self.assertFalse({u'type': u'textbooks'} in course.tabs)
         # Check that discussion has shifted up

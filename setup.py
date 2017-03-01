@@ -36,6 +36,7 @@ setup(
             "syllabus = lms.djangoapps.courseware.tabs:SyllabusTab",
             "teams = lms.djangoapps.teams.plugins:TeamsTab",
             "textbooks = lms.djangoapps.courseware.tabs:TextbookTabs",
+            "university_id = lms.djangoapps.edraak_university.tab:UniversityIDTab",
             "wiki = lms.djangoapps.course_wiki.tab:WikiTab",
         ],
         "openedx.user_partition_scheme": [

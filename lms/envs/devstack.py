@@ -207,6 +207,12 @@ FEATURES['STORE_BILLING_INFO'] = True
 FEATURES['ENABLE_PAID_COURSE_REGISTRATION'] = True
 FEATURES['ENABLE_COSMETIC_DISPLAY_PRICE'] = True
 
+
+###################### Edraak Features ######################
+FEATURES['EDRAAK_UNIVERSITY_APP'] = True
+FEATURES['EDRAAK_UNIVERSITY_CSV_EXPORT'] = True
+
+
 ########################## Third Party Auth #######################
 
 if FEATURES.get('ENABLE_THIRD_PARTY_AUTH') and 'third_party_auth.dummy.DummyBackend' not in AUTHENTICATION_BACKENDS:

@@ -136,6 +136,11 @@ else:
         url(r'^register$', 'student.views.register_user', name="register_user"),
     )
 
+if settings.FEATURES.get('EDRAAK_UNIVERSITY_APP'):
+    urlpatterns += (
+        url(r'^university/', include('edraak_university.urls', namespace='edraak_university')),
+    )
+
 if settings.FEATURES["ENABLE_MOBILE_REST_API"]:
     urlpatterns += (
         url(r'^api/mobile/v0.5/', include('mobile_api.urls')),

@@ -595,6 +595,10 @@ INSTALLED_APPS += (
 MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
 
 
+FEATURES['EDRAAK_UNIVERSITY_APP'] = True
+INSTALLED_APPS += ('edraak_university',)
+
+
 # Set the default Oauth2 Provider Model so that migrations can run in
 # verbose mode
 OAUTH2_PROVIDER_APPLICATION_MODEL = 'oauth2_provider.Application'

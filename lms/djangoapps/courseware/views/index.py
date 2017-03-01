@@ -37,6 +37,8 @@ from xmodule.modulestore.django import modulestore
 from xmodule.x_module import STUDENT_VIEW
 from survey.utils import must_answer_survey
 
+from edraak_university.helpers import university_id_is_required
+
 from ..access import has_access, _adjust_start_date_for_beta_testers
 from ..access_utils import in_preview_mode
 from ..courses import get_studio_url, get_course_with_access
@@ -188,10 +190,18 @@ class CoursewareIndex(View):
             except ValueError:
                 raise Http404(u"Position {} is not an integer!".format(self.position))
 
+    def _redirect_if_needed_to_enter_university_id(self):  # pylint: disable=invalid-name
+        """
+        Redirect to University ID view if the user has to have a valid university ID before continuing to the course.
+        """
+        if university_id_is_required(self.request.user, self.course):
+            raise Redirect(reverse('edraak_university:id', args=[unicode(self.course.id)]))
+
     def _redirect_if_needed_to_access_course(self):
         """
         Verifies that the user can enter the course.
         """
+        self._redirect_if_needed_to_enter_university_id()
         self._redirect_if_needed_to_pay_for_course()
         self._redirect_if_needed_to_register()
         self._redirect_if_needed_for_prereqs()
@@ -388,7 +398,7 @@ class CoursewareIndex(View):
         """
         courseware_context = {
             'csrf': csrf(self.request)['csrf_token'],
-            'COURSE_TITLE': self.course.display_name_with_default_escaped,
+            'COURSE_TITLE': self.course.display_name_with_default_escaped,  # safe-lint: disable=python-deprecated-display-name   pylint: disable=line-too-long
             'course': self.course,
             'init': '',
             'fragment': Fragment(),
@@ -438,7 +448,7 @@ class CoursewareIndex(View):
                 courseware_context['default_tab'] = self.section.default_tab
 
             # section data
-            courseware_context['section_title'] = self.section.display_name_with_default_escaped
+            courseware_context['section_title'] = self.section.display_name_with_default_escaped  # safe-lint: disable=python-deprecated-display-name   pylint: disable=line-too-long
             section_context = self._create_section_context(
                 table_of_contents['previous_of_active_section'],
                 table_of_contents['next_of_active_section'],

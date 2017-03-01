@@ -50,7 +50,7 @@ class CourseOverviewTestCase(ModuleStoreTestCase):
     NEXT_WEEK = TODAY + datetime.timedelta(days=7)
     NEXT_MONTH = TODAY + datetime.timedelta(days=30)
 
-    COURSE_OVERVIEW_TABS = {'courseware', 'info', 'textbooks', 'discussion', 'wiki', 'progress'}
+    COURSE_OVERVIEW_TABS = {'courseware', 'info', 'textbooks', 'discussion', 'wiki', 'progress', 'university_id'}
 
     def check_course_overview_against_course(self, course):
         """

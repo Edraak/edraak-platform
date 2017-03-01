@@ -1609,6 +1609,10 @@ PIPELINE_JS = {
         'source_filenames': incourse_reverify_js,
         'output_filename': 'js/incourse_reverify.js'
     },
+    'edraak-university': {
+        'source_filenames': ['js/vendor/jquery-data-tables.js', 'js/edraak-university/data-table-customizations.js'],
+        'output_filename': 'js/edraak-university.js'
+    },
     'ccx': {
         'source_filenames': ccx_js,
         'output_filename': 'js/ccx.js'
