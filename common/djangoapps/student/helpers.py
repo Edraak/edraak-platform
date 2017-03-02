@@ -15,10 +15,7 @@ from lms.djangoapps.verify_student.models import VerificationDeadline, SoftwareS
 from course_modes.models import CourseMode
 from django.conf import settings
 
-from django.http import HttpResponse, HttpResponseBadRequest
-from django.utils.translation import ugettext as _
-
-from student.models import CourseEnrollment
+from student.models import CourseEnrollment, EnrollStatusChange
 from xmodule.modulestore.django import modulestore
 
 # Note that this lives in openedx, so this dependency should be refactored.
@@ -257,7 +254,7 @@ def enroll(user, course_id, request, check_access):
     # Check that auto enrollment is allowed for this course
     # (= the course is NOT behind a paywall)
     if CourseMode.can_auto_enroll(course_id):
-        # Enroll the user using the default mode (honor)
+        # Enroll the user using the default mode (audit)
         # We're assuming that users of the course enrollment table
         # will NOT try to look up the course enrollment model
         # by its slug.  If they do, it's possible (based on the state of the database)
@@ -265,14 +262,17 @@ def enroll(user, course_id, request, check_access):
         # to "honor".
 
         # Exception is to be handled by the caller
-        CourseEnrollment.enroll(user, course_id, check_access=check_access)
+        enroll_mode = CourseMode.auto_enroll_mode(course_id, available_modes)
+        if enroll_mode:
+            enrollment = CourseEnrollment.enroll(user, course_id, check_access=check_access, mode=enroll_mode)
+            enrollment.send_signal(EnrollStatusChange.enroll)
 
     # If we have more than one course mode or professional ed is enabled,
     # then send the user to the choose your track page.
     # (In the case of no-id-professional/professional ed, this will redirect to a page that
     # funnels users directly into the verification / payment flow)
     if CourseMode.has_verified_mode(available_modes) or CourseMode.has_professional_mode(available_modes):
-        reverse("course_modes_choose", kwargs={'course_id': unicode(course_id)})
+        return reverse("course_modes_choose", kwargs={'course_id': unicode(course_id)})
 
     # Otherwise, there is only one mode available (the default)
     # Success

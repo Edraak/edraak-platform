@@ -124,7 +124,7 @@ from openedx.core.djangoapps.programs.models import ProgramsApiConfig
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.theming import helpers as theming_helpers
 
-from .helpers import enroll
+from helpers import enroll
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -1023,9 +1023,13 @@ def change_enrollment(request, check_access=True):
     if action == "enroll":
         try:
             url = enroll(user, course_id, request, check_access)
-            return HttpResponse(url)
-        except Exception:
+            if url is None:
+                return HttpResponse()
+            else:
+                return HttpResponse(url)
+        except Exception: # pylint: disable=broad-except
             return HttpResponseBadRequest(_("Could not enroll"))
+
     elif action == "unenroll":
         enrollment = CourseEnrollment.get_enrollment(user, course_id)
         if not enrollment:
@@ -1037,6 +1041,7 @@ def change_enrollment(request, check_access=True):
 
         CourseEnrollment.unenroll(user, course_id)
         return HttpResponse()
+
     else:
         return HttpResponseBadRequest(_("Enrollment action is invalid"))
 

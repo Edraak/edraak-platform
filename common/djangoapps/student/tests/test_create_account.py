@@ -122,7 +122,7 @@ class TestCreateAccount(TestCase):
         year_of_birth = year - 14
         self.params.update({
             "level_of_education": "a",
-            "gender": "o",
+            "gender": "f",
             "mailing_address": "123 Example Rd",
             "city": "Exampleton",
             "country": "US",
@@ -140,7 +140,7 @@ class TestCreateAccount(TestCase):
             'yearOfBirth': year_of_birth,
             'education': 'Associate degree',
             'address': self.params['mailing_address'],
-            'gender': 'Other/Prefer Not to Say',
+            'gender': 'Female',
             'country': self.params['country'],
         }
 
@@ -155,7 +155,7 @@ class TestCreateAccount(TestCase):
     def test_profile_saved_all_optional_fields(self):
         self.params.update({
             "level_of_education": "a",
-            "gender": "o",
+            "gender": "f",
             "mailing_address": "123 Example Rd",
             "city": "Exampleton",
             "country": "US",
@@ -166,7 +166,7 @@ class TestCreateAccount(TestCase):
         })
         profile = self.create_account_and_fetch_profile()
         self.assertEqual(profile.level_of_education, "a")
-        self.assertEqual(profile.gender, "o")
+        self.assertEqual(profile.gender, "f")
         self.assertEqual(profile.mailing_address, "123 Example Rd")
         self.assertEqual(profile.city, "Exampleton")
         self.assertEqual(profile.country, "US")
