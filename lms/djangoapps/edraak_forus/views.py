@@ -40,8 +40,8 @@ from openedx.core.djangoapps.user_api.views import RegistrationView
 
 from course_modes.helpers import SUCCESS_ENROLL_PAGE, get_mktg_for_course
 
-from .models import ForusProfile
-from .helpers import validate_forus_params, forus_error_redirect, is_enabled_language
+from models import ForusProfile
+from helpers import ValidateForusParams, forus_error_redirect, is_enabled_language
 
 log = logging.getLogger(__name__)
 
@@ -75,7 +75,7 @@ HIDDEN_FIELDS = POPULATED_FIELDS + (
 class AuthView(View):
     def get(self, request):
         try:
-            forus_params = validate_forus_params(request.GET)
+            forus_params = ValidateForusParams(request.GET).validate()
         except ValidationError as e:
             return forus_error_redirect(*e.messages)
 
@@ -237,7 +237,7 @@ class RegistrationApiView(RegistrationView):
     @method_decorator(csrf_exempt)
     def post(self, request):
         try:
-            validate_forus_params(request.POST)
+            ValidateForusParams(request.POST).validate()
         except ValidationError as e:
             errors = {
                 field: [

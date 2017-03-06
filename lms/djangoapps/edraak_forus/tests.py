@@ -17,7 +17,7 @@ from django.core.exceptions import ValidationError
 from mako.filters import html_escape
 
 from edraak_forus.models import ForusProfile
-from edraak_forus.helpers import validate_forus_params
+from edraak_forus.helpers import ValidateForusParams
 
 NEXT_WEEK = datetime.now(pytz.UTC) + timedelta(days=7)
 PAST_WEEK = datetime.now(pytz.UTC) - timedelta(days=7)
@@ -299,7 +299,7 @@ class ParamValidatorTest(ModuleStoreTestCase):
     def _validate_params(self, **kwargs):
         params = build_forus_params(email=self.user_email)
         params.update(**kwargs)
-        return validate_forus_params(params)
+        return ValidateForusParams(params).validate()
 
 
 class RegistrationApiViewTest(ModuleStoreTestCase):

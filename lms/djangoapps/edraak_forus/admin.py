@@ -8,7 +8,7 @@ from django.utils.html import escape
 from student.models import UserProfile
 
 from models import ForusProfile
-from helpers import setfuncattr
+from decorators import setfuncattr
 
 
 class ForusProfileAdmin(admin.ModelAdmin):
