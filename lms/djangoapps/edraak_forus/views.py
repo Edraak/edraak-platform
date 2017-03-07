@@ -34,14 +34,14 @@ from xmodule.modulestore.django import modulestore
 from django.utils.translation import LANGUAGE_SESSION_KEY
 
 from student.models import AlreadyEnrolledError
-from student.helpers import enroll, get_next_url_for_login_page, InvalidCourseIdError
+from student.helpers import get_next_url_for_login_page, InvalidCourseIdError
 
 from openedx.core.djangoapps.user_api.views import RegistrationView
 
 from course_modes.helpers import SUCCESS_ENROLL_PAGE, get_mktg_for_course
 
-from models import ForusProfile
-from helpers import ValidateForusParams, forus_error_redirect, is_enabled_language
+from edraak_forus.models import ForusProfile
+from edraak_forus.helpers import ValidateForusParams, forus_error_redirect, is_enabled_language
 
 log = logging.getLogger(__name__)
 
@@ -73,10 +73,16 @@ HIDDEN_FIELDS = POPULATED_FIELDS + (
 
 
 class AuthView(View):
+    """
+    Authentication View class
+    """
     def get(self, request):
+        """
+        Manage GET requests
+        """
         try:
             forus_params = ValidateForusParams(request.GET).validate()
-        except ValidationError as e:
+        except ValidationError as e:  # pylint: disable=invalid-name
             return forus_error_redirect(*e.messages)
 
         course_string_id = forus_params['course_id']
@@ -96,18 +102,21 @@ class AuthView(View):
                 else:
                     # Redirect the non-forus users to the login page
                     return redirect('{login_url}?{params}'.format(
-                            login_url=reverse('signin_user'),
-                            params=urlencode({
-                                'course_id': course_string_id,
-                                'enrollment_action': 'enroll',
-                            }),
+                        login_url=reverse('signin_user'),
+                        params=urlencode({
+                            'course_id': course_string_id,
+                            'enrollment_action': 'enroll',
+                        }),
                     ))
 
             return self.enroll(request, user, course_key)
         except User.DoesNotExist:
             return self.render_auth_form(request, forus_params)
 
-    def enroll(self, request, user, course_key):
+    def enroll(self, request, user, course_key):  # pylint: disable=unused-argument
+        """
+        Enroll users
+        """
         try:
             course_url = get_mktg_for_course(SUCCESS_ENROLL_PAGE, unicode(course_key))
             return redirect(course_url)
@@ -119,7 +128,7 @@ class AuthView(View):
                 return redirect('dashboard')
         except InvalidCourseIdError:
             return forus_error_redirect(_("Invalid course id"))
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-except, invalid-name
             log.exception(e)
             return forus_error_redirect(_("Could not enroll"))
 
@@ -132,7 +141,6 @@ class AuthView(View):
 
         Returns:
             JSON-serialized registration form descriptions.
-
         """
         form = json.loads(_local_server_get(reverse('forus_v1_reg_api'), request.session))
 
@@ -140,7 +148,7 @@ class AuthView(View):
             field_name = field['name']
 
             if field_name in POPULATED_FIELDS:
-                    field['defaultValue'] = forus_params[field_name]
+                field['defaultValue'] = forus_params[field_name]
 
             if 'username' == field_name:
                 field['defaultValue'] = forus_params['name'].strip()
@@ -189,6 +197,9 @@ class AuthView(View):
         return render_to_response('edraak_forus/auth.html', context)
 
     def dispatch(self, request, *args, **kwargs):
+        """
+        Dispatch
+        """
         url_lang = request.GET.get('lang')
 
         if is_enabled_language(url_lang):
@@ -199,6 +210,9 @@ class AuthView(View):
 
 
 class RegistrationApiView(RegistrationView):
+    """
+    Registration API view
+    """
     @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         response = super(RegistrationApiView, self).get(request)
@@ -236,9 +250,12 @@ class RegistrationApiView(RegistrationView):
 
     @method_decorator(csrf_exempt)
     def post(self, request):
+        """
+        Handle post requests
+        """
         try:
             ValidateForusParams(request.POST).validate()
-        except ValidationError as e:
+        except ValidationError as e:  # pylint: disable=invalid-name
             errors = {
                 field: [
                     {"user_message": exp.messages[0]}
@@ -254,6 +271,9 @@ class RegistrationApiView(RegistrationView):
         return response
 
     def handle_sucessfull_register(self, user_email, lang):
+        """
+        Save user and set to active upon successful registration
+        """
         user = User.objects.get(email=user_email)
         user.is_active = True
         user.save()
@@ -264,6 +284,9 @@ class RegistrationApiView(RegistrationView):
 
 
 def message(request):
+    """
+    Render to message.html
+    """
     message_text = request.GET.get('message')
 
     return render_to_response('edraak_forus/message.html', {

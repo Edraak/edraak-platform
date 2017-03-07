@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 from mock import patch, Mock
 import pytz
 from datetime import datetime, timedelta
@@ -28,6 +29,9 @@ TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 
 def build_forus_params(**kwargs):
+    """
+    Returns valid ForUs params
+    """
     values = {
         'course_id': '',
         'email': '',
@@ -67,16 +71,19 @@ class ForusAuthTest(ModuleStoreTestCase):
         self.course_root_url = '/courses/{}/info'.format(self.course.id)
         self.dashboard_url = reverse('dashboard')
 
+    # pylint: disable=invalid-name
     def _assertLoggedIn(self, msg_prefix=None):
         res_dashboard = self.client.get(self.dashboard_url)
         ## testing dashboard url to see if user is logged in
         self.assertContains(res_dashboard, 'dashboard-main', msg_prefix=msg_prefix)
 
+    # pylint: disable=invalid-name
     def _assertLoggedOut(self):
         res_dashboard = self.client.get(self.dashboard_url)
         self.assertEquals(res_dashboard.status_code, 302, 'User is not logged out.')
         self._assertPathEquals(res_dashboard['Location'], '/login')
 
+    # pylint: disable=invalid-name
     def _assertPathEquals(self, url_a, url_b):
         path_a = urlparse(url_a).path
         path_b = urlparse(url_b).path
@@ -224,6 +231,7 @@ class ParamValidatorTest(ModuleStoreTestCase):
             User.objects.get(email=self.user_email)
 
     def test_closed_course(self):
+        # pylint: disable=invalid-name
         with self.assertRaisesRegexp(ValidationError, 'Enrollment.*closed.*go.*ForUs') as cm:
             self._validate_params(course_id=unicode(self.closed_course.id))
 
@@ -242,6 +250,7 @@ class ParamValidatorTest(ModuleStoreTestCase):
             self.fail('The course is upcoming and everything is fine, yet there is an error: `{}`'.format(exc))
 
     def test_draft_course(self):
+        # pylint: disable=invalid-name
         with self.assertRaisesRegexp(ValidationError, '.*not.*opened.*go.*ForUs') as cm:
             self._validate_params(course_id=unicode(self.draft_course.id))
 
@@ -279,7 +288,9 @@ class ParamValidatorTest(ModuleStoreTestCase):
             exception_regexp='.*Invalid.*gender.*',
         )
 
+    # pylint: disable=invalid-name
     def _assertValidateData(self, field_id, bad_value, exception_regexp):
+        # pylint: disable=invalid-name
         with self.assertRaisesRegexp(ValidationError, exception_regexp) as cm:
             params = {field_id: bad_value}
             self._validate_params(course_id=unicode(self.upcoming_course.id), **params)
@@ -287,6 +298,7 @@ class ParamValidatorTest(ModuleStoreTestCase):
         self._assertErrorCount(cm.exception, 1)
         self.assertIn(field_id, cm.exception.message_dict)
 
+    # pylint: disable=invalid-name
     def _assertErrorCount(self, exception, expected_count):
         count = len(exception.messages)
         message = 'There should be one error instead of `{count}` in exception `{exception}`'.format(

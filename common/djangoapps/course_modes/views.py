@@ -27,11 +27,7 @@ from embargo import api as embargo_api
 from student.models import CourseEnrollment
 from util.db import outer_atomic
 
-from xmodule.modulestore.django import modulestore
-
-from embargo import api as embargo_api
-
-from helpers import SUCCESS_ENROLL_PAGE, get_mktg_for_course
+from course_modes.helpers import SUCCESS_ENROLL_PAGE, get_mktg_for_course
 
 
 class ChooseModeView(View):

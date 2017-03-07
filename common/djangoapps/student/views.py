@@ -124,7 +124,7 @@ from openedx.core.djangoapps.programs.models import ProgramsApiConfig
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.theming import helpers as theming_helpers
 
-from helpers import enroll
+from student.helpers import enroll
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -145,7 +145,7 @@ def csrf_token(context):
     if token == 'NOTPROVIDED':
         return ''
     return (u'<div style="display:none"><input type="hidden"'
-            ' name="csrfmiddlewaretoken" value="%s" /></div>' % (token))
+            ' name="csrfmiddlewaretoken" value="%s" /></div>' % token)
 
 
 # NOTE: This view is not linked to directly--it is called from
@@ -1027,7 +1027,7 @@ def change_enrollment(request, check_access=True):
                 return HttpResponse()
             else:
                 return HttpResponse(url)
-        except Exception: # pylint: disable=broad-except
+        except Exception:  # pylint: disable=broad-except
             return HttpResponseBadRequest(_("Could not enroll"))
 
     elif action == "unenroll":

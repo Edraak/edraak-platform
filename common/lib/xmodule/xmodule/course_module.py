@@ -1042,6 +1042,9 @@ class CourseDescriptor(CourseFields, SequenceDescriptor, LicenseMixin):
         return now > self.enrollment_start
 
     def is_self_paced(self):
+        """
+        Returns True if course is self paced, False otherwise
+        """
         now = datetime.now(UTC())
 
         if now > self.start and self.end is None:

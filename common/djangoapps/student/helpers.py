@@ -38,8 +38,13 @@ DISABLE_UNENROLL_CERT_STATES = [
     'ready',
 ]
 
+
 class InvalidCourseIdError(Exception):
+    """
+    Raise exception when encountering an invalid course id
+    """
     pass
+
 
 def check_verify_status_by_course(user, course_enrollments):
     """
@@ -214,6 +219,7 @@ def auth_pipeline_urls(auth_entry, redirect_url=None):
         ) for provider in third_party_auth.provider.Registry.accepting_logins()
     }
 
+
 def _update_email_opt_in(request, org):
     """Helper function used to hit the profile API if email opt-in is enabled."""
 
@@ -224,6 +230,10 @@ def _update_email_opt_in(request, org):
 
 
 def enroll(user, course_id, request, check_access):
+    """
+    Enrolls user in course
+    Returns redirect url of course
+    """
     # Make sure the course exists
     # We don't do this check on unenroll, or a bad course id can't be unenrolled from
     if not modulestore().has_course(course_id):
@@ -277,7 +287,6 @@ def enroll(user, course_id, request, check_access):
     # Otherwise, there is only one mode available (the default)
     # Success
     return None
-
 
 
 # Query string parameters that can be passed to the "finish_auth" view to manage

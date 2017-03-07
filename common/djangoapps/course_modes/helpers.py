@@ -19,8 +19,10 @@ COURSE_INFO_PAGE = "COURSE_INFO"
 SUCCESS_ENROLL_PAGE = "ENROLL_SUCCESS"
 
 
-
 def get_mktg_url(page):
+    """
+    Returns course marketing full url
+    """
     lang = ''
 
     if get_language() != 'ar':

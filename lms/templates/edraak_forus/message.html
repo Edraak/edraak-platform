@@ -1,5 +1,7 @@
+<%page expression_filter="h"/>
 <%! from django.conf import settings %>
 <%! from django.utils.translation import ugettext as _ %>
+<%! from openedx.core.djangolib.markup import HTML, Text %>
 
 <%inherit file="../main.html" />
 
@@ -8,18 +10,18 @@
     ${_('Sorry, we are unable to enroll you in the course.')}
   </h1>
   <p class="text-center">
-      ${message|h}
+      ${Text(message)}
   </p>
 
   <hr />
 
   <p class="text-center">
-    ${_('Please go to {forus_link}, and try again. If the problem persists, please email us at {email}.').format(
-        forus_link=u'<a href="{url}">{name}</a>'.format(
+    ${Text(_('Please go to {forus_link}, and try again. If the problem persists, please email us at {email}.')).format(
+        forus_link=HTML(u'<a href="{url}">{name}</a>').format(
            url=settings.FORUS_BASE_URL,
            name=_('ForUs portal'),
         ),
-        email=u'<a href="mailto:{email}">{email}</a>'.format(
+        email=HTML(u'<a href="mailto:{email}">{email}</a>').format(
             email=settings.TECH_SUPPORT_EMAIL
         ),
     )}

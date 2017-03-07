@@ -1,3 +1,6 @@
+"""
+Edraak Forus helpers module
+"""
 import logging
 import hmac
 from urllib import urlencode
@@ -29,7 +32,7 @@ DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 log = logging.getLogger(__name__)
 
-
+# pylint: disable=invalid-name
 ordered_hmac_keys = (
     'course_id',
     'email',
@@ -45,10 +48,16 @@ ordered_hmac_keys = (
 
 
 def is_enabled_language(lang):
+    """
+    Return True if lang in settings LANGUAGES
+    """
     return lang in dict(settings.LANGUAGES)
 
 
 def forus_error_redirect(*messages):
+    """
+    Redirect user to display error messages
+    """
     message = '. '.join(messages) + '.'
 
     url = '{base_url}?{params}'.format(
@@ -62,22 +71,30 @@ def forus_error_redirect(*messages):
 
 
 def calculate_hmac(msg_to_hash):
+    """
+    Returns hmac hexdigest of messages
+    """
     secret_key = settings.FORUS_AUTH_SECRET_KEY
     dig = hmac.new(secret_key.encode('utf-8'), msg_to_hash.encode('utf-8'), digestmod=sha256)
     return dig.hexdigest()
 
 
-class ValidateForusParamsValues():
+class ValidateForusParamsValues(object):
+    """
+    Validates ForUs params values
+    """
     def __init__(self, params):
         self.params = params
         self.errors = defaultdict(lambda: [])
 
+    # pylint: disable=missing-docstring
     def mark_as_invalid(self, field, field_label):
         # Translators: This is for the ForUs API
         self.errors[field].append(_('Invalid {field_label} has been provided').format(
             field_label=field_label,
         ))
 
+    # pylint: disable=missing-docstring
     def validate_user_profile(self):
         if len(self.params.get('name', '')) <= 2:
             # Translators: This is for the ForUs API
@@ -107,6 +124,7 @@ class ValidateForusParamsValues():
             # Translators: This is for the ForUs API
             self.mark_as_invalid('year_of_birth', _('birth year'))
 
+    # pylint: disable=missing-docstring
     def validate_user_email(self):
         try:
             validate_email(self.params.get('email'))
@@ -122,6 +140,7 @@ class ValidateForusParamsValues():
             # Translators: This is for the ForUs API
             self.errors['email'].append(_("The provided email format is invalid"))
 
+    # pylint: disable=missing-docstring
     def validate_course(self):
         try:
             course_key = CourseKey.from_string(self.params['course_id'])
@@ -130,13 +149,17 @@ class ValidateForusParamsValues():
             if not course.is_self_paced():
                 if not course.enrollment_has_started():
                     # Translators: This is for the ForUs API
-                   self. errors['course_id'].append(_('The course has not yet been opened for enrollment, '
-                                                 'please go back to the ForUs portal and enroll in other courses'))
+                    self. errors['course_id'].append(_(
+                        'The course has not yet been opened for enrollment, '
+                        'please go back to the ForUs portal and enroll in other courses'
+                    ))
 
                 if course.enrollment_has_ended():
                     # Translators: This is for the ForUs API
-                   self. errors['course_id'].append(_('Enrollment for this course has been closed, '
-                                                 'please go back to the ForUs portal and enroll in other courses'))
+                    self. errors['course_id'].append(_(
+                        'Enrollment for this course has been closed, '
+                        'please go back to the ForUs portal and enroll in other courses'
+                    ))
 
         except InvalidKeyError:
             log.warning(
@@ -152,6 +175,7 @@ class ValidateForusParamsValues():
             # Translators: This is for the ForUs API
             self.errors['course_id'].append(_('The requested course does not exist'))
 
+    # pylint: disable=missing-docstring
     def validate_request_time(self):
         try:
             time = datetime.strptime(self.params.get('time'), DATE_TIME_FORMAT)
@@ -169,20 +193,25 @@ class ValidateForusParamsValues():
             # Translators: This is for the ForUs API
             self.mark_as_invalid('time', _('date format'))
 
+    # pylint: disable=missing-docstring
     def validate(self):
         self.validate_user_email()
         self.validate_user_profile()
         self.validate_course()
         self.validate_request_time()
-        print(self.errors)
+
         if len(self.errors):
             raise ValidationError(self.errors)
 
 
-class ValidateForusParams():
+class ValidateForusParams(object):
+    """
+    Validate Forus params
+    """
     def __init__(self, params):
         self.params = params
 
+    # pylint: disable=missing-docstring
     def validate_forus_hmac(self):
         remote_hmac = self.params.get('forus_hmac')
 
@@ -196,7 +225,7 @@ class ValidateForusParams():
         params_pairs = [
             u'{}={}'.format(key, self.params.get(key, ''))
             for key in ordered_hmac_keys
-            ]
+        ]
 
         msg_to_hash = u';'.join(params_pairs)
         local_hmac = calculate_hmac(msg_to_hash)
@@ -213,9 +242,11 @@ class ValidateForusParams():
                 "forus_hmac": [_("The security check has failed on the provided parameters")]
             })
 
+    # pylint: disable=missing-docstring
     def validate_forus_params_values(self):
         ValidateForusParamsValues(self.params).validate()
 
+    # pylint: disable=missing-docstring
     def validate(self):
         self.validate_forus_hmac()
         self.validate_forus_params_values()
@@ -223,7 +254,7 @@ class ValidateForusParams():
         clean_params = {
             key: self.params[key]
             for key in ordered_hmac_keys
-            }
+        }
 
         clean_params['forus_hmac'] = self.params['forus_hmac']
 

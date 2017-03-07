@@ -4,11 +4,12 @@ Django admin page for ForUs models
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
+from openedx.core.djangolib.markup import HTML
 
 from student.models import UserProfile
 
-from models import ForusProfile
-from decorators import setfuncattr
+from edraak_forus.models import ForusProfile
+from edraak_forus.decorators import setfuncattr
 
 
 class ForusProfileAdmin(admin.ModelAdmin):
@@ -19,24 +20,33 @@ class ForusProfileAdmin(admin.ModelAdmin):
 
     @setfuncattr('allow_tags', True)
     def edraak_user(self, profile):
+        """
+        Return link to user
+        """
         user = profile.user
-        return u'<a href="{url}">{name}</a>'.format(
+        return HTML(u'<a href="{url}">{name}</a>').format(
             name=escape(user.username),
             url=reverse('admin:auth_user_change', args=[user.pk]),
         )
 
     @setfuncattr('allow_tags', True)
     def edraak_profile(self, profile):
+        """
+        Returns link to Edraak profile
+        """
         try:
             edraak_profile = UserProfile.objects.get(user=profile.user)
         except UserProfile.DoesNotExist:
             return None
 
-        return u'<a href="{url}">Edraak Profile</a>'.format(
+        return HTML(u'<a href="{url}">Edraak Profile</a>').format(
             url=reverse('admin:student_userprofile_change', args=[edraak_profile.pk]),
         )
 
     def email(self, profile):
+        """
+        Returns user email
+        """
         return profile.user.email
 
 
