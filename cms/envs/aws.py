@@ -406,6 +406,17 @@ DEPRECATED_ADVANCED_COMPONENT_TYPES = ENV_TOKENS.get(
 
 VIDEO_UPLOAD_PIPELINE = ENV_TOKENS.get('VIDEO_UPLOAD_PIPELINE', VIDEO_UPLOAD_PIPELINE)
 
+
+################ Edraak Apps ###############
+
+if FEATURES.get('EDRAAK_RATELIMIT_APP'):
+    # Keep in sync with {cms,lms}/envs/{test,aws}.py
+    INSTALLED_APPS += ('edraak_ratelimit',)
+
+    import edraak_ratelimit.helpers
+    AUTHENTICATION_BACKENDS = edraak_ratelimit.helpers.update_authentication_backends(AUTHENTICATION_BACKENDS)
+
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})

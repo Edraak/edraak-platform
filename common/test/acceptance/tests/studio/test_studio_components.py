@@ -2,6 +2,7 @@
 Acceptance tests for adding components in Studio.
 """
 import ddt
+from flaky import flaky
 
 from .base_studio_test import ContainerBase
 from ...fixtures.course import XBlockFixtureDesc
@@ -98,6 +99,7 @@ class ComponentTest(ContainerBase):
             )
         )
 
+    @flaky(max_runs=3)
     def test_add_html_component(self):
         """
         Scenario: I can add HTML components

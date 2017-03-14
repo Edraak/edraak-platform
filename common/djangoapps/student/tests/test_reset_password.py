@@ -91,7 +91,8 @@ class ResetPasswordTests(EventTestMixin, CacheIsolationTestCase):
         """ Try (and fail) resetting password 30 times in a row on an non-existant email address """
         cache.clear()
 
-        for i in xrange(30):
+        # Edraak (ratelimit): Improve edX tests to accept Edraak customizations
+        for i in xrange(100):
             good_req = self.request_factory.post('/password_reset/', {
                 'email': 'thisdoesnotexist{0}@foo.com'.format(i)
             })
