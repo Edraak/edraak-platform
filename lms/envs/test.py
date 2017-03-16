@@ -579,6 +579,14 @@ JWT_AUTH.update({
     'JWT_AUDIENCE': 'test-key',
 })
 
+
+# Edraak Apps
+# Keep in sync with {cms,lms}/envs/{test,aws}.py
+INSTALLED_APPS += ('edraak_ratelimit',)
+# Unlike the production apps, the AUTHENTICATION_BACKENDS is only enabled on per-test-case basis to avoid
+# unnecessary conflicts with edX tests.
+
+
 # Set the default Oauth2 Provider Model so that migrations can run in
 # verbose mode
 OAUTH2_PROVIDER_APPLICATION_MODEL = 'oauth2_provider.Application'

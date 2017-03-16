@@ -323,6 +323,14 @@ FEATURES['ENABLE_TEAMS'] = True
 # Dummy secret key for dev/test
 SECRET_KEY = '85920908f28904ed733fe576320db18cabd7b6cd'
 
+
+# Edraak Apps
+# Keep in sync with {cms,lms}/envs/{test,aws}.py
+INSTALLED_APPS += ('edraak_ratelimit',)
+# Unlike the production apps, the AUTHENTICATION_BACKENDS is only enabled on per-test-case basis to avoid
+# unnecessary conflicts with edX tests.
+
+
 ######### custom courses #########
 INSTALLED_APPS += ('openedx.core.djangoapps.ccxcon',)
 FEATURES['CUSTOM_COURSES_EDX'] = True
