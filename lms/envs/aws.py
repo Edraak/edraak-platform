@@ -367,6 +367,7 @@ if FEATURES.get('AUTH_USE_CAS'):
             CAS_ATTRIBUTE_CALLBACK['function']
         )
 
+################################ Edraak Apps ################################
 
 if FEATURES.get('EDRAAK_RATELIMIT_APP'):
     # Keep in sync with {cms,lms}/envs/{test,aws}.py
@@ -374,6 +375,14 @@ if FEATURES.get('EDRAAK_RATELIMIT_APP'):
 
     import edraak_ratelimit.helpers
     AUTHENTICATION_BACKENDS = edraak_ratelimit.helpers.update_authentication_backends(AUTHENTICATION_BACKENDS)
+
+
+# Keep it in sync with {lms,cms}/envs/{test,aws}.py
+if FEATURES.get('EDRAAK_I18N_APP'):
+    # Common app, keep it in sync with the CMS
+    import edraak_i18n.helpers
+    INSTALLED_APPS += ('edraak_i18n',)
+    MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
 
 
 # Video Caching. Pairing country codes with CDN URLs.

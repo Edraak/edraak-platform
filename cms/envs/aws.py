@@ -417,6 +417,14 @@ if FEATURES.get('EDRAAK_RATELIMIT_APP'):
     AUTHENTICATION_BACKENDS = edraak_ratelimit.helpers.update_authentication_backends(AUTHENTICATION_BACKENDS)
 
 
+# Keep it in sync with {lms,cms}/envs/{test,aws}.py
+if FEATURES.get('EDRAAK_I18N_APP'):
+    # Common app, keep it in sync with the CMS
+    import edraak_i18n.helpers
+    INSTALLED_APPS += ('edraak_i18n',)
+    MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
+
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})
@@ -462,6 +470,7 @@ OAUTH_OIDC_ISSUER = ENV_TOKENS['OAUTH_OIDC_ISSUER']
 ######################## CUSTOM COURSES for EDX CONNECTOR ######################
 if FEATURES.get('CUSTOM_COURSES_EDX'):
     INSTALLED_APPS += ('openedx.core.djangoapps.ccxcon',)
+
 
 # Partner support link for CMS footer
 PARTNER_SUPPORT_EMAIL = ENV_TOKENS.get('PARTNER_SUPPORT_EMAIL', PARTNER_SUPPORT_EMAIL)
