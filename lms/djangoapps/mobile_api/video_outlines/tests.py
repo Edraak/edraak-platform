@@ -826,6 +826,9 @@ class TestVideoSummaryList(TestVideoAPITestCase, MobileAuthTestMixin, MobileCour
             video.transcripts = case.transcripts
             modulestore().update_item(video, self.user.id)
             course_outline = self.api_response().data
+            print case
+            print case.expected_language
+            print course_outline[0]['summary']['language']
             self.assertEqual(len(course_outline), 1)
             self.assertEqual(course_outline[0]['summary']['language'], case.expected_language)
 
@@ -859,6 +862,9 @@ class TestVideoSummaryList(TestVideoAPITestCase, MobileAuthTestMixin, MobileCour
             video.sub = case.english_subtitle
             modulestore().update_item(video, self.user.id)
             course_outline = self.api_response().data
+            print case
+            print case.expected_transcripts
+            print course_outline[0]['summary']['transcripts'].keys()
             self.assertEqual(len(course_outline), 1)
             print case
             self.assertSetEqual(
