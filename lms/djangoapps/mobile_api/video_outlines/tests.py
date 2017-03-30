@@ -499,7 +499,8 @@ class TestVideoSummaryList(TestVideoAPITestCase, MobileAuthTestMixin, MobileCour
             'video_url': self.video_url_high,
             'duration': 12.0,
             'transcripts': {
-                'en': 'http://testserver/api/mobile/v0.5/video_outlines/transcripts/{}/testing_mobile_high_video/en'.format(self.course.id)  # pylint: disable=line-too-long
+                # Edraak (mobile): Do not force English if there's no subtitles found.
+                # 'en': 'http://testserver/api/mobile/v0.5/video_outlines/transcripts/{}/testing_mobile_high_video/en'.format(self.course.id)  # pylint: disable=line-too-long
             },
             'only_on_web': False,
             'encoded_videos': {
@@ -839,9 +840,9 @@ class TestVideoSummaryList(TestVideoAPITestCase, MobileAuthTestMixin, MobileCour
 
         transcript_case = namedtuple('transcript_case', ['transcripts', 'english_subtitle', 'expected_transcripts'])
         transcript_cases = [
-            # defaults to english
-            transcript_case({}, "", ["en"]),
-            transcript_case({}, "en-sub", ["en"]),
+            # Edraak (mobile): Do not force English if there's no subtitles found.
+            transcript_case({}, "", []),
+            transcript_case({}, "en-sub", []),
             # supports english
             transcript_case({"en": 1}, "", ["en"]),
             transcript_case({"en": 1}, "en-sub", ["en"]),
@@ -859,6 +860,7 @@ class TestVideoSummaryList(TestVideoAPITestCase, MobileAuthTestMixin, MobileCour
             modulestore().update_item(video, self.user.id)
             course_outline = self.api_response().data
             self.assertEqual(len(course_outline), 1)
+            print case
             self.assertSetEqual(
                 set(course_outline[0]['summary']['transcripts'].keys()),
                 set(case.expected_transcripts)
