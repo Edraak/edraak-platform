@@ -1,5 +1,7 @@
 """ Helper methods for CourseModes. """
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language, ugettext_lazy as _
+from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from course_modes.models import CourseMode
 from student.helpers import (
@@ -12,6 +14,43 @@ DISPLAY_VERIFIED = "verified"
 DISPLAY_HONOR = "honor"
 DISPLAY_AUDIT = "audit"
 DISPLAY_PROFESSIONAL = "professional"
+
+COURSE_INFO_PAGE = "COURSE_INFO"
+SUCCESS_ENROLL_PAGE = "ENROLL_SUCCESS"
+
+
+def get_mktg_url(page):
+    """
+    Returns course marketing full url
+    """
+    lang = ''
+
+    if get_language() != 'ar':
+        lang = 'en/'
+
+    url = '{root}{lang}{page}'.format(
+        root=settings.MKTG_URLS['ROOT'],
+        lang=lang,
+        page=page
+    )
+    return url
+
+
+def get_mktg_for_course(page, course_id):
+    """
+    Redirects learner to the marketing site desired page
+
+    :param page: desired page
+    :param course_id: Course ID as string.
+    :return (unicode) Redirect URL.
+    """
+    if settings.FEATURES.get('ENABLE_MKTG_SITE'):
+        url = settings.MKTG_URLS.get(page)
+
+        if url:
+            return get_mktg_url(url.format(course_id=course_id))
+
+    return reverse('dashboard')
 
 
 def enrollment_mode_display(mode, verification_status, course_id):

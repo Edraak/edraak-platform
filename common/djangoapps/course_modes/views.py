@@ -27,6 +27,8 @@ from embargo import api as embargo_api
 from student.models import CourseEnrollment
 from util.db import outer_atomic
 
+from course_modes.helpers import SUCCESS_ENROLL_PAGE, get_mktg_for_course
+
 
 class ChooseModeView(View):
     """View used when the user is asked to pick a mode.
@@ -104,7 +106,8 @@ class ChooseModeView(View):
         # in the "honor" track by this point, so we send the user
         # to the dashboard.
         if not CourseMode.has_verified_mode(modes):
-            return redirect(reverse('dashboard'))
+
+            return redirect(get_mktg_for_course(SUCCESS_ENROLL_PAGE, unicode(course_id)))
 
         # If a user has already paid, redirect them to the dashboard.
         if is_active and (enrollment_mode in CourseMode.VERIFIED_MODES + [CourseMode.NO_ID_PROFESSIONAL_MODE]):

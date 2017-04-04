@@ -7,10 +7,11 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.core.urlresolvers import reverse
 from course_modes.models import CourseMode
-from course_modes.helpers import enrollment_mode_display
+from course_modes.helpers import enrollment_mode_display, get_mktg_for_course, COURSE_INFO_PAGE
 from openedx.core.djangolib.js_utils import dump_js_escaped_json
 from openedx.core.djangolib.markup import HTML, Text
 from openedx.core.lib.time_zone_utils import get_user_time_zone
+
 from student.helpers import (
   VERIFY_STATUS_NEED_TO_VERIFY,
   VERIFY_STATUS_SUBMITTED,
@@ -402,7 +403,7 @@ from student.helpers import (
 
         % if course_requirements:
         ## Multiple pre-requisite courses are not supported on frontend that's why we are pulling first element
-        <% prc_target = reverse('about_course', args=[unicode(course_requirements['courses'][0]['key'])]) %>
+        <% prc_target = get_mktg_for_course(COURSE_INFO_PAGE, unicode(course_requirements['courses'][0]['key'])) %>
         <li class="prerequisites">
           <p class="tip">
             ${Text(_("You must successfully complete {link_start}{prc_display}{link_end} before you begin this course.")).format(

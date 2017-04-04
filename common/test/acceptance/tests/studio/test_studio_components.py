@@ -1,6 +1,9 @@
 """
 Acceptance tests for adding components in Studio.
 """
+
+from flaky import flaky
+
 import ddt
 from flaky import flaky
 

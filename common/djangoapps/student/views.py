@@ -12,7 +12,6 @@ from urlparse import urljoin, urlsplit, parse_qs, urlunsplit
 from django.views.generic import TemplateView
 from pytz import UTC
 from requests import HTTPError
-from ipware.ip import get_ip
 
 import edx_oauth2_provider
 from django.conf import settings
@@ -125,6 +124,7 @@ from openedx.core.djangoapps.programs.models import ProgramsApiConfig
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.theming import helpers as theming_helpers
 
+from student.helpers import enroll
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -145,7 +145,7 @@ def csrf_token(context):
     if token == 'NOTPROVIDED':
         return ''
     return (u'<div style="display:none"><input type="hidden"'
-            ' name="csrfmiddlewaretoken" value="%s" /></div>' % (token))
+            ' name="csrfmiddlewaretoken" value="%s" /></div>' % token)
 
 
 # NOTE: This view is not linked to directly--it is called from
@@ -1021,61 +1021,15 @@ def change_enrollment(request, check_access=True):
         return HttpResponseBadRequest(_("Invalid course id"))
 
     if action == "enroll":
-        # Make sure the course exists
-        # We don't do this check on unenroll, or a bad course id can't be unenrolled from
-        if not modulestore().has_course(course_id):
-            log.warning(
-                u"User %s tried to enroll in non-existent course %s",
-                user.username,
-                course_id
-            )
-            return HttpResponseBadRequest(_("Course id is invalid"))
+        try:
+            url = enroll(user, course_id, request, check_access)
+            if url is None:
+                return HttpResponse()
+            else:
+                return HttpResponse(url)
+        except Exception:  # pylint: disable=broad-except
+            return HttpResponseBadRequest(_("Could not enroll"))
 
-        # Record the user's email opt-in preference
-        if settings.FEATURES.get('ENABLE_MKTG_EMAIL_OPT_IN'):
-            _update_email_opt_in(request, course_id.org)
-
-        available_modes = CourseMode.modes_for_course_dict(course_id)
-
-        # Check whether the user is blocked from enrolling in this course
-        # This can occur if the user's IP is on a global blacklist
-        # or if the user is enrolling in a country in which the course
-        # is not available.
-        redirect_url = embargo_api.redirect_if_blocked(
-            course_id, user=user, ip_address=get_ip(request),
-            url=request.path
-        )
-        if redirect_url:
-            return HttpResponse(redirect_url)
-
-        # Check that auto enrollment is allowed for this course
-        # (= the course is NOT behind a paywall)
-        if CourseMode.can_auto_enroll(course_id):
-            # Enroll the user using the default mode (audit)
-            # We're assuming that users of the course enrollment table
-            # will NOT try to look up the course enrollment model
-            # by its slug.  If they do, it's possible (based on the state of the database)
-            # for no such model to exist, even though we've set the enrollment type
-            # to "audit".
-            try:
-                enroll_mode = CourseMode.auto_enroll_mode(course_id, available_modes)
-                if enroll_mode:
-                    enrollment = CourseEnrollment.enroll(user, course_id, check_access=check_access, mode=enroll_mode)
-                    enrollment.send_signal(EnrollStatusChange.enroll)
-            except Exception:  # pylint: disable=broad-except
-                return HttpResponseBadRequest(_("Could not enroll"))
-
-        # If we have more than one course mode or professional ed is enabled,
-        # then send the user to the choose your track page.
-        # (In the case of no-id-professional/professional ed, this will redirect to a page that
-        # funnels users directly into the verification / payment flow)
-        if CourseMode.has_verified_mode(available_modes) or CourseMode.has_professional_mode(available_modes):
-            return HttpResponse(
-                reverse("course_modes_choose", kwargs={'course_id': unicode(course_id)})
-            )
-
-        # Otherwise, there is only one mode available (the default)
-        return HttpResponse()
     elif action == "unenroll":
         enrollment = CourseEnrollment.get_enrollment(user, course_id)
         if not enrollment:
@@ -1087,6 +1041,7 @@ def change_enrollment(request, check_access=True):
 
         CourseEnrollment.unenroll(user, course_id)
         return HttpResponse()
+
     else:
         return HttpResponseBadRequest(_("Enrollment action is invalid"))
 

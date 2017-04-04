@@ -20,6 +20,7 @@ from xmodule.mixin import LicenseMixin
 from xmodule.seq_module import SequenceDescriptor, SequenceModule
 from xmodule.tabs import CourseTabList, InvalidTabsException
 from .fields import Date
+from django.utils.timezone import UTC
 
 log = logging.getLogger(__name__)
 
@@ -1017,6 +1018,39 @@ class CourseDescriptor(CourseFields, SequenceDescriptor, LicenseMixin):
         Returns False if there is no end date specified.
         """
         return course_metadata_utils.has_course_ended(self.end)
+
+    def enrollment_has_ended(self):
+        """
+        Returns True if the current time is after the specified course end date.
+        Returns False if there is no end date specified.
+        """
+        if self.enrollment_end is None:
+            return False
+
+        return datetime.now(UTC()) > self.enrollment_end
+
+    def enrollment_has_started(self):
+        """
+        Returns True if the current time is after the specified course end date.
+        Returns False if there is no end date specified.
+        """
+        now = datetime.now(UTC())
+
+        if self.enrollment_start is None:
+            return False
+
+        return now > self.enrollment_start
+
+    def is_self_paced(self):
+        """
+        Returns True if course is self paced, False otherwise
+        """
+        now = datetime.now(UTC())
+
+        if now > self.start and self.end is None:
+            return True
+
+        return False
 
     def may_certify(self):
         """

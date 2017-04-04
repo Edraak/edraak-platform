@@ -1,13 +1,28 @@
 """Helpers for the student app. """
 from datetime import datetime
+import logging
 import urllib
 
 from pytz import UTC
 from django.core.urlresolvers import reverse, NoReverseMatch
 
+from embargo import api as embargo_api
+from ipware.ip import get_ip
+
 import third_party_auth
 from lms.djangoapps.verify_student.models import VerificationDeadline, SoftwareSecurePhotoVerification
+
 from course_modes.models import CourseMode
+from django.conf import settings
+
+from student.models import CourseEnrollment, EnrollStatusChange
+from xmodule.modulestore.django import modulestore
+
+# Note that this lives in openedx, so this dependency should be refactored.
+from openedx.core.djangoapps.user_api.preferences import api as preferences_api
+
+
+log = logging.getLogger("edx.student")
 
 
 # Enumeration of per-course verification statuses
@@ -22,6 +37,13 @@ DISABLE_UNENROLL_CERT_STATES = [
     'generating',
     'ready',
 ]
+
+
+class InvalidCourseIdError(Exception):
+    """
+    Raise exception when encountering an invalid course id
+    """
+    pass
 
 
 def check_verify_status_by_course(user, course_enrollments):
@@ -196,6 +218,75 @@ def auth_pipeline_urls(auth_entry, redirect_url=None):
             provider.provider_id, auth_entry, redirect_url=redirect_url
         ) for provider in third_party_auth.provider.Registry.accepting_logins()
     }
+
+
+def _update_email_opt_in(request, org):
+    """Helper function used to hit the profile API if email opt-in is enabled."""
+
+    email_opt_in = request.POST.get('email_opt_in')
+    if email_opt_in is not None:
+        email_opt_in_boolean = email_opt_in == 'true'
+        preferences_api.update_email_opt_in(request.user, org, email_opt_in_boolean)
+
+
+def enroll(user, course_id, request, check_access):
+    """
+    Enrolls user in course
+    Returns redirect url of course
+    """
+    # Make sure the course exists
+    # We don't do this check on unenroll, or a bad course id can't be unenrolled from
+    if not modulestore().has_course(course_id):
+        log.warning(
+            u"User %s tried to enroll in non-existent course %s",
+            user.username,
+            course_id
+        )
+        raise InvalidCourseIdError()
+
+    # Record the user's email opt-in preference
+    if settings.FEATURES.get('ENABLE_MKTG_EMAIL_OPT_IN'):
+        _update_email_opt_in(request, course_id.org)
+
+    available_modes = CourseMode.modes_for_course_dict(course_id)
+
+    # Check whether the user is blocked from enrolling in this course
+    # This can occur if the user's IP is on a global blacklist
+    # or if the user is enrolling in a country in which the course
+    # is not available.
+    redirect_url = embargo_api.redirect_if_blocked(
+        course_id, user=user, ip_address=get_ip(request),
+        url=request.path
+    )
+    if redirect_url:
+        return redirect_url
+
+    # Check that auto enrollment is allowed for this course
+    # (= the course is NOT behind a paywall)
+    if CourseMode.can_auto_enroll(course_id):
+        # Enroll the user using the default mode (audit)
+        # We're assuming that users of the course enrollment table
+        # will NOT try to look up the course enrollment model
+        # by its slug.  If they do, it's possible (based on the state of the database)
+        # for no such model to exist, even though we've set the enrollment type
+        # to "honor".
+
+        # Exception is to be handled by the caller
+        enroll_mode = CourseMode.auto_enroll_mode(course_id, available_modes)
+        if enroll_mode:
+            enrollment = CourseEnrollment.enroll(user, course_id, check_access=check_access, mode=enroll_mode)
+            enrollment.send_signal(EnrollStatusChange.enroll)
+
+    # If we have more than one course mode or professional ed is enabled,
+    # then send the user to the choose your track page.
+    # (In the case of no-id-professional/professional ed, this will redirect to a page that
+    # funnels users directly into the verification / payment flow)
+    if CourseMode.has_verified_mode(available_modes) or CourseMode.has_professional_mode(available_modes):
+        return reverse("course_modes_choose", kwargs={'course_id': unicode(course_id)})
+
+    # Otherwise, there is only one mode available (the default)
+    # Success
+    return None
 
 
 # Query string parameters that can be passed to the "finish_auth" view to manage
