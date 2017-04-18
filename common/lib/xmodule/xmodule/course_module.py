@@ -808,6 +808,19 @@ class CourseFields(object):
         scope=Scope.settings
     )
 
+    enable_university_id = Boolean(
+        # This settings is for the edraak_university app
+        display_name=_("Edraak University: Enable ID Tab"),
+        # Although unusual to mention this,
+        # but it's worth noting to ensure no confusion if EDRAAK_UNIVERSITY_APP is disabled.
+        help=_(
+            "Set this to \"true\" (without quotes) to show the University ID tab in this course. "
+            "However this requires the Edraak University app to be enabled by your system administrator."
+        ),
+        default=False,
+        scope=Scope.settings,
+    )
+
     """
     instructor_info dict structure:
     {

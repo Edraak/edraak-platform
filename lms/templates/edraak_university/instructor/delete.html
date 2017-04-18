@@ -1,0 +1,44 @@
+## mako
+<%page expression_filter="h" />
+<%inherit file="/main.html" />
+<%namespace name='static' file='/static_content.html'/>
+<%!
+    from django.utils.translation import ugettext as _
+    from django.core.urlresolvers import reverse
+    from django.conf import settings
+%>
+<%block name="bodyclass">view-in-course view-university-id</%block>
+
+<%block name="headextra">
+    <%static:css group='style-course-vendor'/>
+    <%static:css group='style-course'/>
+</%block>
+
+
+<%block name="pagetitle">${_("Delete a University ID for {course_number}").format(course_number=course.display_number_with_default)}</%block>
+
+<%include file="/courseware/course_navigation.html" args="active_page='university_id'" />
+
+<div class="container">
+    <div id="main" class="course-wrapper">
+        <div class="university-id" id="course-university-id">
+            <h1>${_('Edraak University IDs')}</h1>
+
+            <hr />
+
+            <form method="post">
+                <p>
+                    ${_('Are you sure you want to delete the university ID ({university_id}) for student "{full_name}"?').format(
+                        university_id=object.university_id,
+                        full_name=object.get_full_name(),
+                    )}
+                </p>
+
+                <p>
+                    <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}">
+                    <input type="submit" value="${_('Delete')}">
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

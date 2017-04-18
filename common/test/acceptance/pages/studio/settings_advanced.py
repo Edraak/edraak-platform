@@ -220,6 +220,7 @@ class AdvancedSettingsPage(CoursePage):
             'enable_timed_exams',
             'enable_subsection_gating',
             'learning_info',
+            'enable_university_id',
             'instructor_info',
             'create_zendesk_tickets',
             'ccx_connector',
