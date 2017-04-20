@@ -367,27 +367,6 @@ if FEATURES.get('AUTH_USE_CAS'):
             CAS_ATTRIBUTE_CALLBACK['function']
         )
 
-################################ Edraak Apps ################################
-
-if FEATURES.get('EDRAAK_RATELIMIT_APP'):
-    # Keep in sync with {cms,lms}/envs/{test,aws}.py
-    INSTALLED_APPS += ('edraak_ratelimit',)
-
-    import edraak_ratelimit.helpers
-    AUTHENTICATION_BACKENDS = edraak_ratelimit.helpers.update_authentication_backends(AUTHENTICATION_BACKENDS)
-
-
-# Keep it in sync with {lms,cms}/envs/{test,aws}.py
-if FEATURES.get('EDRAAK_I18N_APP'):
-    # Common app, keep it in sync with the CMS
-    import edraak_i18n.helpers
-    INSTALLED_APPS += ('edraak_i18n',)
-    MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
-
-
-if FEATURES.get('EDRAAK_UNIVERSITY_APP'):
-    INSTALLED_APPS += ('edraak_university',)
-
 
 # Video Caching. Pairing country codes with CDN URLs.
 # Example: {'CN': 'http://api.xuetangx.com/edx/video?s3_url='}
@@ -627,6 +606,37 @@ FINANCIAL_REPORTS = ENV_TOKENS.get("FINANCIAL_REPORTS", FINANCIAL_REPORTS)
 # This can be used to separate uploads for different environments
 # within the same S3 bucket.
 ORA2_FILE_PREFIX = ENV_TOKENS.get("ORA2_FILE_PREFIX", ORA2_FILE_PREFIX)
+
+
+################################ Edraak Apps ################################
+
+if FEATURES.get('EDRAAK_RATELIMIT_APP'):
+    # Keep in sync with {cms,lms}/envs/{test,aws}.py
+    INSTALLED_APPS += ('edraak_ratelimit',)
+
+    import edraak_ratelimit.helpers
+    AUTHENTICATION_BACKENDS = edraak_ratelimit.helpers.update_authentication_backends(AUTHENTICATION_BACKENDS)
+
+
+# Keep it in sync with {lms,cms}/envs/{test,aws}.py
+if FEATURES.get('EDRAAK_I18N_APP'):
+    # Common app, keep it in sync with the CMS
+    import edraak_i18n.helpers
+    INSTALLED_APPS += ('edraak_i18n',)
+    MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
+
+
+if FEATURES.get('EDRAAK_UNIVERSITY_APP'):
+    INSTALLED_APPS += ('edraak_university',)
+
+
+if FEATURES.get('EDRAAK_FORUS_APP'):
+    INSTALLED_APPS += ('edraak_forus',)
+
+    # Set ForUs secret key and url
+    FORUS_AUTH_SECRET_KEY = AUTH_TOKENS.get("FORUS_AUTH_SECRET_KEY")
+    FORUS_BASE_URL = ENV_TOKENS.get("FORUS_BASE_URL")
+
 
 ##### ACCOUNT LOCKOUT DEFAULT PARAMETERS #####
 MAX_FAILED_LOGIN_ATTEMPTS_ALLOWED = ENV_TOKENS.get("MAX_FAILED_LOGIN_ATTEMPTS_ALLOWED", 5)

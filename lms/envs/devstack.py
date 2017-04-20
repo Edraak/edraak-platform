@@ -211,6 +211,7 @@ FEATURES['ENABLE_COSMETIC_DISPLAY_PRICE'] = True
 ###################### Edraak Features ######################
 FEATURES['EDRAAK_UNIVERSITY_APP'] = True
 FEATURES['EDRAAK_UNIVERSITY_CSV_EXPORT'] = True
+FEATURES['EDRAAK_FORUS_APP'] = True
 
 
 ########################## Third Party Auth #######################
