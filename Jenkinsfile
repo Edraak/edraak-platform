@@ -87,6 +87,8 @@ stage('Prepare') {
 }
 
 stage('Test') {
+  // This commit should be removed via
+  error("TODO: Update to match Ficus workers")
   parallel buildParallelSteps()
 }
 
