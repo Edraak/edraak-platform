@@ -19,9 +19,9 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.contrib.staticfiles.storage import staticfiles_storage
 
-from microsite_configuration import microsite
 from edxmako.shortcuts import marketing_link
 from branding.models import BrandingApiConfig
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 
 
 log = logging.getLogger("edx.footer")
@@ -117,7 +117,7 @@ def _footer_copyright():
         u"\u00A9 {org_name}.  All rights reserved except where noted.  "
         u"EdX, Open edX and the edX and Open EdX logos are registered trademarks "
         u"or trademarks of edX Inc."
-    ).format(org_name=microsite.get_value('PLATFORM_NAME', settings.PLATFORM_NAME))
+    ).format(org_name=configuration_helpers.get_value('PLATFORM_NAME', settings.PLATFORM_NAME))
 
 
 def _footer_openedx_link():
@@ -145,7 +145,7 @@ def _footer_social_links():
     Returns: list
 
     """
-    platform_name = microsite.get_value('platform_name', settings.PLATFORM_NAME)
+    platform_name = configuration_helpers.get_value('platform_name', settings.PLATFORM_NAME)
     links = []
 
     for social_name in settings.SOCIAL_MEDIA_FOOTER_NAMES:
@@ -164,6 +164,7 @@ def _footer_social_links():
 
 def _footer_navigation_links():
     """Return the navigation links to display in the footer. """
+    platform_name = configuration_helpers.get_value('platform_name', settings.PLATFORM_NAME)
     return [
         {
             "name": link_name,
@@ -172,13 +173,14 @@ def _footer_navigation_links():
         }
         for link_name, link_url, link_title in [
             ("about", marketing_link("ABOUT"), _("About")),
+            ("enterprise", marketing_link("ENTERPRISE"),
+             _("{platform_name} for Business").format(platform_name=platform_name)),
             ("blog", marketing_link("BLOG"), _("Blog")),
             ("news", marketing_link("NEWS"), _("News")),
             ("help-center", settings.SUPPORT_SITE_LINK, _("Help Center")),
             ("contact", marketing_link("CONTACT"), _("Contact")),
             ("careers", marketing_link("CAREERS"), _("Careers")),
             ("donate", marketing_link("DONATE"), _("Donate")),
-            ("sitemap", marketing_link("SITE_MAP"), _("Sitemap")),
         ]
         if link_url and link_url != "#"
     ]
@@ -191,6 +193,8 @@ def _footer_legal_links():
         ("terms_of_service_and_honor_code", marketing_link("TOS_AND_HONOR"), _("Terms of Service & Honor Code")),
         ("privacy_policy", marketing_link("PRIVACY"), _("Privacy Policy")),
         ("accessibility_policy", marketing_link("ACCESSIBILITY"), _("Accessibility Policy")),
+        ("sitemap", marketing_link("SITE_MAP"), _("Sitemap")),
+        ("media_kit", marketing_link("MEDIA_KIT"), _("Media Kit")),
     ]
 
     # Backwards compatibility: If a combined "terms of service and honor code"
@@ -222,7 +226,7 @@ def _footer_mobile_links(is_secure):
     Returns: list
 
     """
-    platform_name = microsite.get_value('platform_name', settings.PLATFORM_NAME)
+    platform_name = configuration_helpers.get_value('platform_name', settings.PLATFORM_NAME)
 
     mobile_links = []
     if settings.FEATURES.get('ENABLE_FOOTER_MOBILE_APP_LINKS'):
@@ -256,8 +260,8 @@ def _footer_logo_img(is_secure):
     Returns:
         Absolute url to logo
     """
-    logo_name = microsite.get_value('FOOTER_ORGANIZATION_IMAGE', settings.FOOTER_ORGANIZATION_IMAGE)
-    # `logo_name` is looked up from the microsite configuration,
+    logo_name = configuration_helpers.get_value('FOOTER_ORGANIZATION_IMAGE', settings.FOOTER_ORGANIZATION_IMAGE)
+    # `logo_name` is looked up from the configuration,
     # which falls back on the Django settings, which loads it from
     # `lms.env.json`, which is created and managed by Ansible. Because of
     # this runaround, we lose a lot of the flexibility that Django's
@@ -298,7 +302,7 @@ def _absolute_url(is_secure, url_path):
         unicode
 
     """
-    site_name = microsite.get_value('SITE_NAME', settings.SITE_NAME)
+    site_name = configuration_helpers.get_value('SITE_NAME', settings.SITE_NAME)
     parts = ("https" if is_secure else "http", site_name, url_path, '', '', '')
     return urlparse.urlunparse(parts)
 
@@ -327,14 +331,14 @@ def _absolute_url_staticfile(is_secure, name):
     return _absolute_url(is_secure, url_path)
 
 
-def get_microsite_url(name):
+def get_configuration_url(name):
     """
-    Look up and return the value for given url name in microsite configuration.
-    URLs are saved in "urls" dictionary inside Microsite Configuration.
+    Look up and return the value for given url name in configuration.
+    URLs are saved in "urls" dictionary inside configuration.
 
-    Return 'EMPTY_URL' if given url name is not defined in microsite configuration urls.
+    Return 'EMPTY_URL' if given url name is not defined in configuration urls.
     """
-    urls = microsite.get_value("urls", default={})
+    urls = configuration_helpers.get_value("urls", default={})
     return urls.get(name) or EMPTY_URL
 
 
@@ -342,15 +346,15 @@ def get_url(name):
     """
     Lookup and return page url, lookup is performed in the following order
 
-    1. get microsite url, If microsite URL override exists, return it
+    1. get url, If configuration URL override exists, return it
     2. Otherwise return the marketing URL.
 
     :return: string containing page url.
     """
-    # If a microsite URL override exists, return it.  Otherwise return the marketing URL.
-    microsite_url = get_microsite_url(name)
-    if microsite_url != EMPTY_URL:
-        return microsite_url
+    # If a configuration URL override exists, return it.  Otherwise return the marketing URL.
+    configuration_url = get_configuration_url(name)
+    if configuration_url != EMPTY_URL:
+        return configuration_url
 
     # get marketing link, if marketing is disabled then platform url will be used instead.
     url = marketing_link(name)
@@ -360,29 +364,31 @@ def get_url(name):
 
 def get_base_url(is_secure):
     """
-    Return Base URL for site/microsite.
+    Return Base URL for site.
     Arguments:
         is_secure (bool): If true, use HTTPS as the protocol.
     """
     return _absolute_url(is_secure=is_secure, url_path="")
 
 
-def get_logo_url():
+def get_logo_url(is_secure=True):
     """
     Return the url for the branded logo image to be used
+    Arguments:
+        is_secure (bool): If true, use HTTPS as the protocol.
     """
 
-    # if the MicrositeConfiguration has a value for the logo_image_url
+    # if the configuration has an overide value for the logo_image_url
     # let's use that
-    image_url = microsite.get_value('logo_image_url')
+    image_url = configuration_helpers.get_value('logo_image_url')
     if image_url:
-        return '{static_url}{image_url}'.format(
-            static_url=settings.STATIC_URL,
-            image_url=image_url
+        return _absolute_url_staticfile(
+            is_secure=is_secure,
+            name=image_url,
         )
 
     # otherwise, use the legacy means to configure this
-    university = microsite.get_value('university')
+    university = configuration_helpers.get_value('university')
 
     if university:
         return staticfiles_storage.url('images/{uni}-on-edx-logo.png'.format(uni=university))

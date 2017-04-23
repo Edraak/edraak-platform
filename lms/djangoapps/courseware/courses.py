@@ -13,13 +13,10 @@ from django.http import Http404
 from django.conf import settings
 
 from edxmako.shortcuts import render_to_string
-from xmodule.modulestore import ModuleStoreEnum
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
 from static_replace import replace_static_urls
-from xmodule.modulestore import ModuleStoreEnum
 from xmodule.x_module import STUDENT_VIEW
-from microsite_configuration import microsite
 
 from courseware.access import has_access
 from courseware.date_summary import (
@@ -37,6 +34,7 @@ import branding
 
 from opaque_keys.edx.keys import UsageKey
 from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 
 
 log = logging.getLogger(__name__)
@@ -71,7 +69,7 @@ def get_course_by_id(course_key, depth=0):
     if course:
         return course
     else:
-        raise Http404("Course not found.")
+        raise Http404("Course not found: {}.".format(unicode(course_key)))
 
 
 class UserNotEnrolled(Http404):
@@ -296,18 +294,7 @@ def get_course_info_section(request, user, course, section_key):
     return html
 
 
-def get_course_date_summary(course, user):
-    """
-    Return the snippet of HTML to be included on the course info page
-    in the 'Date Summary' section.
-    """
-    blocks = _get_course_date_summary_blocks(course, user)
-    return '\n'.join(
-        b.render() for b in blocks
-    )
-
-
-def _get_course_date_summary_blocks(course, user):
+def get_course_date_blocks(course, user):
     """
     Return the list of blocks to display on the course info page,
     sorted by date.
@@ -380,7 +367,7 @@ def get_courses(user, org=None, filter_=None):
     """
     courses = branding.get_visible_courses(org=org, filter_=filter_)
 
-    permission_name = microsite.get_value(
+    permission_name = configuration_helpers.get_value(
         'COURSE_CATALOG_VISIBILITY_PERMISSION',
         settings.COURSE_CATALOG_VISIBILITY_PERMISSION
     )
@@ -394,7 +381,7 @@ def get_permission_for_course_about():
     """
     Returns the CourseOverview object for the course after checking for access.
     """
-    return microsite.get_value(
+    return configuration_helpers.get_value(
         'COURSE_ABOUT_VISIBILITY_PERMISSION',
         settings.COURSE_ABOUT_VISIBILITY_PERMISSION
     )

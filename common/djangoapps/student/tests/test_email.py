@@ -20,7 +20,7 @@ from django.conf import settings
 from edxmako.shortcuts import render_to_string
 from util.request import safe_get_host
 from util.testing import EventTestMixin
-from openedx.core.djangoapps.theming import helpers as theming_helpers
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.theming.tests.test_util import with_comprehensive_theme
 
 
@@ -57,7 +57,7 @@ class EmailTestMixin(object):
         email_user.assert_called_with(
             mock_render_to_string(subject_template, subject_context),
             mock_render_to_string(body_template, body_context),
-            theming_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
+            configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
         )
 
     def append_allowed_hosts(self, hostname):
@@ -70,23 +70,23 @@ class EmailTestMixin(object):
 class ActivationEmailTests(TestCase):
     """Test sending of the activation email. """
 
-    ACTIVATION_SUBJECT = "Activate Your edX Account"
+    ACTIVATION_SUBJECT = u"Activate Your {} Account".format(settings.PLATFORM_NAME)
 
     # Text fragments we expect in the body of an email
     # sent from an OpenEdX installation.
     OPENEDX_FRAGMENTS = [
-        "Thank you for creating an account with {platform}!".format(platform=settings.PLATFORM_NAME),
+        u"Thank you for creating an account with {platform}!".format(platform=settings.PLATFORM_NAME),
         "http://edx.org/activate/",
         (
             "Check the help section of the "
-            "{platform} website".format(platform=settings.PLATFORM_NAME)
+            u"{platform} website".format(platform=settings.PLATFORM_NAME)
         )
     ]
 
     # Text fragments we expect in the body of an email
     # sent from an EdX-controlled domain.
     EDX_DOMAIN_FRAGMENTS = [
-        "Thank you for creating an account with {platform}!".format(platform=settings.PLATFORM_NAME),
+        u"Thank you for creating an account with {platform}!".format(platform=settings.PLATFORM_NAME),
         "http://edx.org/activate/",
         "https://www.edx.org/contact-us",
         "This email message was automatically sent by edx.org"
@@ -298,7 +298,7 @@ class EmailChangeRequestTests(EventTestMixin, TestCase):
         send_mail.assert_called_with(
             mock_render_to_string('emails/email_change_subject.txt', context),
             mock_render_to_string('emails/email_change.txt', context),
-            theming_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL),
+            configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL),
             [new_email]
         )
         self.assert_event_emitted(

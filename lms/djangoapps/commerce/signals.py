@@ -1,22 +1,24 @@
 """
 Signal handling functions for use with external commerce service.
 """
+from __future__ import unicode_literals
+
 import json
 import logging
 from urlparse import urljoin
 
+import requests
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from edx_rest_api_client.exceptions import HttpClientError
-import requests
-
-from microsite_configuration import microsite
 from request_cache.middleware import RequestCache
 from student.models import UNENROLL_DONE
+
 from openedx.core.djangoapps.commerce.utils import ecommerce_api_client, is_commerce_service_configured
-from openedx.core.djangoapps.theming.helpers import get_value
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+from openedx.core.djangoapps.theming import helpers as theming_helpers
 
 log = logging.getLogger(__name__)
 
@@ -182,7 +184,7 @@ def create_zendesk_ticket(requester_name, requester_email, subject, body, tags=N
 
         # Check for HTTP codes other than 201 (Created)
         if response.status_code != 201:
-            log.error(u'Failed to create ticket. Status: [%d], Body: [%s]', response.status_code, response.content)
+            log.error('Failed to create ticket. Status: [%d], Body: [%s]', response.status_code, response.content)
         else:
             log.debug('Successfully created ticket.')
     except Exception:  # pylint: disable=broad-except
@@ -197,7 +199,9 @@ def generate_refund_notification_body(student, refund_ids):  # pylint: disable=i
         "To process this request, please visit the link(s) below."
     ).format(username=student.username, email=student.email)
 
-    ecommerce_url_root = get_value('ECOMMERCE_PUBLIC_URL_ROOT', settings.ECOMMERCE_PUBLIC_URL_ROOT)
+    ecommerce_url_root = configuration_helpers.get_value(
+        'ECOMMERCE_PUBLIC_URL_ROOT', settings.ECOMMERCE_PUBLIC_URL_ROOT,
+    )
     refund_urls = [urljoin(ecommerce_url_root, '/dashboard/refunds/{}/'.format(refund_id))
                    for refund_id in refund_ids]
 
@@ -209,9 +213,9 @@ def send_refund_notification(course_enrollment, refund_ids):
 
     tags = ['auto_refund']
 
-    if microsite.is_request_in_microsite():
+    if theming_helpers.is_request_in_themed_site():
         # this is not presently supported with the external service.
-        raise NotImplementedError("Unable to send refund processing emails to microsite teams.")
+        raise NotImplementedError("Unable to send refund processing emails to support teams.")
 
     student = course_enrollment.user
     subject = _("[Refund] User-Requested Refund")

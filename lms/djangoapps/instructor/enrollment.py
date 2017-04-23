@@ -6,27 +6,36 @@ Does not include any access control, be sure to check access before calling.
 
 import json
 import logging
+
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from django.utils.translation import override as override_language
+from eventtracking import tracker
+import pytz
 
 from course_modes.models import CourseMode
-from student.models import CourseEnrollment, CourseEnrollmentAllowed
 from courseware.models import StudentModule
 from edxmako.shortcuts import render_to_string
-from lang_pref import LANGUAGE_KEY
-
-from submissions import api as sub_api  # installed from the edx-submissions repository
-from student.models import anonymous_id_for_user
+from lms.djangoapps.grades.signals.signals import PROBLEM_RAW_SCORE_CHANGED
+from openedx.core.djangoapps.lang_pref import LANGUAGE_KEY
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.user_api.models import UserPreference
-
-from microsite_configuration import microsite
+from submissions import api as sub_api  # installed from the edx-submissions repository
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
-from openedx.core.djangoapps.theming import helpers as theming_helpers
 
+from course_modes.models import CourseMode
+from courseware.models import StudentModule
+from edxmako.shortcuts import render_to_string
+from student.models import CourseEnrollment, CourseEnrollmentAllowed, anonymous_id_for_user
+from track.event_transaction_utils import (
+    create_new_event_transaction_id,
+    set_event_transaction_type,
+    get_event_transaction_id
+)
 
 log = logging.getLogger(__name__)
 
@@ -246,6 +255,7 @@ def reset_student_attempts(course_id, student, module_state_key, requesting_user
                 )
                 submission_cleared = True
     except ItemNotFoundError:
+        block = None
         log.warning("Could not find %s in modulestore when attempting to reset attempts.", module_state_key)
 
     # Reset the student's score in the submissions API, if xblock.clear_student_state has not done so already.
@@ -268,6 +278,26 @@ def reset_student_attempts(course_id, student, module_state_key, requesting_user
 
     if delete_module:
         module_to_reset.delete()
+        create_new_event_transaction_id()
+        grade_update_root_type = 'edx.grades.problem.state_deleted'
+        set_event_transaction_type(grade_update_root_type)
+        tracker.emit(
+            unicode(grade_update_root_type),
+            {
+                'user_id': unicode(student.id),
+                'course_id': unicode(course_id),
+                'problem_id': unicode(module_state_key),
+                'instructor_id': unicode(requesting_user.id),
+                'event_transaction_id': unicode(get_event_transaction_id()),
+                'event_transaction_type': unicode(grade_update_root_type),
+            }
+        )
+        _fire_score_changed_for_block(
+            course_id,
+            student,
+            block,
+            module_state_key,
+        )
     else:
         _reset_module_attempts(module_to_reset)
 
@@ -288,6 +318,32 @@ def _reset_module_attempts(studentmodule):
     studentmodule.save()
 
 
+def _fire_score_changed_for_block(
+        course_id,
+        student,
+        block,
+        module_state_key,
+):
+    """
+    Fires a PROBLEM_RAW_SCORE_CHANGED event for the given module.
+    The earned points are always zero. We must retrieve the possible points
+    from the XModule, as noted below. The effective time is now().
+    """
+    if block and block.has_score and block.max_score() is not None:
+        PROBLEM_RAW_SCORE_CHANGED.send(
+            sender=None,
+            raw_earned=0,
+            raw_possible=block.max_score(),
+            weight=getattr(block, 'weight', None),
+            user_id=student.id,
+            course_id=unicode(course_id),
+            usage_id=unicode(module_state_key),
+            score_deleted=True,
+            only_if_higher=False,
+            modified=datetime.now().replace(tzinfo=pytz.UTC),
+        )
+
+
 def get_email_params(course, auto_enroll, secure=True, course_key=None, display_name=None):
     """
     Generate parameters used when parsing email templates.
@@ -300,7 +356,7 @@ def get_email_params(course, auto_enroll, secure=True, course_key=None, display_
     course_key = course_key or course.id.to_deprecated_string()
     display_name = display_name or course.display_name_with_default_escaped
 
-    stripped_site_name = microsite.get_value(
+    stripped_site_name = configuration_helpers.get_value(
         'SITE_NAME',
         settings.SITE_NAME
     )
@@ -372,7 +428,7 @@ def send_mail_to_student(student, param_dict, language=None):
     if 'display_name' in param_dict:
         param_dict['course_name'] = param_dict['display_name']
 
-    param_dict['site_name'] = microsite.get_value(
+    param_dict['site_name'] = configuration_helpers.get_value(
         'SITE_NAME',
         param_dict['site_name']
     )
@@ -380,8 +436,8 @@ def send_mail_to_student(student, param_dict, language=None):
     subject = None
     message = None
 
-    # see if we are running in a microsite and that there is an
-    # activation email template definition available as configuration, if so, then render that
+    # see if there is an activation email template definition available as configuration,
+    # if so, then render that
     message_type = param_dict['message']
 
     email_template_dict = {
@@ -427,7 +483,7 @@ def send_mail_to_student(student, param_dict, language=None):
 
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
-        from_address = theming_helpers.get_value(
+        from_address = configuration_helpers.get_value(
             'email_from_address',
             settings.DEFAULT_FROM_EMAIL
         )
