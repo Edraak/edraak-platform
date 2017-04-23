@@ -335,7 +335,7 @@ class XmlParserMixin(object):
 
         """
         # VS[compat] -- just have the url_name lookup, once translation is done
-        url_name = cls._get_url_name(node)
+        url_name = node.get('url_name', node.get('slug'))
         def_id = id_generator.create_definition(node.tag, url_name)
         usage_id = id_generator.create_usage(def_id)
         aside_children = []
@@ -344,7 +344,8 @@ class XmlParserMixin(object):
         if is_pointer_tag(node):
             # new style:
             # read the actual definition file--named using url_name.replace(':','/')
-            definition_xml, filepath = cls.load_definition_xml(node, runtime, def_id)
+            filepath = cls._format_filepath(node.tag, name_to_pathname(url_name))
+            definition_xml = cls.load_file(filepath, runtime.resources_fs, def_id)
             aside_children = runtime.parse_asides(definition_xml, def_id, usage_id, id_generator)
         else:
             filepath = None
@@ -406,23 +407,6 @@ class XmlParserMixin(object):
                     xblock.add_aside(asd)
 
         return xblock
-
-    @classmethod
-    def _get_url_name(cls, node):
-        """
-        Reads url_name attribute from the node
-        """
-        return node.get('url_name', node.get('slug'))
-
-    @classmethod
-    def load_definition_xml(cls, node, runtime, def_id):
-        """
-        Loads definition_xml stored in a dedicated file
-        """
-        url_name = cls._get_url_name(node)
-        filepath = cls._format_filepath(node.tag, name_to_pathname(url_name))
-        definition_xml = cls.load_file(filepath, runtime.resources_fs, def_id)
-        return definition_xml, filepath
 
     @classmethod
     def _format_filepath(cls, category, name):

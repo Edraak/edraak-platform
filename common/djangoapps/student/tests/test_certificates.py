@@ -23,6 +23,13 @@ from student.models import LinkedInAddToProfileConfiguration
 # pylint: disable=no-member
 
 
+def _fake_is_request_in_microsite():
+    """
+    Mocked version of microsite helper method to always return true
+    """
+    return True
+
+
 class CertificateDisplayTestBase(SharedModuleStoreTestCase):
     """Tests display of certificates on the student dashboard. """
 
@@ -156,10 +163,10 @@ class CertificateDisplayTest(CertificateDisplayTestBase):
         # now we should see it
         self._check_linkedin_visibility(True)
 
-    @mock.patch("openedx.core.djangoapps.theming.helpers.is_request_in_themed_site", mock.Mock(return_value=True))
-    def test_post_to_linkedin_site_specific(self):
+    @mock.patch("microsite_configuration.microsite.is_request_in_microsite", _fake_is_request_in_microsite)
+    def test_post_to_linkedin_microsite(self):
         """
-        Verifies behavior for themed sites which disables the post to LinkedIn
+        Verifies behavior for microsites which disables the post to LinkedIn
         feature (for now)
         """
         self._create_certificate('honor')
@@ -170,7 +177,7 @@ class CertificateDisplayTest(CertificateDisplayTestBase):
         )
         config.save()
 
-        # now we should not see it because we are in a themed site
+        # now we should not see it because we are in a microsite
         self._check_linkedin_visibility(False)
 
 

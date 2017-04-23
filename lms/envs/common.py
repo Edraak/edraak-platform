@@ -497,6 +497,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',  # this is required for admin
                 'django.template.context_processors.csrf',
+                'microsite_configuration.context_processors.microsite_context',
 
                 # Added for django-wiki
                 'django.template.context_processors.media',
@@ -511,11 +512,10 @@ TEMPLATES = [
                 'shoppingcart.context_processor.user_has_cart_context_processor',
 
                 # Allows the open edX footer to be leveraged in Django Templates.
-                'edxmako.shortcuts.footer_context_processor',
+                'edxmako.shortcuts.microsite_footer_context_processor',
 
                 # Online contextual help
                 'context_processors.doc_url',
-                'openedx.core.djangoapps.site_configuration.context_processors.configuration_context'
             ],
             # Change 'debug' in your environment settings files - not here.
             'debug': False
@@ -1548,7 +1548,7 @@ PIPELINE_JS = {
             [
                 'js/sticky_filter.js',
                 'js/query-params.js',
-                'js/vendor/moment-with-locales.min.js',
+                'js/vendor/moment.min.js',
             ]
         ),
         'output_filename': 'js/lms-application.js',
@@ -1700,7 +1700,7 @@ REQUIRE_ENVIRONMENT = "node"
 REQUIRE_JS_PATH_OVERRIDES = {
     'js/bookmarks/views/bookmark_button': 'js/bookmarks/views/bookmark_button.js',
     'js/views/message_banner': 'js/views/message_banner.js',
-    'moment': 'js/vendor/moment-with-locales.min.js',
+    'moment': 'js/vendor/moment.min.js',
     'jquery.url': 'js/vendor/url.min.js',
     'js/courseware/course_home_events': 'js/courseware/course_home_events.js',
     'js/courseware/accordion_events': 'js/courseware/accordion_events.js',
@@ -1714,15 +1714,6 @@ REQUIRE_JS_PATH_OVERRIDES = {
     'edxicons': 'edx-pattern-library/js/edx-icons.js',
     'draggabilly': 'js/vendor/draggabilly.js'
 }
-
-########################## DJANGO DEBUG TOOLBAR ###############################
-
-# We don't enable Django Debug Toolbar universally, but whenever we do, we want
-# to avoid patching settings.  Patched settings can cause circular import
-# problems: http://django-debug-toolbar.readthedocs.org/en/1.0/installation.html#explicit-setup
-
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
 ################################# CELERY ######################################
 
 # Celery's task autodiscovery won't find tasks nested in a tasks package.

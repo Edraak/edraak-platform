@@ -33,7 +33,7 @@ EXPECTED_PREPROCESS_ASSETS_COMMAND = (
     u" {system}/static/sass/*.scss {system}/static/themed_sass"
 )
 EXPECTED_COLLECT_STATIC_COMMAND = (
-    u"python manage.py {system} --settings={asset_settings} collectstatic --noinput {log_string}"
+    u"python manage.py {system} --settings={asset_settings} collectstatic --noinput > /dev/null"
 )
 EXPECTED_CELERY_COMMAND = (
     u"python manage.py lms --settings={settings} celery worker --beat --loglevel=INFO --pythonpath=."
@@ -197,7 +197,6 @@ class TestPaverServerTasks(PaverTestCase):
         """
         Verify the output of a server task.
         """
-        log_string = options.get("log_string", "> /dev/null")
         settings = options.get("settings", None)
         asset_settings = options.get("asset-settings", None)
         is_optimized = options.get("optimized", False)
@@ -243,7 +242,7 @@ class TestPaverServerTasks(PaverTestCase):
             expected_messages.extend(self.expected_sass_commands(system=system, asset_settings=expected_asset_settings))
         if expected_collect_static:
             expected_messages.append(EXPECTED_COLLECT_STATIC_COMMAND.format(
-                system=system, asset_settings=expected_asset_settings, log_string=log_string
+                system=system, asset_settings=expected_asset_settings
             ))
         expected_run_server_command = EXPECTED_RUN_SERVER_COMMAND.format(
             system=system,
@@ -259,7 +258,6 @@ class TestPaverServerTasks(PaverTestCase):
         """
         Verify the output of a server task.
         """
-        log_string = options.get("log_string", "> /dev/null")
         settings = options.get("settings", None)
         asset_settings = options.get("asset_settings", None)
         is_optimized = options.get("optimized", False)
@@ -286,10 +284,10 @@ class TestPaverServerTasks(PaverTestCase):
             expected_messages.extend(self.expected_sass_commands(asset_settings=expected_asset_settings))
         if expected_collect_static:
             expected_messages.append(EXPECTED_COLLECT_STATIC_COMMAND.format(
-                system="lms", asset_settings=expected_asset_settings, log_string=log_string
+                system="lms", asset_settings=expected_asset_settings
             ))
             expected_messages.append(EXPECTED_COLLECT_STATIC_COMMAND.format(
-                system="cms", asset_settings=expected_asset_settings, log_string=log_string
+                system="cms", asset_settings=expected_asset_settings
             ))
         expected_messages.append(
             EXPECTED_RUN_SERVER_COMMAND.format(

@@ -5,8 +5,6 @@ Utility methods for unit tests.
 import filecmp
 from path import Path as path
 
-from xblock.reference.user_service import XBlockUser, UserService
-
 
 def directories_equal(directory1, directory2):
     """
@@ -26,16 +24,3 @@ def directories_equal(directory1, directory2):
         return True
 
     return compare_dirs(path(directory1), path(directory2))
-
-
-class StubUserService(UserService):
-    """
-    Stub UserService for testing the sequence module.
-    """
-    def get_current_user(self):
-        """
-        Implements abstract method for getting the current user.
-        """
-        user = XBlockUser()
-        user.opt_attrs['edx-platform.username'] = 'bilbo'
-        return user
