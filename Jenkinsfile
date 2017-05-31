@@ -4,7 +4,7 @@ def makeNode(suite, shard) {
   return {
     echo "I am ${suite}:${shard}, and the worker is yet to be started!"
 
-    node('worker-ami') {
+    node('ficus-worker') {
       // Cleaning up previous builds. Heads up! Not sure if `WsCleanup` actually works.
       step([$class: 'WsCleanup'])
 
@@ -40,8 +40,7 @@ def makeNode(suite, shard) {
 
 def getSuites() {
   return [
-    [name: 'js-unit', 'shards': ['all']],
-    [name: 'commonlib-unit', 'shards': ['all']],
+    [name: 'commonlib-js-unit', 'shards': ['all']],
     [name: 'quality', 'shards': ['all']],
     [name: 'lms-unit', 'shards': [
       1,
@@ -63,6 +62,8 @@ def getSuites() {
       7,
       8,
       9,
+      10,
+      11,
     ]],
   ]
 }
@@ -88,7 +89,6 @@ stage('Prepare') {
 
 stage('Test') {
   // This commit should be removed via
-  error("TODO: Update to match Ficus workers")
   parallel buildParallelSteps()
 }
 
