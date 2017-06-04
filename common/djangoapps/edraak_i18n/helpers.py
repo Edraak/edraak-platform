@@ -19,8 +19,8 @@ def add_locale_middleware(middleware_classes):
     edraak_middleware = 'edraak_i18n.middleware.DefaultLocaleMiddleware'
 
     other_locale_middlewares = (
-        'lang_pref.middleware.LanguagePreferenceMiddleware',
-        'dark_lang.middleware.DarkLangMiddleware',
+        'openedx.core.djangoapps.lang_pref.middleware.LanguagePreferenceMiddleware',
+        'openedx.core.djangoapps.dark_lang.middleware.DarkLangMiddleware',
         'django.middleware.locale.LocaleMiddleware',
     )
 

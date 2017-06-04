@@ -22,7 +22,7 @@ from opaque_keys.edx.keys import CourseKey
 from opaque_keys import InvalidKeyError
 from courseware.courses import get_course_by_id
 from student.models import UserProfile
-from lang_pref.api import released_languages
+from openedx.core.djangoapps.lang_pref.api import released_languages
 
 
 DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'

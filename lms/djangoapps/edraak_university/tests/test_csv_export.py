@@ -75,8 +75,8 @@ class TestInstructorGradeReport(InstructorGradeReportTestCase):
     def test_headers_disabled(self, header):
         rows = self.create_rows()
 
-        self.assertIn('email', rows[0])  # Sanity check for the header row
-        self.assertIn('username', rows[0])  # Sanity check
+        self.assertIn('Email', rows[0])  # Sanity check for the header row
+        self.assertIn('Username', rows[0])  # Sanity check
         self.assertFalse(is_csv_export_enabled_on_course(self.course))  # Sanity check
 
         self.assertEquals(len(rows[0]), len(rows[1]),
@@ -89,8 +89,8 @@ class TestInstructorGradeReport(InstructorGradeReportTestCase):
     def test_headers_enabled(self, header):
         rows = self.create_rows()
 
-        self.assertIn('email', rows[0])  # Sanity check
-        self.assertIn('username', rows[0])  # Sanity check
+        self.assertIn('Email', rows[0])  # Sanity check
+        self.assertIn('Username', rows[0])  # Sanity check
         self.assertTrue(is_csv_export_enabled_on_course(self.course))  # Sanity check
 
         self.assertEquals(len(rows[0]), len(rows[1]),
