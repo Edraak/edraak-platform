@@ -726,6 +726,7 @@ class DiscussionResponseEditTest(BaseDiscussionTestCase):
         self.assertEqual(expected_response_html, actual_response_html)
 
     @attr(shard=2)
+    @flaky
     def test_edit_response_add_link_error_msg(self):
         """
         Scenario: User submits invalid input to the 'add link' form

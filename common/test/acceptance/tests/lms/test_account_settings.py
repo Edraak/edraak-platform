@@ -254,6 +254,7 @@ class AccountSettingsPageTest(AccountSettingsTestMixin, AcceptanceTest):
         """
         self._test_readonly_field('username', 'Username', self.username)
 
+    @skip('Edraak: Skip a flaky test')
     def test_full_name_field(self):
         """
         Test behaviour of "Full Name" field.
