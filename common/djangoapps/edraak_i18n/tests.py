@@ -12,7 +12,7 @@ from django.conf import settings
 from mock import patch
 import ddt
 
-from dark_lang.models import DarkLangConfig
+from openedx.core.djangoapps.dark_lang.models import DarkLangConfig
 from student.tests.factories import UserFactory
 
 from edraak_i18n.middleware import DefaultLocaleMiddleware
@@ -38,8 +38,8 @@ class SettingsTest(TestCase):
         self.assertIn('edraak_i18n.middleware.DefaultLocaleMiddleware', settings.MIDDLEWARE_CLASSES)
 
     @ddt.data(
-        'lang_pref.middleware.LanguagePreferenceMiddleware',
-        'dark_lang.middleware.DarkLangMiddleware',
+        'openedx.core.djangoapps.lang_pref.middleware.LanguagePreferenceMiddleware',
+        'openedx.core.djangoapps.dark_lang.middleware.DarkLangMiddleware',
         'django.middleware.locale.LocaleMiddleware',
     )
     def test_middleware_order(self, other_middleware):

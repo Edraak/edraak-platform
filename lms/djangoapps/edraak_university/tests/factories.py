@@ -1,9 +1,10 @@
 """
 Dummy factories for tests
 """
+import factory
 from factory import SubFactory, Sequence
 from factory.django import DjangoModelFactory
-from student.tests.factories import UserFactory
+from student.tests.factories import UserFactory, UserProfileFactory
 
 from edraak_university.models import UniversityID
 

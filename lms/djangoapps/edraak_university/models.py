@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from student.models import UserProfile
 
-from xmodule_django.models import CourseKeyField
+from openedx.core.djangoapps.xmodule_django.models import CourseKeyField
 
 
 class UniversityID(models.Model):

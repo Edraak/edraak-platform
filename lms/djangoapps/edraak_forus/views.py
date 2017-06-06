@@ -23,7 +23,7 @@ from django.utils.decorators import method_decorator
 from edxmako.shortcuts import render_to_response
 from enrollment.errors import CourseEnrollmentExistsError
 from enrollment.api import add_enrollment
-from lang_pref import LANGUAGE_KEY
+from openedx.core.djangoapps.lang_pref import LANGUAGE_KEY
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys import InvalidKeyError
 from openedx.core.djangoapps.user_api.views import RegistrationView

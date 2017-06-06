@@ -191,13 +191,13 @@ class StubLtiHandler(StubHttpRequestHandler):
         if submit_url:
             submit_form = textwrap.dedent("""
                 <form action="{submit_url}/grade" method="post">
-                    <input type="submit" name="submit-button" value="Submit">
+                    <input type="submit" name="submit-button" value="Submit" id="submit-button">
                 </form>
                 <form action="{submit_url}/lti2_outcome" method="post">
-                    <input type="submit" name="submit-lti2-button" value="Submit">
+                    <input type="submit" name="submit-lti2-button" value="Submit" id="submit-lti2-button">
                 </form>
                 <form action="{submit_url}/lti2_delete" method="post">
-                    <input type="submit" name="submit-lti2-delete-button" value="Submit">
+                    <input type="submit" name="submit-lti2-delete-button" value="Submit" id="submit-lti-delete-button">
                 </form>
             """).format(submit_url=submit_url)
         else:
@@ -256,16 +256,16 @@ class StubLtiHandler(StubHttpRequestHandler):
         sha1 = hashlib.sha1()
         sha1.update(body)
         oauth_body_hash = unicode(base64.b64encode(sha1.digest()))
-        params = client.get_oauth_params(None)
-        params.append((u'oauth_body_hash', oauth_body_hash))
         mock_request = mock.Mock(
             uri=unicode(urllib.unquote(url)),
             headers=headers,
             body=u"",
             decoded_body=u"",
-            oauth_params=params,
             http_method=unicode(method),
         )
+        params = client.get_oauth_params(mock_request)
+        mock_request.oauth_params = params
+        mock_request.oauth_params.append((u'oauth_body_hash', oauth_body_hash))
         sig = client.get_oauth_signature(mock_request)
         mock_request.oauth_params.append((u'oauth_signature', sig))
         new_headers = parameters.prepare_headers(mock_request.oauth_params, headers, realm=None)

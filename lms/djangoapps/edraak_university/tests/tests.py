@@ -12,7 +12,7 @@ from mock import Mock, patch
 import ddt
 from pkg_resources import iter_entry_points  # pylint: disable=no-name-in-module
 
-from student.tests.factories import UserFactory, CourseEnrollmentFactory
+from student.tests.factories import UserFactory, UserProfileFactory, CourseEnrollmentFactory
 from xmodule.tabs import CourseTabList
 from student.models import CourseEnrollment
 from xmodule.modulestore.tests.factories import CourseFactory
@@ -36,6 +36,7 @@ class ModuleStoreTestCaseLoggedIn(ModuleStoreTestCase):
 
     def setUp(self):
         super(ModuleStoreTestCaseLoggedIn, self).setUp()
+        UserProfileFactory.create(user=self.user)  # Avoid missing profile errors on the `get_user_preferences` calls
 
         self.course = self.create_course()
 
