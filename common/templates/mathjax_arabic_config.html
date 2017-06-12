@@ -1,0 +1,40 @@
+## mako
+## File:   templates/mathjax_arabic_config.html
+##
+## Include the arabic.js MathJax extension that allows rendering beautiful Arabic math.
+##
+
+% if settings.FEATURES.get('ENABLE_ARABIC_MATHJAX'):
+    ## The Amiri font is more beautiful for Math
+    ## Putting it here to ensure it's only loaded when the feature is enabled
+    <link href="//fonts.googleapis.com/css?family=Amiri&amp;subset=arabic" rel="stylesheet" type="text/css">
+
+    <script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path["arabic"] = "https://cdn.rawgit.com/Edraak/arabic-mathjax/v1.1/dist";
+
+    MathJax.Hub.Config({
+        extensions: [
+            "[arabic]/arabic.js"
+        ]
+    });
+
+    ## Hack #1: The `arabic.js` isn't playing well with MathJax v2.6 within the studio and LMS
+    ## This hack solves it by copying the configs from the arabic.js extension
+    ## Not sure why!
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            undefinedFamily: 'Amiri'
+        }
+    });
+    </script>
+
+    <script type="text/x-mathjax-config">
+    ##  Hack #3.b
+    MathJax.Hub.Register.MessageHook("End PreProcess", function () {
+        ##  This scripts applys the fixup style for the Droid Naskh
+        $('.MathJax_Preview')
+            .parent()
+            .addClass('naskhfixup');
+    });
+    </script>
+% endif
