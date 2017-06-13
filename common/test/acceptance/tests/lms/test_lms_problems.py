@@ -6,6 +6,7 @@ See also old lettuce tests in lms/djangoapps/courseware/features/problems.featur
 """
 from nose.plugins.attrib import attr
 from textwrap import dedent
+from unittest import skip
 
 from common.test.acceptance.tests.helpers import UniqueCourseTest
 from common.test.acceptance.pages.studio.auto_auth import AutoAuthPage
@@ -562,6 +563,7 @@ class ProblemWithMathjax(ProblemsTest):
         """)
         return XBlockFixtureDesc('problem', 'MATHJAX TEST PROBLEM', data=xml)
 
+    @skip('Edraak: Disable until we support SVG output for the Arabic MathJax extension.')
     def test_mathjax_in_hint(self):
         """
         Test that MathJax have successfully rendered in problem hint

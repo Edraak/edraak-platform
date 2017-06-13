@@ -691,6 +691,7 @@ class HighLevelTabTest(UniqueCourseTest):
         self.tab_nav.go_to_tab('Test Static Tab')
         self.assertTrue(self.tab_nav.is_on_tab('Test Static Tab'))
 
+    @skip('Edraak: Disable until we support SVG output for the Arabic MathJax extension.')
     def test_static_tab_with_mathjax(self):
         """
         Navigate to a static tab (course content)
