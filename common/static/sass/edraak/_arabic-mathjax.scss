@@ -1,0 +1,48 @@
+// Hack #2.a: Putting the other missing configs from Hack #1 as styles
+.MathJax {
+  .mfliph {
+    display: inline-block !important;
+    font-family: inherit; /* Fix an error with the \pi and \prime */
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -ms-filter: fliph;
+    filter: fliph;
+  }
+
+  .mar {
+    // The Arabic italics is not something you'd want for س and نها ,
+    // therefore this fixes it
+    &, > span {
+      font-family: Amiri !important;
+      font-style: normal !important;
+    }
+  }
+}
+
+// Hack #3.a Arabic Droid Naskh is not playing well with MathJax `spans`
+// This style makes sure that the spans in a MathJax element gets the
+// `sans-serif` font family instead of Arabic Droid Naskh
+.naskhfixup {
+  > span {
+    > span {
+      font-family: sans-serif;
+    }
+  }
+}
+
+// Hack #4
+// Proper alignment for equations in Arabic in the multiple choice questions
+.MathJax_Display {
+  body.rtl & {
+    > .MathJax {
+      text-align: right;
+    }
+  }
+
+  .problem & {
+    display: inline-block !important;
+    width: auto;
+  }
+}
