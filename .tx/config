@@ -1,68 +1,56 @@
 [main]
 host = https://www.transifex.com
 
-[edx-platform.django-partial]
+[edraak-platform.django-partial]
 file_filter = conf/locale/<lang>/LC_MESSAGES/django-partial.po
 source_file = conf/locale/en/LC_MESSAGES/django-partial.po
 source_lang = en
 type = PO
 
-[edx-platform.django-studio]
+[edraak-platform.django-studio]
 file_filter = conf/locale/<lang>/LC_MESSAGES/django-studio.po
 source_file = conf/locale/en/LC_MESSAGES/django-studio.po
 source_lang = en
 type = PO
 
-[edx-platform.djangojs-partial]
+[edraak-platform.djangojs-partial]
 file_filter = conf/locale/<lang>/LC_MESSAGES/djangojs-partial.po
 source_file = conf/locale/en/LC_MESSAGES/djangojs-partial.po
 source_lang = en
 type = PO
 
-[edx-platform.djangojs-studio]
+[edraak-platform.djangojs-studio]
 file_filter = conf/locale/<lang>/LC_MESSAGES/djangojs-studio.po
 source_file = conf/locale/en/LC_MESSAGES/djangojs-studio.po
 source_lang = en
 type = PO
 
-[edx-platform.mako]
+[edraak-platform.mako]
 file_filter = conf/locale/<lang>/LC_MESSAGES/mako.po
 source_file = conf/locale/en/LC_MESSAGES/mako.po
 source_lang = en
 type = PO
 
-[edx-platform.mako-studio]
+[edraak-platform.mako-studio]
 file_filter = conf/locale/<lang>/LC_MESSAGES/mako-studio.po
 source_file = conf/locale/en/LC_MESSAGES/mako-studio.po
 source_lang = en
 type = PO
 
-[edx-platform.underscore]
+[edraak-platform.underscore]
 file_filter = conf/locale/<lang>/LC_MESSAGES/underscore.po
 source_file = conf/locale/en/LC_MESSAGES/underscore.po
 source_lang = en
 type = PO
 
-[edx-platform.underscore-studio]
+[edraak-platform.underscore-studio]
 file_filter = conf/locale/<lang>/LC_MESSAGES/underscore-studio.po
 source_file = conf/locale/en/LC_MESSAGES/underscore-studio.po
 source_lang = en
 type = PO
 
-[edx-platform.wiki]
+[edraak-platform.wiki]
 file_filter = conf/locale/<lang>/LC_MESSAGES/wiki.po
 source_file = conf/locale/en/LC_MESSAGES/wiki.po
-source_lang = en
-type = PO
-
-[open-edx-releases.release-ficus]
-file_filter = conf/locale/<lang>/LC_MESSAGES/django.po
-source_file = conf/locale/en/LC_MESSAGES/django.po
-source_lang = en
-type = PO
- 
-[open-edx-releases.release-ficus-js]
-file_filter = conf/locale/<lang>/LC_MESSAGES/djangojs.po
-source_file = conf/locale/en/LC_MESSAGES/djangojs.po
 source_lang = en
 type = PO
