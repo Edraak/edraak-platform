@@ -61,6 +61,9 @@ from lms.envs.common import (
     ENABLE_CREDIT_ELIGIBILITY, YOUTUBE_API_KEY,
     DEFAULT_COURSE_ABOUT_IMAGE_URL,
 
+    # Lazy Gettext
+    _,
+
     # Django REST framework configuration
     REST_FRAMEWORK,
 
@@ -104,8 +107,8 @@ from xmodule.mixin import LicenseMixin
 # Dummy secret key for dev/test
 SECRET_KEY = 'dev key'
 
-STUDIO_NAME = "Studio"
-STUDIO_SHORT_NAME = "Studio"
+STUDIO_NAME = _("Your Platform Studio")
+STUDIO_SHORT_NAME = _("Studio")
 FEATURES = {
     'GITHUB_PUSH': False,
 
