@@ -1,6 +1,9 @@
 """
 Helper functions to Edraak i18n module.
 """
+from django.utils import six
+from django.utils.functional import lazy
+
 
 
 def add_locale_middleware(middleware_classes):
@@ -33,6 +36,21 @@ def add_locale_middleware(middleware_classes):
 
     # Insert the DefaultLocaleMiddleware before any other locale-related middleware in order for it to work
     return middleware_classes[:first_index] + (edraak_middleware,) + middleware_classes[first_index:]
+
+
+def _format_lazy(format_string, *args, **kwargs):
+    """
+    Apply str.format() on 'format_string' where format_string, args,
+    and/or kwargs might be lazy.
+
+    Copied from Django 1.11:
+
+     - https://docs.djangoproject.com/en/1.11/_modules/django/utils/text/
+    """
+    return format_string.format(*args, **kwargs)
+
+
+format_lazy = lazy(_format_lazy, six.text_type)
 
 
 def is_api_request(request):
