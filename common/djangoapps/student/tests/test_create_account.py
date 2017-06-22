@@ -142,7 +142,7 @@ class TestCreateAccount(TestCase):
             'yearOfBirth': year_of_birth,
             'education': 'Associate degree',
             'address': self.params['mailing_address'],
-            'gender': 'Other/Prefer Not to Say',
+            'gender': 'Prefer Not to Say',
             'country': self.params['country'],
         }
 
