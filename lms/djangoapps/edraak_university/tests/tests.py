@@ -12,7 +12,7 @@ from mock import Mock, patch
 import ddt
 from pkg_resources import iter_entry_points  # pylint: disable=no-name-in-module
 
-from student.tests.factories import UserFactory, UserProfileFactory, CourseEnrollmentFactory
+from student.tests.factories import UserFactory, CourseEnrollmentFactory
 from xmodule.tabs import CourseTabList
 from student.models import CourseEnrollment
 from xmodule.modulestore.tests.factories import CourseFactory
@@ -24,68 +24,6 @@ from edraak_university import helpers
 from edraak_university.forms import UniversityIDForm
 from edraak_university.models import UniversityID
 from edraak_university.tests.factories import UniversityIDFactory
-
-
-class ModuleStoreTestCaseLoggedIn(ModuleStoreTestCase):
-    """
-    A base test class to provide helpers to create user (staff or not staff) and log him in.
-    """
-
-    LOGIN_STAFF = True
-    ENROLL_USER = False
-
-    def setUp(self):
-        super(ModuleStoreTestCaseLoggedIn, self).setUp()
-        UserProfileFactory.create(user=self.user)  # Avoid missing profile errors on the `get_user_preferences` calls
-
-        self.course = self.create_course()
-
-        if self.LOGIN_STAFF:
-            self.login_user(self.user, self.user_password)
-        else:
-            user, password = self.create_non_staff_user()
-            self.user = user
-            self.user_password = password
-            self.login_user(user, password)
-
-    def create_non_staff_user(self):
-        """
-        Overrides the non-staff user method.
-        """
-
-        password = 'foo'
-
-        user = UserFactory.create(
-            password=password,
-            is_staff=False,
-            is_active=True,
-        )
-
-        user.save()
-
-        return user, password
-
-    def create_course(self):
-        """
-        Creates the initial course for testing.
-
-        This method is to created to enable overriding for customization from children classes.
-        """
-
-        return CourseFactory.create()
-
-    def login_user(self, user, password):
-        """
-        Login and enroll user.
-        """
-        self.client.post(reverse('login'), {'email': user.email, 'password': password})
-        dashboard_res = self.client.get(reverse('dashboard'))
-        self.assertContains(dashboard_res, 'Dashboard', msg_prefix='The user should be logged in')
-
-        if self.ENROLL_USER:
-            CourseEnrollmentFactory.create(
-                user=user, course_id=self.course.id
-            )
 
 
 class SettingsTest(TestCase):

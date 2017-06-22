@@ -18,7 +18,7 @@ from edraak_university import helpers
 from edraak_university.mixins import CourseContextMixin
 
 from edraak_university.tests.factories import UniversityIDFactory
-from edraak_university.tests.tests import ModuleStoreTestCaseLoggedIn
+from edraak_tests.tests.helpers import ModuleStoreTestCaseLoggedIn
 
 
 class CourseContextMixinTest(ModuleStoreTestCase):
