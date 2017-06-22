@@ -8,6 +8,7 @@ Tests for the Edraak i18n module.
 
 from django.test import TestCase, RequestFactory, override_settings
 from django.conf import settings
+import django.utils.translation as translation
 
 from mock import patch
 import ddt
@@ -16,7 +17,7 @@ from openedx.core.djangoapps.dark_lang.models import DarkLangConfig
 from student.tests.factories import UserFactory
 
 from edraak_i18n.middleware import DefaultLocaleMiddleware
-from edraak_i18n.helpers import is_api_request
+from edraak_i18n.helpers import is_api_request, format_lazy
 
 
 @ddt.ddt
@@ -190,3 +191,15 @@ class HelpersTest(TestCase):
         Tests the `is_api_request` helper on different params.
         """
         self.assertEquals(is_api_request(self.request_factory.get(path)), should_be_api)
+
+    def test_format_lazy(self):
+        """
+        A sanity check for the imported format_lazy function from Django 1.11
+        """
+        with patch.object(translation._trans, 'ugettext', wraps=translation._trans.ugettext) as mock_ugettext:  # pylint: disable=protected-access
+            result = format_lazy(translation.ugettext_lazy('Hello, {}'), translation.ugettext_lazy('World'))
+            self.assertEquals(mock_ugettext.call_count, 0)
+            self.assertEquals('{}!'.format(result), 'Hello, World!')  # Enforce evaluation
+            self.assertEquals(mock_ugettext.call_count, 2)
+            mock_ugettext.assert_any_call('Hello, {}')
+            mock_ugettext.assert_any_call('World')
