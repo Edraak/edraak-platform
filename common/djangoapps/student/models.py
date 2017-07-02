@@ -253,14 +253,20 @@ class UserProfile(models.Model):
     this_year = datetime.now(UTC).year
     VALID_YEARS = range(this_year, this_year - 120, -1)
     year_of_birth = models.IntegerField(blank=True, null=True, db_index=True)
+
     GENDER_CHOICES = (
         ('m', ugettext_noop('Male')),
         ('f', ugettext_noop('Female')),
         # Translators: 'Other' refers to the student's gender
-        ('o', ugettext_noop('Other/Prefer Not to Say'))
+        ('o', ugettext_noop('Prefer Not to Say'))
     )
+
     gender = models.CharField(
-        blank=True, null=True, max_length=6, db_index=True, choices=GENDER_CHOICES
+        blank=True, null=True, max_length=6, db_index=True, choices=tuple(
+            # Prevent making additional migrations
+            (code, 'Other/Prefer Not to Say' if code == 'o' else name)
+            for code, name in GENDER_CHOICES
+        )
     )
 
     # [03/21/2013] removed these, but leaving comment since there'll still be
