@@ -102,6 +102,9 @@ FEATURES = {
 
     'DISABLE_LOGIN_BUTTON': False,  # used in systems where login is automatic, eg MIT SSL
 
+    # The recommendation by our QA is to turn this on until edX provide proper support for mobile.
+    'EDRAAK_VIEWPORT_CHANGES': True,
+
     # extrernal access methods
     'AUTH_USE_OPENID': False,
     'AUTH_USE_CERTIFICATES': False,

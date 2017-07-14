@@ -103,6 +103,16 @@ html.video-fullscreen {
 .course-wrapper {
   position: relative;
 
+  &.chromeless-wrapper {
+    section.course-content {
+      @include direction();
+
+      background-color: #fafafa;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
   .courseware-results-wrapper {
     display: none;
   }
