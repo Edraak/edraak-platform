@@ -126,10 +126,6 @@ else:
         url(r'^register$', 'student.views.register_user', name="register_user"),
     )
 
-if settings.FEATURES.get('EDRAAK_UNIVERSITY_APP'):
-    urlpatterns += (
-        url(r'^university/', include('edraak_university.urls', namespace='edraak_university')),
-    )
 
 if settings.FEATURES["ENABLE_MOBILE_REST_API"]:
     urlpatterns += (
@@ -156,6 +152,17 @@ if settings.FEATURES["ENABLE_SYSADMIN_DASHBOARD"]:
 if settings.FEATURES.get("EDRAAK_FORUS_APP"):
     urlpatterns += (
         url(r'^forus/v1/', include('edraak_forus.urls', namespace='forus_v1')),
+    )
+
+if settings.FEATURES.get('EDRAAK_UNIVERSITY_APP'):
+    urlpatterns += (
+        url(r'^university/', include('edraak_university.urls', namespace='edraak_university')),
+    )
+
+import edraak_certificates.utils  # nopep8
+if edraak_certificates.utils.is_certificates_feature_enabled():
+    urlpatterns += (
+        url(r'^certificates/', include('edraak_certificates.urls', namespace='edraak_certificates')),
     )
 
 urlpatterns += (

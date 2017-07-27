@@ -7,10 +7,10 @@ from edxmako.shortcuts import render_to_string
 from mock import patch
 import requests
 
-from edraak_tests.tests.helpers import ModuleStoreTestCaseLoggedIn
+from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
 
 
-class ArabicMathJaxExtensionTest(ModuleStoreTestCaseLoggedIn):
+class ArabicMathJaxExtensionTestCase(ModuleStoreLoggedInTestCase):
     """
     Sanity checks for the MathJax Arabic extension.
     """
