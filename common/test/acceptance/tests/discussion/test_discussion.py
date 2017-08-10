@@ -604,6 +604,7 @@ class DiscussionResponseEditTest(BaseDiscussionTestCase):
         page.submit_response_edit(response_id, new_response)
 
     @attr(shard=2)
+    @flaky()
     def test_edit_response_add_link(self):
         """
         Scenario: User submits valid input to the 'add link' form
@@ -638,6 +639,7 @@ class DiscussionResponseEditTest(BaseDiscussionTestCase):
         self.assertEqual(expected_response_html, actual_response_html)
 
     @attr(shard=2)
+    @flaky()
     def test_edit_response_add_image(self):
         """
         Scenario: User submits valid input to the 'add image' form
@@ -692,6 +694,7 @@ class DiscussionResponseEditTest(BaseDiscussionTestCase):
         page.verify_link_editor_error_messages_shown()
 
     @attr(shard=2)
+    @flaky()
     def test_edit_response_add_decorative_image(self):
         """
         Scenario: User submits invalid input to the 'add image' form
