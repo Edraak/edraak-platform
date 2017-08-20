@@ -18,7 +18,7 @@ from edraak_university import helpers
 from edraak_university.mixins import CourseContextMixin
 
 from edraak_university.tests.factories import UniversityIDFactory
-from edraak_tests.tests.helpers import ModuleStoreTestCaseLoggedIn
+from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
 
 
 class CourseContextMixinTest(ModuleStoreTestCase):
@@ -71,7 +71,7 @@ class CourseContextMixinTest(ModuleStoreTestCase):
 
 
 @ddt.ddt
-class UniversityIDViewStudentTest(ModuleStoreTestCaseLoggedIn):
+class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
     """
     Integration tests for the University ID student views.
     """
@@ -80,7 +80,7 @@ class UniversityIDViewStudentTest(ModuleStoreTestCaseLoggedIn):
     LOGIN_STAFF = False
 
     def setUp(self):
-        super(UniversityIDViewStudentTest, self).setUp()
+        super(UniversityIDViewStudentTestCase, self).setUp()
         self.url = reverse('edraak_university:id', args=[unicode(self.course.id)])
 
     def create_course(self):
@@ -183,7 +183,7 @@ class UniversityIDViewStudentTest(ModuleStoreTestCaseLoggedIn):
                              msg_prefix='{} should redirect to login'.format(view_name))
 
 
-class UniversityIDViewStaffTest(ModuleStoreTestCaseLoggedIn):
+class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
     """
     Integration tests for the instructor views of University ID.
     """
@@ -192,7 +192,7 @@ class UniversityIDViewStaffTest(ModuleStoreTestCaseLoggedIn):
     LOGIN_STAFF = True
 
     def setUp(self):
-        super(UniversityIDViewStaffTest, self).setUp()
+        super(UniversityIDViewStaffTestCase, self).setUp()
         self.student_form_url = reverse('edraak_university:id', args=[unicode(self.course.id)])
         self.staff_list_url = reverse('edraak_university:id_list', args=[unicode(self.course.id)])
 

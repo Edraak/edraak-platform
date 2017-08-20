@@ -9,7 +9,7 @@ from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory
 
 
-class ModuleStoreTestCaseLoggedIn(ModuleStoreTestCase):
+class ModuleStoreLoggedInTestCase(ModuleStoreTestCase):
     """
     A base test class to provide helpers to create user (staff or not staff) and log him in.
     """
@@ -18,7 +18,7 @@ class ModuleStoreTestCaseLoggedIn(ModuleStoreTestCase):
     ENROLL_USER = False
 
     def setUp(self):
-        super(ModuleStoreTestCaseLoggedIn, self).setUp()
+        super(ModuleStoreLoggedInTestCase, self).setUp()
         UserProfileFactory.create(user=self.user)  # Avoid missing profile errors on the `get_user_preferences` calls
 
         self.course = self.create_course()

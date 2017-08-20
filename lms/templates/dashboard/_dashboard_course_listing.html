@@ -8,6 +8,7 @@ from django.utils.translation import ungettext
 from django.core.urlresolvers import reverse
 from course_modes.models import CourseMode
 from course_modes.helpers import enrollment_mode_display
+import edraak_certificates.utils
 from openedx.core.djangolib.js_utils import dump_js_escaped_json
 from openedx.core.djangolib.markup import HTML, Text
 from student.helpers import (
@@ -131,7 +132,7 @@ from student.helpers import (
                 % endif
         </div>
         <div class="wrapper-course-actions">
-          <div class="course-actions">
+          <div class="course-actions ${'course-actions-with-edraak-certificates' if edraak_certificates.utils.show_dashboard_button(user, course_overview) else ''}">
             % if show_courseware_link:
               % if course_overview.has_ended():
                 % if not is_course_blocked:
@@ -288,6 +289,13 @@ from student.helpers import (
                 </ul>
               </div>
             </div>
+            % if edraak_certificates.utils.show_dashboard_button(user, course_overview):
+              <div class="edraak-issue-certificate">
+                <a href="${reverse('edraak_certificates:issue', args=[course_overview.id])}">
+                  ${_("Issue Certificate")}
+                </a>
+              </div>
+            % endif
           </div>
         </div>
       </div>
@@ -308,8 +316,10 @@ from student.helpers import (
       </div>
       % endif
 
-      % if course_overview.may_certify() and cert_status:
-        <%include file='_dashboard_certificate_information.html' args='cert_status=cert_status,course_overview=course_overview, enrollment=enrollment, reverify_link=reverify_link'/>
+      % if not edraak_certificates.utils.show_dashboard_button(user, course_overview):
+        % if course_overview.may_certify() and cert_status:
+          <%include file='_dashboard_certificate_information.html' args='cert_status=cert_status,course_overview=course_overview, enrollment=enrollment, reverify_link=reverify_link'/>
+        % endif
       % endif
 
       % if credit_status is not None:

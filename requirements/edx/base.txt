@@ -199,5 +199,9 @@ edx-django-release-util==0.2.0
 # modulestore inspection
 py2neo==3.1.2
 
+# Used for printing the Edraak certificates
+python-bidi==0.3.4
+wand==0.3.7
+
 # for calculating coverage
 -r coverage.txt
