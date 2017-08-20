@@ -1,79 +1,69 @@
 ## mako
-<%page expression_filter="h" />
-<%inherit file="/main.html" />
-<%namespace name='static' file='/static_content.html'/>
 <%!
-    from django.utils.translation import pgettext, ugettext as _
+    from django.utils.translation import ugettext as _
     from django.core.urlresolvers import reverse
-    from django.conf import settings
 %>
-<%block name="bodyclass">view-in-course view-university-id-list</%block>
 
-<%block name="headextra">
-    <%static:css group='style-course-vendor'/>
-    <%static:css group='style-course'/>
+<%page args="section_data" expression_filter="h"/>
+<%namespace name='static' file='/static_content.html'/>
 
-    <%static:js group='edraak-university'/>
-</%block>
+<div class="basic-wrapper">
+    <h2>${_("Students' IDs List")}</h2>
+    <div class="container">
+        <div id="main" class="course-wrapper profile-wrapper">
+            <div class="university-id" id="course-university-id">
+                <h1>${_('Edraak University IDs')}</h1>
 
-<%block name="pagetitle">${_("List of University IDs for {course_number}").format(course_number=course.display_number_with_default)}</%block>
+                <hr />
 
-<%include file="/courseware/course_navigation.html" args="active_page='university_id'" />
+                <table class="instructor-list">
+                    <thead>
+                        <tr>
+                            <th class="sortable">${_('Student\'s University ID')}</th>
+                            <th class="sortable">${_('Section Number')}</th>
+                            <th>${_('Username')}</th>
+                            <th>${_('Full Name')}</th>
+                            <th>${_('Email')}</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    % for uni_id in object_list:
+                        <tr class="university-id-entry" class="${'conflicted' if uni_id.is_conflicted else ''}">
+                            <td class="break">
+                                ${uni_id.university_id}
 
-<div class="container">
-    <div id="main" class="course-wrapper profile-wrapper">
-        <div class="university-id" id="course-university-id">
-            <h1>${_('Edraak University IDs')}</h1>
+                                % if uni_id.is_conflicted:
+                                  <span title="${_('This university ID is a duplicate.')}">(*)</span>
+                                % endif
+                            </td>
+                            <td>${uni_id.get_cohort()}</td>
+                            <td>${uni_id.user.username}</td>
+                            <td>${uni_id.get_full_name()}</td>
+                            <td>${uni_id.get_email()}</td>
+                            <td>
+                                <a href="${reverse('edraak_university:id_update', args=[course.id, uni_id.pk])}">
+                                    ${_('Edit')}
+                                </a>
+                            </td>
 
-            <hr />
+                            <td>
+                                <a href="${reverse('edraak_university:id_delete', args=[course.id, uni_id.pk])}">
+                                    ${_('Delete')}
+                                </a>
+                            </td>
+                        </tr>
+                    % endfor
 
-            <table class="instructor-list">
-                <thead>
-                    <tr>
-                        <th class="break sortable">${_('Student\'s University ID')}</th>
-                        <th class="break sortable">${_('Section Number')}</th>
-                        <th class="break">${_('Username')}</th>
-                        <th class="break">${_('Full Name')}</th>
-                        <th class="break">${_('Email')}</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                % for uni_id in object_list:
-                    <tr class="university-id-entry" class="${'conflicted' if uni_id.is_conflicted else ''}">
-                        <td class="break">
-                            ${uni_id.university_id}
-
-                            % if uni_id.is_conflicted:
-                              <span title="${_('This university ID is a duplicate.')}">(*)</span>
-                            % endif
-                        </td>
-                        <td class="break">${uni_id.section_number}</td>
-                        <td class="break">${uni_id.user.username}</td>
-                        <td class="break">${uni_id.get_full_name()}</td>
-                        <td class="break">${uni_id.get_email()}</td>
-                        <td>
-                            <a href="${reverse('edraak_university:id_update', args=[course.id, uni_id.pk])}">
-                                ${_('Edit')}
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="${reverse('edraak_university:id_delete', args=[course.id, uni_id.pk])}">
-                                ${_('Delete')}
-                            </a>
-                        </td>
-                    </tr>
-                % endfor
-
-                % if not object_list:
-                    <tr>
-                        <td colspan="7">
-                            ${_('No student have entered his/her university ID yet.')}
-                        </td>
-                    </tr>
-                % endif:
-            </table>
+                    % if not object_list:
+                        <tr>
+                            <td colspan="7">
+                                ${_('No student has entered his/her university ID yet.')}
+                            </td>
+                        </tr>
+                    % endif:
+                </table>
+            </div>
         </div>
     </div>
 </div>

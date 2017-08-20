@@ -26,6 +26,12 @@ class UniversityIDAdminTest(ModuleStoreTestCase):
         self.assertTrue(self.admin.edraak_user.allow_tags, 'Should allow HTML in the user field, link tag is needed')
         self.assertFalse(hasattr(self.admin.email, 'allow_tags'), 'Should not allow HTML the email field')
 
+    def test_cohort(self):
+        cohort = Mock()
+        university_id = Mock(get_cohort=Mock(return_value=cohort))
+
+        self.assertIs(self.admin.cohort(university_id), cohort)
+
     def test_assert_escaping(self):
         uni_id_mock = Mock(
             user=Mock(

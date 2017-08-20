@@ -1,0 +1,50 @@
+## mako
+<%! from django.utils.translation import ugettext as _ %>
+<%page expression_filter="h" />
+<%inherit file="/main.html" />
+<%namespace name='static' file='/static_content.html'/>
+
+<%block name="bodyclass">view-in-course view-university-id-list</%block>
+
+<%include file="/courseware/course_navigation.html" args="active_page='university_id'" />
+<%block name="headextra">
+  <%static:js group='main_vendor'/>
+  <%static:css group='style-course-vendor'/>
+  <%static:css group='style-course'/>
+  <%static:js group='instructor_dash'/>
+</%block>
+
+<section class="container">
+  <script>
+    jQuery(function($) {
+      $("#id_registration_end_date").datepicker();
+    });
+  </script>
+
+  <div class="instructor-dashboard-wrapper-2">
+    <section class="instructor-dashboard-content-2" id="instructor-dashboard-content">
+        <h1>${_("Students' University IDs")}</h1>
+
+        ## links which are tied to idash-sections below.
+        ## the links are activated and handled in instructor_dashboard.coffee
+        ## when the javascript loads, it clicks on the first section
+        <ul class="instructor-nav">
+          % for section_data in sections:
+            ## This is necessary so we don't scrape 'section_display_name' as a string.
+            <% dname = section_data['section_display_name'] %>
+            <li class="nav-item">
+                <button type="button" class="btn-link" data-section="${section_data['section_key']}">${_(dname)}</button>
+            </li>
+          % endfor
+        </ul>
+
+        ## each section corresponds to a section_data sub-dictionary provided by the view
+        ## to keep this short, sections can be pulled out into their own files
+        % for section_data in sections:
+          <section id="${section_data['section_key']}" class="idash-section active-section">
+            <%include file="${section_data['section_key']}.html" args="section_data=section_data" />
+          </section>
+        % endfor
+    </section>
+  </div>
+</section>

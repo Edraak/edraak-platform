@@ -34,6 +34,19 @@
     .errorlist {
       color: $red;
     }
+
+    textarea  {
+      height: 100px;
+    }
+  }
+
+  .terms {
+    height: 200px;
+    border: 1px solid #ccc;
+    overflow: auto;
+    padding: 20px;
+    margin-top: 10px;
+    line-height: 1.5em;
   }
 
   .submit {
@@ -41,6 +54,12 @@
   }
 }
 
+// Success Messages
+.view-university-id-success {
+  .activation {
+    margin-top: 40px;
+  }
+}
 
 // Instructor View Styles
 .university-id {
@@ -74,9 +93,10 @@
     tr {
       th, td {
         border: 1px solid $light-gray2;
-        padding: $baseline/4 $baseline/2;
-        vertical-align: baseline;
+        padding: $baseline/4 $baseline;
+        vertical-align: middle;
         width: unset !important;
+        text-align: center;
 
         &.break {
           word-break: break-all;
@@ -94,4 +114,55 @@
     font-size: 14px;
     margin: 10px 8px 0;
   }
+
+  &.university-id-settings {
+    padding: 0 $baseline*2 0;
+  }
+}
+
+.ui-datepicker {
+  background: $white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border: 0;
+
+  .ui-widget-header {
+    background: #1ca3a6;
+    border-radius: 2px;
+
+    a  {
+      color:transparent;
+    }
+  }
+
+   .ui-datepicker-next,
+   .ui-datepicker-prev {
+     &.ui-state-hover {
+       border-color: transparent;
+       background: $mediumGrey;
+       .ui-icon-circle-triangle-e,
+       .ui-icon-circle-triangle-w {
+           background-image: url(../css/vendor/ui-lightness/images/ui-icons_ffffff_256x240.png);
+       }
+     }
+   }
+
+   .ui-state-highlight {
+     background: rgb(197, 207, 223);
+     border-color: rgb(197, 207, 223);
+     color: $white;
+   }
+
+   .ui-state-active, .ui-state-hover {
+     background: $blue;
+     border-color: $blue;
+     color: $white;
+   }
+ }
+
+.ui-widget {
+ @extend %t-copy-base;
+}
+
+.ui-widget-header {
+ border:none;
 }

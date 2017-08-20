@@ -1,0 +1,20 @@
+<%!
+    from openedx.core.djangolib.markup import HTML
+    from django.utils.translation import ugettext as _
+%>
+<%page args="section_data" expression_filter="h" />
+<%namespace name='static' file='/static_content.html'/>
+
+
+<div class="basic-wrapper">
+  <h2>${_("University ID settings")}</h2>
+    <div class="university-id university-id-settings" id="course-university-id">
+        <form class="university-id-form" method="post">
+            <div class="fields">
+                ${HTML(section_data['form'].as_p())}
+                <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}">
+            </div>
+            <input class="submit" type="submit" value="${_('Save')}">
+        </form>
+    </div>
+</div>

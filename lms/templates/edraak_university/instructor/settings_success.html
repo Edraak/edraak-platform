@@ -1,0 +1,18 @@
+## mako
+<%!
+    from django.utils.translation import ugettext as _
+    from django.core.urlresolvers import reverse
+%>
+<%page expression_filter="h" />
+<%inherit file="../_message.html" />
+
+<%block name="pagetitle">${_("Your Settings Have Been Saved")}</%block>
+
+<%block name="university_id_success_message">
+    <h1 class="valid text-center">${_("Your Settings Have Been Saved")}</h1>
+    <p class="text-center">
+        <a href="${reverse('edraak_university:id_staff', args=[course.id])}">
+            <strong>${_('View the Students List')}</strong>
+        </a>
+    </p>
+</%block>
