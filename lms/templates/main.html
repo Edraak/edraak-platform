@@ -26,7 +26,10 @@ from pipeline_mako import render_require_js_path_overrides
 <head dir="${static.dir_rtl()}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    % if not settings.FEATURES['EDRAAK_VIEWPORT_CHANGES']:
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    % endif
 
 ## Define a couple of helper functions to make life easier when
 ## embedding theme conditionals into templates. All inheriting

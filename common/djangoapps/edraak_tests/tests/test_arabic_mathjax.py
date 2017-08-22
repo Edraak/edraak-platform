@@ -2,7 +2,6 @@
 Tests for the Arabic MathJax extension setup.
 """
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from edxmako.shortcuts import render_to_string
 from mock import patch
 import requests
