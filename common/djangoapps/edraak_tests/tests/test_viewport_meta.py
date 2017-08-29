@@ -1,16 +1,8 @@
 import ddt
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.test import TestCase
-from edxmako import lookup_template
 from mock import patch
 from unittest import skipUnless
-
-from courseware.testutils import RenderXBlockTestMixin
-from util.url import reload_django_url_config
-from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
-
-from edraak_tests.tests.helpers import ModuleStoreTestCaseLoggedIn
 
 
 @ddt.ddt
