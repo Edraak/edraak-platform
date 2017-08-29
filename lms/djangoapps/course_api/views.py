@@ -5,11 +5,12 @@ Course API Views
 from django.core.exceptions import ValidationError
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
+from course_api.helpers import get_marketing_data, is_marketing_api_enabled
 from openedx.core.lib.api.paginators import NamespacedPageNumberPagination
 from openedx.core.lib.api.view_utils import view_auth_classes, DeveloperErrorViewMixin
 from .api import course_detail, list_courses
 from .forms import CourseDetailGetForm, CourseListGetForm
-from .serializers import CourseSerializer, CourseDetailSerializer
+from .serializers import CourseSerializer, CourseDetailSerializer, CourseDetailMarketingSerializer
 
 
 @view_auth_classes(is_authenticated=False)
@@ -99,8 +100,21 @@ class CourseDetailView(DeveloperErrorViewMixin, RetrieveAPIView):
                 "pacing": "instructor"
             }
     """
+    def get_serializer_class(self):
+        if is_marketing_api_enabled():
+            return CourseDetailMarketingSerializer
 
-    serializer_class = CourseDetailSerializer
+        return CourseDetailSerializer
+
+    def get_serializer_context(self):
+        context = super(CourseDetailView, self).get_serializer_context()
+        if is_marketing_api_enabled():
+            context['marketing_data'] = get_marketing_data(
+                course_key=self.kwargs['course_key_string'],
+                language=self.request.LANGUAGE_CODE,
+            )
+
+        return context
 
     def get_object(self):
         """
