@@ -96,6 +96,40 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
         return self.context['request'].build_absolute_uri(base_url)
 
 
+class CourseDetailMarketingSerializer(CourseSerializer):
+    """
+    Serializer for Course objects (like CourseDetailSerializer) but fetching some data from the marketing site.
+
+    This allows reuse of the marketing site data, as opposed to duplicating them in the LMS.
+    """
+
+    def get_data_with_marketing_overrides(self, original_serialized_data):
+        marketing_data = self.context.get('marketing_data')
+        if not marketing_data:
+            return original_serialized_data
+
+        overridden = {}
+        overridden.update(original_serialized_data)
+
+        overridden['effort'] = marketing_data['estimated_effort']
+        overridden['name'] = marketing_data['name']
+        overridden['short_description'] = marketing_data['short_description']
+        overridden['overview'] = marketing_data['overview']
+
+        if marketing_data.get('course_image'):
+            overridden['media']['course_image']['uri'] = marketing_data['course_image']
+
+        if marketing_data.get('course_video'):
+            overridden['media']['course_video']['uri'] = marketing_data['course_video']
+
+        return overridden
+
+    @property
+    def data(self):
+        serialized_data = super(CourseDetailMarketingSerializer, self).data
+        return self.get_data_with_marketing_overrides(serialized_data)
+
+
 class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-method
     """
     Serializer for Course objects providing additional details about the
