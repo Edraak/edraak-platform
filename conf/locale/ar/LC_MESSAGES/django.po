@@ -47,8 +47,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2017-06-08 09:47+0000\n"
-"PO-Revision-Date: 2017-06-08 09:47:12.178141\n"
+"POT-Creation-Date: 2017-09-07 09:10+0000\n"
+"PO-Revision-Date: 2017-09-07 09:10:33.489674\n"
 "Last-Translator: Omar Al-Ithawi <oithawi@qrf.org>, 2017\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -558,8 +558,8 @@ msgstr "أنثى"
 
 #. Translators: 'Other' refers to the student's gender
 #: common/djangoapps/student/models.py
-msgid "Other/Prefer Not to Say"
-msgstr "أخرى/ أفضّل عدم الإفصاح"
+msgid "Prefer Not to Say"
+msgstr "أفضّل عدم الإفصاح"
 
 #: common/djangoapps/student/models.py
 msgid "Doctorate"
@@ -969,6 +969,11 @@ msgstr ""
 #: common/djangoapps/third_party_auth/models.py
 msgid "The Site that this SAML configuration belongs to."
 msgstr "الموقع الذي تنتمي إليه إعدادات لغة ترميز التأكيدات الأمنيّة (SAML)."
+
+#: common/djangoapps/third_party_auth/models.py lms/templates/help_modal.html
+#, python-brace-format
+msgid "{platform_name} Support"
+msgstr "دعم {platform_name}"
 
 #: common/djangoapps/third_party_auth/templates/third_party_auth/post_custom_auth_entry.html
 #: lms/templates/student_account/finish_auth.html
@@ -6188,6 +6193,39 @@ msgstr "حدث خطأ أثناء محاولة تحميل الملف. يُرجى 
 msgid "Good"
 msgstr "جيّد"
 
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid ""
+"A course of study offered by Edraak with cooperation from MITx. The learning"
+" experience has been supervised and managed by the course team."
+msgstr ""
+"مساق دراسيّ تقدّمه إدراك بالتعاون مع MITx. يدير تجربة التعلم في هذا المساق "
+"ويُشرِف عليه فريق المساق."
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid ""
+"A course of study offered by Edraak. The learning experience has been "
+"supervised and managed by the course team."
+msgstr ""
+"مساق دراسيّ تقدّمه إدراك. يدير تجربة التعلم في هذا المساق ويُشرِف عليه فريق "
+"المساق."
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that:"
+msgstr "لقد تم مُنِح:"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed:"
+msgstr "هذه الشهادة لإتمامه بنجاح مساق:"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This course is sponsored by:"
+msgstr "هذا المساق برعاية:"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+#, python-brace-format
+msgid "Course{new_line}Certificate{new_line}of Completion"
+msgstr "شهادة {new_line} إتمام المساق"
+
 #. Translators: This is for the ForUs API
 #: lms/djangoapps/edraak_forus/helpers.py
 #, python-brace-format
@@ -6282,6 +6320,10 @@ msgid "date forus profile created"
 msgstr "تاريخ التسجيل في فُرص."
 
 #: lms/djangoapps/edraak_university/forms.py
+msgid "Section Number *"
+msgstr "رقم الشعبة *"
+
+#: lms/djangoapps/edraak_university/forms.py
 msgid "Full Name in Arabic *"
 msgstr "الاسم الكامل باللغة العربية *"
 
@@ -6319,16 +6361,28 @@ msgid ""
 msgstr "الرقم الجامعي الذي أدخلته قصير جداً، يرجى التأكد منه."
 
 #: lms/djangoapps/edraak_university/forms.py
-msgid "Section Number *"
-msgstr "رقم الشعبة *"
+msgid "Full Name in Arabic"
+msgstr "الاسم الكامل باللغة العربية"
+
+#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
+#. Translators: This label appears above a field on the login form
+#. meant to hold the user's email address.
+#. Translators: This label appears above a field on the registration form
+#. meant to hold the user's email address.
+#. Translators: This label appears above a field on the password reset
+#. form meant to hold the user's email address.
+#: lms/djangoapps/edraak_university/forms.py
+#: lms/djangoapps/instructor/views/api.py
+#: lms/djangoapps/instructor/views/instructor_dashboard.py
+#: openedx/core/djangoapps/user_api/views.py
+#: lms/templates/edraak_university/instructor/list.html
+#: lms/templates/instructor/instructor_dashboard_2/generate_registarion_codes_modal.html
+msgid "Email"
+msgstr "البريد الإلكتروني"
 
 #: lms/djangoapps/edraak_university/forms.py
-msgid ""
-"Enter the number/name of the section e.g. 1, 2 or A, B, C depending on your "
-"university structure."
-msgstr ""
-"يُرجى إدخال اسم الشعبة. قد يكون اسم الشعبة رقمًا أو حرفًا، وهذا يعتمد على "
-"الطريقة التي تتبعها جامعتك."
+msgid "YYYY-MM-DD"
+msgstr "يوم-شهر-سنة"
 
 #: lms/djangoapps/edraak_university/models.py
 #: lms/templates/edraak_university/university_id.html
@@ -6336,9 +6390,13 @@ msgid "Student University ID"
 msgstr "الرقم الجامعي"
 
 #: lms/djangoapps/edraak_university/models.py
-#: lms/templates/edraak_university/instructor/list.html
-msgid "Section Number"
-msgstr "رقم الشعبة"
+msgid "Registration End Date"
+msgstr "الموعد النهائي لتسجيل معلومات الطلاب"
+
+#: lms/djangoapps/edraak_university/models.py
+#: lms/templates/edraak_university/university_id.html
+msgid "Terms and Conditions"
+msgstr "الشروط والأحكام"
 
 #: lms/djangoapps/edraak_university/tab.py
 msgid "University ID"
@@ -6618,21 +6676,6 @@ msgstr "تاريخ تشغيل عملية إعداد التقرير"
 #: lms/djangoapps/instructor_task/tasks_helper.py
 msgid "User ID"
 msgstr "رقم المستخدم"
-
-#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
-#. Translators: This label appears above a field on the login form
-#. meant to hold the user's email address.
-#. Translators: This label appears above a field on the registration form
-#. meant to hold the user's email address.
-#. Translators: This label appears above a field on the password reset
-#. form meant to hold the user's email address.
-#: lms/djangoapps/instructor/views/api.py
-#: lms/djangoapps/instructor/views/instructor_dashboard.py
-#: openedx/core/djangoapps/user_api/views.py
-#: lms/templates/edraak_university/instructor/list.html
-#: lms/templates/instructor/instructor_dashboard_2/generate_registarion_codes_modal.html
-msgid "Email"
-msgstr "البريد الإلكتروني"
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/djangoapps/instructor_task/tasks_helper.py
@@ -9190,6 +9233,10 @@ msgstr "بيانات الصورة غير صالحة."
 msgid "Verification photos received"
 msgstr "استُلمت الصور الخاصة بالتوثيق"
 
+#: lms/envs/common.py
+msgid "Edraak"
+msgstr "إدراك"
+
 #. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 #. Translators: This is the website name of www.facebook.com.  Please
 #. translate this the way that Facebook advertises in your language.
@@ -9281,6 +9328,10 @@ msgstr "يوتيوب"
 #, python-brace-format
 msgid "Subscribe to the {platform_name} YouTube channel"
 msgstr "اشترك في قناة {platform_name} على يوتيوب."
+
+#: lms/envs/common.py
+msgid "Edraak Insights"
+msgstr "إدراك إنسايتس"
 
 #: lms/envs/common.py
 msgid "Kosovo"
@@ -11162,6 +11213,14 @@ msgstr "المساق في حالة \"منشور\" بالفعل."
 msgid "Incorrect format for field '{name}'. {detailed_message}"
 msgstr "تنسيق غير صحيح لحقل ’{name}‘. {detailed_message}"
 
+#: cms/envs/common.py
+msgid "Edraak Studio"
+msgstr "استوديو إدراك"
+
+#: cms/envs/common.py
+msgid "Studio"
+msgstr "استوديو"
+
 #: cms/lib/xblock/tagging/tagging.py
 msgid "Dictionary with the available tags"
 msgstr "قاموس بالوسوم المتاحة"
@@ -11799,10 +11858,6 @@ msgid "Support"
 msgstr "الدعم"
 
 #: lms/templates/help_modal.html
-msgid "{platform_name} Support"
-msgstr "دعم {platform_name}"
-
-#: lms/templates/help_modal.html
 msgid ""
 "For {strong_start}questions on course lectures, homework, tools, or "
 "materials for this course{strong_end}, post in the {link_start}course "
@@ -12292,6 +12347,7 @@ msgid "Hint"
 msgstr "تلميح"
 
 #: lms/templates/problem.html lms/templates/word_cloud.html
+#: lms/templates/edraak_university/instructor/settings.html
 msgid "Save"
 msgstr "حفظ"
 
@@ -14718,6 +14774,16 @@ msgstr ""
 msgid "Your score is {current_score}%. You have passed the entrance exam."
 msgstr "لقد نجحت في امتحان القبول، وعلامتك هي {current_score}%."
 
+#: lms/templates/courseware/enroll_banner.html
+msgid "You are not enrolled yet"
+msgstr "لستَ مسجّلًا بعد."
+
+#: lms/templates/courseware/enroll_banner.html
+msgid ""
+"You are not currently enrolled in this course. {link_start}Sign up "
+"now!{link_end}"
+msgstr "لستَ مسجّلًا بعد في هذا المساق. {link_start} سجِّل الآن!{link_end}"
+
 #: lms/templates/courseware/gradebook.html
 msgid "Gradebook"
 msgstr "سجل العلامات"
@@ -14741,16 +14807,6 @@ msgstr "الصفحة التالية"
 #: lms/templates/courseware/info.html
 msgid "{course_number} Course Info"
 msgstr "{course_number} معلومات المساق "
-
-#: lms/templates/courseware/info.html
-msgid "You are not enrolled yet"
-msgstr "لستَ مسجّلًا بعد."
-
-#: lms/templates/courseware/info.html
-msgid ""
-"You are not currently enrolled in this course. {link_start}Sign up "
-"now!{link_end}"
-msgstr "لستَ مسجّلًا بعد في هذا المساق. {link_start} سجِّل الآن!{link_end}"
 
 #: lms/templates/courseware/info.html
 msgid "Welcome to {org}'s {course_name}!"
@@ -15196,6 +15252,10 @@ msgid "Email Settings"
 msgstr "إعدادات عنوان البريد الإلكتروني "
 
 #: lms/templates/dashboard/_dashboard_course_listing.html
+msgid "Issue Certificate"
+msgstr "أصدر الشهادة"
+
+#: lms/templates/dashboard/_dashboard_course_listing.html
 msgid "Related Programs"
 msgstr "التخصصات ذات الصلة"
 
@@ -15542,6 +15602,56 @@ msgstr "حسب أكبر عدد من الأنشطة"
 msgid "by most votes"
 msgstr "حسب أكبر عدد من الأصوات"
 
+#: lms/templates/edraak_certificates/fail.html
+#: lms/templates/edraak_certificates/issue.html
+msgid "Please wait..."
+msgstr "يرجى الانتظار..."
+
+#: lms/templates/edraak_certificates/fail.html
+msgid "You have Not completed this course"
+msgstr "لم تكمل هذا المساق بعد"
+
+#: lms/templates/edraak_certificates/fail.html
+msgid ""
+"Unfortunately, you have not completed this course, you will not be able to "
+"issue a certificate."
+msgstr "لم تُكمل هذا المساق بعد، لذلك لا يمكنك إصدار الشهادة."
+
+#: lms/templates/edraak_certificates/fail.html
+msgid ""
+"You will be redirected to your {link_start}dashboard{link_end} in 10 "
+"seconds."
+msgstr "سيتم تحويلك {link_start}لمكتبك{link_end} خلال عشر ثوان."
+
+#: lms/templates/edraak_certificates/issue.html
+msgid "We are calculating your grades. This may take up-to one minute."
+msgstr "يجري حساب درجاتك الآن. ستستغرق هذه العملية دقيقة تقريباً."
+
+#: lms/templates/edraak_certificates/view.html
+msgid "Course Completion Certificate"
+msgstr "شهادة إتمام المساق"
+
+#: lms/templates/edraak_certificates/view.html
+msgid ""
+"Please note that the certificate will be issued with your full name on it as"
+" provided on your {link_start}account settings{link_end}."
+msgstr ""
+"تَصدر شهادات إدراك بإسمك الكامل عليها، كما هو مكتوب في {link_start}صفحة "
+"إعدادات الحساب{link_end}."
+
+#: lms/templates/edraak_certificates/view.html
+msgid ""
+"Please double check your name. We prefer that the name is written in the "
+"same language you're issuing the certificate with. To change it, go to the "
+"{link_start}account settings{link_end} and edit your full name."
+msgstr ""
+"تأكد من أن اسمك مكتوب بشكل صحيح وبنفس لغة إصدار الشهادة. لتعديل اسمك يرجى "
+"التوجه الى {link_start}إعدادات الحساب{link_end} وتعديل اسمك."
+
+#: lms/templates/edraak_certificates/view.html
+msgid "Download as PDF"
+msgstr "حمل بصيغة PDF"
+
 #: lms/templates/edraak_forus/auth.html
 #: lms/templates/student_account/login_and_register.html
 msgid "Sign in or Register"
@@ -15568,6 +15678,14 @@ msgid "{course_number} Student University ID"
 msgstr "الرقم الجامعي لمساق {course_number} "
 
 #: lms/templates/edraak_university/university_id.html
+msgid "Enroll in the course so you can edit your university ID."
+msgstr "سجِّل بالمساق كي تُدخل رقمك الجامعي."
+
+#: lms/templates/edraak_university/university_id.html
+msgid "Registration is disabled. Contact your course instructor for help."
+msgstr "أنتهت الفترة المخصصة لإدخال الرقم الجامعي. تواصل مع المدرس للمساعدة."
+
+#: lms/templates/edraak_university/university_id.html
 msgid ""
 "The information below have been successfully submitted to your university "
 "coordinator."
@@ -15585,9 +15703,9 @@ msgstr ""
 "نحن بحاجة إلى معلوماتك الجامعية من أجل تقارير علاماتك. نرجو منك إدخال "
 "المعلومات المطلوبة والتأكد من أنها صحيحة."
 
-#: lms/templates/edraak_university/university_id_success.html
-msgid "{course_number} Student University ID Successfully Saved"
-msgstr "تم حفظ رقمك الجامعي بنجاح لمساق {course_number}"
+#: lms/templates/edraak_university/university_id.html
+msgid "You can submit and change your information before {registration_end}"
+msgstr "يمكنك إدخال وتعديل معلومات قبل {registration_end}"
 
 #: lms/templates/edraak_university/university_id_success.html
 msgid "Your Student University ID Has Been Saved"
@@ -15617,10 +15735,10 @@ msgid "Delete a University ID for {course_number}"
 msgstr "احذف رقم الطالب الجامعي من مساق {course_number}"
 
 #: lms/templates/edraak_university/instructor/delete.html
-#: lms/templates/edraak_university/instructor/list.html
+#: lms/templates/edraak_university/instructor/main.html
 #: lms/templates/edraak_university/instructor/update.html
-msgid "Edraak University IDs"
-msgstr "الأرقام الجامعية في إدراك"
+msgid "Students' University IDs"
+msgstr "الأرقام الجامعية للطلاب"
 
 #: lms/templates/edraak_university/instructor/delete.html
 msgid ""
@@ -15631,32 +15749,44 @@ msgstr ""
 "\"{full_name}\" ؟"
 
 #: lms/templates/edraak_university/instructor/list.html
-msgid "List of University IDs for {course_number}"
-msgstr "قائمة الأرقام الجامعية لمساق{course_number}"
+msgid "Students' IDs List"
+msgstr "قائمة أرقام الطلاب الجامعية"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Edraak University IDs"
+msgstr "الأرقام الجامعية في إدراك"
 
 #: lms/templates/edraak_university/instructor/list.html
 msgid "Student's University ID"
 msgstr "رقم الطالب الجامعي"
 
 #: lms/templates/edraak_university/instructor/list.html
+msgid "Section Number"
+msgstr "رقم الشعبة"
+
+#: lms/templates/edraak_university/instructor/list.html
 msgid "This university ID is a duplicate."
 msgstr "هذا الرقم الجامعي مستخدم أكثر من مرة."
 
 #: lms/templates/edraak_university/instructor/list.html
-msgid "No student have entered his/her university ID yet."
+msgid "No student has entered his/her university ID yet."
 msgstr "لم يقم أي طالب بإدخال بيانات رقمه الجامعي بعد."
+
+#: lms/templates/edraak_university/instructor/settings.html
+msgid "University ID settings"
+msgstr "إعدادات الرقم الجامعي"
+
+#: lms/templates/edraak_university/instructor/settings_success.html
+msgid "Your Settings Have Been Saved"
+msgstr "حُفِظَت الإعدادات التي أجريتها."
+
+#: lms/templates/edraak_university/instructor/settings_success.html
+msgid "View the Students List"
+msgstr "إعرض قائمة الطلاب"
 
 #: lms/templates/edraak_university/instructor/update.html
 msgid "Update University ID for {course_number}"
 msgstr "عدل الرقم الجامعي لطالب في {course_number}"
-
-#: lms/templates/edraak_university/instructor/update.html
-msgid "Full Name:"
-msgstr "الاسم الكامل:"
-
-#: lms/templates/edraak_university/instructor/update.html
-msgid "Email:"
-msgstr "البريد الإلكتروني:"
 
 #: lms/templates/edxnotes/edxnotes.html
 msgid "Student Notes"
