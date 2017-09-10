@@ -1,33 +1,43 @@
 """
 Integration tests for the University ID by testing the views.
 """
-
+from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.shortcuts import Http404
+from django.conf import settings
 
 from bs4 import BeautifulSoup
 from mock import Mock, patch
 import ddt
 
 from opaque_keys.edx.locator import CourseLocator
+
+from edraak_university.models import UniversityIDSettings
+from edraak_university.views import UniversityIDView
+from edxmako.shortcuts import marketing_link
+from openedx.core.djangoapps.course_groups.cohorts import set_course_cohort_settings
+
+from openedx.core.djangoapps.course_groups.tests.helpers import CohortFactory
+
+from student.models import CourseEnrollment
 from student.tests.factories import UserFactory
 from xmodule.modulestore.tests.factories import CourseFactory
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 
 from edraak_university import helpers
-from edraak_university.mixins import CourseContextMixin
+from edraak_university.mixins import ContextMixin
 
 from edraak_university.tests.factories import UniversityIDFactory
 from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
 
 
-class CourseContextMixinTest(ModuleStoreTestCase):
+class ContextMixinTest(ModuleStoreTestCase):
     """
-    Tests for CourseContextMixin context_data and helper methods.
+    Tests for ContextMixin context_data and helper methods.
     """
 
     def setUp(self):
-        super(CourseContextMixinTest, self).setUp()
+        super(ContextMixinTest, self).setUp()
 
         course = CourseFactory.create()
         user = UserFactory.create()
@@ -38,7 +48,7 @@ class CourseContextMixinTest(ModuleStoreTestCase):
         })
 
         # Mocks a University ID view
-        view_mock_class = type('ViewMock', (CourseContextMixin, base_view_mock_class,), {
+        view_mock_class = type('ViewMock', (ContextMixin, base_view_mock_class,), {
             'kwargs': {
                 'course_id': unicode(course.id)
             },
@@ -81,6 +91,8 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
 
     def setUp(self):
         super(UniversityIDViewStudentTestCase, self).setUp()
+        set_course_cohort_settings(self.course.id, is_cohorted=True)
+        self.cohort = CohortFactory.create(course_id=self.course.id)
         self.url = reverse('edraak_university:id', args=[unicode(self.course.id)])
 
     def create_course(self):
@@ -97,13 +109,35 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
         form_data = {
             'full_name': self.user.profile.name,
             'university_id': 'A100C50',
-            'section_number': 'B',
+            'cohort': self.cohort.id,
         }
 
         if data_overrides:
             form_data.update(data_overrides)
 
         return self.client.post(self.url, data=form_data)
+
+    def test_student_success_view_message(self):
+        url = reverse('edraak_university:id_success', args=[self.course.id])
+        res = self.client.get(url)
+        self.assertNotContains(res, 'View the Students List')
+        self.assertContains(res, 'Your student university ID has been successfully')
+
+    def test_disabled_university_id_redirect(self):
+        disabled_course = CourseFactory.create(enable_university_id=False)
+        CourseEnrollment.get_or_create_enrollment(self.user, disabled_course.id)
+        set_course_cohort_settings(disabled_course.id, is_cohorted=True)
+
+        student_form_url = reverse('edraak_university:id', args=[unicode(disabled_course.id)])
+        course_root_url = reverse('course_root', args=[unicode(disabled_course.id)])
+
+        res = self.client.get(student_form_url)
+        self.assertRedirects(res, course_root_url)
+
+    @patch('edraak_university.views.is_student_form_disabled', return_value=True)
+    def test_disabled_form(self, _is_student_form_disabled):
+        res = self.submit_form()
+        self.assertContains(res, 'Registration is disabled. Contact your course instructor for help.')
 
     def test_basic_request(self):
         res = self.client.get(self.url)
@@ -160,14 +194,15 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
         self.assertRedirects(self.client.get(course_url), university_id_url,
                              msg_prefix='Should not allow access to {} before having a university ID'.format(view_name))
 
-        self.submit_form()
+        res = self.submit_form()
+        self.assertEquals(res.status_code, 302)  # Should successfully save the university ID
 
         self.assertContains(self.client.get(course_url), 'Skip to main',
                             msg_prefix='Should allow access to {} after entering valid university ID'.format(view_name))
 
     @ddt.unpack
     @ddt.data(
-        {'view_name': 'edraak_university:id_list', 'view_args': []},
+        {'view_name': 'edraak_university:id_staff', 'view_args': []},
         {'view_name': 'edraak_university:id_update', 'view_args': ['123']},
         {'view_name': 'edraak_university:id_delete', 'view_args': ['123']},
     )
@@ -182,6 +217,103 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
         self.assertRedirects(res_logged_out, '/login?next={}'.format(url),
                              msg_prefix='{} should redirect to login'.format(view_name))
 
+    def get_initialized_view(self):
+        kwargs = {'course_id': unicode(self.course.id)}
+        view = UniversityIDView(**kwargs)
+        view.request = Mock(user=self.user)
+        view.kwargs = kwargs
+        return view, kwargs
+
+    def test_context_data_courses_url(self):
+        view, kwargs = self.get_initialized_view()
+
+        with patch.dict(settings.FEATURES, ENABLE_MKTG_SITE=False):
+            data_disabled = view.get_context_data(**kwargs)
+            url_disabled = reverse('about_course', args=[self.course.id])
+            self.assertEquals(data_disabled['url_to_enroll'], url_disabled)
+
+        with patch.dict(settings.FEATURES, ENABLE_MKTG_SITE=True):
+            url_enabled = marketing_link('COURSES')
+            data_enabled = view.get_context_data(**kwargs)
+            self.assertEquals(data_enabled['url_to_enroll'], url_enabled)
+
+    def test_initial_data(self):
+        view, _kwargs = self.get_initialized_view()
+        initial = view.get_initial()
+
+        self.assertIn('full_name', initial)
+        self.assertIn('cohort', initial)
+        self.assertEquals(self.user.profile.name, initial['full_name'])
+
+        self.submit_form()
+        self.assertEquals(view.get_initial()['cohort'], self.cohort.id)
+
+    def test_context_data_university_settings(self):
+        view, kwargs = self.get_initialized_view()
+
+        data_before = view.get_context_data(**kwargs)
+        self.assertIsNone(data_before['terms_conditions'])
+        self.assertIsNone(data_before['registration_end'])
+
+        university_settings = UniversityIDSettings(
+            course_key=self.course.id,
+            registration_end_date=timezone.now().date(),
+            terms_and_conditions='Hello World!',
+        )
+        university_settings.save()
+
+        data_after = view.get_context_data(**kwargs)
+        self.assertEquals(data_after['terms_conditions'], 'Hello World!')
+        self.assertIn(unicode(timezone.now().date().year), unicode(data_after['registration_end']))
+
+
+@ddt.ddt
+class UniversityIDStaffSettingsTestCase(ModuleStoreLoggedInTestCase):
+    """
+    Integration tests for the instructor view settings view of University ID.
+
+    Hint: It's molded within the UniversityIDStaffView as a huge giant hack!
+    """
+    ENROLL_USER = True
+    LOGIN_STAFF = True
+
+    def setUp(self):
+        super(UniversityIDStaffSettingsTestCase, self).setUp()
+        self.form_url = reverse('edraak_university:id_staff', args=[self.course.id])
+        self.success_url = reverse('edraak_university:id_settings_success', args=[self.course.id])
+
+    def submit_form(self, form_data=None):
+        """
+        Submits the student university ID form and returns the response.
+        """
+        if not form_data:
+            form_data = {}
+
+        return self.client.post(self.form_url, data=form_data)
+
+    @ddt.data(
+        {},
+        {'registration_end_date': '2010-10-25'},
+        {'terms_and_conditions': 'Hello!'},
+        {'terms_and_conditions': 'Hello!', 'registration_end_date': '2010-10-25'},
+    )
+    def test_submit_valid_form(self, overrides):
+        res = self.submit_form(overrides)
+        self.assertRedirects(res, self.success_url)
+
+    def test_update_valid_form(self):
+        kwargs = {'terms_and_conditions': 'Hello!', 'registration_end_date': '2010-10-25'}
+        uni_settings = UniversityIDSettings(course_key=self.course.id, **kwargs)
+        uni_settings.save()
+        res = self.submit_form({'terms_and_conditions': 'Yikes!'})
+        self.assertRedirects(res, self.success_url)
+
+    def test_submit_invalid_form(self):
+        res = self.submit_form({'registration_end_date': '10-25'})
+        soup = BeautifulSoup(res.content)
+        errors_list_elems = soup.select('ul.errorlist')
+        self.assertTrue(len(errors_list_elems), 'Error list element should be shown')
+
 
 class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
     """
@@ -193,8 +325,15 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
 
     def setUp(self):
         super(UniversityIDViewStaffTestCase, self).setUp()
+        set_course_cohort_settings(course_key=self.course.id, is_cohorted=True)
         self.student_form_url = reverse('edraak_university:id', args=[unicode(self.course.id)])
-        self.staff_list_url = reverse('edraak_university:id_list', args=[unicode(self.course.id)])
+        self.staff_list_url = reverse('edraak_university:id_staff', args=[unicode(self.course.id)])
+
+    def create_course(self):
+        """
+        Overrides `create_course` to enable university ID.
+        """
+        return CourseFactory.create(enable_university_id=True)
 
     def create_university_ids(self):
         """
@@ -206,12 +345,20 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
         for university_id in ['A5000C100', 'A5000C200', 'A5000C200', 'A5000C300']:
             obj = UniversityIDFactory.create(
                 university_id=university_id,
-                course_key=unicode(self.course.id),
+                course_key=self.course.id,
             )
             obj.save()
+
             id_list.append(obj)
 
         return id_list
+
+    def create_cohort(self, users):
+        cohort = CohortFactory.create(
+            course_id=self.course.id,
+            users=users,
+        )
+        return cohort
 
     def test_tab_link(self):
         self.assertNotEqual(self.student_form_url, self.staff_list_url)  # Sanity check for the test
@@ -220,14 +367,20 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
 
     def test_empty_list(self):
         res = self.client.get(self.staff_list_url)
-        self.assertContains(res, 'No student have entered')
+        self.assertContains(res, 'No student has entered')
         self.assertNotContains(res, 'university-id-entry')
+
+    def test_staff_success_view_message(self):
+        url = reverse('edraak_university:id_settings_success', args=[self.course.id])
+        res = self.client.get(url)
+        self.assertNotContains(res, 'Your student university ID has been successfully')
+        self.assertContains(res, 'View the Students List')
 
     def test_list_with_entries(self):
         university_ids = self.create_university_ids()
 
         res = self.client.get(self.staff_list_url)
-        self.assertNotContains(res, 'No student have entered')
+        self.assertNotContains(res, 'No student has entered')
         self.assertContains(res, 'university-id-entry')
         self.assertEquals(res.content.count('university-id-entry'), len(university_ids),
                           msg='Should display all the IDs')
@@ -236,9 +389,10 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
                           msg='Should add the correct class for all duplicate IDs')
 
     def test_update_view(self):
-        university_id = UniversityIDFactory.create()
+        id_list = self.create_university_ids()
+        university_id = id_list[0]
 
-        url = reverse('edraak_university:id_update', args=[unicode(self.course.id), university_id.pk])
+        url = reverse('edraak_university:id_update', args=[self.course.id, university_id.pk])
         res = self.client.get(url)
 
         self.assertNotContains(res, 'john_cooper_1895', msg_prefix='Should not contain the username')
@@ -247,6 +401,9 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
 
     def test_update_conflicted_view(self):
         id_list = self.create_university_ids()
+        self.create_cohort(users=[
+            obj.user for obj in id_list
+        ])
 
         res_list_conflicted = self.client.get(self.staff_list_url)
         self.assertEquals(res_list_conflicted.content.count('conflicted'), 2,
@@ -256,11 +413,12 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
         update_url = reverse('edraak_university:id_update', args=[unicode(self.course.id), conflicted_id.pk])
         res_update = self.client.post(update_url, {
             'university_id': 'A5000C201',  # Correct the ID to avoid conflict
-            'section_number': conflicted_id.section_number,
+            'full_name': conflicted_id.get_full_name(),
+            'email': conflicted_id.get_email(),
+            'cohort': conflicted_id.get_cohort().id,
         })
 
         self.assertRedirects(res_update, self.staff_list_url, msg_prefix='Should redirect to the IDs list on success')
-
         res_list_good = self.client.get(self.staff_list_url)
         self.assertNotContains(res_list_good, 'conflicted', msg_prefix='Should not have any conflicted IDs')
 

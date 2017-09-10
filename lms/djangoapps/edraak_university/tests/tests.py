@@ -1,7 +1,9 @@
 """
 All sort of tests for the University ID app.
 """
-
+import datetime
+import pytz
+from django.db.models import Q
 from django.test import TestCase, override_settings
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.conf import settings
@@ -10,6 +12,17 @@ from django.contrib.auth.models import AnonymousUser
 from bs4 import BeautifulSoup
 from mock import Mock, patch
 import ddt
+
+from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
+from openedx.core.djangoapps.course_groups.cohorts import (
+    add_user_to_cohort,
+    get_cohort,
+    set_course_cohort_settings,
+    DEFAULT_COHORT_NAME,
+)
+
+from openedx.core.djangoapps.course_groups.tests.helpers import CohortFactory
+from openedx.core.djangoapps.course_groups.models import CourseUserGroup
 from pkg_resources import iter_entry_points  # pylint: disable=no-name-in-module
 
 from student.tests.factories import UserFactory, CourseEnrollmentFactory
@@ -21,8 +34,8 @@ from student.models import UserProfile
 
 from edraak_university.tab import UniversityIDTab
 from edraak_university import helpers
-from edraak_university.forms import UniversityIDForm
-from edraak_university.models import UniversityID
+from edraak_university.forms import UniversityIDStudentForm
+from edraak_university.models import UniversityID, UniversityIDSettings, DEFAULT_COHORT_NAMES
 from edraak_university.tests.factories import UniversityIDFactory
 
 
@@ -47,6 +60,15 @@ class SettingsTest(TestCase):
         feature = settings.FEATURES.get('EDRAAK_UNIVERSITY_CSV_EXPORT')
         self.assertFalse(feature, 'The export IDs should be disabled by default')
 
+    def test_default_cohort_name(self):
+        """
+        Just in case edX decided to do something crazy with this, again!
+
+        For more info, check the old way of getting the default cohort:
+         - https://github.com/Edraak/edx-platform/pull/288/files#diff-77d729b2747c0a082c632262ceadb69bR7
+        """
+        self.assertIn(DEFAULT_COHORT_NAME, DEFAULT_COHORT_NAMES)
+
     def test_tab_installation(self):
         course_tabs = {
             entry_point.name: entry_point.load()
@@ -59,6 +81,13 @@ class SettingsTest(TestCase):
 
         tab_class_name = course_tabs['university_id'].type
         self.assertEquals(tab_class_name, 'university_id', 'Should have the required tab, with a correct tab.type')
+
+
+class UniversityIDSettingsModelTest(ModuleStoreTestCase):
+    def test_unicode(self):
+        course = CourseFactory.create(org='ORG', number='CS', run='2020')
+        obj = UniversityIDSettings(course_key=course.id)
+        self.assertEquals(unicode(obj), 'ORG/CS/2020')
 
 
 @ddt.ddt
@@ -191,11 +220,73 @@ class UniversityTabIDTest(ModuleStoreTestCase):
         self.assertNotContains(res, '/university/id/', msg_prefix='The link should not appear')
 
 
+class IsStudentFormDisabledHelperTest(ModuleStoreTestCase):
+    TODAY = datetime.datetime.now(pytz.UTC)
+    LAST_WEEK = TODAY - datetime.timedelta(days=7)
+    NEXT_WEEK = TODAY + datetime.timedelta(days=7)
+
+    def setUp(self):
+        super(IsStudentFormDisabledHelperTest, self).setUp()
+        self.course = CourseFactory.create()
+        self.user = UserFactory.create()
+        self.enrollment = CourseEnrollmentFactory.create(user=self.user, course_id=self.course.id)
+        # Instructor haven't edited the information yet
+        self.uid = UniversityID(can_edit=True, user=self.user, course_key=self.course.id)
+        self.uid.save()
+
+    def assertReturnValue(self, expected, msg=None):
+        actual = helpers.is_student_form_disabled(self.user, self.course.id)
+        self.assertEquals(actual, expected, msg)
+
+    def test_happy_scenario(self):
+        self.assertReturnValue(False)
+
+    def test_with_can_edit_equals_false(self):
+        """
+        The form is should be disabled the instructor edited the student data.
+        """
+        self.uid.can_edit = False
+        self.uid.save()
+        self.assertReturnValue(True, 'Should be disabled when the instructor updates the information')
+
+    def test_with_future_registration_end_date(self):
+        """
+        The form is should be disabled when registration end date (is not null) and (already passed).
+        """
+        uid_settings = UniversityIDSettings(registration_end_date=self.NEXT_WEEK, course_key=self.course.id)
+        uid_settings.save()
+        self.assertReturnValue(False, 'Future registration end date should NOT disable the form')
+
+    def test_with_past_registration_end_date(self):
+        """
+        The form is should be disabled when registration end date (is not null) and (already passed).
+        """
+        uid_settings = UniversityIDSettings(registration_end_date=self.LAST_WEEK, course_key=self.course.id)
+        uid_settings.save()
+        self.assertReturnValue(True, 'Past registration end date should disable the form')
+
+    def test_with_null_registration_end_date(self):
+        """
+        The form is should be disabled when registration end date (is not null) and (already passed).
+        """
+        uid_settings = UniversityIDSettings(registration_end_date=None, course_key=self.course.id)
+        uid_settings.save()
+        self.assertReturnValue(False, 'NULL registration end date should NOT disable the form')
+
+    def test_not_enrolled_user(self):
+        enrollment = CourseEnrollment.objects.get(user=self.user, course_id=self.course.id)
+        enrollment.delete()
+        self.assertReturnValue(True, 'Should be disabled for un-enrolled users')
+
+
 @ddt.ddt
-class HelpersTest(ModuleStoreTestCase):
+class HelpersTest(ModuleStoreLoggedInTestCase):
     """
     Tests for the UniversityID helper functions.
     """
+
+    LOGIN_STAFF = False
+    ENROLL_USER = True
 
     def test_is_feature_enabled_helper(self):
         with patch.dict(settings.FEATURES, EDRAAK_UNIVERSITY_APP=True):
@@ -258,13 +349,24 @@ class HelpersTest(ModuleStoreTestCase):
 
 
 @ddt.ddt
-class UniversityIDFormTest(TestCase):
+class UniversityIDFormTest(ModuleStoreTestCase):
     """
-    Unit tests for the UniversityIDForm class.
+    Unit tests for the UniversityIDStudentForm class.
     """
 
     def setUp(self):
         super(UniversityIDFormTest, self).setUp()
+        self.course = CourseFactory.create()
+        set_course_cohort_settings(course_key=self.course.id, is_cohorted=True)
+
+        # Initialize the default group!
+        default_cohort = get_cohort(user=self.user, course_key=self.course.id)
+        self.assertEquals(default_cohort.name, DEFAULT_COHORT_NAME)  # Sanity-check
+
+        self.cohort, _created = CourseUserGroup.create(
+            name='Cohort_A',
+            course_id=self.course.id,
+        )
 
     def get_form(self, overrides=None):
         """
@@ -274,20 +376,31 @@ class UniversityIDFormTest(TestCase):
             # Initially clean params
             'full_name': 'Mahmoud Salam',
             'university_id': '2010-12-05',
-            'section_number': '10'
+            'cohort': self.cohort.id,
         }
 
         if overrides:
             # May add validation errors for testing purposes
             params.update(overrides)
 
-        form = UniversityIDForm(params)
+        form = UniversityIDStudentForm(self.course.id, data=params)
         return form
 
     def test_initial_data_are_valid(self):
         form = self.get_form()
+
+        default_cohort = CourseUserGroup.objects.get(~Q(name=self.cohort.name), course_id=self.course.id)
+        self.assertEquals(default_cohort.name, DEFAULT_COHORT_NAME)
+
+        custom_cohort = CourseUserGroup.objects.get(course_id=self.course.id, name=self.cohort.name)
+        self.assertEquals(custom_cohort.group_type, CourseUserGroup.COHORT)
+
+        # Sanity check
+        cohorts = UniversityID.get_cohorts_for_course(self.course.id)
+        self.assertListEqual(list(cohorts), [custom_cohort])
+
+        self.assertEquals(form.errors, {})
         self.assertTrue(form.is_valid())
-        self.assertFalse(len(form.errors))
 
     @ddt.unpack
     @ddt.data(
@@ -298,7 +411,7 @@ class UniversityIDFormTest(TestCase):
         {'field_name': 'university_id', 'bad_value': '2011 501', 'issue': 'has a space'},
         {'field_name': 'university_id', 'bad_value': 'a' * 100, 'issue': 'is too long'},
         {'field_name': 'university_id', 'bad_value': '2011/500', 'issue': 'has a special char'},
-        {'field_name': 'section_number', 'bad_value': '', 'issue': 'is empty'},
+        {'field_name': 'cohort', 'bad_value': '', 'issue': 'is empty'},
     )
     def test_field_validators(self, field_name, bad_value, issue):
         invalid_params = {field_name: bad_value}
@@ -341,16 +454,48 @@ class UniversityIDModelTest(ModuleStoreTestCase):
 
     def setUp(self):
         super(UniversityIDModelTest, self).setUp()
+        self.course = CourseFactory.create(
+            org='a',
+            number='b',
+            run='c',
+        )
+        self.cohort = CohortFactory.create(
+            course_id=self.course.id,
+        )
+        set_course_cohort_settings(course_key=self.course.id, is_cohorted=True)
         self.model = UniversityIDFactory.create(
             user__username='username1',
             user__email='user@example.eu',
             user__profile__name='Mike Wazowski',
-            course_key='a/b/c',
+            course_key=self.course.id,
             university_id='201711201',
-            section_number='10',
         )
 
         self.profile = UserProfile.objects.get(user=self.model.user)
+
+    def test_default_cohort(self):
+        self.assertEquals(self.model.get_cohort().name, DEFAULT_COHORT_NAME)
+        self.assertEquals(0, self.cohort.users.count())
+
+    def test_with_custom_cohort(self):
+        add_user_to_cohort(self.cohort, self.model.user.email)
+        self.assertEquals(1, self.cohort.users.count())
+        self.assertEquals(self.model.get_cohort().id, self.cohort.id)
+
+    def test_set_cohort(self):
+        self.model.set_cohort(self.cohort)
+        self.assertEquals(self.model.get_cohort().id, self.cohort.id)
+        self.model.set_cohort(self.cohort)  # Set cohort twice, it should be fine!
+
+    def test_remove_from_cohort(self):
+        self.model.set_cohort(self.cohort)
+        self.assertNotEqual(self.model.get_cohort().name, DEFAULT_COHORT_NAME)
+
+        self.model.remove_from_cohort()
+        self.assertEquals(self.model.get_cohort().name, DEFAULT_COHORT_NAME)
+
+        # Removing from a cohort multiple times should be fine!
+        self.model.remove_from_cohort()
 
     def test_unicode(self):
         self.assertEquals(unicode(self.model), 'username1 - a/b/c - 201711201')
@@ -376,7 +521,6 @@ class UniversityIDModelTest(ModuleStoreTestCase):
             model = UniversityIDFactory.create(
                 course_key=course_key,
                 university_id=uni_id,
-                section_number='10',
             )
 
             model.save()

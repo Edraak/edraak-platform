@@ -16,12 +16,12 @@ class UniversityIDAdmin(admin.ModelAdmin):
         'edraak_user',
         'course_key',
         'university_id',
-        'section_number',
+        'cohort',
         'email',
         'date_created',
     )
 
-    readonly_fields = ('user', 'course_key', 'date_created',)
+    readonly_fields = ('user', 'course_key', 'date_created', '_cohort', '_section_number',)
     search_fields = ('user__email', 'user__username', 'course_key', 'university_id',)
 
     def edraak_user(self, university_id_obj):
@@ -33,6 +33,9 @@ class UniversityIDAdmin(admin.ModelAdmin):
             name=Text(unicode(user)),
             url=Text(reverse('admin:auth_user_change', args=[user.pk])),
         )
+
+    def cohort(self, university_id_obj):
+        return university_id_obj.get_cohort()
 
     def email(self, profile):
         """

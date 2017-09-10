@@ -760,7 +760,7 @@ def upload_grades_csv(_xmodule_instance_args, _entry_id, course_id, _task_input,
 
     edraak_university_header = []
     if is_csv_export_enabled_on_course(course):
-        edraak_university_header = ['Full Name', 'University ID', 'University Section']
+        edraak_university_header = ['Full Name', 'University ID']
 
     rows.append(
         ["Student ID", "Email", "Username", "Grade"] +
@@ -861,9 +861,9 @@ def upload_grades_csv(_xmodule_instance_args, _entry_id, course_id, _task_input,
 
             try:
                 university_id = UniversityID.objects.get(user=student, course_key=course_id)
-                edraak_university_data.extend([university_id.university_id, university_id.section_number])
+                edraak_university_data.append(university_id.university_id)
             except UniversityID.DoesNotExist:
-                edraak_university_data.extend(['N/A', 'N/A'])
+                edraak_university_data.append('N/A')
 
         rows.append(
             [student.id, student.email, student.username, course_grade.percent] +

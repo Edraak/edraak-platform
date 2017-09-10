@@ -4,10 +4,11 @@ Helpers for the University ID django app, mainly for correct feature checks.
 
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
+from django.utils import timezone
 
 from opaque_keys.edx.locator import CourseLocator
-
-from edraak_university.models import UniversityID
+from edraak_university.models import UniversityID, UniversityIDSettings
+from student.models import CourseEnrollment
 
 
 def is_feature_enabled():
@@ -40,6 +41,48 @@ def get_university_id(user, course_id):
         )
     except UniversityID.DoesNotExist:
         return None
+
+
+def show_enroll_banner(user, course_key):
+    # This should be in sync with `student/views/views.py:course_info`
+    return (
+        user.is_authenticated()
+        and not CourseEnrollment.is_enrolled(user, course_key)
+    )
+
+
+def is_student_form_disabled(user, course_key):
+    """
+    This method detects if the form should be disabled or
+    enabled. The form is should be disabled in the following cases:
+        * If the instructor edited the student data
+        * The registration end date (is not null) and (already passed)
+        * The user is not enrolled in the course
+    :return: True if the form must be disabled, False otherwise
+    """
+    student_uid = get_university_id(user=user, course_id=unicode(course_key))
+    if student_uid and not student_uid.can_edit:
+        return True
+
+    not_enrolled = not CourseEnrollment.is_enrolled(user=user, course_key=course_key)
+
+    university_settings = get_university_settings(course_key=course_key)
+    if university_settings:
+        # The instructor already defined a settings for the course
+        registration_end = university_settings.registration_end_date
+        if registration_end:
+            # The registration end date is not stored as null
+            today = timezone.now().date()
+            return registration_end <= today or not_enrolled
+
+    return not_enrolled
+
+
+def get_university_settings(course_key):
+    try:
+        return UniversityIDSettings.objects.get(course_key=course_key)
+    except UniversityIDSettings.DoesNotExist:
+        return
 
 
 def has_valid_university_id(user, course_id):

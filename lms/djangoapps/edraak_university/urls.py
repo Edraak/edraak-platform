@@ -20,9 +20,14 @@ urlpatterns = patterns(
         name='id_success',
     ),
     url(
+        r'^id/{}/settings_success$'.format(settings.COURSE_ID_PATTERN),
+        views.UniversityIDSettingsSuccessView.as_view(),
+        name='id_settings_success',
+    ),
+    url(
         r'^id/{}/instructor/list$'.format(settings.COURSE_ID_PATTERN),
-        views.UniversityIDListView.as_view(),
-        name='id_list',
+        views.UniversityIDStaffView.as_view(),
+        name='id_staff',
     ),
     url(
         r'^id/{}/instructor/update/(?P<pk>\d+)$'.format(settings.COURSE_ID_PATTERN),

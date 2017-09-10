@@ -1,0 +1,22 @@
+## mako
+<%page expression_filter="h" />
+<%inherit file="/main.html" />
+<%namespace name='static' file='/static_content.html'/>
+
+<%block name="bodyclass">view-in-course view-university-id-success</%block>
+
+<%block name="headextra">
+    <%static:css group='style-course-vendor'/>
+    <%static:css group='style-course'/>
+</%block>
+
+
+<%include file="/courseware/course_navigation.html" args="active_page='university_id'" />
+
+<%block name="bodyextra">
+    <section id="main" class="container activation">
+        <section class="message">
+            <%block name="university_id_success_message"></%block>
+        </section>
+    </section>
+</%block>

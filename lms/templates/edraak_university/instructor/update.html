@@ -24,18 +24,9 @@
 <div class="container">
     <div id="main" class="course-wrapper">
         <div class="university-id" id="course-university-id">
-            <h1>${_('Edraak University IDs')}</h1>
+            <h1>${_('Students\' University IDs')}</h1>
             <form class="university-id-form" method="post">
                 <div class="fields">
-                    <p>
-                        <label>${_('Full Name:')}</label>
-                        <input type="text" disabled value="${object.get_full_name()}">
-                    </p>
-
-                    <p>
-                        <label>${_('Email:')}</label>
-                        <input type="text" disabled value="${object.get_email()}">
-                    </p>
 
                     ${HTML(form.as_p())}
 

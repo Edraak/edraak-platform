@@ -4,8 +4,6 @@
 <%namespace name='static' file='/static_content.html'/>
 <%!
     from django.utils.translation import ugettext as _
-    from django.core.urlresolvers import reverse
-    from django.conf import settings
 %>
 <%block name="bodyclass">view-in-course view-university-id</%block>
 
@@ -22,7 +20,7 @@
 <div class="container">
     <div id="main" class="course-wrapper">
         <div class="university-id" id="course-university-id">
-            <h1>${_('Edraak University IDs')}</h1>
+            <h1>${_('Students\' University IDs')}</h1>
 
             <hr />
 

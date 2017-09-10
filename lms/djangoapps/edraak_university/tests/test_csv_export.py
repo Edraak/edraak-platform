@@ -26,7 +26,7 @@ class TestInstructorGradeReport(InstructorGradeReportTestCase):
     EMAIL_WITH_ID = 'john@example.org'
     EMAIL_WITHOUT_ID = 'doe@example.com'
 
-    UNIVERSITY_ID_COLUMNS = ['Full Name', 'University ID', 'University Section']
+    UNIVERSITY_ID_COLUMNS = ['Full Name', 'University ID']
 
     def setUp(self):
         super(TestInstructorGradeReport, self).setUp()
@@ -44,7 +44,6 @@ class TestInstructorGradeReport(InstructorGradeReportTestCase):
                 user=student,
                 course_key=unicode(self.course.id),
                 university_id='2011A-500',
-                section_number='K',
             )
 
     def create_rows(self):
@@ -120,7 +119,6 @@ class TestInstructorGradeReport(InstructorGradeReportTestCase):
         university_id_data = {
             'Full Name': id_object.get_full_name(),
             'University ID': id_object.university_id,
-            'University Section': id_object.section_number,
         }
 
         self.assertIn(user.email, row.values())  # Should contain the email, just a sanity check

@@ -9,7 +9,7 @@ from courseware.courses import get_course_with_access
 from courseware.access import has_access
 
 
-class CourseContextMixin(object):
+class ContextMixin(object):
     """
     A mixin that loads the course in the context data and provide a helper to check for staff access.
     """
@@ -38,10 +38,14 @@ class CourseContextMixin(object):
         if not has_access(self.request.user, 'staff', course):
             raise Http404('Course does not exists, or user does not have permission.')
 
+    def is_staff(self):
+        return has_access(self.request.user, 'staff', self.get_course())
+
     def get_context_data(self, **kwargs):
         """
         Add the course to the context data.
         """
-        data = super(CourseContextMixin, self).get_context_data(**kwargs)
+        data = super(ContextMixin, self).get_context_data(**kwargs)
         data['course'] = self.get_course()
+        data['is_staff'] = self.is_staff()
         return data

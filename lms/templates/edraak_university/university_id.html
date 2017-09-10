@@ -6,8 +6,8 @@
     from django.utils.translation import ugettext as _
     from django.core.urlresolvers import reverse
     from django.conf import settings
-
-    from openedx.core.djangolib.markup import HTML
+    from markdown import markdown
+    from openedx.core.djangolib.markup import HTML, Text
 %>
 <%block name="bodyclass">view-in-course view-university-id</%block>
 
@@ -19,6 +19,7 @@
 
 <%block name="pagetitle">${_("{course_number} Student University ID").format(course_number=course.display_number_with_default)}</%block>
 
+<%include file="/courseware/enroll_banner.html" args="show_enroll_banner=show_enroll_banner, url_to_enroll=url_to_enroll"/>
 <%include file="/courseware/course_navigation.html" args="active_page='university_id'" />
 
 <div class="container">
@@ -28,7 +29,15 @@
                 <h1>${_('Student University ID')}</h1>
 
                 <div class="form-help">
-                    % if has_valid_information:
+                    % if show_enroll_banner:
+                        <p class="important">
+                            ${_('Enroll in the course so you can edit your university ID.')}
+                        </p>
+                    % elif is_form_disabled:
+                        <p class="important">
+                            ${_('Registration is disabled. Contact your course instructor for help.')}
+                        </p>
+                    % elif has_valid_information:
                         <p>
                             ${_('The information below have been successfully submitted '
                                 'to your university coordinator.')}
@@ -43,6 +52,16 @@
                                 'Please enter the required information, and verify it is correct.')}
                         </p>
                     % endif
+
+                    % if registration_end and not is_form_disabled:
+                        <p>
+                            ${Text(_('You can submit and change your information before {registration_end}')).format(
+                                registration_end=HTML('<strong>{date}</strong>').format(
+                                    date=Text(registration_end),
+                                ),
+                            )}
+                        </p>
+                    % endif
                 </div>
 
                 <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}">
@@ -50,10 +69,22 @@
                 <hr />
 
                 <div class="fields">
-                    ${HTML(form.as_div())}
+                    <fieldset ${'disabled' if is_form_disabled else ''}>
+                        ${HTML(form.as_div())}
+                    </fieldset>
+
+                % if terms_conditions:
+                    <hr />
+                    <h3>${_('Terms and Conditions')}</h3>
+                    <div class="terms">
+                        ${HTML(markdown(terms_conditions))}
+                    </div>
+                    <br>
+                % endif
+
                 </div>
 
-                <input class="submit" type="submit" value="${_('Submit')}">
+                <input class="submit" type="submit" value="${_('Submit')}" ${'disabled' if is_form_disabled or show_enroll_banner else ''}>
             </form>
         </div>
     </div>

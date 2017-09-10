@@ -1,43 +1,30 @@
 ## mako
-<%page expression_filter="h" />
-<%inherit file="/main.html" />
-<%namespace name='static' file='/static_content.html'/>
 <%!
     from django.utils.translation import ugettext as _
     from django.core.urlresolvers import reverse
-    from django.conf import settings
 %>
-<%block name="bodyclass">view-in-course view-university-id-success</%block>
+<%page expression_filter="h" />
+<%inherit file="_message.html" />
 
-<%block name="headextra">
-    <%static:css group='style-course-vendor'/>
-    <%static:css group='style-course'/>
+<%block name="pagetitle">${_("Your Student University ID Has Been Saved")}</%block>
+
+<%block name="university_id_success_message">
+    <h1 class="valid text-center">${_("Your Student University ID Has Been Saved")}</h1>
+
+    <hr class="horizontal-divider">
+    <p>
+        ${_('Your student university ID has been successfully '
+            'submitted and will be used for your grade records.')}
+    </p>
+
+    <p>
+        ${_('Should your university coordinator have any comments on '
+            'the information you entered, he/she will contact you.')}
+    </p>
+
+    <p class="text-center">
+        <a href="${reverse('courseware', kwargs={'course_id': course.id})}">
+            <strong>${_('View the Course Content')}</strong>
+        </a>
+    </p>
 </%block>
-
-
-<%block name="pagetitle">${_("{course_number} Student University ID Successfully Saved").format(course_number=course.display_number_with_default)}</%block>
-
-<%include file="/courseware/course_navigation.html" args="active_page='university_id'" />
-
-<section id="main" class="container activation">
-    <section class="message">
-        <h1 class="valid text-center">${_("Your Student University ID Has Been Saved")}</h1>
-
-        <hr class="horizontal-divider">
-            <p>
-                ${_('Your student university ID has been successfully '
-                    'submitted and will be used for your grade records.')}
-            </p>
-
-            <p>
-                ${_('Should your university coordinator have any comments on '
-                    'the information you entered, he/she will contact you.')}
-            </p>
-
-            <p class="text-center">
-                <a href="${reverse('courseware', kwargs={'course_id': course.id})}">
-                    <strong>${_('View the Course Content')}</strong>
-                </a>
-            </p>
-    </section>
-</section>
