@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2017-09-07 09:53+0000\n"
-"PO-Revision-Date: 2017-09-07 09:53:57.125362\n"
+"POT-Creation-Date: 2017-09-11 09:29+0000\n"
+"PO-Revision-Date: 2017-09-11 09:30:21.538619\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -6081,7 +6081,12 @@ msgstr ""
 
 #: common/static/common/templates/discussion/thread-show.underscore
 #, python-format
-msgid "%(post_type)s posted %(time_ago)s by %(author)s"
+msgid "discussion posted %(time_ago)s by %(author)s"
+msgstr ""
+
+#: common/static/common/templates/discussion/thread-show.underscore
+#, python-format
+msgid "question posted %(time_ago)s by %(author)s"
 msgstr ""
 
 #: common/static/common/templates/discussion/thread-show.underscore

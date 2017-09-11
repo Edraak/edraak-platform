@@ -47,8 +47,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2017-09-07 09:10+0000\n"
-"PO-Revision-Date: 2017-09-07 09:10:33.489674\n"
+"POT-Creation-Date: 2017-09-11 09:26+0000\n"
+"PO-Revision-Date: 2017-09-11 09:26:19.179849\n"
 "Last-Translator: Omar Al-Ithawi <oithawi@qrf.org>, 2017\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -323,6 +323,34 @@ msgid "User profile"
 msgstr "ملف المستخدِم"
 
 #: common/djangoapps/student/forms.py
+msgid "Username must be minimum of two characters long"
+msgstr "يجب أن يتكوّن اسم المستخدم من حرفين على الأقل"
+
+#: common/djangoapps/student/forms.py
+#, python-format
+msgid "Username cannot be more than %(limit_value)s characters long"
+msgstr "لا يمكن أن يزيد عدد حروف اسم المستخدم عن %(limit_value)s"
+
+#. Translators: This message is shown when the Unicode usernames are NOT
+#. allowed
+#: common/djangoapps/student/forms.py
+msgid ""
+"Usernames can only contain Roman letters, western numerals (0-9), "
+"underscores (_), and hyphens (-)."
+msgstr ""
+"يجب أن يحتوي اسم المستخدم على حروف انجليزية وأرقام غربية (0-9) وشرطات سُفلية"
+" (_) وإشارة الطرح (-) فقط."
+
+#. Translators: This message is shown only when the Unicode usernames are
+#. allowed
+#: common/djangoapps/student/forms.py
+msgid ""
+"Usernames can only contain letters, numerals, underscore (_), numbers and "
+"@/./+/-/_ characters."
+msgstr ""
+"يجب أن يحتوي اسم المستخدم على حروف وأرقام والرموز التالية: @ و. و+ و- و_ ."
+
+#: common/djangoapps/student/forms.py
 msgid ""
 "That e-mail address doesn't have an associated user account. Are you sure "
 "you've registered?"
@@ -339,10 +367,6 @@ msgstr ""
 "المرور."
 
 #: common/djangoapps/student/forms.py
-msgid "Username must be minimum of two characters long"
-msgstr "يجب أن يتكوّن اسم المستخدم من حرفين على الأقل"
-
-#: common/djangoapps/student/forms.py
 msgid "A properly formatted e-mail is required"
 msgstr "يجب إدخال عنوان بريد إلكتروني مكتوب بطريقة سليمة"
 
@@ -353,19 +377,6 @@ msgstr "يجب إدخال كلمة مرور صالحة"
 #: common/djangoapps/student/forms.py
 msgid "Your legal name must be a minimum of two characters long"
 msgstr "يجب أن يتكون اسمك القانوني من حرفين على الأقلّ"
-
-#: common/djangoapps/student/forms.py
-msgid ""
-"Usernames can only contain Roman letters, western numerals (0-9), "
-"underscores (_), and hyphens (-)."
-msgstr ""
-"يجب أن يحتوي اسم المستخدم على حروف انجليزية وأرقام غربية (0-9) وشرطات سُفلية"
-" (_) وإشارة الطرح (-) فقط."
-
-#: common/djangoapps/student/forms.py
-#, python-format
-msgid "Username cannot be more than %(limit_value)s characters long"
-msgstr "لا يمكن أن يزيد عدد حروف اسم المستخدم عن %(limit_value)s"
 
 #: common/djangoapps/student/forms.py
 #, python-format
@@ -4979,6 +4990,12 @@ msgid "Download the {platform_name} mobile app from Google Play"
 msgstr ""
 "يُرجى تنزيل تطبيق الهاتف المحمول لمنصّة {platform_name} من Google Play"
 
+#. Translators: Bulk email from address e.g. ("Physics 101" Course Staff)
+#: lms/djangoapps/bulk_email/tasks.py
+#, python-brace-format
+msgid "\"{course_title}\" Course Staff"
+msgstr "فريق مساق \"{course_title}\""
+
 #: lms/djangoapps/ccx/plugins.py
 msgid "CCX Coach"
 msgstr "مدرِّب CCX"
@@ -6383,6 +6400,11 @@ msgstr "البريد الإلكتروني"
 #: lms/djangoapps/edraak_university/forms.py
 msgid "YYYY-MM-DD"
 msgstr "يوم-شهر-سنة"
+
+#: lms/djangoapps/edraak_university/models.py
+#: openedx/core/djangoapps/course_groups/cohorts.py
+msgid "Default Group"
+msgstr "المجموعة الافتراضية"
 
 #: lms/djangoapps/edraak_university/models.py
 #: lms/templates/edraak_university/university_id.html
@@ -9337,6 +9359,11 @@ msgstr "إدراك إنسايتس"
 msgid "Kosovo"
 msgstr "كوسوفو (Kosovo)"
 
+#: lms/templates/emails/password_reset_subject.txt
+#, python-format
+msgid "Password reset on %(platform_name)s"
+msgstr "إعادة ضبط كلمة المرور على %(platform_name)s"
+
 #: lms/templates/logout.html
 msgid "Signed Out"
 msgstr "خرجت"
@@ -9400,10 +9427,10 @@ msgstr "خطأ"
 #, python-format
 msgid ""
 "You're receiving this e-mail because you requested a password reset for your"
-" user account at %(site_name)s."
+" user account at %(platform_name)s."
 msgstr ""
 "وصلتك رسالة البريد الالكتروني هذه بناءً على طلبك بتغيير كلمة المرور لحسابك "
-"في %(site_name)s."
+"في %(platform_name)s."
 
 #: lms/templates/registration/password_reset_email.html
 msgid "Please go to the following page and choose a new password:"
@@ -10020,10 +10047,6 @@ msgid ""
 msgstr ""
 "قائمة بالمجالات المختلفة التي يُسمح لها بتقديم طلبات خارج مجالاتها إلى هذا "
 "الموقع. يرجى ذكر كل مجال في سطر منفصل."
-
-#: openedx/core/djangoapps/course_groups/cohorts.py
-msgid "Default Group"
-msgstr "المجموعة الافتراضية"
 
 #: openedx/core/djangoapps/course_groups/cohorts.py
 msgid "You cannot create two cohorts with the same name"
@@ -11746,12 +11769,10 @@ msgid "Go back to the {link_start}home page{link_end}."
 msgstr "ارجِع إلى{link_start}الصفحة الرئيسيّة{link_end}."
 
 #: lms/templates/email_change_successful.html
-#: lms/templates/emails_change_successful.html
 msgid "E-mail change successful!"
 msgstr "نجح تغيير البريد الإلكتروني"
 
 #: lms/templates/email_change_successful.html
-#: lms/templates/emails_change_successful.html
 msgid "You should see your new email in your {link_start}dashboard{link_end}."
 msgstr ""
 "سيظهر عنوان بريدك الإلكتروني الجديد في صفحة {link_start}\"مكتبي\"{link_end} "
@@ -22217,10 +22238,12 @@ msgstr "أدخِل معلومات مفيدة عن مساقك"
 #: cms/templates/settings.html
 msgid ""
 "Identify the course language here. This is used to assist users find courses"
-" that are taught in a specific language."
+" that are taught in a specific language. It is also used to localize the "
+"'From:' field in bulk emails."
 msgstr ""
 "حدد لغة المساق هنا لمساعدة المستخدِمين على العثور على المساقات التي تُدرَّس "
-"بلغة معيَّنة.  "
+"بلغة معيَّنة.  ستستخدم هذه اللغة أيضاً في حقل المُرسل عند إرسال البريد "
+"الجماعي للطلاب."
 
 #: cms/templates/settings.html
 msgid "Introducing Your Course"

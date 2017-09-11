@@ -37,8 +37,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2017-09-07 09:09+0000\n"
-"PO-Revision-Date: 2017-09-07 09:10:33.814461\n"
+"POT-Creation-Date: 2017-09-11 09:25+0000\n"
+"PO-Revision-Date: 2017-09-11 09:26:19.495358\n"
 "Last-Translator: Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -6541,8 +6541,13 @@ msgstr "أضِف تعليقًا"
 
 #: common/static/common/templates/discussion/thread-show.underscore
 #, python-format
-msgid "%(post_type)s posted %(time_ago)s by %(author)s"
-msgstr "نشر %(author)s موضوع %(post_type)s %(time_ago)s"
+msgid "discussion posted %(time_ago)s by %(author)s"
+msgstr "موضوع نشره %(author)s %(time_ago)s"
+
+#: common/static/common/templates/discussion/thread-show.underscore
+#, python-format
+msgid "question posted %(time_ago)s by %(author)s"
+msgstr "سؤال نشره %(author)s %(time_ago)s"
 
 #: common/static/common/templates/discussion/thread-show.underscore
 msgid "Closed"
