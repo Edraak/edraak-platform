@@ -788,7 +788,6 @@ class VideoExportTestCase(VideoDescriptorTestBase):
         self.assertEqual(xml.get('display_name'), u'\u8fd9\u662f\u6587')
 
 
-@ddt.ddt
 @patch.object(settings, 'YOUTUBE', create=True, new={
     # YouTube JavaScript API
     'API': 'www.youtube.com/iframe_api',
@@ -823,10 +822,8 @@ class VideoExportTestCase(VideoDescriptorTestBase):
     # The default value in {lms,cms}/envs/common.py and xmodule/tests/test_video.py should be consistent.
     'FALLBACK_TO_ENGLISH_TRANSCRIPTS': True,
 })
+@ddt.ddt
 class VideoDescriptorIndexingTestCase(unittest.TestCase):
-    """
-    Make sure that VideoDescriptor can format data for indexing as expected.
-    """
     def test_video_with_no_subs_index_dictionary(self):
         """
         Test index dictionary of a video module without subtitles.
