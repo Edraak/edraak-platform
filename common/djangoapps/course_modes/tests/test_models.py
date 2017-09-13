@@ -9,8 +9,10 @@ from datetime import datetime, timedelta
 import itertools
 
 import ddt
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from mock import patch
 from opaque_keys.edx.locations import SlashSeparatedCourseKey
 from opaque_keys.edx.locator import CourseLocator
 import pytz
@@ -69,6 +71,20 @@ class CourseModeModelTest(TestCase):
         # shouldn't be able to find a corresponding course
         modes = CourseMode.modes_for_course(self.course_key)
         self.assertEqual([CourseMode.DEFAULT_MODE], modes)
+
+    @patch.dict(settings.FEATURES, EDRAAK_DEFAULT_MODE_HONOR=True)
+    def test_modes_for_course_empty_edraak(self):
+        """
+        Edraak: By default use `honor` instead of `audit`. This is the requirement because we don't charge fees for
+                our courses.
+        """
+        # Sanity check: The shopping cart mode should be honor!
+        # Otherwise we need to add something like `EDRAAK_DEFAULT_MODE=Mode(...)`
+        self.assertEqual(CourseMode.HONOR, CourseMode.EDRAAK_DEFAULT_MODE.slug)
+
+        # Shouldn't be able to find a corresponding course
+        modes = CourseMode.modes_for_course(self.course_key)
+        self.assertEqual([CourseMode.EDRAAK_DEFAULT_MODE], modes)
 
     def test_nodes_for_course_single(self):
         """

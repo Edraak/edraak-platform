@@ -6,6 +6,7 @@ import pytz
 
 from collections import namedtuple, defaultdict
 from config_models.models import ConfigurationModel
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
@@ -140,6 +141,8 @@ class CourseMode(models.Model):
     # use "honor"
     DEFAULT_SHOPPINGCART_MODE_SLUG = HONOR
     DEFAULT_SHOPPINGCART_MODE = Mode(HONOR, _('Honor'), 0, '', 'usd', None, None, None, None)
+
+    EDRAAK_DEFAULT_MODE = DEFAULT_SHOPPINGCART_MODE
 
     class Meta(object):
         unique_together = ('course_id', 'mode_slug', 'currency')
@@ -306,7 +309,10 @@ class CourseMode(models.Model):
 
         modes = ([mode.to_tuple() for mode in found_course_modes])
         if not modes:
-            modes = [cls.DEFAULT_MODE]
+            if settings.FEATURES.get('EDRAAK_DEFAULT_MODE_HONOR'):
+                return [cls.EDRAAK_DEFAULT_MODE]
+
+            return [cls.DEFAULT_MODE]
 
         return modes
 
