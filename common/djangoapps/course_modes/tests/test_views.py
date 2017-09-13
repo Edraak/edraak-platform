@@ -221,6 +221,56 @@ class CourseModeViewTest(UrlResetMixin, ModuleStoreTestCase):
         'unsupported': {'unsupported_mode': True},
     }
 
+    @patch.dict(settings.FEATURES, ENABLE_MKTG_SITE=True, EDRAAK_USE_MARKETING_COURSE_SUCCESS_PAGE=True)
+    @patch.object(settings, 'MKTG_URLS', {
+        'ROOT': 'https://edraak.io',
+        'COURSE_SUCCESS_PAGE_FORMAT': '/course/{course_id}/voila',
+    })
+    def test_choose_mode_edraak_redirect_post(self):
+        """
+        Ensures that this redirects to the marketing success page instead of dashboard for Edraak.
+
+        This only works for `honor` enrollments.
+        Audit enrollments can be supported later, but currently it's throwing a 400 error during tests.
+        """
+        CourseModeFactory.create(mode_slug='honor', course_id=self.course.id)
+
+        # Choose the mode (POST request)
+        choose_track_url = reverse('course_modes_choose', args=[unicode(self.course.id)])
+        response = self.client.post(choose_track_url, self.POST_PARAMS_FOR_COURSE_MODE['honor'])
+
+        expected_url = 'https://edraak.io/course/{course_id}/voila'.format(course_id=self.course.id)
+        self.assertRedirects(response, expected_url=expected_url, fetch_redirect_response=False)
+
+    @ddt.data('honor', 'audit')
+    @unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+    @patch.dict(settings.FEATURES, ENABLE_MKTG_SITE=True, EDRAAK_USE_MARKETING_COURSE_SUCCESS_PAGE=True)
+    @patch.object(settings, 'MKTG_URLS', {
+        'ROOT': 'https://edraak.io',
+        'COURSE_SUCCESS_PAGE_FORMAT': '/course/{course_id}/voila',
+    })
+    def test_choose_mode_edraak_redirect_get(self, enrollment_mode):
+        """
+        Edraak: This only works for `honor` enrollments.
+        Audit enrollments can be supported later, but currently it's throwing a 400 error during tests.
+        """
+        CourseModeFactory.create(mode_slug=enrollment_mode, course_id=self.course.id)
+
+        # Enroll the user in the test course
+        if enrollment_mode is not None:
+            CourseEnrollmentFactory(
+                is_active=True,
+                mode=enrollment_mode,
+                course_id=self.course.id,
+                user=self.user
+            )
+
+        url = reverse('course_modes_choose', args=[unicode(self.course.id)])
+        response = self.client.get(url)
+
+        expected_url = 'https://edraak.io/course/{course_id}/voila'.format(course_id=self.course.id)
+        self.assertRedirects(response, expected_url=expected_url, fetch_redirect_response=False)
+
     @ddt.data(
         ('honor', 'dashboard'),
         ('verified', 'start-flow'),

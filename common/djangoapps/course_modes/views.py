@@ -20,6 +20,7 @@ from opaque_keys.edx.locations import SlashSeparatedCourseKey
 from xmodule.modulestore.django import modulestore
 
 from lms.djangoapps.commerce.utils import EcommerceService
+from course_modes.edraak_helpers import get_course_success_page_url
 from course_modes.models import CourseMode
 from courseware.access import has_access
 from edxmako.shortcuts import render_to_response
@@ -104,7 +105,7 @@ class ChooseModeView(View):
         # in the "honor" track by this point, so we send the user
         # to the dashboard.
         if not CourseMode.has_verified_mode(modes):
-            return redirect(reverse('dashboard'))
+            return redirect(get_course_success_page_url(course_id))
 
         # If a user has already paid, redirect them to the dashboard.
         if is_active and (enrollment_mode in CourseMode.VERIFIED_MODES + [CourseMode.NO_ID_PROFESSIONAL_MODE]):
@@ -209,7 +210,7 @@ class ChooseModeView(View):
 
         if requested_mode == 'honor':
             CourseEnrollment.enroll(user, course_key, mode=requested_mode)
-            return redirect(reverse('dashboard'))
+            return redirect(get_course_success_page_url(course_id))
 
         mode_info = allowed_modes[requested_mode]
 
