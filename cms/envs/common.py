@@ -1063,6 +1063,14 @@ INSTALLED_APPS = [
     # Country embargo support
     'openedx.core.djangoapps.embargo',
 
+    # Monitoring signals
+    'monitoring',
+
+    # Edraak specific modules
+    'edraak_i18n',
+    'edraak_ratelimit',
+    'edraak_specializations',
+
     # Course action state
     'course_action_state',
 
@@ -1171,6 +1179,9 @@ MKTG_URL_LINK_MAP = {
 }
 
 COURSES_WITH_UNSAFE_CODE = []
+
+######################## PROGRAMS PLATFORM #############################
+PROGS_URLS = {}
 
 ############################## EVENT TRACKING #################################
 

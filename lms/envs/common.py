@@ -2224,6 +2224,20 @@ INSTALLED_APPS = [
 
     'lms.djangoapps.lms_xblock.apps.LMSXBlockConfig',
 
+    # Edraak specific modules
+    'edraak_misc',
+    'edraak_tracking',
+    'edraak_i18n',
+    'edraak_contact',
+    'edraak_bayt',
+    'edraak_certificates',
+    'edraak_api',
+    'edraak_url_rewrites',
+    'edraak_forus',
+    'edraak_ratelimit',
+    'edraak_university',
+    'edraak_specializations',
+
     # Course data caching
     'openedx.core.djangoapps.content.course_overviews.apps.CourseOverviewsConfig',
     'openedx.core.djangoapps.content.course_structures.apps.CourseStructuresConfig',
@@ -2383,6 +2397,9 @@ ACTIVATION_EMAIL_SUPPORT_LINK = ''
 
 # Days before the expired date that we warn the user
 ENTITLEMENT_EXPIRED_ALERT_PERIOD = 90
+
+######################## PROGRAMS PLATFORM #############################
+PROGS_URLS = {}
 
 ############################# SOCIAL MEDIA SHARING #############################
 # Social Media Sharing on Student Dashboard
