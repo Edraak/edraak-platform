@@ -16,7 +16,11 @@ from enrollment.errors import (
     InvalidEnrollmentAttribute,
     UserNotFoundError
 )
-from enrollment.serializers import CourseEnrollmentSerializer, CourseSerializer
+from enrollment.serializers import (
+    CourseEnrollmentSerializer,
+    CourseSerializer,
+    EdraakCourseEnrollmentSerializer
+)
 from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
 from openedx.core.lib.exceptions import CourseNotFoundError
 from student.models import (
@@ -31,13 +35,15 @@ from student.models import (
 log = logging.getLogger(__name__)
 
 
-def get_course_enrollments(user_id):
+# Edraak: update function to accept request param
+def get_course_enrollments(user_id, request=None):
     """Retrieve a list representing all aggregated data for a user's course enrollments.
 
     Construct a representation of all course enrollment data for a specific user.
 
     Args:
         user_id (str): The name of the user to retrieve course enrollment information for.
+        request: The request that comes with the REST call
 
     Returns:
         A serializable list of dictionaries of all aggregated enrollment data for a user.
@@ -48,7 +54,18 @@ def get_course_enrollments(user_id):
         is_active=True
     ).order_by('created')
 
-    enrollments = CourseEnrollmentSerializer(qset, many=True).data
+    # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
+    if request is None:
+        enrollments = CourseEnrollmentSerializer(
+            qset,
+            many=True
+        ).data
+    else:
+        enrollments = EdraakCourseEnrollmentSerializer(
+            qset,
+            many=True,
+            context={'request': request}
+        ).data
 
     # Find deleted courses and filter them out of the results
     deleted = []
@@ -70,7 +87,8 @@ def get_course_enrollments(user_id):
     return valid
 
 
-def get_course_enrollment(username, course_id):
+# Edraak: update function to accept request param
+def get_course_enrollment(username, course_id, request=None):
     """Retrieve an object representing all aggregated data for a user's course enrollment.
 
     Get the course enrollment information for a specific user and course.
@@ -78,6 +96,7 @@ def get_course_enrollment(username, course_id):
     Args:
         username (str): The name of the user to retrieve course enrollment information for.
         course_id (str): The course to retrieve course enrollment information for.
+        request: The request that comes with the REST call
 
     Returns:
         A serializable dictionary representing the course enrollment.
@@ -88,7 +107,18 @@ def get_course_enrollment(username, course_id):
         enrollment = CourseEnrollment.objects.get(
             user__username=username, course_id=course_key
         )
-        return CourseEnrollmentSerializer(enrollment).data
+
+        # Edraak: use EdraakCourseEnrollmentSerializer to serialize enrollments
+        if request is None:
+            data = CourseEnrollmentSerializer(enrollment).data
+        else:
+            data = EdraakCourseEnrollmentSerializer(
+                enrollment,
+                context={'request': request}
+            ).data
+
+        return data
+
     except CourseEnrollment.DoesNotExist:
         return None
 
@@ -109,7 +139,8 @@ def get_user_enrollments(course_key):
     ).order_by('created')
 
 
-def create_course_enrollment(username, course_id, mode, is_active):
+# Edraak: update function to accept request param
+def create_course_enrollment(username, course_id, mode, is_active, request=None):
     """Create a new course enrollment for the given user.
 
     Creates a new course enrollment for the specified user username.
@@ -119,6 +150,7 @@ def create_course_enrollment(username, course_id, mode, is_active):
         course_id (str): The course to create the course enrollment for.
         mode (str): (Optional) The mode for the new enrollment.
         is_active (boolean): (Optional) Determines if the enrollment is active.
+        request: The request that comes with the REST call
 
     Returns:
         A serializable dictionary representing the new course enrollment.
@@ -149,7 +181,8 @@ def create_course_enrollment(username, course_id, mode, is_active):
     except CourseFullError as err:
         raise CourseEnrollmentFullError(text_type(err))
     except AlreadyEnrolledError as err:
-        enrollment = get_course_enrollment(username, course_id)
+        # Edraak: pass request param to get_course_enrollment
+        enrollment = get_course_enrollment(username, course_id, request=request)
         raise CourseEnrollmentExistsError(text_type(err), enrollment)
 
 
