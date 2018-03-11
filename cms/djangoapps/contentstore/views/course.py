@@ -1356,9 +1356,9 @@ def advanced_settings_handler(request, course_key_string):
                             spec_json = r.json()
                             CourseSpecializationInfo.objects.update_or_create(
                                 course_id=course_key,
-                                specialization_slug=
-                                course_module.specialization_slug,
                                 defaults={
+                                    'specialization_slug':
+                                        course_module.specialization_slug,
                                     'name_en': spec_json.get('name_en'),
                                     'name_ar': spec_json.get('name_ar')
                                 }

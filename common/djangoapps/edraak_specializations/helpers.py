@@ -32,9 +32,9 @@ def get_specialization_info(course_id):
     info["title"] = info_obj.name_en if get_language() == "en"\
         else info_obj.name_ar
     info["link"] = urljoin(
-        settings.PROGS_URLS.get('ROOT'),
-        settings.PROGS_URLS.get("PROG_LMS", "").format(
-            program_slug=info_obj.specialization_slug
+        settings.MKTG_URLS.get('ROOT'),
+        settings.MKTG_URLS.get("SPECIALIZATION_INFO", "").format(
+            slug=info_obj.specialization_slug
         )
     )
     return info
