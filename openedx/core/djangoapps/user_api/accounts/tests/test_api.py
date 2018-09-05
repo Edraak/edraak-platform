@@ -19,6 +19,7 @@ from nose.plugins.attrib import attr
 from nose.tools import raises
 from six import iteritems
 
+from openedx.core.djangoapps.ace_common.tests.mixins import EmailTemplateTagMixin
 from openedx.core.djangoapps.site_configuration.tests.factories import SiteFactory
 from openedx.core.djangoapps.user_api.accounts import PRIVATE_VISIBILITY, USERNAME_MAX_LENGTH
 from openedx.core.djangoapps.user_api.accounts.api import (
@@ -60,7 +61,7 @@ def mock_render_to_string(template_name, context):
 
 @attr(shard=2)
 @skip_unless_lms
-class TestAccountApi(UserSettingsEventTestMixin, TestCase):
+class TestAccountApi(UserSettingsEventTestMixin, EmailTemplateTagMixin):
     """
     These tests specifically cover the parts of the API methods that are not covered by test_views.py.
     This includes the specific types of error raised, and default behavior when optional arguments
@@ -211,8 +212,10 @@ class TestAccountApi(UserSettingsEventTestMixin, TestCase):
             "name": "Mickey Mouse",
             "email": "seems_ok@sample.com"
         }
-        with self.assertRaises(AccountUpdateError) as context_manager:
-            update_account_settings(self.user, less_naughty_update)
+
+        with patch('crum.get_current_request', return_value=self.fake_request):
+            with self.assertRaises(AccountUpdateError) as context_manager:
+                update_account_settings(self.user, less_naughty_update)
         self.assertIn("Error thrown from do_email_change_request", context_manager.exception.developer_message)
 
         # Verify that the name change happened, even though the attempt to send the email failed.
@@ -225,6 +228,7 @@ class TestAccountApi(UserSettingsEventTestMixin, TestCase):
         Test that email address changes are rejected when ALLOW_EMAIL_ADDRESS_CHANGE is not set.
         """
         disabled_update = {"email": "valid@example.com"}
+
         with self.assertRaises(AccountUpdateError) as context_manager:
             update_account_settings(self.user, disabled_update)
         self.assertIn("Email address changes have been disabled", context_manager.exception.developer_message)

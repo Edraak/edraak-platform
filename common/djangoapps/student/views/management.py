@@ -19,6 +19,7 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.auth.views import password_reset_confirm
+from django.contrib.sites.models import Site
 from django.core import mail
 from django.urls import reverse
 from django.core.validators import ValidationError, validate_email
@@ -34,7 +35,9 @@ from django.utils.http import base36_to_int, urlsafe_base64_encode
 from django.utils.translation import get_language, ungettext
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
+from edx_ace import ace
+from edx_ace.recipient import Recipient
 from eventtracking import tracker
 from ipware.ip import get_ip
 # Note that this lives in LMS, so this dependency should be refactored.
@@ -58,6 +61,7 @@ from openedx.core.djangoapps import monitoring_utils
 from openedx.core.djangoapps.catalog.utils import (
     get_programs_with_type,
 )
+from openedx.core.djangoapps.ace_common.template_context import get_base_template_context
 from openedx.core.djangoapps.embargo import api as embargo_api
 from openedx.core.djangoapps.external_auth.login_and_register import register as external_auth_register
 from openedx.core.djangoapps.lang_pref import LANGUAGE_KEY
@@ -84,6 +88,7 @@ from student.helpers import (
     generate_activation_email_context,
     get_next_url_for_login_page
 )
+from student.message_types import EmailChange, PasswordReset
 from student.models import (
     CourseEnrollment,
     PasswordHistory,
@@ -1277,24 +1282,32 @@ def do_email_change_request(user, new_email, activation_key=None):
     pec.activation_key = activation_key
     pec.save()
 
-    context = {
-        'key': pec.activation_key,
+    use_https = theming_helpers.get_current_request().is_secure()
+
+    site = Site.objects.get_current()
+    message_context = get_base_template_context(site)
+    message_context.update({
         'old_email': user.email,
-        'new_email': pec.new_email
-    }
+        'new_email': pec.new_email,
+        'confirm_link': '{protocol}://{site}{link}'.format(
+            protocol='https' if use_https else 'http',
+            site=configuration_helpers.get_value('SITE_NAME', settings.SITE_NAME),
+            link=reverse('confirm_email_change', kwargs={
+                'key': pec.activation_key,
+            }),
+        ),
+    })
 
-    subject = render_to_string('emails/email_change_subject.txt', context)
-    subject = ''.join(subject.splitlines())
-
-    message = render_to_string('emails/email_change.txt', context)
-
-    from_address = configuration_helpers.get_value(
-        'email_from_address',
-        settings.DEFAULT_FROM_EMAIL
+    msg = EmailChange().personalize(
+        recipient=Recipient(user.username, pec.new_email),
+        language=preferences_api.get_user_preference(user, LANGUAGE_KEY),
+        user_context=message_context,
     )
+
     try:
-        mail.send_mail(subject, message, from_address, [pec.new_email])
+        ace.send(msg)
     except Exception:
+        from_address = configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
         log.error(u'Unable to send email activation link to user from "%s"', from_address, exc_info=True)
         raise ValueError(_('Unable to send email activation link. Please try again later.'))
 
@@ -1305,8 +1318,8 @@ def do_email_change_request(user, new_email, activation_key=None):
         SETTING_CHANGE_INITIATED,
         {
             "setting": "email",
-            "old": context['old_email'],
-            "new": context['new_email'],
+            "old": message_context['old_email'],
+            "new": message_context['new_email'],
             "user_id": user.id,
         }
     )
