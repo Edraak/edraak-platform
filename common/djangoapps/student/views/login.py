@@ -72,6 +72,7 @@ from student.models import (
     create_comments_service_user
 )
 from student.helpers import authenticate_new_user, do_create_account
+from student.views.management import compose_and_send_activation_email
 from third_party_auth import pipeline, provider
 from util.json_request import JsonResponse
 
@@ -253,7 +254,9 @@ def _log_and_raise_inactive_user_auth_error(unauthenticated_user):
             unauthenticated_user.username)
         )
 
-    send_reactivation_email_for_user(unauthenticated_user)
+    profile = UserProfile.objects.get(user=unauthenticated_user)
+    compose_and_send_activation_email(unauthenticated_user, profile)
+
     raise AuthFailedError(_generate_not_activated_message(unauthenticated_user))
 
 
