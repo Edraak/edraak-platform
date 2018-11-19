@@ -55,7 +55,9 @@ import openedx.core.djangoapps.external_auth.views
 import third_party_auth
 import track.views
 from course_modes.models import CourseMode
-from edxmako.shortcuts import render_to_response, render_to_string
+from edx_ace import ace
+from edx_ace.recipient import Recipient
+from edxmako.shortcuts import render_to_response, render_to_string, marketing_link
 from entitlements.models import CourseEntitlement
 from openedx.core.djangoapps import monitoring_utils
 from openedx.core.djangoapps.catalog.utils import (
@@ -88,7 +90,7 @@ from student.helpers import (
     generate_activation_email_context,
     get_next_url_for_login_page
 )
-from student.message_types import EmailChange, PasswordReset
+from student.message_types import EmailChange, EmailChangeConfirmation, PasswordReset, RecoveryEmailCreate
 from student.models import (
     CourseEnrollment,
     PasswordHistory,
@@ -141,8 +143,8 @@ def csrf_token(context):
     token = context.get('csrf_token', '')
     if token == 'NOTPROVIDED':
         return ''
-    return (u'<div style="display:none"><input type="hidden"'
-            ' name="csrfmiddlewaretoken" value="{}" /></div>'.format(token))
+    return (HTML(u'<div style="display:none"><input type="hidden"'
+                 ' name="csrfmiddlewaretoken" value="{}" /></div>').format(Text(token)))
 
 
 # NOTE: This view is not linked to directly--it is called from
@@ -1353,9 +1355,31 @@ def confirm_email_change(request, key):  # pylint: disable=unused-argument
             transaction.set_rollback(True)
             return response
 
-        subject = render_to_string('emails/email_change_subject.txt', address_context)
-        subject = ''.join(subject.splitlines())
-        message = render_to_string('emails/confirm_email_change.txt', address_context)
+        use_https = request.is_secure()
+        if settings.FEATURES['ENABLE_MKTG_SITE']:
+            contact_link = marketing_link('CONTACT')
+        else:
+            contact_link = '{protocol}://{site}{link}'.format(
+                protocol='https' if use_https else 'http',
+                site=configuration_helpers.get_value('SITE_NAME', settings.SITE_NAME),
+                link=reverse('contact'),
+            )
+
+        site = Site.objects.get_current()
+        message_context = get_base_template_context(site)
+        message_context.update({
+            'old_email': user.email,
+            'new_email': pec.new_email,
+            'contact_link': contact_link,
+            'from_address': configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL),
+        })
+
+        msg = EmailChangeConfirmation().personalize(
+            recipient=Recipient(user.username, user.email),
+            language=preferences_api.get_user_preference(user, LANGUAGE_KEY),
+            user_context=message_context,
+        )
+
         u_prof = UserProfile.objects.get(user=user)
         meta = u_prof.get_meta()
         if 'old_emails' not in meta:
@@ -1365,11 +1389,7 @@ def confirm_email_change(request, key):  # pylint: disable=unused-argument
         u_prof.save()
         # Send it to the old email...
         try:
-            user.email_user(
-                subject,
-                message,
-                configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
-            )
+            ace.send(msg)
         except Exception:    # pylint: disable=broad-except
             log.warning('Unable to send confirmation email to old address', exc_info=True)
             response = render_to_response("email_change_failed.html", {'email': user.email})
@@ -1380,12 +1400,9 @@ def confirm_email_change(request, key):  # pylint: disable=unused-argument
         user.save()
         pec.delete()
         # And send it to the new email...
+        msg.recipient = Recipient(user.username, pec.new_email)
         try:
-            user.email_user(
-                subject,
-                message,
-                configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
-            )
+            ace.send(msg)
         except Exception:  # pylint: disable=broad-except
             log.warning('Unable to send confirmation email to new address', exc_info=True)
             response = render_to_response("email_change_failed.html", {'email': pec.new_email})
