@@ -90,10 +90,6 @@ from lms.envs.common import (
     # django-debug-toolbar
     DEBUG_TOOLBAR_PATCH_SETTINGS,
     BLOCK_STRUCTURES_SETTINGS,
-
-    # File upload defaults
-    FILE_UPLOAD_STORAGE_BUCKET_NAME,
-    FILE_UPLOAD_STORAGE_PREFIX,
 )
 from path import Path as path
 from warnings import simplefilter
@@ -789,8 +785,6 @@ YOUTUBE = {
     # YouTube JavaScript API
     'API': 'https://www.youtube.com/iframe_api',
 
-    'TEST_TIMEOUT': 1500,
-
     # URL to get YouTube metadata
     'METADATA_URL': 'https://www.googleapis.com/youtube/v3/videos',
 
@@ -967,9 +961,6 @@ INSTALLED_APPS = (
 
     # management of user-triggered async tasks (course import/export, etc.)
     'user_tasks',
-
-    # Unusual migrations
-    'database_fixups',
 )
 
 
