@@ -2,7 +2,6 @@
 Utility functions for transcripts.
 ++++++++++++++++++++++++++++++++++
 """
-from django.conf import settings
 import os
 import copy
 import json
@@ -556,7 +555,7 @@ class VideoTranscriptsMixin(object):
     This is necessary for both VideoModule and VideoDescriptor.
     """
 
-    def available_translations(self, transcripts, verify_assets=None):
+    def available_translations(self, transcripts, verify_assets=True):
         """Return a list of language codes for which we have transcripts.
 
         Args:
@@ -566,16 +565,13 @@ class VideoTranscriptsMixin(object):
                 we might do this is to avoid slamming contentstore() with queries
                 when trying to make a listing of videos and their languages.
 
-                Defaults to `not FALLBACK_TO_ENGLISH_TRANSCRIPTS`.
+                Defaults to True.
 
             transcripts (dict): A dict with all transcripts and a sub.
 
                 Defaults to False
         """
         translations = []
-        if verify_assets is None:
-            verify_assets = not settings.FEATURES.get('FALLBACK_TO_ENGLISH_TRANSCRIPTS')
-
         sub, other_langs = transcripts["sub"], transcripts["transcripts"]
 
         # If we're not verifying the assets, we just trust our field values
