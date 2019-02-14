@@ -80,7 +80,6 @@ class SAMLMetadataTest(SAMLTestCase):
         self._validate_signed_metadata(pub_key_starts_with=pub_key_starts_with)
 
     def test_secure_key_configuration(self):
-        pass
         """ Test that the SAML private key can be stored in Django settings and not the DB """
         self.enable_saml(
             public_key='',
