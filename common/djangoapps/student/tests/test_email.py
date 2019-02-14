@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.core import mail
 from django.contrib.auth.models import User
 from django.db import transaction
-from django.test import override_settings, TestCase, TransactionTestCase
+from django.test import TestCase, TransactionTestCase
 from django.test.client import RequestFactory
 from mock import Mock, patch
 from django.http import HttpResponse
@@ -416,25 +416,6 @@ class EmailChangeConfirmationTests(EmailTestMixin, TransactionTestCase):
             User.objects.get(username=self.user.username).email
         )
         self.assertEquals(0, PendingEmailChange.objects.count())
-
-    @unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', "Test only valid in LMS")
-    @override_settings(MKTG_URLS={'ROOT': 'https://dummy-root', 'CONTACT': '/help/contact-us'})
-    def test_marketing_contact_link(self, _email_user):
-        context = {
-            'site': 'edx.org',
-            'old_email': 'old@example.com',
-            'new_email': 'new@example.com',
-        }
-
-        confirm_email_body = render_to_string('emails/confirm_email_change.txt', context)
-        # With marketing site disabled, should link to the LMS contact static page.
-        # The http(s) part was omitted keep the test focused.
-        self.assertIn('://edx.org/contact', confirm_email_body)
-
-        with patch.dict(settings.FEATURES, {'ENABLE_MKTG_SITE': True}):
-            # Marketing site enabled, should link to the marketing site contact page.
-            confirm_email_body = render_to_string('emails/confirm_email_change.txt', context)
-            self.assertIn('https://dummy-root/help/contact-us', confirm_email_body)
 
     @patch('student.views.PendingEmailChange.objects.get', Mock(side_effect=TestException))
     def test_always_rollback(self, _email_user):
