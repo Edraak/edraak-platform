@@ -188,22 +188,18 @@ class ResetPasswordTests(EventTestMixin, CacheIsolationTestCase):
             req = self.request_factory.post(
                 '/password_reset/', {'email': self.user.email}
             )
-            req.is_secure = Mock(return_value=True)
             req.get_host = Mock(return_value=domain_override)
             req.user = self.user
             password_reset(req)
             _, msg, _, _ = send_email.call_args[0]
 
-            reset_intro_msg = "you requested a password reset for your user account at {}".format(platform_name)
-            self.assertIn(reset_intro_msg, msg)
-
-            reset_link = "https://{}/"
+            reset_msg = "you requested a password reset for your user account at {}"
             if domain_override:
-                reset_link = reset_link.format(domain_override)
+                reset_msg = reset_msg.format(domain_override)
             else:
-                reset_link = reset_link.format(settings.SITE_NAME)
+                reset_msg = reset_msg.format(settings.SITE_NAME)
 
-            self.assertIn(reset_link, msg)
+            self.assertIn(reset_msg, msg)
 
             sign_off = "The {} Team".format(platform_name)
             self.assertIn(sign_off, msg)
@@ -228,7 +224,7 @@ class ResetPasswordTests(EventTestMixin, CacheIsolationTestCase):
         password_reset(req)
         _, msg, from_addr, _ = send_email.call_args[0]
 
-        reset_msg = "you requested a password reset for your user account at {}".format(fake_get_value('platform_name'))
+        reset_msg = "you requested a password reset for your user account at openedx.localhost"
 
         self.assertIn(reset_msg, msg)
 
