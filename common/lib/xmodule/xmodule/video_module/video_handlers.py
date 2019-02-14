@@ -275,7 +275,7 @@ class VideoStudentViewHandlers(object):
 
         elif dispatch.startswith('available_translations'):
 
-            available_translations = self.available_translations(transcripts, verify_assets=True)
+            available_translations = self.available_translations(transcripts)
             if available_translations:
                 response = Response(json.dumps(available_translations))
                 response.content_type = 'application/json'
