@@ -48,6 +48,8 @@ from lms.djangoapps.lms_xblock.mixin import LmsBlockMixin
 # The display name of the platform to be used in templates/emails/etc.
 PLATFORM_NAME = _('Edraak')
 CC_MERCHANT_NAME = PLATFORM_NAME
+# Shows up in the platform footer, eg "(c) COPYRIGHT_YEAR"
+COPYRIGHT_YEAR = "2017"
 
 PLATFORM_FACEBOOK_ACCOUNT = "http://www.facebook.com/YourPlatformFacebookAccount"
 PLATFORM_TWITTER_ACCOUNT = "@YourPlatformTwitterAccount"
