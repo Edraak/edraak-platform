@@ -8,6 +8,8 @@ from .aws import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 # Don't use S3 in devstack, fall back to filesystem
 del DEFAULT_FILE_STORAGE
+COURSE_IMPORT_EXPORT_STORAGE = 'django.core.files.storage.FileSystemStorage'
+USER_TASKS_ARTIFACT_STORAGE = COURSE_IMPORT_EXPORT_STORAGE
 MEDIA_ROOT = "/edx/var/edxapp/uploads"
 
 DEBUG = True
@@ -85,6 +87,7 @@ DEBUG_TOOLBAR_CONFIG = {
         'debug_toolbar.panels.profiling.ProfilingPanel',
     ),
     'SHOW_TOOLBAR_CALLBACK': 'cms.envs.devstack.should_show_debug_toolbar',
+    'JQUERY_URL': None,
 }
 
 
@@ -107,11 +110,7 @@ FEATURES['ENTRANCE_EXAMS'] = True
 ################################ COURSE LICENSES ################################
 FEATURES['LICENSING'] = True
 # Needed to enable licensing on video modules
-XBLOCK_SETTINGS = {
-    "VideoDescriptor": {
-        "licensing_enabled": True
-    }
-}
+XBLOCK_SETTINGS.update({'VideoDescriptor': {'licensing_enabled': True}})
 
 ################################ SEARCH INDEX ################################
 FEATURES['ENABLE_COURSEWARE_INDEX'] = True

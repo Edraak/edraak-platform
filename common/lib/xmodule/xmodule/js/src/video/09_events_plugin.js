@@ -94,6 +94,7 @@
                     new_time: time,
                     type: type
                 });
+                this.emitPlayVideoEvent = true;
             },
 
             onSpeedChange: function(event, newSpeed, oldSpeed) {
@@ -141,7 +142,8 @@
             log: function(eventName, data) {
                 var logInfo = _.extend({
                     id: this.state.id,
-                    code: this.state.isYoutubeType() ? this.state.youtubeId() : 'html5'
+                    // eslint-disable-next-line no-nested-ternary
+                    code: this.state.isYoutubeType() ? this.state.youtubeId() : this.state.canPlayHLS ? 'hls' : 'html5'
                 }, data, this.options.data);
                 Logger.log(eventName, logInfo);
             }

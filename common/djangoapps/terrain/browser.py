@@ -5,17 +5,18 @@ Browser set up for acceptance tests.
 # pylint: disable=no-member
 # pylint: disable=unused-argument
 
-from lettuce import before, after, world
-from splinter.browser import Browser
+from base64 import encodestring
+from json import dumps
 from logging import getLogger
-from django.core.management import call_command
+
+import requests
 from django.conf import settings
+from django.core.management import call_command
+from lettuce import after, before, world
 from selenium.common.exceptions import WebDriverException
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import requests
-from base64 import encodestring
-from json import dumps
+from splinter.browser import Browser
 from os import environ
 
 import xmodule.modulestore.django
@@ -290,10 +291,9 @@ def after_each_step(step):
 
 
 @after.harvest
-def teardown_browser(total):
+def saucelabs_status(total):
     """
-    Quit the browser after executing the tests.
+    Collect data for saucelabs.
     """
     if world.LETTUCE_SELENIUM_CLIENT == 'saucelabs':
         set_saucelabs_job_status(world.jobid, total.scenarios_ran == total.scenarios_passed)
-    world.browser.quit()

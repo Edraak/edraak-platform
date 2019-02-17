@@ -70,20 +70,24 @@
 
                 /* Edraak: Skip failing edX test
                 it('fetch the transcript in HTML5 mode', function(done) {
+                    var transcriptURL = '/transcript/translation/en',
+                        transcriptCall;
                     state = jasmine.initializePlayer();
 
                     jasmine.waitUntil(function() {
                         return state.videoCaption.loaded;
                     }).then(function() {
                         expect($.ajaxWithPrefix).toHaveBeenCalledWith({
-                            url: '/transcript/translation/en',
+                            url: transcriptURL,
                             notifyOnError: false,
                             data: void(0),
                             success: jasmine.any(Function),
                             error: jasmine.any(Function)
                         });
-                        expect($.ajaxWithPrefix.calls.mostRecent().args[0].data)
-                            .toBeUndefined();
+                        transcriptCall = $.ajaxWithPrefix.calls.all().find(function(call) {
+                            return call.args[0].url === transcriptURL;
+                        });
+                        expect(transcriptCall.args[0].data).toBeUndefined();
                     }).always(done);
                 });
                 */
@@ -988,9 +992,11 @@
                     videoWrapperHeight = $('.video-wrapper').height();
                     progressSliderHeight = state.el.find('.slider').height();
                     controlHeight = state.el.find('.video-controls').height();
-                    shouldBeHeight = videoWrapperHeight -
+                    shouldBeHeight = parseInt((
+                        videoWrapperHeight -
                         0.5 * progressSliderHeight -
-                        controlHeight;
+                        controlHeight
+                    ), 10);
 
                     expect(realHeight).toBe(shouldBeHeight);
                 });
