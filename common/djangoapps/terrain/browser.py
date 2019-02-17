@@ -19,7 +19,6 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from splinter.browser import Browser
 from os import environ
 
-import xmodule.modulestore.django
 from xmodule.contentstore.django import _CONTENTSTORE
 
 LOGGER = getLogger(__name__)
@@ -189,11 +188,12 @@ def clear_data(scenario):
 
 @after.each_scenario
 def reset_databases(scenario):
-    '''
+    """
     After each scenario, all databases are cleared/dropped.  Contentstore data are stored in unique databases
     whereas modulestore data is in unique collection names.  This data is created implicitly during the scenarios.
     If no data is created during the test, these lines equivilently do nothing.
-    '''
+    """
+    import xmodule.modulestore.django
     xmodule.modulestore.django.modulestore()._drop_database()  # pylint: disable=protected-access
     xmodule.modulestore.django.clear_existing_modulestores()
     _CONTENTSTORE.clear()
