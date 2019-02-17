@@ -7,10 +7,11 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from course_api.helpers import get_marketing_data, is_marketing_api_enabled
 from openedx.core.lib.api.paginators import NamespacedPageNumberPagination
-from openedx.core.lib.api.view_utils import view_auth_classes, DeveloperErrorViewMixin
+from openedx.core.lib.api.view_utils import DeveloperErrorViewMixin, view_auth_classes
+
 from .api import course_detail, list_courses
 from .forms import CourseDetailGetForm, CourseListGetForm
-from .serializers import CourseSerializer, CourseDetailSerializer, CourseDetailMarketingSerializer
+from .serializers import CourseDetailSerializer, CourseDetailMarketingSerializer, CourseSerializer
 
 
 @view_auth_classes(is_authenticated=False)

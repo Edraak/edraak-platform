@@ -2,19 +2,19 @@
 Tests for instructor_task/models.py.
 """
 import copy
-from cStringIO import StringIO
 import time
+from cStringIO import StringIO
 
 import boto
 from django.conf import settings
-from django.test import SimpleTestCase, override_settings, TestCase
+from django.test import SimpleTestCase, TestCase, override_settings
 from mock import patch
+from opaque_keys.edx.locator import CourseLocator
 from unittest import skip
 
 from common.test.utils import MockS3Mixin
 from lms.djangoapps.instructor_task.models import ReportStore
 from lms.djangoapps.instructor_task.tests.test_base import TestReportMixin
-from opaque_keys.edx.locator import CourseLocator
 
 
 class ReportStoreTestMixin(object):
