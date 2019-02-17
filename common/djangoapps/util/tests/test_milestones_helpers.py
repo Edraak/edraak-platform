@@ -7,15 +7,11 @@ from mock import patch
 
 from milestones.exceptions import InvalidCourseKeyException, InvalidUserException
 from util import milestones_helpers
-from django.conf import settings
-
-from milestones import api as milestones_api
-from milestones.models import MilestoneRelationshipType
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory
 
 
-@patch.dict(settings.FEATURES, {'MILESTONES_APP': False})
+@patch.dict('django.conf.settings.FEATURES', {'MILESTONES_APP': False})
 @ddt.ddt
 class MilestonesHelpersTestCase(ModuleStoreTestCase):
     """
@@ -37,14 +33,11 @@ class MilestonesHelpersTestCase(ModuleStoreTestCase):
 
         self.user = {'id': '123'}
 
-        self.milestone = milestones_api.add_milestone({
+        self.milestone = {
             'name': 'Test Milestone',
             'namespace': 'doesnt.matter',
             'description': 'Testing Milestones Helpers Library',
-        })
-
-        MilestoneRelationshipType.objects.get_or_create(name='requires')
-        MilestoneRelationshipType.objects.get_or_create(name='fulfills')
+        }
 
     @ddt.data(
         (False, False, False),
@@ -122,16 +115,13 @@ class MilestonesHelpersTestCase(ModuleStoreTestCase):
         response = milestones_helpers.get_service()
         self.assertIsNone(response)
 
-    @patch.dict(settings.FEATURES, {'MILESTONES_APP': True})
+    @patch.dict('django.conf.settings.FEATURES', {'MILESTONES_APP': True})
     def test_any_unfulfilled_milestones(self):
         """
-        Tests any_unfulfilled_milestones for invalid arguments with the app enabled.
-        """
-
-        # Should not raise any exceptions
-        milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user['id'])
-
+        Tests any_unfulfilled_milestones for invalid arguments with
+        the app enabled
+         """
         with self.assertRaises(InvalidCourseKeyException):
-            milestones_helpers.any_unfulfilled_milestones(None, self.user['id'])
+            milestones_helpers.any_unfulfilled_milestones(None, self.user)
         with self.assertRaises(InvalidUserException):
             milestones_helpers.any_unfulfilled_milestones(self.course.id, None)

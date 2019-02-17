@@ -239,9 +239,9 @@ LOGGING = get_logger_config(LOG_DIR,
                             service_variant=SERVICE_VARIANT)
 
 #theming start:
-PLATFORM_NAME = ENV_TOKENS.get('PLATFORM_NAME', PLATFORM_NAME)
-STUDIO_NAME = ENV_TOKENS.get('STUDIO_NAME', STUDIO_NAME)
-STUDIO_SHORT_NAME = ENV_TOKENS.get('STUDIO_SHORT_NAME', STUDIO_SHORT_NAME)
+PLATFORM_NAME = ENV_TOKENS.get('PLATFORM_NAME', 'edX')
+STUDIO_NAME = ENV_TOKENS.get('STUDIO_NAME', 'edX Studio')
+STUDIO_SHORT_NAME = ENV_TOKENS.get('STUDIO_SHORT_NAME', 'Studio')
 
 # Event Tracking
 if "TRACKING_IGNORE_URL_PATTERNS" in ENV_TOKENS:
@@ -265,9 +265,6 @@ if FEATURES.get('AUTH_USE_CAS'):
             CAS_ATTRIBUTE_CALLBACK['function']
         )
 
-# Specific setting for the File Upload Service to store media in a bucket.
-FILE_UPLOAD_STORAGE_BUCKET_NAME = ENV_TOKENS.get('FILE_UPLOAD_STORAGE_BUCKET_NAME', FILE_UPLOAD_STORAGE_BUCKET_NAME)
-FILE_UPLOAD_STORAGE_PREFIX = ENV_TOKENS.get('FILE_UPLOAD_STORAGE_PREFIX', FILE_UPLOAD_STORAGE_PREFIX)
 
 ################ SECURE AUTH ITEMS ###############################
 # Secret things: passwords, access keys, etc.

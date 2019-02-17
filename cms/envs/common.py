@@ -49,7 +49,7 @@ import lms.envs.common
 # Although this module itself may not use these imported variables, other dependent modules may.
 from lms.envs.common import (
     USE_TZ, TECH_SUPPORT_EMAIL, PLATFORM_NAME, BUGS_EMAIL, DOC_STORE_CONFIG, DATA_DIR, ALL_LANGUAGES, WIKI_ENABLED,
-    update_module_store_settings, ASSET_IGNORE_REGEX,
+    update_module_store_settings, ASSET_IGNORE_REGEX, COPYRIGHT_YEAR,
     PARENTAL_CONSENT_AGE_LIMIT, COMPREHENSIVE_THEME_DIRS, REGISTRATION_EMAIL_PATTERNS_ALLOWED,
     # The following PROFILE_IMAGE_* settings are included as they are
     # indirectly accessed through the email opt-in API, which is
@@ -60,9 +60,6 @@ from lms.envs.common import (
     # display credit eligibility table on the CMS or not.
     ENABLE_CREDIT_ELIGIBILITY, YOUTUBE_API_KEY,
     DEFAULT_COURSE_ABOUT_IMAGE_URL,
-
-    # Lazy Gettext
-    _,
 
     # Django REST framework configuration
     REST_FRAMEWORK,
@@ -84,16 +81,9 @@ from lms.envs.common import (
 
     JWT_AUTH,
 
-    USERNAME_REGEX_PARTIAL,
-    USERNAME_PATTERN,
-
     # django-debug-toolbar
     DEBUG_TOOLBAR_PATCH_SETTINGS,
     BLOCK_STRUCTURES_SETTINGS,
-
-    # File upload defaults
-    FILE_UPLOAD_STORAGE_BUCKET_NAME,
-    FILE_UPLOAD_STORAGE_PREFIX,
 )
 from path import Path as path
 from warnings import simplefilter
@@ -110,8 +100,8 @@ from xmodule.mixin import LicenseMixin
 # Dummy secret key for dev/test
 SECRET_KEY = 'dev key'
 
-STUDIO_NAME = _("Edraak Studio")
-STUDIO_SHORT_NAME = _("Studio")
+STUDIO_NAME = "Studio"
+STUDIO_SHORT_NAME = "Studio"
 FEATURES = {
     'GITHUB_PUSH': False,
 
@@ -225,11 +215,6 @@ FEATURES = {
 
     # Show Language selector
     'SHOW_LANGUAGE_SELECTOR': False,
-
-    # At edX it's safe to assume that English transcripts are always available
-    # This is not the case for all installations.
-    # The default value in {lms,cms}/envs/common.py and xmodule/tests/test_video.py should be consistent.
-    'FALLBACK_TO_ENGLISH_TRANSCRIPTS': True,
 
     # Set this to False to facilitate cleaning up invalid xml from your modulestore.
     'ENABLE_XBLOCK_XML_VALIDATION': True,
@@ -789,8 +774,6 @@ YOUTUBE = {
     # YouTube JavaScript API
     'API': 'https://www.youtube.com/iframe_api',
 
-    'TEST_TIMEOUT': 1500,
-
     # URL to get YouTube metadata
     'METADATA_URL': 'https://www.googleapis.com/youtube/v3/videos',
 
@@ -967,9 +950,6 @@ INSTALLED_APPS = (
 
     # management of user-triggered async tasks (course import/export, etc.)
     'user_tasks',
-
-    # Unusual migrations
-    'database_fixups',
 )
 
 
@@ -1222,6 +1202,8 @@ OAUTH_OIDC_ISSUER = 'https://www.example.com/oauth2'
 
 # 5 minute expiration time for JWT id tokens issued for external API requests.
 OAUTH_ID_TOKEN_EXPIRATION = 5 * 60
+
+USERNAME_PATTERN = r'(?P<username>[\w.@+-]+)'
 
 # Partner support link for CMS footer
 PARTNER_SUPPORT_EMAIL = ''

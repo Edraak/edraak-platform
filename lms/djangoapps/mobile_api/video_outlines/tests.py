@@ -8,15 +8,13 @@ from uuid import uuid4
 from collections import namedtuple
 
 import ddt
-from django.conf import settings
+from nose.plugins.attrib import attr
 from edxval import api
 from xmodule.modulestore.tests.factories import ItemFactory
 from xmodule.video_module import transcripts_utils
 from xmodule.modulestore.django import modulestore
 from xmodule.partitions.partitions import Group, UserPartition
 from milestones.tests.utils import MilestonesTestCaseMixin
-from mock import patch
-from nose.plugins.attrib import attr
 
 from mobile_api.models import MobileApiConfig
 from openedx.core.djangoapps.course_groups.tests.helpers import CohortFactory
@@ -516,16 +514,6 @@ class TestVideoSummaryList(TestVideoAPITestCase, MobileAuthTestMixin, MobileCour
             },
             'size': 111
         }
-
-        # The transcript was not entered, so it should not be found!
-        # This is the default behaviour at courses.edX.org, based on `FALLBACK_TO_ENGLISH_TRANSCRIPTS`
-        transcripts_response = self.client.get(expected_output['transcripts']['en'])
-        self.assertEqual(404, transcripts_response.status_code)
-
-        with patch.dict(settings.FEATURES, FALLBACK_TO_ENGLISH_TRANSCRIPTS=False):
-            # Other platform installations may override this setting
-            # This ensures that the server don't return empty English transcripts when there's none!
-            self.assertFalse(self.api_response().data[0]['summary'].get('transcripts'))
 
         # Testing when video_profiles='mobile_low,mobile_high,youtube'
         course_outline = self.api_response().data

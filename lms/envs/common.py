@@ -46,8 +46,10 @@ from lms.djangoapps.lms_xblock.mixin import LmsBlockMixin
 
 ################################### FEATURES ###################################
 # The display name of the platform to be used in templates/emails/etc.
-PLATFORM_NAME = _('Edraak')
+PLATFORM_NAME = "Your Platform Name Here"
 CC_MERCHANT_NAME = PLATFORM_NAME
+# Shows up in the platform footer, eg "(c) COPYRIGHT_YEAR"
+COPYRIGHT_YEAR = "2017"
 
 PLATFORM_FACEBOOK_ACCOUNT = "http://www.facebook.com/YourPlatformFacebookAccount"
 PLATFORM_TWITTER_ACCOUNT = "@YourPlatformTwitterAccount"
@@ -350,11 +352,6 @@ FEATURES = {
     # Show Language selector.
     'SHOW_LANGUAGE_SELECTOR': False,
 
-    # At edX it's safe to assume that English transcripts are always available
-    # This is not the case for all installations.
-    # The default value in {lms,cms}/envs/common.py and xmodule/tests/test_video.py should be consistent.
-    'FALLBACK_TO_ENGLISH_TRANSCRIPTS': True,
-
     # Write new CSM history to the extended table.
     # This will eventually default to True and may be
     # removed since all installs should have the separate
@@ -613,13 +610,7 @@ USAGE_KEY_PATTERN = r'(?P<usage_key_string>(?:i4x://?[^/]+/[^/]+/[^/]+/[^@]+(?:@
 ASSET_KEY_PATTERN = r'(?P<asset_key_string>(?:/?c4x(:/)?/[^/]+/[^/]+/[^/]+/[^@]+(?:@[^/]+)?)|(?:[^/]+))'
 USAGE_ID_PATTERN = r'(?P<usage_id>(?:i4x://?[^/]+/[^/]+/[^/]+/[^@]+(?:@[^/]+)?)|(?:[^/]+))'
 
-
-# The space is required for space-dependent languages like Arabic and Farsi.
-# However, backward compatibility with Ficus older releases is still maintained (space is still not valid)
-# in the AccountCreationForm and the user_api through the ENABLE_UNICODE_USERNAME feature flag.
-USERNAME_REGEX_PARTIAL = r'[\w .@_+-]+'
-USERNAME_PATTERN = r'(?P<username>{regex})'.format(regex=USERNAME_REGEX_PARTIAL)
-
+USERNAME_PATTERN = r'(?P<username>[\w.@+-]+)'
 
 ############################## EVENT TRACKING #################################
 LMS_SEGMENT_KEY = None
@@ -1898,8 +1889,6 @@ YOUTUBE = {
     # YouTube JavaScript API
     'API': 'https://www.youtube.com/iframe_api',
 
-    'TEST_TIMEOUT': 1500,
-
     # URL to get YouTube metadata
     'METADATA_URL': 'https://www.googleapis.com/youtube/v3/videos/',
 
@@ -2170,9 +2159,6 @@ INSTALLED_APPS = (
 
     # additional release utilities to ease automation
     'release_util',
-
-    # Unusual migrations
-    'database_fixups',
 )
 
 # Migrations which are not in the standard module "migrations"
@@ -2719,7 +2705,7 @@ OPENID_DOMAIN_PREFIX = 'openid:'
 ANALYTICS_DATA_URL = ""
 ANALYTICS_DATA_TOKEN = ""
 ANALYTICS_DASHBOARD_URL = ""
-ANALYTICS_DASHBOARD_NAME = _('Edraak Insights')
+ANALYTICS_DASHBOARD_NAME = PLATFORM_NAME + " Insights"
 
 # REGISTRATION CODES DISPLAY INFORMATION SUBTITUTIONS IN THE INVOICE ATTACHMENT
 INVOICE_CORP_ADDRESS = "Please place your corporate address\nin this configuration"

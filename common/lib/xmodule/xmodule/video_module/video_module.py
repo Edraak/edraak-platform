@@ -315,7 +315,11 @@ class VideoModule(VideoFields, VideoTranscriptsMixin, VideoStudentViewHandlers, 
             'end': self.end_time.total_seconds(),
             'transcriptLanguage': transcript_language,
             'transcriptLanguages': sorted_languages,
-            'ytTestTimeout': settings.YOUTUBE['TEST_TIMEOUT'],
+
+            # TODO: Later on the value 1500 should be taken from some global
+            # configuration setting field.
+            'ytTestTimeout': 1500,
+
             'ytApiUrl': settings.YOUTUBE['API'],
             'ytMetadataUrl': settings.YOUTUBE['METADATA_URL'],
             'ytKey': yt_api_key,
@@ -938,7 +942,7 @@ class VideoDescriptor(VideoFields, VideoTranscriptsMixin, VideoStudioViewHandler
         transcripts_info = self.get_transcripts_info()
         transcripts = {
             lang: self.runtime.handler_url(self, 'transcript', 'download', query="lang=" + lang, thirdparty=True)
-            for lang in self.available_translations(transcripts_info)
+            for lang in self.available_translations(transcripts_info, verify_assets=False)
         }
 
         return {
