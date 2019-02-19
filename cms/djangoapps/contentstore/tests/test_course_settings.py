@@ -10,18 +10,19 @@ import ddt
 import mock
 from django.conf import settings
 from django.test.utils import override_settings
-from django.utils.timezone import UTC
+from pytz import UTC
 from milestones.tests.utils import MilestonesTestCaseMixin
 from mock import Mock, patch
 
 from contentstore.utils import reverse_course_url, reverse_usage_url
+from milestones.models import MilestoneRelationshipType
 from models.settings.course_grading import CourseGradingModel, GRADING_POLICY_CHANGED_EVENT_TYPE, hash_grading_policy
 from models.settings.course_metadata import CourseMetadata
 from models.settings.encoder import CourseSettingsEncoder
 from openedx.core.djangoapps.models.course_details import CourseDetails
-from openedx.core.djangoapps.self_paced.models import SelfPacedConfiguration
 from student.roles import CourseInstructorRole, CourseStaffRole
 from student.tests.factories import UserFactory
+from util import milestones_helpers
 from xblock_django.models import XBlockStudioConfigurationFlag
 from xmodule.fields import Date
 from xmodule.modulestore import ModuleStoreEnum
@@ -40,6 +41,8 @@ class CourseSettingsEncoderTest(CourseTestCase):
     """
     Tests for CourseSettingsEncoder.
     """
+    shard = 1
+
     def test_encoder(self):
         details = CourseDetails.fetch(self.course.id)
         jsondetails = json.dumps(details, cls=CourseSettingsEncoder)
@@ -59,7 +62,7 @@ class CourseSettingsEncoderTest(CourseTestCase):
         doesn't work for these dates.
         """
         details = CourseDetails.fetch(self.course.id)
-        pre_1900 = datetime.datetime(1564, 4, 23, 1, 1, 1, tzinfo=UTC())
+        pre_1900 = datetime.datetime(1564, 4, 23, 1, 1, 1, tzinfo=UTC)
         details.enrollment_start = pre_1900
         dumped_jsondetails = json.dumps(details, cls=CourseSettingsEncoder)
         loaded_jsondetails = json.loads(dumped_jsondetails)
@@ -72,7 +75,7 @@ class CourseSettingsEncoderTest(CourseTestCase):
         details = {
             'number': 1,
             'string': 'string',
-            'datetime': datetime.datetime.now(UTC())
+            'datetime': datetime.datetime.now(UTC)
         }
         jsondetails = json.dumps(details, cls=CourseSettingsEncoder)
         jsondetails = json.loads(jsondetails)
@@ -86,6 +89,8 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
     """
     Tests for modifying content on the first course settings page (course dates, overview, etc.).
     """
+    shard = 1
+
     def alter_field(self, url, details, field, val):
         """
         Change the one field to the given value and then invoke the update post to see if it worked.
@@ -100,6 +105,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         resp = self.client.ajax_post(url, payload)
         self.compare_details_with_encoding(json.loads(resp.content), details.__dict__, field + str(val))
 
+        MilestoneRelationshipType.objects.get_or_create(name='requires')
+        MilestoneRelationshipType.objects.get_or_create(name='fulfills')
+
     @staticmethod
     def convert_datetime_to_iso(datetime_obj):
         """
@@ -108,7 +116,6 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         return Date().to_json(datetime_obj)
 
     def test_update_and_fetch(self):
-        SelfPacedConfiguration(enabled=True).save()
         details = CourseDetails.fetch(self.course.id)
 
         # resp s/b json from here on
@@ -116,14 +123,14 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         resp = self.client.get_json(url)
         self.compare_details_with_encoding(json.loads(resp.content), details.__dict__, "virgin get")
 
-        utc = UTC()
-        self.alter_field(url, details, 'start_date', datetime.datetime(2012, 11, 12, 1, 30, tzinfo=utc))
-        self.alter_field(url, details, 'start_date', datetime.datetime(2012, 11, 1, 13, 30, tzinfo=utc))
-        self.alter_field(url, details, 'end_date', datetime.datetime(2013, 2, 12, 1, 30, tzinfo=utc))
-        self.alter_field(url, details, 'enrollment_start', datetime.datetime(2012, 10, 12, 1, 30, tzinfo=utc))
+        self.alter_field(url, details, 'start_date', datetime.datetime(2012, 11, 12, 1, 30, tzinfo=UTC))
+        self.alter_field(url, details, 'start_date', datetime.datetime(2012, 11, 1, 13, 30, tzinfo=UTC))
+        self.alter_field(url, details, 'end_date', datetime.datetime(2013, 2, 12, 1, 30, tzinfo=UTC))
+        self.alter_field(url, details, 'enrollment_start', datetime.datetime(2012, 10, 12, 1, 30, tzinfo=UTC))
 
-        self.alter_field(url, details, 'enrollment_end', datetime.datetime(2012, 11, 15, 1, 30, tzinfo=utc))
+        self.alter_field(url, details, 'enrollment_end', datetime.datetime(2012, 11, 15, 1, 30, tzinfo=UTC))
         self.alter_field(url, details, 'short_description', "Short Description")
+        self.alter_field(url, details, 'about_sidebar_html', "About Sidebar HTML")
         self.alter_field(url, details, 'overview', "Overview")
         self.alter_field(url, details, 'intro_video', "intro_video")
         self.alter_field(url, details, 'effort', "effort")
@@ -141,6 +148,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         self.compare_date_fields(details, encoded, context, 'enrollment_end')
         self.assertEqual(
             details['short_description'], encoded['short_description'], context + " short_description not =="
+        )
+        self.assertEqual(
+            details['about_sidebar_html'], encoded['about_sidebar_html'], context + " about_sidebar_html not =="
         )
         self.assertEqual(details['overview'], encoded['overview'], context + " overviews not ==")
         self.assertEqual(details['intro_video'], encoded.get('intro_video', None), context + " intro_video not ==")
@@ -172,6 +182,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
 
     @mock.patch.dict("django.conf.settings.FEATURES", {'ENABLE_PREREQUISITE_COURSES': True})
     def test_pre_requisite_course_update_and_fetch(self):
+        self.assertFalse(milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user.id),
+                         msg='The initial empty state should be: no prerequisite courses')
+
         url = get_url(self.course.id)
         resp = self.client.get_json(url)
         course_detail_json = json.loads(resp.content)
@@ -190,12 +203,18 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         course_detail_json = json.loads(resp.content)
         self.assertEqual(pre_requisite_course_keys, course_detail_json['pre_requisite_courses'])
 
+        self.assertTrue(milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user.id),
+                        msg='Should have prerequisite courses')
+
         # remove pre requisite course
         course_detail_json['pre_requisite_courses'] = []
         self.client.ajax_post(url, course_detail_json)
         resp = self.client.get_json(url)
         course_detail_json = json.loads(resp.content)
         self.assertEqual([], course_detail_json['pre_requisite_courses'])
+
+        self.assertFalse(milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user.id),
+                         msg='Should not have prerequisite courses anymore')
 
     @mock.patch.dict("django.conf.settings.FEATURES", {'ENABLE_PREREQUISITE_COURSES': True})
     def test_invalid_pre_requisite_course(self):
@@ -251,11 +270,11 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
             self.assertContains(response, "Course End Date")
             self.assertContains(response, "Enrollment Start Date")
             self.assertContains(response, "Enrollment End Date")
-            self.assertContains(response, "not the dates shown on your course summary page")
 
             self.assertContains(response, "Introducing Your Course")
             self.assertContains(response, "Course Card Image")
             self.assertContains(response, "Course Short Description")
+            self.assertNotContains(response, "Course About Sidebar HTML")
             self.assertNotContains(response, "Course Title")
             self.assertNotContains(response, "Course Subtitle")
             self.assertNotContains(response, "Course Duration")
@@ -268,6 +287,14 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
 
     @unittest.skipUnless(settings.FEATURES.get('ENTRANCE_EXAMS', False), True)
     def test_entrance_exam_created_updated_and_deleted_successfully(self):
+        """
+        This tests both of the entrance exam settings and the `any_unfulfilled_milestones` helper.
+
+        Splitting the test requires significant refactoring `settings_handler()` view.
+        """
+        self.assertFalse(milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user.id),
+                         msg='The initial empty state should be: no entrance exam')
+
         settings_details_url = get_url(self.course.id)
         data = {
             'entrance_exam_enabled': 'true',
@@ -276,7 +303,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
             'short_description': 'empty',
             'overview': '',
             'effort': '',
-            'intro_video': ''
+            'intro_video': '',
+            'start_date': '2012-01-01',
+            'end_date': '2012-12-31',
         }
         response = self.client.post(settings_details_url, data=json.dumps(data), content_type='application/json',
                                     HTTP_ACCEPT='application/json')
@@ -299,6 +328,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         self.assertTrue(course.entrance_exam_enabled)
         self.assertEquals(course.entrance_exam_minimum_score_pct, .80)
 
+        self.assertTrue(milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user.id),
+                        msg='The entrance exam should be required.')
+
         # Delete the entrance exam
         data['entrance_exam_enabled'] = "false"
         response = self.client.post(
@@ -311,6 +343,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
         self.assertEquals(response.status_code, 200)
         self.assertFalse(course.entrance_exam_enabled)
         self.assertEquals(course.entrance_exam_minimum_score_pct, None)
+
+        self.assertFalse(milestones_helpers.any_unfulfilled_milestones(self.course.id, self.user.id),
+                         msg='The entrance exam should not be required anymore')
 
     @unittest.skipUnless(settings.FEATURES.get('ENTRANCE_EXAMS', False), True)
     def test_entrance_exam_store_default_min_score(self):
@@ -325,7 +360,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
             'short_description': 'empty',
             'overview': '',
             'effort': '',
-            'intro_video': ''
+            'intro_video': '',
+            'start_date': '2012-01-01',
+            'end_date': '2012-12-31',
         }
         response = self.client.post(
             settings_details_url,
@@ -348,7 +385,9 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
             'short_description': 'empty',
             'overview': '',
             'effort': '',
-            'intro_video': ''
+            'intro_video': '',
+            'start_date': '2012-01-01',
+            'end_date': '2012-12-31',
         }
 
         response = self.client.post(
@@ -383,7 +422,6 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
             self.assertContains(response, "Course End Date")
             self.assertContains(response, "Enrollment Start Date")
             self.assertContains(response, "Enrollment End Date")
-            self.assertNotContains(response, "not the dates shown on your course summary page")
 
             self.assertContains(response, "Introducing Your Course")
             self.assertContains(response, "Course Card Image")
@@ -392,6 +430,7 @@ class CourseDetailsViewTest(CourseTestCase, MilestonesTestCaseMixin):
             self.assertContains(response, "Course Duration")
             self.assertContains(response, "Course Description")
             self.assertContains(response, "Course Short Description")
+            self.assertNotContains(response, "Course About Sidebar HTML")
             self.assertContains(response, "Course Overview")
             self.assertContains(response, "Course Introduction Video")
             self.assertContains(response, "Requirements")
@@ -404,6 +443,8 @@ class CourseGradingTest(CourseTestCase):
     """
     Tests for the course settings grading page.
     """
+    shard = 1
+
     def test_initial_grader(self):
         test_grader = CourseGradingModel(self.course)
         self.assertIsNotNone(test_grader.graders)
@@ -455,11 +496,11 @@ class CourseGradingTest(CourseTestCase):
 
         # one for each of the calls to update_from_json()
         send_signal.assert_has_calls([
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
         ])
 
         # one for each of the calls to update_from_json(); the last update doesn't actually change the parts of the
@@ -505,9 +546,9 @@ class CourseGradingTest(CourseTestCase):
 
         # one for each of the calls to update_grader_from_json()
         send_signal.assert_has_calls([
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
         ])
 
         # one for each of the calls to update_grader_from_json()
@@ -620,8 +661,8 @@ class CourseGradingTest(CourseTestCase):
 
         # one for each call to update_section_grader_type()
         send_signal.assert_has_calls([
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
         ])
 
         tracker.emit.assert_has_calls([
@@ -698,9 +739,9 @@ class CourseGradingTest(CourseTestCase):
         self.assertNotIn(original_model['graders'][1], updated_model['graders'])
         send_signal.assert_has_calls([
             # once for the POST
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
             # once for the DELETE
-            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_id=self.course.id),
+            mock.call(sender=CourseGradingModel, user_id=self.user.id, course_key=self.course.id),
         ])
 
     def setup_test_set_get_section_grader_ajax(self):
@@ -738,6 +779,8 @@ class CourseMetadataEditingTest(CourseTestCase):
     """
     Tests for CourseMetadata.
     """
+    shard = 1
+
     def setUp(self):
         CourseTestCase.setUp(self)
         self.fullcourse = CourseFactory.create()
@@ -1127,6 +1170,8 @@ class CourseGraderUpdatesTest(CourseTestCase):
     """
     Test getting, deleting, adding, & updating graders
     """
+    shard = 1
+
     def setUp(self):
         """Compute the url to use in tests"""
         super(CourseGraderUpdatesTest, self).setUp()
@@ -1192,6 +1237,8 @@ class CourseEnrollmentEndFieldTest(CourseTestCase):
     Base class to test the enrollment end fields in the course settings details view in Studio
     when using marketing site flag and global vs non-global staff to access the page.
     """
+    shard = 1
+
     NOT_EDITABLE_HELPER_MESSAGE = "Contact your edX partner manager to update these settings."
     NOT_EDITABLE_DATE_WRAPPER = "<div class=\"field date is-not-editable\" id=\"field-enrollment-end-date\">"
     NOT_EDITABLE_TIME_WRAPPER = "<div class=\"field time is-not-editable\" id=\"field-enrollment-end-time\">"
