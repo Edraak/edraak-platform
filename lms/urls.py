@@ -190,12 +190,6 @@ if settings.FEATURES.get('EDRAAK_UNIVERSITY_APP'):
         url(r'^university/', include('edraak_university.urls', namespace='edraak_university')),
     ]
 
-import edraak_certificates.utils  # nopep8
-if edraak_certificates.utils.is_certificates_feature_enabled():
-    urlpatterns += [
-        url(r'^certificates/', include('edraak_certificates.urls', namespace='edraak_certificates')),
-    ]
-
 urlpatterns += [
     url(r'^support/', include('support.urls')),
 ]

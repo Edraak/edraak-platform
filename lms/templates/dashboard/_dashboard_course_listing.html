@@ -164,7 +164,7 @@ from util.course import get_link_for_about_page, get_encoded_course_sharing_utm_
             % endif
         </div>
         <div class="wrapper-course-actions">
-          <div class="course-actions ${'course-actions-with-edraak-certificates' if edraak_certificates.utils.show_dashboard_button(user, course_overview) else ''}">
+          <div class="course-actions">
             % if show_courseware_link or is_unfulfilled_entitlement:
               % if course_overview.has_ended():
                 % if not is_course_blocked:
@@ -361,10 +361,8 @@ from util.course import get_link_for_about_page, get_encoded_course_sharing_utm_
         </div>
       % endif
 
-      % if not edraak_certificates.utils.show_dashboard_button(user, course_overview):
-        % if cert_status:
-          <%include file='_dashboard_certificate_information.html' args='cert_status=cert_status,course_overview=course_overview, enrollment=enrollment, reverify_link=reverify_link'/>
-        % endif
+      % if cert_status:
+        <%include file='_dashboard_certificate_information.html' args='cert_status=cert_status,course_overview=course_overview, enrollment=enrollment, reverify_link=reverify_link'/>
       % endif
 
       % if credit_status is not None:

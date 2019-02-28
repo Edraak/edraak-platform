@@ -669,10 +669,6 @@ if FEATURES.get('EDRAAK_UNIVERSITY_APP'):
     INSTALLED_APPS += ('edraak_university',)
 
 
-if FEATURES.get('EDRAAK_CERTIFICATES_APP') and FEATURES.get('ORGANIZATIONS_APP'):
-    INSTALLED_APPS += ('edraak_certificates',)
-
-
 if FEATURES.get('EDRAAK_FORUS_APP'):
     INSTALLED_APPS += ('edraak_forus',)
 

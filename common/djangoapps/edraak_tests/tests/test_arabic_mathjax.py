@@ -9,7 +9,7 @@ import requests
 from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
 
 
-class ArabicMathJaxExtensionTestCase(ModuleStoreLoggedInTestCase):
+class ArabicMathJaxExtensionTest(ModuleStoreLoggedInTestCase):
     """
     Sanity checks for the MathJax Arabic extension.
     """

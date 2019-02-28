@@ -586,9 +586,6 @@ INSTALLED_APPS += ('edraak_forus',)
 FORUS_AUTH_SECRET_KEY = 'dummy_auth_secret_key'
 FORUS_BASE_URL = 'http://forus.jo'
 
-FEATURES['EDRAAK_CERTIFICATES_APP'] = True
-FEATURES['EDRAAK_CERTIFICATES_DASHBOARD_BUTTON'] = False
-INSTALLED_APPS += ('edraak_certificates',)
 
 FEATURES['EDRAAK_UNIVERSITY_APP'] = True
 INSTALLED_APPS += ('edraak_university',)
