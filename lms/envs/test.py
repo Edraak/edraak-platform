@@ -579,13 +579,6 @@ INSTALLED_APPS += (
 
 MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
 
-FEATURES['EDRAAK_FORUS_APP'] = True
-INSTALLED_APPS += ('edraak_forus',)
-
-# Use dummy ForUs secret key
-FORUS_AUTH_SECRET_KEY = 'dummy_auth_secret_key'
-FORUS_BASE_URL = 'http://forus.jo'
-
 FEATURES['EDRAAK_CERTIFICATES_APP'] = True
 FEATURES['EDRAAK_CERTIFICATES_DASHBOARD_BUTTON'] = False
 INSTALLED_APPS += ('edraak_certificates',)

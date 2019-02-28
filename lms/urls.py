@@ -180,11 +180,6 @@ if settings.FEATURES.get('ENABLE_SYSADMIN_DASHBOARD'):
         url(r'^sysadmin/', include('dashboard.sysadmin_urls')),
     ]
 
-if settings.FEATURES.get("EDRAAK_FORUS_APP"):
-    urlpatterns += [
-        url(r'^forus/v1/', include('edraak_forus.urls', namespace='forus_v1')),
-    ]
-
 if settings.FEATURES.get('EDRAAK_UNIVERSITY_APP'):
     urlpatterns += [
         url(r'^university/', include('edraak_university.urls', namespace='edraak_university')),
