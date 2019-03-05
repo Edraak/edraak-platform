@@ -1,14 +1,13 @@
 """
 URLs for the Edraak University ID app.
 """
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.conf import settings
 
 from edraak_university import views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(
         r'^id/{}$'.format(settings.COURSE_ID_PATTERN),
         views.UniversityIDView.as_view(),
@@ -39,4 +38,4 @@ urlpatterns = patterns(
         views.UniversityIDDeleteView.as_view(),
         name='id_delete',
     ),
-)
+]

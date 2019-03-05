@@ -10,6 +10,7 @@ from time import time
 
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from lazy import lazy
 from opaque_keys.edx.keys import UsageKey
 from pytz import UTC
@@ -34,6 +35,9 @@ from student.roles import BulkRoleCache
 from xmodule.modulestore.django import modulestore
 from xmodule.partitions.partitions_service import PartitionService
 from xmodule.split_test_module import get_split_user_partitions
+
+from edraak_university.helpers import is_csv_export_enabled_on_course
+from edraak_university.models import UniversityID
 
 from .runner import TaskProgress
 from .utils import upload_csv_to_report_store
@@ -233,6 +237,7 @@ class CourseGradeReport(object):
             (['Cohort Name'] if context.cohorts_enabled else []) +
             [u'Experiment Group ({})'.format(partition.name) for partition in context.course_experiments] +
             (['Team Name'] if context.teams_enabled else []) +
+            (['Full Name', 'University ID'] if is_csv_export_enabled_on_course(context.course) else []) +
             ['Enrollment Track', 'Verification Status'] +
             ['Certificate Eligible', 'Certificate Delivered', 'Certificate Type'] +
             ['Enrollment Status']
@@ -397,6 +402,27 @@ class CourseGradeReport(object):
         )
         return [enrollment_mode, verification_status]
 
+    def _user_edraak_university_id(self, user, context):
+        """
+        Return the Edraak customized additional grade report cells for a student.
+        """
+
+        edraak_university_data = []
+        if is_csv_export_enabled_on_course(context.course):
+            try:
+                user_profile = user.profile
+                edraak_university_data.append(user_profile.name)
+            except ObjectDoesNotExist:
+                edraak_university_data.append('N/A')
+
+            try:
+                university_id = UniversityID.objects.get(user=user, course_key=context.course_id)
+                edraak_university_data.append(university_id.university_id)
+            except UniversityID.DoesNotExist:
+                edraak_university_data.append('N/A')
+
+        return edraak_university_data
+
     def _user_certificate_info(self, user, context, course_grade, bulk_certs):
         """
         Returns the course certification information for the given user.
@@ -448,6 +474,7 @@ class CourseGradeReport(object):
                         self._user_cohort_group_names(user, context) +
                         self._user_experiment_group_names(user, context) +
                         self._user_team_names(user, bulk_context.teams) +
+                        self._user_edraak_university_id(user, context) +
                         self._user_verification_mode(user, context, bulk_context.enrollments) +
                         self._user_certificate_info(user, context, course_grade, bulk_context.certs) +
                         [_user_enrollment_status(user, context.course_id)]

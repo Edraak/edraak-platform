@@ -105,6 +105,8 @@ from xmodule.modulestore.exceptions import ItemNotFoundError, NoPathToItem
 from xmodule.tabs import CourseTabList
 from xmodule.x_module import STUDENT_VIEW
 
+from lms.djangoapps.edraak_university.helpers import university_id_is_required
+
 from ..entrance_exams import user_can_skip_entrance_exam
 from ..module_render import get_module, get_module_by_usage_id, get_module_for_descriptor
 
@@ -337,7 +339,7 @@ def course_info(request, course_id):
         # LEARNER-612: CCX redirect handled by new Course Home (DONE)
         # LEARNER-1697: Transition banner messages to new Course Home (DONE)
         # If the user has to have a valid university ID before continuing to the course.
-        if not staff_access and university_id_is_required(request.user, course):
+        if university_id_is_required(request.user, course):
             return redirect(reverse('edraak_university:id', args=[unicode(course.id)]))
 
         # if user is not enrolled in a course then app will show enroll/get register link inside course info page.
@@ -499,6 +501,9 @@ class CourseTabView(EdxFragmentView):
         with modulestore().bulk_operations(course_key):
             course = get_course_with_access(request.user, 'load', course_key)
             try:
+                if university_id_is_required(request.user, course):
+                    return redirect(reverse('edraak_university:id', args=[course_id]))
+
                 # Render the page
                 tab = CourseTabList.get_tab_by_type(course.tabs, tab_type)
                 page_context = self.create_page_context(request, course=course, tab=tab, **kwargs)
@@ -776,7 +781,7 @@ def course_about(request, course_id):
         studio_url = get_studio_url(course, 'settings/details')
 
         # If the user has to have a valid university ID before continuing to the course.
-        if not staff_access and university_id_is_required(request.user, course):
+        if university_id_is_required(request.user, course):
             return redirect(reverse('edraak_university:id', args=[unicode(course.id)]))
 
         if has_access(request.user, 'load', course):

@@ -24,17 +24,15 @@ class UniversityIDTab(EnrolledTab):
         """
         Decides whether to show the course tab or not, based on course and platform settings.
         """
-
-        if settings.ROOT_URLCONF == 'lms.urls':
-            # The platform don't provide a user when the tab is show on CMS
-            # So this check is skipped on the CMS
-            if not user:
-                return False
-
         if not is_feature_enabled() or not course.enable_university_id:
             return False
 
         if super(UniversityIDTab, cls).is_enabled(course, user):
+            return True
+
+        if settings.ROOT_URLCONF == 'cms.urls':
+            # The platform don't provide a user when the tab is show on CMS
+            # So this ensures that the tab shows up in CMS
             return True
 
         return False
