@@ -7,7 +7,7 @@ from ratelimitbackend.exceptions import RateLimitException
 from django.db.models import F
 
 from django.contrib.auth.models import User
-from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.backends import AllowAllUsersModelBackend, ModelBackend
 
 from edraak_ratelimit.models import RateLimitedIP
 
@@ -52,12 +52,6 @@ class EdraakRateLimitMixin(RateLimitMixin):
         limited_ip.latest_user = user
         limited_ip.save()
 
-
-class EdraakRateLimitModelBackend(EdraakRateLimitMixin, ModelBackend):
-    """
-    Log the locks in the database and allow fine-grained unlock.
-    """
-
     def authenticate(self, **kwargs):
         """
         Authenticates a user (Django's default behaviour) and logs failed attempts in the database.
@@ -66,8 +60,26 @@ class EdraakRateLimitModelBackend(EdraakRateLimitMixin, ModelBackend):
             **kwargs: Whatever django's `ModelBackend` takes.
         """
         try:
-            return super(EdraakRateLimitModelBackend, self).authenticate(**kwargs)
+            return super(EdraakRateLimitMixin, self).authenticate(**kwargs)
         except RateLimitException:
             request = kwargs.get('request')
             self.db_log_failed_attempt(request, kwargs[self.username_key])
             raise  # Keep it consistent with the RateLimitMixin logic
+
+
+class EdraakRateLimitAllowAllUsersModelBackend(EdraakRateLimitMixin, AllowAllUsersModelBackend):
+    """
+    Log the locks in the database and allow fine-grained unlock.
+
+    Allow inactive users for 3rd party apps with logging.
+    """
+    pass
+
+
+class EdraakRateLimitModelBackend(EdraakRateLimitMixin, ModelBackend):
+    """
+    Log the locks in the database and allow fine-grained unlock.
+
+    Allow inactive users for 3rd party apps with logging.
+    """
+    pass
