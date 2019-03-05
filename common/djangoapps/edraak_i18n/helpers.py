@@ -32,7 +32,7 @@ def add_locale_middleware(middleware_classes):
     first_index = min(indexes)
 
     # Insert the DefaultLocaleMiddleware before any other locale-related middleware in order for it to work
-    return middleware_classes[:first_index] + (edraak_middleware,) + middleware_classes[first_index:]
+    return middleware_classes[:first_index] + [edraak_middleware] + middleware_classes[first_index:]
 
 
 def is_api_request(request):
