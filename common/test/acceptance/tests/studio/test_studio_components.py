@@ -3,7 +3,6 @@ Acceptance tests for adding components in Studio.
 """
 import ddt
 from nose.plugins.attrib import attr
-from flaky import flaky
 
 from common.test.acceptance.fixtures.course import XBlockFixtureDesc
 from common.test.acceptance.pages.studio.container import ContainerPage
@@ -102,7 +101,6 @@ class ComponentTest(ContainerBase):
             )
         )
 
-    @flaky(max_runs=3)
     def test_add_html_component(self):
         """
         Scenario: I can add HTML components

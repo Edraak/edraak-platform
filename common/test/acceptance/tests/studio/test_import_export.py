@@ -6,7 +6,6 @@ from datetime import datetime
 
 from nose.plugins.attrib import attr
 
-from flaky import flaky
 from unittest import skip
 
 from common.test.acceptance.pages.lms.course_home import CourseHomePage
