@@ -12,7 +12,7 @@ import pytz
 
 from edraak_certificates import utils
 from edraak_certificates.utils import STATIC_DIR
-from edraak_certificates.generator import fonts
+from edraak_certificates.generator import fonts, generate_certificate
 from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
 from xmodule.modulestore.tests.factories import CourseFactory
 

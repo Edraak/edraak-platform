@@ -44,9 +44,6 @@ class EdraakCertificate(object):
         self.instructor = instructor
         self.course_end_date = course_end_date
         self.course_org = course_org
-
-        self.temp_file = NamedTemporaryFile(suffix='-cert.pdf')
-
         self.ctx = None
 
     def is_english_course(self):
@@ -62,7 +59,7 @@ class EdraakCertificate(object):
             return translation.ugettext(text)
 
     def init_context(self):
-        ctx = canvas.Canvas(self.temp_file.name)
+        ctx = canvas.Canvas(None)
         ctx.setPageSize(SIZE)
         self.ctx = ctx
 
@@ -232,7 +229,6 @@ class EdraakCertificate(object):
 
     def save(self):
         self.ctx.showPage()
-        self.ctx.save()
 
     def course_org_disclaimer(self):
         if self.course_org == 'MITX':
@@ -291,6 +287,7 @@ class EdraakCertificate(object):
         self.draw_bidi_center_text(self.course_end_date, date_x, 4.82, size=0.27)
 
         self.save()
+        return self.ctx.getpdfdata()
 
 
 def generate_certificate(request, course):
@@ -318,6 +315,4 @@ def generate_certificate(request, course):
         instructor=instructor_name,
     )
 
-    cert.generate_and_save()
-
-    return cert.temp_file
+    return cert.generate_and_save()

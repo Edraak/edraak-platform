@@ -1,10 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.core.files.temp import NamedTemporaryFile
-from django.core.servers.basehttp import FileWrapper
 from django.db import transaction
 from django.http import HttpResponse, Http404
-from wand.image import Image
-import os
+import StringIO
 
 from edxmako.shortcuts import render_to_response
 from opaque_keys.edx import locator
@@ -51,13 +48,11 @@ def download_pdf(request, course_id):
     if not is_student_pass(user, course_id):
         raise Http404()
 
-    pdf_file = generate_certificate(request, course)
-    wrapper = FileWrapper(pdf_file)
+    pdf_string_io = generate_certificate(request, course)
 
     # `application/octet-stream` is to force download
-    response = HttpResponse(wrapper, content_type='application/octet-stream')
-
-    response['Content-Length'] = os.path.getsize(pdf_file.name)
+    response = HttpResponse(pdf_string_io, content_type='application/octet-stream')
+    response['Content-Length'] = len(pdf_string_io)
     response['Content-Disposition'] = "attachment; filename=Edraak-Certificate.pdf"
 
     return response
@@ -66,6 +61,8 @@ def download_pdf(request, course_id):
 @transaction.non_atomic_requests
 @login_required
 def preview_png(request, course_id):
+    from wand.image import Image  # Importing locally to avoid breaking tests.
+
     user = request.user
 
     course_key = locator.CourseLocator.from_string(course_id)
@@ -75,14 +72,12 @@ def preview_png(request, course_id):
         raise Http404()
 
     pdf_file = generate_certificate(request, course)
-    image_file = NamedTemporaryFile(suffix='-cert.png')
 
-    with Image(filename=pdf_file.name) as img:
-        with img.clone() as i:
-            i.save(filename=image_file.name)
+    pdf_file_magic_wand = Image(file=pdf_file)
+    image = pdf_file_magic_wand.clone()
+    image.format = 'png'
 
-    wrapper = FileWrapper(image_file)
-    response = HttpResponse(wrapper, content_type='image/png')
-    response['Content-Length'] = os.path.getsize(image_file.name)
+    image_io = StringIO.StringIO()
+    image.save(file=image_io)
 
-    return response
+    return HttpResponse(image_io, content_type='image/png')
