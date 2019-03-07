@@ -15,7 +15,6 @@ import urllib
 from contextlib import contextmanager
 from datetime import datetime, timedelta
 
-from flaky import flaky
 import ddt
 import unicodecsv
 from capa.tests.response_xml_factory import MultipleChoiceResponseXMLFactory
@@ -460,7 +459,6 @@ class TestTeamGradeReport(InstructorGradeReportTestCase):
     def test_team_in_grade_report(self):
         self._verify_cell_data_for_user(self.student1.username, self.course.id, 'Team Name', '')
 
-    @flaky
     def test_correct_team_name_in_grade_report(self):
         team1 = CourseTeamFactory.create(course_id=self.course.id)
         CourseTeamMembershipFactory.create(team=team1, user=self.student1)

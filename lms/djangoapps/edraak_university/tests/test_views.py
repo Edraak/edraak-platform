@@ -15,7 +15,7 @@ from opaque_keys.edx.locator import CourseLocator
 from edraak_university.models import UniversityIDSettings
 from edraak_university.views import UniversityIDView
 from edxmako.shortcuts import marketing_link
-from openedx.core.djangoapps.course_groups.cohorts import set_course_cohort_settings
+from openedx.core.djangoapps.course_groups.cohorts import set_course_cohorted
 
 from openedx.core.djangoapps.course_groups.tests.helpers import CohortFactory
 
@@ -91,7 +91,7 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
 
     def setUp(self):
         super(UniversityIDViewStudentTestCase, self).setUp()
-        set_course_cohort_settings(self.course.id, is_cohorted=True)
+        set_course_cohorted(self.course.id, cohorted=True)
         self.cohort = CohortFactory.create(course_id=self.course.id)
         self.url = reverse('edraak_university:id', args=[unicode(self.course.id)])
 
@@ -126,13 +126,13 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
     def test_disabled_university_id_redirect(self):
         disabled_course = CourseFactory.create(enable_university_id=False)
         CourseEnrollment.get_or_create_enrollment(self.user, disabled_course.id)
-        set_course_cohort_settings(disabled_course.id, is_cohorted=True)
+        set_course_cohorted(disabled_course.id, cohorted=True)
 
         student_form_url = reverse('edraak_university:id', args=[unicode(disabled_course.id)])
         course_root_url = reverse('course_root', args=[unicode(disabled_course.id)])
 
         res = self.client.get(student_form_url)
-        self.assertRedirects(res, course_root_url)
+        self.assertRedirects(res, course_root_url, fetch_redirect_response=False)
 
     @patch('edraak_university.views.is_student_form_disabled', return_value=True)
     def test_disabled_form(self, _is_student_form_disabled):
@@ -144,7 +144,7 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
         self.assertContains(res, 'university-id-form')
         self.assertContains(res, 'class="important"', msg_prefix='No information has been posted yet!')
 
-        soup = BeautifulSoup(res.content)
+        soup = BeautifulSoup(res.content, 'html.parser')
         self.assertFalse(soup.select('ul.errorlist'), msg='Initial form should not contain errors')
 
     @patch('edraak_university.views.update_account_settings')
@@ -180,18 +180,31 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
         self.assertFalse(helpers.has_valid_university_id(self.user, unicode(self.course.id)),
                          msg='The information was not valid, there should be no ID')
 
-        soup = BeautifulSoup(res.content)
+        soup = BeautifulSoup(res.content, 'html.parser')
         errors_list_elems = soup.select('ul.errorlist')
         self.assertTrue(len(errors_list_elems), 'Error list element should be shown')
         error_messages = unicode(errors_list_elems[0].text)
         self.assertIn('student university ID you have entered is too short', error_messages)
 
-    @ddt.data('course_root', 'info', 'about_course', 'courseware')
+    @ddt.data('course_root', 'info')
+    def test_sanity_check_for_legacy_course_pages(self, view_name):
+        """
+        Sanity check to ensure those pages are not open.
+        """
+        course_url = reverse(view_name, args=[unicode(self.course.id)])
+        course_experience_url = reverse('openedx.course_experience.course_home', args=[unicode(self.course.id)])
+
+        self.assertRedirects(self.client.get(course_url), course_experience_url,
+                             fetch_redirect_response=False,
+                             msg_prefix='{} should redirect to the new course experience home'.format(view_name))
+
+    @ddt.data('about_course', 'courseware', 'openedx.course_experience.course_home')
     def test_view_course_pages_with_no_id(self, view_name):
         course_url = reverse(view_name, args=[unicode(self.course.id)])
         university_id_url = reverse('edraak_university:id', args=[unicode(self.course.id)])
 
         self.assertRedirects(self.client.get(course_url), university_id_url,
+                             fetch_redirect_response=False,
                              msg_prefix='Should not allow access to {} before having a university ID'.format(view_name))
 
         res = self.submit_form()
@@ -310,7 +323,7 @@ class UniversityIDStaffSettingsTestCase(ModuleStoreLoggedInTestCase):
 
     def test_submit_invalid_form(self):
         res = self.submit_form({'registration_end_date': '10-25'})
-        soup = BeautifulSoup(res.content)
+        soup = BeautifulSoup(res.content, 'html.parser')
         errors_list_elems = soup.select('ul.errorlist')
         self.assertTrue(len(errors_list_elems), 'Error list element should be shown')
 
@@ -325,7 +338,7 @@ class UniversityIDViewStaffTestCase(ModuleStoreLoggedInTestCase):
 
     def setUp(self):
         super(UniversityIDViewStaffTestCase, self).setUp()
-        set_course_cohort_settings(course_key=self.course.id, is_cohorted=True)
+        set_course_cohorted(course_key=self.course.id, cohorted=True)
         self.student_form_url = reverse('edraak_university:id', args=[unicode(self.course.id)])
         self.staff_list_url = reverse('edraak_university:id_staff', args=[unicode(self.course.id)])
 

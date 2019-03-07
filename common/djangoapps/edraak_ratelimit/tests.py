@@ -37,7 +37,7 @@ class SettingsTest(TestCase):
         This is to prevent edX tests from failing.
         """
         self.assertNotIn('edraak_ratelimit.backends.EdraakRateLimitModelBackend', settings.AUTHENTICATION_BACKENDS)
-        self.assertIn('ratelimitbackend.backends.RateLimitModelBackend', settings.AUTHENTICATION_BACKENDS)
+        self.assertIn('openedx.core.djangoapps.oauth_dispatch.dot_overrides.validators.EdxRateLimitedAllowAllUsersModelBackend', settings.AUTHENTICATION_BACKENDS)
 
     def test_ip_ratelimit_settings(self):
         """
@@ -219,26 +219,31 @@ class HelpersTest(TestCase):
         """
         self.assertEquals(humanize_delta(delta), output, msg)
 
-    def test_update_authentication_backends_helper(self):
+    @ddt.unpack
+    @ddt.data({
+        'edx_backend': 'ratelimitbackend.backends.RateLimitModelBackend',
+        'edraak_backend': 'edraak_ratelimit.backends.EdraakRateLimitModelBackend',
+    }, {
+        'edx_backend':
+            'openedx.core.djangoapps.oauth_dispatch.dot_overrides.validators.EdxRateLimitedAllowAllUsersModelBackend',
+        'edraak_backend': 'edraak_ratelimit.backends.EdraakRateLimitAllowAllUsersModelBackend',
+    })
+    def test_update_authentication_backends_helper_lms(self, edx_backend, edraak_backend):
         """
         Ensures that the helper preserves the backend location.
         """
 
         with self.assertRaises(ValueError):
             # Should not work if the ratelimit backend is not within the original settings from edX (in common.py).
-            update_authentication_backends(('backend1', 'backend2'))
+            update_authentication_backends(['backend1', 'backend2'])
 
-        original_backend = 'ratelimitbackend.backends.RateLimitModelBackend'
-
-        updated_backends = update_authentication_backends((
+        updated_backends = update_authentication_backends([
             'dummy1',
-            original_backend,
+            edx_backend,
             'dummy2',
-        ))
+        ])
 
-        edraak_backend = 'edraak_ratelimit.backends.EdraakRateLimitModelBackend'
-
-        self.assertNotIn(original_backend, updated_backends)
+        self.assertNotIn(edx_backend, updated_backends)
         self.assertIn(edraak_backend, updated_backends)
 
         self.assertEquals(1, updated_backends.index(edraak_backend),

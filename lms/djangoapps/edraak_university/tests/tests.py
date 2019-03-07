@@ -17,7 +17,7 @@ from edraak_tests.tests.helpers import ModuleStoreLoggedInTestCase
 from openedx.core.djangoapps.course_groups.cohorts import (
     add_user_to_cohort,
     get_cohort,
-    set_course_cohort_settings,
+    set_course_cohorted,
     DEFAULT_COHORT_NAME,
 )
 
@@ -139,6 +139,7 @@ class UniversityTabIDTest(ModuleStoreTestCase):
         """
         with override_settings(ROOT_URLCONF=urlconf):
             with patch.dict(settings.FEATURES, EDRAAK_UNIVERSITY_APP=True):
+                self.assertEquals(settings.ROOT_URLCONF, urlconf)  # Sanity check
                 course = Mock(enable_university_id=True)
                 tab = UniversityIDTab(tab_dict={})
                 self.assertEquals(tab.is_enabled(course, user=None), should_enable, msg=msg)
@@ -332,7 +333,8 @@ class HelpersTest(ModuleStoreLoggedInTestCase):
         self.assertEquals(helpers.get_university_id(user, unicode(course.id)).user_id, user.id,
                           'Should return the correct user_id')
 
-    def test_university_id_is_required_helper(self):
+    @patch('edraak_university.helpers.has_access', return_value=False)
+    def test_university_id_is_required_helper_for_user(self, _):
         """
         Tests for both has_valid_university_id and university_id_is_required.
         """
@@ -347,6 +349,17 @@ class HelpersTest(ModuleStoreLoggedInTestCase):
             self.assertTrue(helpers.university_id_is_required(Mock(), Mock(enable_university_id=True)),
                             'The user have no ID and the feature is enabled, so the ID is required.')
 
+    @patch('edraak_university.helpers.has_access', return_value=True)
+    def test_university_id_is_required_helper_for_staff(self, _):
+        """
+        Tests for university_id_is_required for staff users.
+        """
+        with patch('edraak_university.helpers.get_university_id', return_value=None):
+            self.assertFalse(
+                helpers.university_id_is_required(Mock(), Mock(enable_university_id=True)),
+                'The STAFF user have no ID, so the ID is NOT required.',
+            )
+
 
 @ddt.ddt
 class UniversityIDFormTest(ModuleStoreTestCase):
@@ -357,7 +370,7 @@ class UniversityIDFormTest(ModuleStoreTestCase):
     def setUp(self):
         super(UniversityIDFormTest, self).setUp()
         self.course = CourseFactory.create()
-        set_course_cohort_settings(course_key=self.course.id, is_cohorted=True)
+        set_course_cohorted(course_key=self.course.id, cohorted=True)
 
         # Initialize the default group!
         default_cohort = get_cohort(user=self.user, course_key=self.course.id)
@@ -462,7 +475,7 @@ class UniversityIDModelTest(ModuleStoreTestCase):
         self.cohort = CohortFactory.create(
             course_id=self.course.id,
         )
-        set_course_cohort_settings(course_key=self.course.id, is_cohorted=True)
+        set_course_cohorted(course_key=self.course.id, cohorted=True)
         self.model = UniversityIDFactory.create(
             user__username='username1',
             user__email='user@example.eu',

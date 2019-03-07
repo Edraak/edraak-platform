@@ -6,6 +6,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
 from django.utils import timezone
 
+from courseware.access import has_access
 from opaque_keys.edx.locator import CourseLocator
 from edraak_university.models import UniversityID, UniversityIDSettings
 from student.models import CourseEnrollment
@@ -99,6 +100,10 @@ def university_id_is_required(user, course):
     Used mainly to determine to block the courseware content before having a valid University ID.
     """
     if not is_feature_enabled():
+        return False
+
+    if has_access(user, 'staff', course.id):
+        # Skip this test for staff users.
         return False
 
     if course.enable_university_id:

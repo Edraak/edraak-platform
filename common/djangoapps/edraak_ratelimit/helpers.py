@@ -13,13 +13,36 @@ def update_authentication_backends(original_backends):
     Returns:
         The updated backends tuple.
     """
+    edx_to_edraak_backends = {
+        'ratelimitbackend.backends.RateLimitModelBackend':
+            'edraak_ratelimit.backends.EdraakRateLimitModelBackend',
 
-    original_backend = 'ratelimitbackend.backends.RateLimitModelBackend'
-    edraak_backend = 'edraak_ratelimit.backends.EdraakRateLimitModelBackend'
+        'openedx.core.djangoapps.oauth_dispatch.dot_overrides.validators.EdxRateLimitedAllowAllUsersModelBackend':
+            'edraak_ratelimit.backends.EdraakRateLimitAllowAllUsersModelBackend',
+    }
 
-    index = original_backends.index(original_backend)
+    backends = original_backends[:]  # copy the list
+    for edx_backend, edraak_backend in edx_to_edraak_backends.iteritems():
+        backends = [
+            edraak_backend if auth_backend == edx_backend else auth_backend
+            for auth_backend in backends
+        ]
 
-    return original_backends[:index] + (edraak_backend,) + original_backends[(index + 1):]
+    edraak_lms_backend, edraak_studio_backend = edx_to_edraak_backends.values()
+
+    if (edraak_lms_backend not in backends) and (edraak_studio_backend not in backends):
+        raise ValueError(
+            'Edraak RateLimit backends was not added, this module probably needs an update '
+            'to match the Open edX release..'
+        )
+
+    if (edraak_lms_backend in backends) and (edraak_studio_backend in backends):
+        raise ValueError(
+            'Both Edraak RateLimit backends have been added, this module probably needs an update '
+            'to match the Open edX release..'
+        )
+
+    return backends
 
 
 def humanize_delta(delta):
