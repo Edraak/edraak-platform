@@ -134,3 +134,6 @@ class UniversityIDSettings(models.Model):
 
     def __unicode__(self):
         return unicode(self.course_key)
+
+    class Meta:
+        app_label = 'edraak_university'
