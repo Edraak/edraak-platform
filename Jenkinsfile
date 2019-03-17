@@ -5,7 +5,7 @@ def runPythonTests() {
                 doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: 'jenkins-worker',
                 refspec: '+refs/heads/*:refs/remotes/origin/* +refs/pull/*:refs/remotes/origin/pr/*',
-                url: 'git@github.com:edx/edx-platform.git']]]
+                url: 'git@github.com:Edraak/edraak-platform.git']]]
             console_output = sh(returnStdout: true, script: 'bash scripts/all-tests.sh').trim()
             dir('stdout') {
                 writeFile file: "${TEST_SUITE}-${SHARD}-stdout.log", text: console_output
@@ -333,7 +333,7 @@ pipeline {
                             doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
                             userRemoteConfigs: [[credentialsId: 'jenkins-worker',
                             refspec: '+refs/heads/*:refs/remotes/origin/* +refs/pull/*:refs/remotes/origin/pr/*',
-                            url: 'git@github.com:edx/edx-platform.git']]]
+                            url: 'git@github.com:Edraak/edraak-platform.git']]]
                         unstash 'lms-unit-1-reports'
                         unstash 'lms-unit-2-reports'
                         unstash 'lms-unit-3-reports'
