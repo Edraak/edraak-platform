@@ -1,7 +1,7 @@
 def runPythonTests() {
     ansiColor('gnome-terminal') {
         sshagent(credentials: ['jenkins-worker'], ignoreMissing: true) {
-            checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${sha1}']],
+            checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${BRANCH_NAME}']],
                 doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: 'jenkins-worker',
                 refspec: '+refs/heads/*:refs/remotes/origin/* +refs/pull/*:refs/remotes/origin/pr/*',
@@ -329,7 +329,7 @@ pipeline {
             steps {
                 ansiColor('gnome-terminal') {
                     sshagent(credentials: ['jenkins-worker'], ignoreMissing: true) {
-                        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${sha1}']],
+                        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${BRANCH_NAME}']],
                             doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
                             userRemoteConfigs: [[credentialsId: 'jenkins-worker',
                             refspec: '+refs/heads/*:refs/remotes/origin/* +refs/pull/*:refs/remotes/origin/pr/*',

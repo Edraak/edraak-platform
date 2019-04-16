@@ -9,6 +9,8 @@ NODE_VERSION=8.9.3
 
 NODE_INSTALL_COMMAND="nodeenv --node=$NODE_VERSION --prebuilt $NODE_ENV_DIR --force"
 
+sudo rm -f /etc/boto.cfg
+
 # Clear the mongo database
 # Note that this prevents us from running jobs in parallel on a single worker.
 mongo --quiet --eval 'db.getMongo().getDBNames().forEach(function(i){db.getSiblingDB(i).dropDatabase()})'
