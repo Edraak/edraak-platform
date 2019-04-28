@@ -207,7 +207,6 @@ ADMINS = ENV_TOKENS.get('ADMINS', ADMINS)
 SERVER_EMAIL = ENV_TOKENS.get('SERVER_EMAIL', SERVER_EMAIL)
 MKTG_URLS = ENV_TOKENS.get('MKTG_URLS', MKTG_URLS)
 MKTG_URL_LINK_MAP.update(ENV_TOKENS.get('MKTG_URL_LINK_MAP', {}))
-PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 TECH_SUPPORT_EMAIL = ENV_TOKENS.get('TECH_SUPPORT_EMAIL', TECH_SUPPORT_EMAIL)
 
 for name, value in ENV_TOKENS.get("CODE_JAIL", {}).items():
@@ -500,6 +499,10 @@ if FEATURES.get('EDRAAK_I18N_APP'):
     import edraak_i18n.helpers
     INSTALLED_APPS += ('edraak_i18n',)
     MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
+
+INSTALLED_APPS += ('edraak_specializations',)
+
+PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
 ################ PUSH NOTIFICATIONS ###############
 
