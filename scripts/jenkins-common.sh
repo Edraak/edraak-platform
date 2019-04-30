@@ -9,6 +9,8 @@ NODE_VERSION=8.9.3
 
 NODE_INSTALL_COMMAND="nodeenv --node=$NODE_VERSION --prebuilt $NODE_ENV_DIR --force"
 
+sudo rm -f /etc/boto.cfg
+
 # Clear the mongo database
 # Note that this prevents us from running jobs in parallel on a single worker.
 mongo --quiet --eval 'db.getMongo().getDBNames().forEach(function(i){db.getSiblingDB(i).dropDatabase()})'
@@ -73,4 +75,5 @@ SHARD_NUM=${SHARD:="all"}
 export PAVER_TIMER_LOG="test_root/log/timing.paver.$TEST_SUITE.$SHARD_NUM.log"
 export ANSIBLE_TIMER_LOG="test_root/log/timing.ansible.$TIMESTAMP.log"
 
-echo "This node is `curl http://169.254.169.254/latest/meta-data/hostname`"
+# The following line is only used in AWS
+# echo "This node is `curl http://169.254.169.254/latest/meta-data/hostname`"
