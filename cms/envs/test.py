@@ -311,7 +311,7 @@ FEATURES['ENABLE_TEAMS'] = True
 # Dummy secret key for dev/test
 SECRET_KEY = '85920908f28904ed733fe576320db18cabd7b6cd'
 
-######### Edraak Apps #########
+################ Edraak Apps ###############
 
 # Keep in sync with {cms,lms}/envs/{test,aws}.py
 INSTALLED_APPS += ('edraak_ratelimit',)
@@ -327,6 +327,7 @@ INSTALLED_APPS += (
 
 MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
 
+INSTALLED_APPS += ('edraak_specializations',)
 
 ######### custom courses #########
 INSTALLED_APPS.append('openedx.core.djangoapps.ccxcon.apps.CCXConnectorConfig')

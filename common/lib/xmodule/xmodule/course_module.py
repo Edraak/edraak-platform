@@ -900,6 +900,15 @@ class CourseFields(object):
         scope=Scope.settings, default=False
     )
 
+    # Edraak (progs): linking a course with a specialization
+    specialization_slug = String(
+        display_name=_("Specialization slug (id) "),
+        help=_("Enter the slug (id) for the  specialization "
+               "which this course belongs to."),
+        default="",
+        scope=Scope.settings
+    )
+
 
 class CourseModule(CourseFields, SequenceModule):  # pylint: disable=abstract-method
     """

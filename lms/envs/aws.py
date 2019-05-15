@@ -647,7 +647,7 @@ FINANCIAL_REPORTS = ENV_TOKENS.get("FINANCIAL_REPORTS", FINANCIAL_REPORTS)
 ORA2_FILE_PREFIX = ENV_TOKENS.get("ORA2_FILE_PREFIX", ORA2_FILE_PREFIX)
 
 
-################################ Edraak Apps ################################
+################ Edraak Apps ###############
 
 if FEATURES.get('EDRAAK_RATELIMIT_APP'):
     # Keep in sync with {cms,lms}/envs/{test,aws}.py
@@ -672,6 +672,9 @@ if FEATURES.get('EDRAAK_UNIVERSITY_APP'):
 if FEATURES.get('EDRAAK_CERTIFICATES_APP') and FEATURES.get('ORGANIZATIONS_APP'):
     INSTALLED_APPS += ('edraak_certificates',)
 
+INSTALLED_APPS += ('edraak_specializations',)
+
+PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
 ##### ACCOUNT LOCKOUT DEFAULT PARAMETERS #####
 MAX_FAILED_LOGIN_ATTEMPTS_ALLOWED = ENV_TOKENS.get("MAX_FAILED_LOGIN_ATTEMPTS_ALLOWED", 5)

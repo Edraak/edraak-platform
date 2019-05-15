@@ -564,7 +564,7 @@ FEATURES['ORGANIZATIONS_APP'] = True
 # Financial assistance page
 FEATURES['ENABLE_FINANCIAL_ASSISTANCE_FORM'] = True
 
-######### Edraak Apps #########
+################ Edraak Apps ###############
 
 # Keep in sync with {cms,lms}/envs/{test,aws}.py
 INSTALLED_APPS += ('edraak_ratelimit',)
@@ -585,6 +585,8 @@ INSTALLED_APPS += ('edraak_certificates',)
 
 FEATURES['EDRAAK_UNIVERSITY_APP'] = True
 INSTALLED_APPS += ('edraak_university',)
+
+INSTALLED_APPS += ('edraak_specializations',)
 
 COURSE_CATALOG_API_URL = 'https://catalog.example.com/api/v1'
 

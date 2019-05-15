@@ -500,6 +500,10 @@ if FEATURES.get('EDRAAK_I18N_APP'):
     INSTALLED_APPS += ('edraak_i18n',)
     MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSES)
 
+INSTALLED_APPS += ('edraak_specializations',)
+
+PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})

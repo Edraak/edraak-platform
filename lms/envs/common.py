@@ -2384,6 +2384,9 @@ ACTIVATION_EMAIL_SUPPORT_LINK = ''
 # Days before the expired date that we warn the user
 ENTITLEMENT_EXPIRED_ALERT_PERIOD = 90
 
+################ Edraak Apps ###############
+PROGS_URLS = {}
+
 ############################# SOCIAL MEDIA SHARING #############################
 # Social Media Sharing on Student Dashboard
 SOCIAL_SHARING_SETTINGS = {
