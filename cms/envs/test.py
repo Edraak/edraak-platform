@@ -329,6 +329,8 @@ MIDDLEWARE_CLASSES = edraak_i18n.helpers.add_locale_middleware(MIDDLEWARE_CLASSE
 
 INSTALLED_APPS += ('edraak_specializations',)
 
+COUNTRIES_FIRST = []  # Turned off here to pass edx tests
+
 ######### custom courses #########
 INSTALLED_APPS.append('openedx.core.djangoapps.ccxcon.apps.CCXConnectorConfig')
 FEATURES['CUSTOM_COURSES_EDX'] = True

@@ -1253,7 +1253,6 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
             }
         )
 
-    @skip('Edraak: Skipped in Hawthorn Upgrade')
     @ddt.data(
         ('pk', 'PK', 'Bob123', 'Bob123'),
         ('Pk', 'PK', None, ''),
@@ -1608,9 +1607,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
         self.assertTrue(settings.COUNTRIES_FIRST_SORT, 'Should re-sort the COUNTRIES_FIRST for each language')
         self.assertNotIn('TW', dict(settings.COUNTRIES_OVERRIDE), 'Should translate Taiwan')
 
-    @skip('Edraak: Skipped in Hawthorn Upgrade')
     def test_registration_form_country(self):
-        # Edraak (countries): Updated tests to match Edraak's settings
         country_options = (
             [
                 {
@@ -1619,21 +1616,12 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
                     "default": True
                 }
             ] + [
-                {  # Show the Arabic countries first
-                    "value": country_code,
-                    "name": unicode(country_name),
-                    "default": False
-                }
-                for country_code, country_name in SORTED_COUNTRIES
-                if country_code in settings.COUNTRIES_FIRST
-            ] + [
                 {
                     "value": country_code,
                     "name": unicode(country_name),
                     "default": False
                 }
                 for country_code, country_name in SORTED_COUNTRIES
-                if country_code not in settings.COUNTRIES_FIRST
             ]
         )
         self._assert_reg_field(

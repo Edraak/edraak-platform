@@ -2,7 +2,6 @@
 """
 Tests for Edraak Certificates.
 """
-import unittest
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.test import TestCase
@@ -125,7 +124,6 @@ class OrganizationLogoTestCase(TestCase):
             # Should use the database logo
             self.assertRegexpMatches(os.path.basename(updated_logo.name), r'.*hsoub.*\.png.*')
 
-    @unittest.skip('Edraak: Skipped in Hawthorn Upgrade')
     def test_course_org_db_logo_association(self):
         """
         Suppose we created a course and incorrectly called it `MITX/Demo/2017` while we want Hsoub logo on it?
@@ -150,7 +148,7 @@ class OrganizationLogoTestCase(TestCase):
         OrganizationCourse.objects.create(organization=wanted_org, course_id=course_key)
 
         with utils.OrganizationLogo(org_id, course_key) as overridden_logo:
-            self.assertRegexpMatches(os.path.basename(overridden_logo.name), r'.*moe.*.\.png*')  # Now it's an MoE course!
+            self.assertRegexpMatches(os.path.basename(overridden_logo.name), r'.*moe.*\.png*')  # Now it's an MoE course!
 
     def test_no_double_organization_course(self):
         """
