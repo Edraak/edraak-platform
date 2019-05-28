@@ -31,7 +31,7 @@ from pipeline_mako import render_require_js_path_overrides
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    % if not settings.FEATURES['EDRAAK_VIEWPORT_CHANGES']:
+    % if not settings.FEATURES.get('EDRAAK_VIEWPORT_CHANGES', False):
         <meta name="viewport" content="width=device-width, initial-scale=1">
     % endif
 

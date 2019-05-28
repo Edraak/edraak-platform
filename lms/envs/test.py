@@ -588,6 +588,8 @@ INSTALLED_APPS += ('edraak_university',)
 
 INSTALLED_APPS += ('edraak_specializations',)
 
+COUNTRIES_FIRST = []  # Turned off here to pass edx tests
+
 COURSE_CATALOG_API_URL = 'https://catalog.example.com/api/v1'
 
 COMPREHENSIVE_THEME_DIRS = [REPO_ROOT / "themes", REPO_ROOT / "common/test"]

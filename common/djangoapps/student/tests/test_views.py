@@ -314,7 +314,6 @@ class StudentDashboardTests(SharedModuleStoreTestCase, MilestonesTestCaseMixin, 
         response = self.client.get(self.path)
         self.assertRedirects(response, reverse('account_settings'))
 
-    @unittest.skip('Edraak: Skipped in Hawthorn Upgrade')
     @patch.multiple('django.conf.settings', **MOCK_SETTINGS)
     @ddt.data(
         *itertools.product(
@@ -626,7 +625,6 @@ class StudentDashboardTests(SharedModuleStoreTestCase, MilestonesTestCaseMixin, 
         response = self.client.get(self.path)
         self.assertEqual(pq(response.content)(self.EMAIL_SETTINGS_ELEMENT_ID).length, 0)
 
-    @unittest.skip('Edraak: Skipped in Hawthorn Upgrade')
     @patch.multiple('django.conf.settings', **MOCK_SETTINGS_HIDE_COURSES)
     def test_hide_dashboard_courses_until_activated(self):
         """

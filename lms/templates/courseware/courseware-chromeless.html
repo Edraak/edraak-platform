@@ -34,7 +34,7 @@ ${static.get_page_title_breadcrumbs(course_name())}
 </%block>
 
 <%block name="headextra">
-% if settings.FEATURES['EDRAAK_VIEWPORT_CHANGES']:
+% if settings.FEATURES.get('EDRAAK_VIEWPORT_CHANGES', False):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 % endif
 
