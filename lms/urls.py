@@ -45,6 +45,7 @@ from openedx.core.djangoapps.programs.models import ProgramsApiConfig
 from openedx.core.djangoapps.self_paced.models import SelfPacedConfiguration
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.verified_track_content import views as verified_track_content_views
+from openedx.core.djangoapps.user_api import views as user_api_views
 from openedx.features.enterprise_support.api import enterprise_enabled
 from ratelimitbackend import admin
 from static_template_view import views as static_template_view_views
@@ -237,6 +238,11 @@ COURSE_URLS = [
 ]
 urlpatterns += [
     # jump_to URLs for direct access to a location in the course
+    url(
+        r'^user_api/v1/account/post_registration/$',
+        user_api_views.update_profile_info,
+        name='user_api_post_registration'
+    ),
     url(
         r'^courses/{}/jump_to/(?P<location>.*)$'.format(
             settings.COURSE_ID_PATTERN,
