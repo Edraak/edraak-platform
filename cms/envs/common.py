@@ -476,7 +476,11 @@ MIDDLEWARE_CLASSES = [
     'openedx.core.djangoapps.header_control.middleware.HeaderControlMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+
+    # Replaced by Edraak to allow cross origin CSRF
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'openedx.core.djangoapps.cors_csrf.middleware.CrossDomainCsrfViewMiddleware',
+
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
 
     # Allows us to define redirects via Django admin

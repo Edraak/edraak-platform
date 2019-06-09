@@ -1263,7 +1263,10 @@ MIDDLEWARE_CLASSES = [
     'corsheaders.middleware.CorsMiddleware',
     'openedx.core.djangoapps.cors_csrf.middleware.CorsCSRFMiddleware',
     'openedx.core.djangoapps.cors_csrf.middleware.CsrfCrossDomainCookieMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+
+    # Replaced by Edraak to allow cross origin CSRF
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'openedx.core.djangoapps.cors_csrf.middleware.CrossDomainCsrfViewMiddleware',
 
     'splash.middleware.SplashMiddleware',
 

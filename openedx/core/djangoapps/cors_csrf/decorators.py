@@ -1,5 +1,7 @@
 """Decorators for cross-domain CSRF. """
+from django.utils.decorators import decorator_from_middleware
 from django.views.decorators.csrf import ensure_csrf_cookie
+from .middleware import CrossDomainCsrfViewMiddleware
 
 
 def ensure_csrf_cookie_cross_domain(func):
@@ -26,3 +28,12 @@ def ensure_csrf_cookie_cross_domain(func):
         # CSRF cookie gets set.
         return ensure_csrf_cookie(func)(*args, **kwargs)
     return _inner
+
+
+csrf_protect = decorator_from_middleware(CrossDomainCsrfViewMiddleware)
+csrf_protect.__name__ = "csrf_protect"
+csrf_protect.__doc__ = """
+This decorator adds CSRF protection in exactly the same way as
+CsrfViewMiddleware, but it can be used on a per view basis.  Using both, or
+using the decorator multiple times, is harmless and efficient.
+"""

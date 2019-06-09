@@ -11,7 +11,9 @@ from .aws import *
 # Disable CSRF for load testing
 EXCLUDE_CSRF = lambda elem: elem not in [
     'django.template.context_processors.csrf',
-    'django.middleware.csrf.CsrfViewMiddleware'
+    # Replaced by Edraak to allow cross origin CSRF
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'openedx.core.djangoapps.cors_csrf.middleware.CrossDomainCsrfViewMiddleware',
 ]
 DEFAULT_TEMPLATE_ENGINE['OPTIONS']['context_processors'] = filter(
     EXCLUDE_CSRF, DEFAULT_TEMPLATE_ENGINE['OPTIONS']['context_processors']
