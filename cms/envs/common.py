@@ -1175,6 +1175,8 @@ COURSES_WITH_UNSAFE_CODE = []
 ################ Edraak Apps ###############
 PROGS_URLS = {}
 
+FEATURES['ENABLE_EDRAAK_LOGISTRATION'] = False  # Disabled in tests by default
+
 ############################## EVENT TRACKING #################################
 
 TRACK_MAX_EVENT = 50000

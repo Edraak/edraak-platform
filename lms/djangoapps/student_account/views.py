@@ -49,7 +49,7 @@ from openedx.features.enterprise_support.utils import (
     update_logistration_context_for_enterprise,
     update_account_settings_context_for_enterprise,
 )
-from student.helpers import destroy_oauth_tokens, get_next_url_for_login_page
+from student.helpers import destroy_oauth_tokens, get_next_url_for_login_page, get_next_url_for_progs_login_page
 from student.message_types import PasswordReset
 from student.models import UserProfile
 from student.views import register_user as old_register_view, signin_user as old_login_view
@@ -81,6 +81,10 @@ def login_and_registration_form(request, initial_mode="login"):
     redirect_to = get_next_url_for_login_page(request)
     # If we're already logged in, redirect to the dashboard
     if request.user.is_authenticated:
+        return redirect(redirect_to)
+
+    if settings.FEATURES.get("ENABLE_EDRAAK_LOGISTRATION", False) and settings.PROGS_URLS:
+        redirect_to = get_next_url_for_progs_login_page(request, initial_mode)
         return redirect(redirect_to)
 
     # Retrieve the form descriptions from the user API
