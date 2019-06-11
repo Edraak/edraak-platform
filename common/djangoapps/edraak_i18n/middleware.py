@@ -3,6 +3,7 @@ Edraak i18n Middleware
 """
 
 from django.conf import settings
+from django.utils.translation import LANGUAGE_SESSION_KEY
 from edraak_i18n.helpers import is_api_request
 
 
@@ -28,6 +29,11 @@ class DefaultLocaleMiddleware(object):
 
         # Edraak (hack): The DefaultLocaleMiddleware is disabled by default during tests, which is not very accurate.
         if not settings.FEATURES.get('EDRAAK_I18N_LOCALE_MIDDLEWARE'):
+            return
+
+        if 'HTTP_X_API_ACCEPT_LANGUAGE' in request.META:
+            # Override the API accept language
+            request.META[HTTP_ACCEPT_LANGUAGE] = request.META['HTTP_X_API_ACCEPT_LANGUAGE']
             return
 
         if is_api_request(request):

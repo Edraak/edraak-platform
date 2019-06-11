@@ -1,13 +1,16 @@
 """HTTP end-points for the User API. """
 
+import logging
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS, PermissionDenied, ValidationError
 from django.db import transaction
+from django.db.utils import DatabaseError
 from django.http import HttpResponse, HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt, csrf_protect, ensure_csrf_cookie
 from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.http import require_POST
 from django_filters.rest_framework import DjangoFilterBackend
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx import locator
@@ -34,7 +37,10 @@ from openedx.core.lib.api.authentication import SessionAuthenticationAllowInacti
 from openedx.core.lib.api.permissions import ApiKeyHeaderPermission
 from student.cookies import set_logged_in_cookies
 from student.views import AccountValidationError, create_account_with_params
+from util.db import outer_atomic
 from util.json_request import JsonResponse
+
+log = logging.getLogger(__name__)
 
 
 class LoginSessionView(APIView):
@@ -176,6 +182,45 @@ class RegistrationView(APIView):
     @method_decorator(sensitive_post_parameters("password"))
     def dispatch(self, request, *args, **kwargs):
         return super(RegistrationView, self).dispatch(request, *args, **kwargs)
+
+
+@transaction.non_atomic_requests
+@require_POST
+@outer_atomic(read_committed=True)
+def update_profile_info(request):
+    """
+    """
+    # Get the user
+
+    data = request.POST.copy()
+    user = request.user
+
+    post_registration_fields = [('gender', str), ('country', str), ('year_of_birth', int)]
+
+    try:
+        user_profile = UserProfile.objects.get(user=user)
+        user_has_profile = True
+    except UserProfile.DoesNotExist:
+        # Handle when no profile for the user, create a new one
+        user_profile = UserProfile(user=user)
+        user_has_profile = False
+
+    for field in post_registration_fields:
+        field_name = field[0]
+        field_type = field[1]
+
+        value = field_type(data.get(field_name))
+
+        if value:
+            setattr(user_profile, field_name, value)
+
+    try:
+        user_profile.save(update_fields=list(field[0] for field in post_registration_fields) if user_has_profile else None)
+        return JsonResponse({"is_success": True}, status=200)
+    except (DatabaseError, ValidationError, TypeError) as e:
+        log.error('Failed to save post auth data for {user}, exception is {e}'.format(user=user.username, e=e))
+
+    return JsonResponse({"is_success": False}, status=400)
 
 
 class PasswordResetView(APIView):

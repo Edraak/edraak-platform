@@ -312,6 +312,42 @@ def get_next_url_for_login_page(request):
     return redirect_to
 
 
+def get_next_url_for_progs_login_page(request, initial_mode):
+    """
+    Determine the URL to redirect to following login/registration/third_party_auth
+    The user is currently on a login or reigration page.
+    If 'course_id' is set, or other POST_AUTH_PARAMS, we will need to send the user to the
+    /account/finish_auth/ view following login, which will take care of auto-enrollment in
+    the specified course.
+    Otherwise, we go to the ?next= query param or to the dashboard if nothing else is
+    specified.
+    """
+    params = []
+    next = request.GET.get('next', None)
+
+    if next:
+        params.append(('next', next))
+
+    if any(param in request.GET for param in POST_AUTH_PARAMS):
+        # Before we redirect to next/dashboard, we need to handle auto-enrollment:
+        params += [(param, request.GET[param]) for param in POST_AUTH_PARAMS if param in request.GET]
+        # After auto-enrollment, user will be sent to payment page or to this URL
+        # Note: if we are resuming a third party auth pipeline, then the next URL will already
+        # be saved in the session as part of the pipeline state. That URL will take priority
+        # over this one.
+
+    from course_modes.helpers import get_progs_url
+
+    auth_url = get_progs_url(initial_mode)
+
+    if params:
+        redirect_to = '{}?{}'.format(auth_url, urllib.urlencode(params))
+    else:
+        redirect_to = auth_url
+
+    return redirect_to
+
+
 def get_redirect_to(request):
     """
     Determine the redirect url and return if safe

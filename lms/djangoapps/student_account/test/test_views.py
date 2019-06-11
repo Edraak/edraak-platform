@@ -347,6 +347,17 @@ class StudentAccountLoginAndRegistrationTest(ThirdPartyAuthTestMixin, UrlResetMi
         response = self.client.get(reverse(url_name))
         self.assertRedirects(response, reverse("dashboard"))
 
+    @mock.patch.dict("django.conf.settings.FEATURES", {'ENABLE_EDRAAK_LOGISTRATION': True})
+    @mock.patch.dict("django.conf.settings.PROGS_URLS", {'ROOT': 'http://www.example.com'})
+    @ddt.data("signin_user", "register_user")
+    def test_login_and_registration_with_edraak_logistration(self, url_name):
+        # Should redirect to program's login/register page
+        response = self.client.get(reverse(url_name))
+        if url_name == "signin_user":
+            self.assertEqual(response['Location'], 'http://www.example.com/en/login')
+        else:
+            self.assertEqual(response['Location'], 'http://www.example.com/en/register')
+
     @ddt.data(
         (None, "signin_user"),
         (None, "register_user"),
