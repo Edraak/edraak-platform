@@ -504,6 +504,12 @@ INSTALLED_APPS += ('edraak_specializations',)
 
 PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
+if FEATURES.get('SENTRY_CLIENT_KEY_CMS'):  # Sentry integration
+    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
+    RAVEN_CONFIG = {
+        'dsn': FEATURES.get('SENTRY_CLIENT_KEY_CMS'),
+    }
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})
