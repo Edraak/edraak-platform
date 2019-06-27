@@ -336,7 +336,7 @@ def get_next_url_for_progs_login_page(request, initial_mode):
         # be saved in the session as part of the pipeline state. That URL will take priority
         # over this one.
 
-    from course_modes.helpers import get_progs_url
+    from course_modes.edraak_helpers import get_progs_url
 
     auth_url = get_progs_url(initial_mode)
 

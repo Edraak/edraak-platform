@@ -1,9 +1,6 @@
 """ Helper methods for CourseModes. """
-from urlparse import urljoin
-from functools import reduce
-
 from django.conf import settings
-from django.utils.translation import get_language, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from course_modes.models import CourseMode
 from student.helpers import VERIFY_STATUS_APPROVED, VERIFY_STATUS_NEED_TO_VERIFY, VERIFY_STATUS_SUBMITTED
@@ -12,18 +9,6 @@ DISPLAY_VERIFIED = "verified"
 DISPLAY_HONOR = "honor"
 DISPLAY_AUDIT = "audit"
 DISPLAY_PROFESSIONAL = "professional"
-
-
-def get_progs_url(page):
-    lang = ''
-
-    if get_language() != 'ar':
-        lang = 'en/'
-
-    root = settings.PROGS_URLS['ROOT']
-
-    url = reduce(urljoin, [root, lang, page])
-    return url
 
 
 def enrollment_mode_display(mode, verification_status, course_id):
