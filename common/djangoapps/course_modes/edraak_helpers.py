@@ -1,6 +1,7 @@
 """ Edraak custom helper methods for CourseModes. """
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.translation import get_language
 
 from edxmako.shortcuts import marketing_link
 
@@ -47,3 +48,25 @@ def get_course_success_page_url(course_id):
         return marketing_root_format.format(course_id=course_id)
     else:
         return reverse('dashboard')
+
+
+def get_progs_url(page):
+    lang = ''
+
+    if get_language() != 'ar':
+        lang = 'en/'
+
+    root = settings.PROGS_URLS['ROOT']
+
+    if root[-1:] != '/':
+        root += '/'
+
+    if page[:1] == '/':
+        page = page[-(len(page) - 1):]
+
+    url = "{root}{lang}{page}".format(
+        root=root,
+        lang=lang,
+        page=page)
+
+    return url
