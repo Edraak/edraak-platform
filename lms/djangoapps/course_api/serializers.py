@@ -115,7 +115,7 @@ class CourseDetailMarketingSerializer(CourseSerializer):
         overridden['effort'] = marketing_data['estimated_effort']
         overridden['name'] = marketing_data['name']
         overridden['short_description'] = marketing_data['short_description']
-        overridden['overview'] = marketing_data['overview']
+        overridden['overview'] = marketing_data['overview'] or ''
 
         if marketing_data.get('course_image'):
             overridden['media']['course_image']['uri'] = marketing_data['course_image']
