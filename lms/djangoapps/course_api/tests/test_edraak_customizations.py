@@ -17,7 +17,7 @@ from course_api import helpers
 
 
 MARKETING_COURSE_FIXTURE = {
-    'estimated_effort': '3',
+    'effort': '3',
     'name': 'A Fancier edX Demo Course',
     'course_image': 'https://edx.org/image.png',
     'course_video': 'https://edx.org/image.mp4',
@@ -144,7 +144,7 @@ class MarketingSiteCourseDetailsTestCase(ModuleStoreTestCase):
         super(MarketingSiteCourseDetailsTestCase, self).setUp()
         self.course = CourseFactory.create(
             display_name='edx demo course',
-            estimated_effort='3',
+            effort='3',
             short_description='forgot to add it in LMS!',
         )
         self.view = CourseDetailView(course_id=unicode(self.course.id))
