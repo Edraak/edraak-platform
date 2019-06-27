@@ -112,7 +112,7 @@ class CourseDetailMarketingSerializer(CourseSerializer):
         overridden = {}
         overridden.update(original_serialized_data)
 
-        overridden['effort'] = marketing_data['estimated_effort']
+        overridden['effort'] = marketing_data['effort']
         overridden['name'] = marketing_data['name']
         overridden['short_description'] = marketing_data['short_description']
         overridden['overview'] = marketing_data['overview'] or ''
