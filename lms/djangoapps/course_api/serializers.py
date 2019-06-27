@@ -64,6 +64,8 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
     id = serializers.CharField()  # pylint: disable=invalid-name
     media = _CourseApiMediaCollectionSerializer(source='*')
     name = serializers.CharField(source='display_name_with_default_escaped')
+    name_en = serializers.CharField(read_only=True)
+    name_ar = serializers.CharField(read_only=True)
     number = serializers.CharField(source='display_number_with_default')
     org = serializers.CharField(source='display_org_with_default')
     short_description = serializers.CharField()
@@ -116,7 +118,9 @@ class CourseDetailMarketingSerializer(CourseSerializer):
         overridden['name'] = marketing_data['name']
         overridden['short_description'] = marketing_data['short_description']
         overridden['overview'] = marketing_data['overview'] or ''
-
+        overridden['name_en'] = marketing_data['name_en']
+        overridden['name_ar'] = marketing_data['name_ar']
+        
         if marketing_data.get('course_image'):
             overridden['media']['course_image']['uri'] = marketing_data['course_image']
 
