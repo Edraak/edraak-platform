@@ -5,6 +5,7 @@ Course API Serializers.  Representing course catalog data
 import urllib
 
 from django.urls import reverse
+from django.utils.translation import get_language
 from rest_framework import serializers
 
 from openedx.core.djangoapps.models.course_details import CourseDetails
@@ -116,11 +117,14 @@ class CourseDetailMarketingSerializer(CourseSerializer):
 
         overridden['effort'] = marketing_data['effort']
         overridden['name'] = marketing_data['name']
-        overridden['short_description'] = marketing_data['short_description']
+        if get_language() == 'en':
+            overridden['short_description'] = marketing_data['short_description_en']
+        else:
+            overridden['short_description'] = marketing_data['short_description_ar']
         overridden['overview'] = marketing_data['overview'] or ''
         overridden['name_en'] = marketing_data['name_en']
         overridden['name_ar'] = marketing_data['name_ar']
-        
+
         if marketing_data.get('course_image'):
             overridden['media']['course_image']['uri'] = marketing_data['course_image']
 
