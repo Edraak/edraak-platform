@@ -9,7 +9,7 @@ from xmodule.modulestore.django import modulestore
 
 from edxmako.shortcuts import marketing_link
 from courseware.access import has_access
-from courseware.grades import grade
+from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
 from opaque_keys.edx import locator
 
 from .constants import COURSE_MKTG_DETAILS_CACHE_KEY
@@ -61,7 +61,7 @@ def is_student_pass(user, request, course_id):
     if has_access(user, 'staff', course):
         return True
 
-    return bool(grade(user, request, course)['grade'])
+    return bool(CourseGradeFactory().read(user, course)['grade'])
 
 
 def is_certificate_allowed(user, course):
