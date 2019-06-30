@@ -19,9 +19,13 @@ from course_api import helpers
 MARKETING_COURSE_FIXTURE = {
     'effort': '3',
     'name': 'A Fancier edX Demo Course',
+    'name_en': 'An English Fancier edX Demo Course',
+    'name_ar': 'An Arabic Fancier edX Demo Course',
     'course_image': 'https://edx.org/image.png',
     'course_video': 'https://edx.org/image.mp4',
-    'short_description': 'This is the course where your learn everything!',
+    'short_description': 'This is the course where you learn everything!',
+    'short_description_en': 'English description of the course where you learn everything!',
+    'short_description_ar': 'Arabic description of the course where you learn everything!',
     'overview': """
         <div>
           <h1>Course Overview</h1>
@@ -168,15 +172,26 @@ class MarketingSiteCourseDetailsTestCase(ModuleStoreTestCase):
         self.assertContains(res, 'edx demo course')
         self.assertNotContains(res, '<p>An overview form the marketing site</p>')
 
+    def _test_with_marketing_overrides(self, short_description):
+        res = self.client.get(self.course_api_url)
+
+        self.assertNotContains(res, 'edx demo course')
+        self.assertContains(res, 'A Fancier edX Demo Course')
+        self.assertContains(res, 'An English Fancier edX Demo Course')
+        self.assertContains(res, 'An Arabic Fancier edX Demo Course')
+        self.assertContains(res, '<p>An overview form the marketing site</p>')
+        
+        self.assertContains(res, short_description)
+
+        api_json = json.loads(res.content)
+        self.assertIn(api_json['effort'], '3')
+
     @patch.dict(settings.FEATURES, EDRAAK_USE_MARKETING_COURSE_DETAILS_API=True)
     @ddt.data(MARKETING_COURSE_FIXTURE, MARKETING_COURSE_FIXTURE_MISSING_IMAGE)
     def test_with_marketing_overrides(self, course_fixture):
         with mock_requests_get(body_json=course_fixture):
-            res = self.client.get(self.course_api_url)
+            with patch('course_api.serializers.get_language', return_value='en'):
+                self._test_with_marketing_overrides('English description of the course where you learn everything!')
 
-            self.assertNotContains(res, 'edx demo course')
-            self.assertContains(res, 'A Fancier edX Demo Course')
-            self.assertContains(res, '<p>An overview form the marketing site</p>')
-
-            api_json = json.loads(res.content)
-            self.assertIn(api_json['effort'], '3')
+            with patch('course_api.serializers.get_language', return_value='ar'):
+                self._test_with_marketing_overrides('Arabic description of the course where you learn everything!')
