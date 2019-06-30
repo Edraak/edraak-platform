@@ -193,6 +193,10 @@ if edraak_certificates.utils.is_certificates_feature_enabled():
     ]
 
 urlpatterns += [
+        url(r'', include('edraak_misc.urls')),
+    ]
+
+urlpatterns += [
     url(r'^support/', include('support.urls')),
 ]
 
