@@ -5,6 +5,7 @@ Course API Serializers.  Representing course catalog data
 import urllib
 
 from django.urls import reverse
+from django.utils.translation import get_language
 from rest_framework import serializers
 
 from openedx.core.djangoapps.models.course_details import CourseDetails
@@ -64,6 +65,8 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
     id = serializers.CharField()  # pylint: disable=invalid-name
     media = _CourseApiMediaCollectionSerializer(source='*')
     name = serializers.CharField(source='display_name_with_default_escaped')
+    name_en = serializers.CharField(read_only=True)
+    name_ar = serializers.CharField(read_only=True)
     number = serializers.CharField(source='display_number_with_default')
     org = serializers.CharField(source='display_org_with_default')
     short_description = serializers.CharField()
@@ -112,10 +115,15 @@ class CourseDetailMarketingSerializer(CourseSerializer):
         overridden = {}
         overridden.update(original_serialized_data)
 
-        overridden['effort'] = marketing_data['estimated_effort']
+        overridden['effort'] = marketing_data['effort']
         overridden['name'] = marketing_data['name']
-        overridden['short_description'] = marketing_data['short_description']
-        overridden['overview'] = marketing_data['overview']
+        if get_language() == 'en':
+            overridden['short_description'] = marketing_data['short_description_en']
+        else:
+            overridden['short_description'] = marketing_data['short_description_ar']
+        overridden['overview'] = marketing_data['overview'] or ''
+        overridden['name_en'] = marketing_data['name_en']
+        overridden['name_ar'] = marketing_data['name_ar']
 
         if marketing_data.get('course_image'):
             overridden['media']['course_image']['uri'] = marketing_data['course_image']

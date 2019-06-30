@@ -74,3 +74,18 @@ class HelpersTestCase(ModuleStoreTestCase):
         """
         self.assertTrue(edraak_helpers.is_marketing_course_success_page_enabled(), 'Should be enabled')
         self.assertEqual(edraak_helpers.get_course_success_page_url('a/b/c'), 'https://mktg.com/course/a/b/c/success')
+
+    def _test_get_progs_url(self, path):
+        with patch('course_modes.edraak_helpers.get_language', return_value='en'):
+            self.assertEqual(edraak_helpers.get_progs_url(path), 'https://progs.com/en/page_path')
+
+        with patch('course_modes.edraak_helpers.get_language', return_value='ar'):
+            self.assertEqual(edraak_helpers.get_progs_url(path), 'https://progs.com/page_path')
+
+    @ddt.data('/page_path', 'page_path')
+    def test_get_progs_url(self, path):
+        with patch.object(settings, 'PROGS_URLS', {'ROOT': 'https://progs.com/'}):
+            self._test_get_progs_url(path)
+
+        with patch.object(settings, 'PROGS_URLS', {'ROOT': 'https://progs.com'}):
+            self._test_get_progs_url(path)
