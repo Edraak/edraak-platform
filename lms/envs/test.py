@@ -237,7 +237,7 @@ FEATURES['ENABLE_THIRD_PARTY_AUTH'] = True
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.linkedin.LinkedinOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
+    'edraak_social.backends.facebook.EdraakFacebookOAuth2',
     'social_core.backends.azuread.AzureADOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'third_party_auth.dummy.DummyBackend',
