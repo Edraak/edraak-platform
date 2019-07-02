@@ -8,19 +8,16 @@ from edraak_certificates.utils import is_student_pass
 
 @transaction.non_atomic_requests
 @login_required
-def check_student_grades(request):
-    user = request.user
-    course_id = request.POST['course_id']
-
+def check_student_grades(request, course_id):
     return JsonResponse({
         'success': False,
-        'error': is_student_pass(user, course_id)
+        'error': is_student_pass(request.user, course_id)
     })
 
 
 @transaction.non_atomic_requests
 @login_required
-def student_course_complete_status(request, course_id):
+def course_complete_status(request, course_id):
     """
     This view returns a json response describing if a user has
     completed (passed) a course.
