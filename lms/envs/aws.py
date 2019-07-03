@@ -702,7 +702,7 @@ if FEATURES.get('ENABLE_THIRD_PARTY_AUTH'):
     tmp_backends = ENV_TOKENS.get('THIRD_PARTY_AUTH_BACKENDS', [
         'social_core.backends.google.GoogleOAuth2',
         'social_core.backends.linkedin.LinkedinOAuth2',
-        'social_core.backends.facebook.FacebookOAuth2',
+        'edraak_social.backends.facebook.EdraakFacebookOAuth2',
         'social_core.backends.azuread.AzureADOAuth2',
         'third_party_auth.saml.SAMLAuthBackend',
         'third_party_auth.lti.LTIAuthBackend',
@@ -829,6 +829,14 @@ ELASTIC_SEARCH_CONFIG = ENV_TOKENS.get('ELASTIC_SEARCH_CONFIG', [{}])
 FACEBOOK_API_VERSION = AUTH_TOKENS.get("FACEBOOK_API_VERSION")
 FACEBOOK_APP_SECRET = AUTH_TOKENS.get("FACEBOOK_APP_SECRET")
 FACEBOOK_APP_ID = AUTH_TOKENS.get("FACEBOOK_APP_ID")
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email'
+}
+SOCIAL_AUTH_FACEBOOK_AUTH_EXTRA_ARGUMENTS = {
+    'auth_type': 'reauthorize',
+}
 
 XBLOCK_SETTINGS = ENV_TOKENS.get('XBLOCK_SETTINGS', {})
 XBLOCK_SETTINGS.setdefault("VideoDescriptor", {})["licensing_enabled"] = FEATURES.get("LICENSING", False)
