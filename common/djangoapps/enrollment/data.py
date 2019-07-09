@@ -16,8 +16,10 @@ from enrollment.errors import (
     InvalidEnrollmentAttribute,
     UserNotFoundError
 )
-from enrollment.serializers import CourseEnrollmentSerializer, CourseSerializer
+from enrollment.serializers import CourseSerializer
+from enrollment.serializers import EdraakCourseEnrollmentSerializer
 from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
+from openedx.core.djangoapps.request_cache import get_request_or_stub
 from openedx.core.lib.exceptions import CourseNotFoundError
 from student.models import (
     AlreadyEnrolledError,
@@ -48,7 +50,12 @@ def get_course_enrollments(user_id):
         is_active=True
     ).order_by('created')
 
-    enrollments = CourseEnrollmentSerializer(qset, many=True).data
+    # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
+    enrollments = EdraakCourseEnrollmentSerializer(
+        qset,
+        many=True,
+        context={'request': get_request_or_stub()}
+    ).data
 
     # Find deleted courses and filter them out of the results
     deleted = []
@@ -88,7 +95,12 @@ def get_course_enrollment(username, course_id):
         enrollment = CourseEnrollment.objects.get(
             user__username=username, course_id=course_key
         )
-        return CourseEnrollmentSerializer(enrollment).data
+        # Edraak: use EdraakCourseEnrollmentSerializer to serialize enrollments
+        data = EdraakCourseEnrollmentSerializer(
+            enrollment,
+            context={'request': get_request_or_stub()}
+        ).data
+        return data
     except CourseEnrollment.DoesNotExist:
         return None
 
@@ -272,7 +284,12 @@ def _get_user(user_id):
 def _update_enrollment(enrollment, is_active=None, mode=None):
     enrollment.update_enrollment(is_active=is_active, mode=mode)
     enrollment.save()
-    return CourseEnrollmentSerializer(enrollment).data
+    # Edraak: use EdraakCourseEnrollmentSerializer to serialize enrollments
+    data = EdraakCourseEnrollmentSerializer(
+        enrollment,
+        context={'request': get_request_or_stub()}
+    ).data
+    return data
 
 
 def _invalid_attribute(attributes):

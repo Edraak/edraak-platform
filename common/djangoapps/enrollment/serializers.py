@@ -6,7 +6,10 @@ import logging
 from rest_framework import serializers
 
 from course_modes.models import CourseMode
+from course_api.serializers import CourseDetailMarketingSerializer as EdraakCourseSerializer
 from student.models import CourseEnrollment
+
+from edraak_specializations.models import CourseSpecializationInfo
 
 log = logging.getLogger(__name__)
 
@@ -99,3 +102,46 @@ class ModeSerializer(serializers.Serializer):
     description = serializers.CharField()
     sku = serializers.CharField()
     bulk_sku = serializers.CharField()
+
+
+# Edraak: adding custom serializer for enrollments
+class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
+    edraak_course_details = EdraakCourseSerializer(source="course_overview")
+    is_certificate_allowed = serializers.SerializerMethodField()
+    specialization_slug = serializers.SerializerMethodField()
+
+    def get_is_certificate_allowed(self, obj):
+        # Keep this import local to hide LMS related stuff from pytest when testing CMS
+        from edraak_certificates.utils import is_certificate_allowed
+
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            allowed = obj.course_overview and is_certificate_allowed(request.user, obj.course_overview)
+        else:
+            log.warning(
+                'EDRAAK: Certificate is not allowed because EdraakCourseEnrollmentSerializer cannot find user!'
+            )
+            allowed = False
+
+        return allowed
+
+    def get_specialization_slug(self, obj):
+        try:
+            specialization_info = CourseSpecializationInfo.objects.get(course_id=obj.course_id)
+        except CourseSpecializationInfo.DoesNotExist:
+            return None
+        return specialization_info.specialization_slug
+
+    class Meta(object):
+        model = CourseEnrollment
+        fields = (
+            'created',
+            'mode',
+            'is_active',
+            'course_details',
+            'edraak_course_details',
+            'is_certificate_allowed',
+            'specialization_slug',
+            'user'
+        )
+        lookup_field = 'username'
