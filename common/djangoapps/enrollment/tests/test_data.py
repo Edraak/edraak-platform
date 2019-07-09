@@ -20,7 +20,8 @@ from enrollment.errors import (
     CourseEnrollmentFullError,
     UserNotFoundError
 )
-from enrollment.serializers import CourseEnrollmentSerializer
+from enrollment.serializers import EdraakCourseEnrollmentSerializer
+from openedx.core.djangoapps.request_cache import get_request_or_stub
 from openedx.core.lib.exceptions import CourseNotFoundError
 from student.models import AlreadyEnrolledError, CourseEnrollment, CourseFullError, EnrollmentClosedError
 from student.tests.factories import UserFactory
@@ -223,7 +224,14 @@ class EnrollmentDataTest(ModuleStoreTestCase):
             self.course.id
         )
         self.assertTrue(result.exists())
-        self.assertEqual(CourseEnrollmentSerializer(results, many=True).data, created_enrollments)
+        self.assertEqual(
+            EdraakCourseEnrollmentSerializer(
+                results,
+                many=True,
+                context={'request': get_request_or_stub()}
+            ).data,
+            created_enrollments
+        )
 
     @ddt.data(
         # Default (no course modes in the database)

@@ -194,8 +194,7 @@ class EnrollmentView(APIView, ApiKeyPermissionMixIn):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         try:
-            # Edraak: pass request to api.get_enrollment
-            return Response(api.get_enrollment(username, course_id, request=request))
+            return Response(api.get_enrollment(username, course_id))
         except CourseEnrollmentError:
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
@@ -566,8 +565,7 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
         """
         username = request.GET.get('user', request.user.username)
         try:
-            # Edraak: pass request to api.get_enrollments
-            enrollment_data = api.get_enrollments(username, request=request)
+            enrollment_data = api.get_enrollments(username)
         except CourseEnrollmentError:
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
@@ -681,8 +679,7 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
                 consent_client.provide_consent(**kwargs)
 
             enrollment_attributes = request.data.get('enrollment_attributes')
-            # Edraak: pass request to api.get_enrollment
-            enrollment = api.get_enrollment(username, unicode(course_id), request=request)
+            enrollment = api.get_enrollment(username, unicode(course_id))
             mode_changed = enrollment and mode is not None and enrollment['mode'] != mode
             active_changed = enrollment and is_active is not None and enrollment['is_active'] != is_active
             missing_attrs = []
@@ -724,14 +721,12 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
                 )
             else:
                 # Will reactivate inactive enrollments.
-                # Edraak: pass request to api.add_enrollment
                 response = api.add_enrollment(
                     username,
                     unicode(course_id),
                     mode=mode,
                     is_active=is_active,
-                    enrollment_attributes=enrollment_attributes,
-                    request=request
+                    enrollment_attributes=enrollment_attributes
                 )
 
             email_opt_in = request.data.get('email_opt_in', None)
@@ -775,8 +770,7 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
         finally:
             # Assumes that the ecommerce service uses an API key to authenticate.
             if has_api_key_permissions:
-                # Edraak: pass request to api.get_enrollment
-                current_enrollment = api.get_enrollment(username, unicode(course_id), request=request)
+                current_enrollment = api.get_enrollment(username, unicode(course_id))
                 audit_log(
                     'enrollment_change_requested',
                     course_id=unicode(course_id),
