@@ -58,6 +58,7 @@ from third_party_auth.decorators import xframe_allow_whitelisted
 from util.bad_request_rate_limiter import BadRequestRateLimiter
 from util.date_utils import strftime_localized
 
+from student.edraak_helpers import edraak_update_origin
 
 AUDIT_LOG = logging.getLogger("audit")
 log = logging.getLogger(__name__)
@@ -174,6 +175,9 @@ def login_and_registration_form(request, initial_mode="login"):
 
     enterprise_customer = enterprise_customer_for_request(request)
     update_logistration_context_for_enterprise(request, context, enterprise_customer)
+
+    # Edraak: add (origin) option to the context if applicable
+    edraak_update_origin(request, context)  # Warning: This modifies `context['data']['origin']`
 
     response = render_to_response('student_account/login_and_register.html', context)
     handle_enterprise_cookies_for_logistration(request, response, context)
