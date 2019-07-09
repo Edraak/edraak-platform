@@ -18,8 +18,7 @@ log = logging.getLogger(__name__)
 DEFAULT_DATA_API = 'enrollment.data'
 
 
-# Edraak: update function to accept request param
-def get_enrollments(user_id, request=None):
+def get_enrollments(user_id):
     """Retrieves all the courses a user is enrolled in.
 
     Takes a user and retrieves all relative enrollments. Includes information regarding how the user is enrolled
@@ -27,7 +26,6 @@ def get_enrollments(user_id, request=None):
 
     Args:
         user_id (str): The username of the user we want to retrieve course enrollment information for.
-        request: The request that comes with the REST call
 
     Returns:
         A list of enrollment information for the given user.
@@ -94,12 +92,10 @@ def get_enrollments(user_id, request=None):
         ]
 
     """
-    # Edraak: pass request param to _data_api().get_course_enrollments
-    return _data_api().get_course_enrollments(user_id, request=request)
+    return _data_api().get_course_enrollments(user_id)
 
 
-# Edraak: update function to accept request param
-def get_enrollment(user_id, course_id, request=None):
+def get_enrollment(user_id, course_id):
     """Retrieves all enrollment information for the user in respect to a specific course.
 
     Gets all the course enrollment information specific to a user in a course.
@@ -107,7 +103,6 @@ def get_enrollment(user_id, course_id, request=None):
     Args:
         user_id (str): The user to get course enrollment information for.
         course_id (str): The course to get enrollment information for.
-        request: The request that comes with the REST call
 
     Returns:
         A serializable dictionary of the course enrollment.
@@ -144,12 +139,10 @@ def get_enrollment(user_id, course_id, request=None):
         }
 
     """
-    # Edraak: pass request param to _data_api().get_course_enrollment
-    return _data_api().get_course_enrollment(user_id, course_id, request=request)
+    return _data_api().get_course_enrollment(user_id, course_id)
 
 
-# Edraak: update function to accept request param
-def add_enrollment(user_id, course_id, mode=None, is_active=True, enrollment_attributes=None, request=None):
+def add_enrollment(user_id, course_id, mode=None, is_active=True, enrollment_attributes=None):
     """Enrolls a user in a course.
 
     Enrolls a user in a course. If the mode is not specified, this will default to `CourseMode.DEFAULT_MODE_SLUG`.
@@ -162,7 +155,6 @@ def add_enrollment(user_id, course_id, mode=None, is_active=True, enrollment_att
         is_active (boolean): Optional argument for making the new enrollment inactive. If not specified, is_active
             defaults to True.
         enrollment_attributes (list): Attributes to be set the enrollment.
-        request: The request that comes with the REST call
 
     Returns:
         A serializable dictionary of the new course enrollment.
@@ -201,8 +193,7 @@ def add_enrollment(user_id, course_id, mode=None, is_active=True, enrollment_att
     if mode is None:
         mode = _default_course_mode(course_id)
     validate_course_mode(course_id, mode, is_active=is_active)
-    # Edraak: pass request param to _data_api().create_course_enrollment
-    enrollment = _data_api().create_course_enrollment(user_id, course_id, mode, is_active, request=request)
+    enrollment = _data_api().create_course_enrollment(user_id, course_id, mode, is_active)
 
     if enrollment_attributes is not None:
         set_enrollment_attributes(user_id, course_id, enrollment_attributes)

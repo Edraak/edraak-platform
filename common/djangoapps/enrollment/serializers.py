@@ -7,9 +7,9 @@ from rest_framework import serializers
 
 from course_modes.models import CourseMode
 from course_api.serializers import CourseDetailMarketingSerializer as EdraakCourseSerializer
-from edraak_certificates.utils import is_certificate_allowed
-from edraak_specializations.models import CourseSpecializationInfo
 from student.models import CourseEnrollment
+
+from edraak_specializations.models import CourseSpecializationInfo
 
 log = logging.getLogger(__name__)
 
@@ -111,11 +111,19 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
     specialization_slug = serializers.SerializerMethodField()
 
     def get_is_certificate_allowed(self, obj):
-        request = self.context.get('request')
+        # Keep this import local to hide LMS related stuff from pytest when testing CMS
+        from edraak_certificates.utils import is_certificate_allowed
 
-        return bool(
-            request and obj.course_overview and is_certificate_allowed(request.user, obj.course_overview)
-        )
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            allowed = obj.course_overview and is_certificate_allowed(request.user, obj.course_overview)
+        else:
+            log.warning(
+                'EDRAAK: Certificate is not allowed because EdraakCourseEnrollmentSerializer cannot find user!'
+            )
+            allowed = False
+
+        return allowed
 
     def get_specialization_slug(self, obj):
         try:
