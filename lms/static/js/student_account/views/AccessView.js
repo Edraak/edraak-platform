@@ -62,6 +62,14 @@
                         }
                     }
 
+                    // Edraak: if an origin option is passed, then
+                    // the authentication request came from a different
+                    // trusted domain. therefore, the nextUrl should
+                    // redirect to the origin domain.
+                    if (options.origin) {
+                        this.nextUrl = location.protocol + "//" + options.origin + this.nextUrl;
+                    }
+
                     this.formDescriptions = {
                         login: options.login_form_desc,
                         register: options.registration_form_desc,
