@@ -398,6 +398,20 @@ DATADOG.update(ENV_TOKENS.get("DATADOG", {}))
 if 'DATADOG_API' in AUTH_TOKENS:
     DATADOG['api_key'] = AUTH_TOKENS['DATADOG_API']
 
+try:
+    # IMPORTANT: Keep in sync with the lms/aws.py
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    if AUTH_TOKENS.get('SENTRY_DSN'):
+        sentry_sdk.init(
+            dsn=AUTH_TOKENS.get('SENTRY_DSN'),
+            integrations=[DjangoIntegration()]
+        )
+except ImportError:
+    # Disable it when Sentry isn't installed, useful for devstack
+    pass
+
 # Celery Broker
 CELERY_ALWAYS_EAGER = ENV_TOKENS.get("CELERY_ALWAYS_EAGER", False)
 CELERY_BROKER_TRANSPORT = ENV_TOKENS.get("CELERY_BROKER_TRANSPORT", "")
