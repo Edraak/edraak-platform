@@ -33,7 +33,10 @@ class DefaultLocaleMiddleware(object):
 
         if 'HTTP_X_API_ACCEPT_LANGUAGE' in request.META:
             # Override the API accept language
-            request.META[HTTP_ACCEPT_LANGUAGE] = request.META['HTTP_X_API_ACCEPT_LANGUAGE']
+            # Preserve the original value just in case,
+            # the underscore prefix means that you probably shouldn't be using it anyway
+            request.META['_HTTP_ACCEPT_LANGUAGE'] = request.META['HTTP_ACCEPT_LANGUAGE']
+            request.META['HTTP_ACCEPT_LANGUAGE'] = request.META['HTTP_X_API_ACCEPT_LANGUAGE']
             return
 
         if is_api_request(request):
@@ -42,8 +45,7 @@ class DefaultLocaleMiddleware(object):
             return
 
         if 'HTTP_ACCEPT_LANGUAGE' in request.META:
-            # Preserve the original value just in case,
-            # the underscore prefix means that you probably shouldn't be using it anyway
+            # Again, preserving the language
             request.META['_HTTP_ACCEPT_LANGUAGE'] = request.META['HTTP_ACCEPT_LANGUAGE']
 
         # Make the accept language as same as the site original language regardless of the original value
