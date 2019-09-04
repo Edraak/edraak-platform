@@ -141,6 +141,24 @@ class DefaultLocaleMiddlewareTest(TestCase):
             'The feature flag is enabled, the middleware should NOT change the language for API views.'
         )
 
+    @patch.dict(settings.FEATURES, {'EDRAAK_I18N_LOCALE_MIDDLEWARE': True})
+    @override_settings(LANGUAGE_CODE='ar')
+    def test_enabled_api_with_x_lang_header(self):
+        """
+        Ensure that `HTTP_X_API_ACCEPT_LANGUAGE` is used when applicable.
+        """
+        req = self.request_factory.get('/user_api/')
+        client_language = 'en'
+        req.META['HTTP_ACCEPT_LANGUAGE'] = 'fr-ca'
+        req.META['HTTP_X_API_ACCEPT_LANGUAGE'] = client_language
+        self.middleware.process_request(req)
+
+        self.assertEquals(
+            req.META['HTTP_ACCEPT_LANGUAGE'],
+            client_language,
+            'The feature flag is enabled, the middleware should NOT change the language for API views.'
+        )
+
     @ddt.unpack
     @ddt.data(
         {'settings_lang': 'en', 'req_lang': 'en', 'valid': 'Skip to', 'invalid': u'Skïp tö'},
