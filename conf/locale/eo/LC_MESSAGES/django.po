@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2018 EdX
+# Copyright (C) 2019 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2018 EdX
+# Copyright (C) 2019 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2018 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2018 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2018 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-02 05:55+0000\n"
-"PO-Revision-Date: 2018-07-02 05:55:39.490020\n"
+"POT-Creation-Date: 2019-09-08 09:02+0000\n"
+"PO-Revision-Date: 2019-09-08 09:02:08.605774\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -659,8 +659,8 @@ msgstr "Fémälé Ⱡ'σяєм ιρѕυ#"
 
 #. Translators: 'Other' refers to the student's gender
 #: common/djangoapps/student/models.py
-msgid "Other/Prefer Not to Say"
-msgstr "Öthér/Préfér Nöt tö Säý Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+msgid "Prefer Not to Say"
+msgstr "Préfér Nöt tö Säý Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмє#"
 
 #: common/djangoapps/student/models.py
 msgid "Doctorate"
@@ -2720,6 +2720,8 @@ msgstr ""
 #: lms/templates/register-shib.html
 #: lms/templates/dashboard/_entitlement_reason_survey.html
 #: lms/templates/dashboard/_reason_survey.html
+#: lms/templates/edraak_university/university_id.html
+#: lms/templates/edraak_university/instructor/update.html
 #: lms/templates/peer_grading/peer_grading_problem.html
 #: lms/templates/survey/survey.html
 #: openedx/core/djangoapps/dark_lang/templates/dark_lang/preview-language-fragment.html
@@ -2932,6 +2934,10 @@ msgstr "Ànswér ÌD Ⱡ'σяєм ιρѕυм ∂σł#"
 #: common/lib/xmodule/xmodule/capa_module.py
 msgid "Question"
 msgstr "Qüéstïön Ⱡ'σяєм ιρѕυм ∂#"
+
+#: common/lib/xmodule/xmodule/capa_module.py
+msgid "Correct Answer"
+msgstr "Çörréçt Ànswér Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 
 #: common/lib/xmodule/xmodule/conditional_module.py
 msgid "Conditional"
@@ -4135,6 +4141,26 @@ msgstr ""
 " ¢σηѕє¢тєтυя α#"
 
 #: common/lib/xmodule/xmodule/course_module.py
+msgid "Edraak University: Enable ID Tab"
+msgstr ""
+"Édrääk Ûnïvérsïtý: Énäßlé ÌD Täß Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тє#"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid ""
+"Set this to \"true\" (without quotes) to show the University ID tab in this "
+"course. However this requires the Edraak University app to be enabled by "
+"your system administrator."
+msgstr ""
+"Sét thïs tö \"trüé\" (wïthöüt qüötés) tö shöw thé Ûnïvérsïtý ÌD täß ïn thïs "
+"çöürsé. Höwévér thïs réqüïrés thé Édrääk Ûnïvérsïtý äpp tö ßé énäßléd ßý "
+"ýöür sýstém ädmïnïsträtör. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя "
+"α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα"
+" αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ "
+"ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη "
+"яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα "
+"ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα q#"
+
+#: common/lib/xmodule/xmodule/course_module.py
 msgid "Course Instructor"
 msgstr "Çöürsé Ìnstrüçtör Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмє#"
 
@@ -4183,6 +4209,17 @@ msgstr ""
 "¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
 "¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт "
 "ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυηт мσłłιт αηιм ι∂ єѕт łαвσя#"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Specialization slug (id) "
+msgstr "Spéçïälïzätïön slüg (ïd)  Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid ""
+"Enter the slug (id) for the  specialization which this course belongs to."
+msgstr ""
+"Éntér thé slüg (ïd) för thé  spéçïälïzätïön whïçh thïs çöürsé ßélöngs tö. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "General"
@@ -6791,6 +6828,7 @@ msgstr ""
 #: lms/templates/staff_problem_info.html
 #: lms/templates/api_admin/catalogs/search.html
 #: lms/templates/ccx/enrollment.html
+#: lms/templates/edraak_university/instructor/list.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Username"
 msgstr "Ûsérnämé Ⱡ'σяєм ιρѕυм ∂#"
@@ -7338,18 +7376,6 @@ msgstr ""
 "nöt ïnçlüdé ä çértïfïçäté. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
 
 #: lms/djangoapps/courseware/views/views.py
-msgid "Your enrollment: Honor track"
-msgstr "Ýöür énröllmént: Hönör träçk Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
-
-#: lms/djangoapps/courseware/views/views.py
-msgid ""
-"You are enrolled in the honor track for this course. The honor track does "
-"not include a certificate."
-msgstr ""
-"Ýöü äré énrölléd ïn thé hönör träçk för thïs çöürsé. Thé hönör träçk döés "
-"nöt ïnçlüdé ä çértïfïçäté. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
-
-#: lms/djangoapps/courseware/views/views.py
 msgid "We're working on it..."
 msgstr "Wé'ré wörkïng ön ït... Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
 
@@ -7870,6 +7896,146 @@ msgstr ""
 msgid "Good"
 msgstr "Gööd Ⱡ'σяєм ι#"
 
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid ""
+"A course of study offered by Edraak with cooperation from MITx. The learning"
+" experience has been supervised and managed by the course team."
+msgstr ""
+"À çöürsé öf stüdý öfféréd ßý Édrääk wïth çööpérätïön fröm MÌTx. Thé léärnïng"
+" éxpérïénçé häs ßéén süpérvïséd änd mänägéd ßý thé çöürsé téäm. Ⱡ'σяєм ιρѕυм"
+" ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя "
+"ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ "
+"ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ "
+"¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
+"¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт "
+"ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυηт мσłłιт αηιм ι∂ єѕт łα#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid ""
+"A course of study offered by Edraak. The learning experience has been "
+"supervised and managed by the course team."
+msgstr ""
+"À çöürsé öf stüdý öfféréd ßý Édrääk. Thé léärnïng éxpérïénçé häs ßéén "
+"süpérvïséd änd mänägéd ßý thé çöürsé téäm. Ⱡ'σяєм ιρѕυм ∂σłσя#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that:"
+msgstr "Thïs ïs tö çértïfý thät: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed:"
+msgstr "Süççéssfüllý çömplétéd: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This course is sponsored by:"
+msgstr "Thïs çöürsé ïs spönsöréd ßý: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+#, python-brace-format
+msgid "Course{new_line}Certificate{new_line}of Completion"
+msgstr ""
+"Çöürsé{new_line}Çértïfïçäté{new_line}öf Çömplétïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
+"αмєт, ¢σηѕє¢тєтυ#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Section Number *"
+msgstr "Séçtïön Nümßér * Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Full Name in Arabic *"
+msgstr "Füll Nämé ïn Àräßïç * Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Enter your full name that you use at the university in Arabic."
+msgstr ""
+"Éntér ýöür füll nämé thät ýöü üsé ät thé ünïvérsïtý ïn Àräßïç. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "The name you have entered is too short, please double check."
+msgstr ""
+"Thé nämé ýöü hävé éntéréd ïs töö shört, pléäsé döüßlé çhéçk. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid ""
+"The student university ID you have entered is too long, please double check."
+msgstr ""
+"Thé stüdént ünïvérsïtý ÌD ýöü hävé éntéréd ïs töö löng, pléäsé döüßlé çhéçk."
+" Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Student University ID *"
+msgstr "Stüdént Ûnïvérsïtý ÌD * Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Enter the full student university ID e.g. 201311318."
+msgstr ""
+"Éntér thé füll stüdént ünïvérsïtý ÌD é.g. 201311318. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
+"αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid ""
+"The student university ID must only consist of numbers, letters and dashes."
+msgstr ""
+"Thé stüdént ünïvérsïtý ÌD müst önlý çönsïst öf nümßérs, léttérs änd däshés. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid ""
+"The student university ID you have entered is too short, please double "
+"check."
+msgstr ""
+"Thé stüdént ünïvérsïtý ÌD ýöü hävé éntéréd ïs töö shört, pléäsé döüßlé "
+"çhéçk. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєт#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Full Name in Arabic"
+msgstr "Füll Nämé ïn Àräßïç Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
+
+#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
+#. Translators: This label appears above a field on the password reset
+#. form meant to hold the user's email address.
+#. Translators: This label appears above a field on the login form
+#. meant to hold the user's email address.
+#. Translators: This label appears above a field on the registration form
+#. meant to hold the user's email address.
+#: lms/djangoapps/edraak_university/forms.py
+#: lms/djangoapps/instructor/views/api.py
+#: lms/djangoapps/instructor/views/instructor_dashboard.py
+#: openedx/core/djangoapps/user_api/api.py lms/templates/ccx/enrollment.html
+#: lms/templates/edraak_university/instructor/list.html
+#: lms/templates/instructor/instructor_dashboard_2/generate_registarion_codes_modal.html
+msgid "Email"
+msgstr "Émäïl Ⱡ'σяєм ιρѕ#"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "YYYY-MM-DD"
+msgstr "ÝÝÝÝ-MM-DD Ⱡ'σяєм ιρѕυм ∂σłσ#"
+
+#: lms/djangoapps/edraak_university/models.py
+#: openedx/core/djangoapps/course_groups/cohorts.py
+msgid "Default Group"
+msgstr "Défäült Gröüp Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
+
+#: lms/djangoapps/edraak_university/models.py
+#: lms/templates/edraak_university/university_id.html
+msgid "Student University ID"
+msgstr "Stüdént Ûnïvérsïtý ÌD Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: lms/djangoapps/edraak_university/models.py
+msgid "Registration End Date"
+msgstr "Régïsträtïön Énd Däté Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: lms/djangoapps/edraak_university/models.py
+#: lms/templates/edraak_university/university_id.html
+msgid "Terms and Conditions"
+msgstr "Térms änd Çöndïtïöns Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: lms/djangoapps/edraak_university/tab.py
+msgid "University ID"
+msgstr "Ûnïvérsïtý ÌD Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
+
 #: lms/djangoapps/edxnotes/helpers.py
 msgid "EdxNotes Service is unavailable. Please try again in a few minutes."
 msgstr ""
@@ -8226,20 +8392,6 @@ msgstr "énrölléd léärnér pröfïlé Ⱡ'σяєм ιρѕυм ∂σłσя ѕ
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
 msgid "User ID"
 msgstr "Ûsér ÌD Ⱡ'σяєм ιρѕυм #"
-
-#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
-#. Translators: This label appears above a field on the password reset
-#. form meant to hold the user's email address.
-#. Translators: This label appears above a field on the login form
-#. meant to hold the user's email address.
-#. Translators: This label appears above a field on the registration form
-#. meant to hold the user's email address.
-#: lms/djangoapps/instructor/views/api.py
-#: lms/djangoapps/instructor/views/instructor_dashboard.py
-#: openedx/core/djangoapps/user_api/api.py lms/templates/ccx/enrollment.html
-#: lms/templates/instructor/instructor_dashboard_2/generate_registarion_codes_modal.html
-msgid "Email"
-msgstr "Émäïl Ⱡ'σяєм ιρѕ#"
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
@@ -8966,6 +9118,7 @@ msgstr ""
 #: openedx/core/djangoapps/user_api/api.py cms/templates/register.html
 #: lms/templates/register-form.html lms/templates/register-shib.html
 #: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
+#: lms/templates/edraak_university/instructor/list.html
 #: themes/stanford-style/lms/templates/register-form.html
 #: themes/stanford-style/lms/templates/register-shib.html
 msgid "Full Name"
@@ -11498,6 +11651,8 @@ msgstr "Délété ärtïçlé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 #: lms/templates/wiki/delete.html
 #: lms/templates/wiki/plugins/attachments/index.html
 #: cms/templates/component.html cms/templates/studio_xblock_wrapper.html
+#: lms/templates/edraak_university/instructor/delete.html
+#: lms/templates/edraak_university/instructor/list.html
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/index.html
 #: wiki/templates/wiki/delete.html
@@ -11553,6 +11708,7 @@ msgstr ""
 
 #: lms/templates/wiki/edit.html cms/templates/component.html
 #: cms/templates/container.html cms/templates/studio_xblock_wrapper.html
+#: lms/templates/edraak_university/instructor/list.html
 #: lms/templates/instructor/instructor_dashboard_2/e-commerce.html
 #: lms/templates/wiki/includes/article_menu.html wiki/templates/wiki/edit.html
 #: wiki/templates/wiki/includes/article_menu.html
@@ -11700,7 +11856,6 @@ msgid "Create new merged version"
 msgstr "Çréäté néw mérgéd vérsïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
 
 #: lms/templates/wiki/includes/anonymous_blocked.html
-#: wiki/templates/wiki/includes/anonymous_blocked.html
 #, python-format
 msgid ""
 "\n"
@@ -12289,10 +12444,6 @@ msgid ""
 msgstr ""
 "Lïst öf dömäïns thät äré ällöwéd tö mäké çröss-dömäïn réqüésts tö thïs sïté."
 "  Pléäsé lïst éäçh dömäïn ön ïts öwn lïné. Ⱡ'σяєм ιρѕυм #"
-
-#: openedx/core/djangoapps/course_groups/cohorts.py
-msgid "Default Group"
-msgstr "Défäült Gröüp Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 
 #: openedx/core/djangoapps/course_groups/cohorts.py
 msgid "You cannot create two cohorts with the same name"
@@ -14103,6 +14254,16 @@ msgid "Tabs Exception"
 msgstr "Täßs Éxçéptïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 
 #: cms/djangoapps/contentstore/views/course.py
+msgid "An error occurred while trying to save the speciliazation id"
+msgstr ""
+"Àn érrör öççürréd whïlé trýïng tö sävé thé spéçïlïäzätïön ïd Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: cms/djangoapps/contentstore/views/course.py
+msgid "Specialization id error"
+msgstr "Spéçïälïzätïön ïd érrör Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: cms/djangoapps/contentstore/views/course.py
 msgid "This group configuration is in use and cannot be deleted."
 msgstr ""
 "Thïs gröüp çönfïgürätïön ïs ïn üsé änd çännöt ßé délétéd. Ⱡ'σяєм ιρѕυм ∂σłσя"
@@ -15866,6 +16027,7 @@ msgid "Hint"
 msgstr "Hïnt Ⱡ'σяєм ι#"
 
 #: lms/templates/problem.html lms/templates/word_cloud.html
+#: lms/templates/edraak_university/instructor/settings.html
 msgid "Save"
 msgstr "Sävé Ⱡ'σяєм ι#"
 
@@ -18657,6 +18819,18 @@ msgstr ""
 "Ýöür sçöré ïs {current_score}%. Ýöü hävé pässéd thé éntränçé éxäm. Ⱡ'σяєм "
 "ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
+#: lms/templates/courseware/enroll_banner.html
+msgid "You are not enrolled yet"
+msgstr "Ýöü äré nöt énrölléd ýét Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
+
+#: lms/templates/courseware/enroll_banner.html
+msgid ""
+"You are not currently enrolled in this course. {link_start}Sign up "
+"now!{link_end}"
+msgstr ""
+"Ýöü äré nöt çürréntlý énrölléd ïn thïs çöürsé. {link_start}Sïgn üp "
+"nöw!{link_end} Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
 #: lms/templates/courseware/gradebook.html
 msgid "Gradebook"
 msgstr "Grädéßöök Ⱡ'σяєм ιρѕυм ∂σł#"
@@ -18680,18 +18854,6 @@ msgstr "néxt pägé Ⱡ'σяєм ιρѕυм ∂σł#"
 #: lms/templates/courseware/info.html
 msgid "{course_number} Course Info"
 msgstr "{course_number} Çöürsé Ìnfö Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
-
-#: lms/templates/courseware/info.html
-msgid "You are not enrolled yet"
-msgstr "Ýöü äré nöt énrölléd ýét Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
-
-#: lms/templates/courseware/info.html
-msgid ""
-"You are not currently enrolled in this course. {link_start}Enroll "
-"now!{link_end}"
-msgstr ""
-"Ýöü äré nöt çürréntlý énrölléd ïn thïs çöürsé. {link_start}Énröll "
-"nöw!{link_end} Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
 #: lms/templates/courseware/info.html
 msgid "Welcome to {org}'s {course_title}!"
@@ -19899,6 +20061,205 @@ msgstr "ßý möst äçtïvïtý Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм
 #: lms/templates/discussion/_thread_list_template.html
 msgid "by most votes"
 msgstr "ßý möst vötés Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
+
+#: lms/templates/edraak_certificates/fail.html
+#: lms/templates/edraak_certificates/issue.html
+msgid "Please wait..."
+msgstr "Pléäsé wäït... Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
+
+#: lms/templates/edraak_certificates/fail.html
+msgid "You have Not completed this course"
+msgstr ""
+"Ýöü hävé Nöt çömplétéd thïs çöürsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєт#"
+
+#: lms/templates/edraak_certificates/fail.html
+msgid ""
+"Unfortunately, you have not completed this course, you will not be able to "
+"issue a certificate."
+msgstr ""
+"Ûnförtünätélý, ýöü hävé nöt çömplétéd thïs çöürsé, ýöü wïll nöt ßé äßlé tö "
+"ïssüé ä çértïfïçäté. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
+
+#: lms/templates/edraak_certificates/fail.html
+msgid ""
+"You will be redirected to your {link_start}dashboard{link_end} in 10 "
+"seconds."
+msgstr ""
+"Ýöü wïll ßé rédïréçtéd tö ýöür {link_start}däshßöärd{link_end} ïn 10 "
+"séçönds. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/templates/edraak_certificates/issue.html
+msgid "We are calculating your grades. This may take up-to one minute."
+msgstr ""
+"Wé äré çälçülätïng ýöür grädés. Thïs mäý täké üp-tö öné mïnüté. Ⱡ'σяєм ιρѕυм"
+" ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/templates/edraak_certificates/view.html
+msgid "Course Completion Certificate"
+msgstr "Çöürsé Çömplétïön Çértïfïçäté Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: lms/templates/edraak_certificates/view.html
+msgid ""
+"Please note that the certificate will be issued with your full name on it as"
+" provided on your {link_start}account settings{link_end}."
+msgstr ""
+"Pléäsé nöté thät thé çértïfïçäté wïll ßé ïssüéd wïth ýöür füll nämé ön ït äs"
+" prövïdéd ön ýöür {link_start}äççöünt séttïngs{link_end}. Ⱡ'σяєм ιρѕυм ∂#"
+
+#: lms/templates/edraak_certificates/view.html
+msgid ""
+"Please double check your name. We prefer that the name is written in the "
+"same language you're issuing the certificate with. To change it, go to the "
+"{link_start}account settings{link_end} and edit your full name."
+msgstr ""
+"Pléäsé döüßlé çhéçk ýöür nämé. Wé préfér thät thé nämé ïs wrïttén ïn thé "
+"sämé längüägé ýöü'ré ïssüïng thé çértïfïçäté wïth. Tö çhängé ït, gö tö thé "
+"{link_start}äççöünt séttïngs{link_end} änd édït ýöür füll nämé. Ⱡ'σяєм ιρѕυм"
+" ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя "
+"ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ "
+"ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ "
+"¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
+"¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αт#"
+
+#: lms/templates/edraak_certificates/view.html
+msgid "Download as PDF"
+msgstr "Döwnlöäd äs PDF Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "{course_number} Student University ID"
+msgstr ""
+"{course_number} Stüdént Ûnïvérsïtý ÌD Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "Enroll in the course so you can edit your university ID."
+msgstr ""
+"Énröll ïn thé çöürsé sö ýöü çän édït ýöür ünïvérsïtý ÌD. Ⱡ'σяєм ιρѕυм ∂σłσя "
+"ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "Registration is disabled. Contact your course instructor for help."
+msgstr ""
+"Régïsträtïön ïs dïsäßléd. Çöntäçt ýöür çöürsé ïnstrüçtör för hélp. Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
+
+#: lms/templates/edraak_university/university_id.html
+msgid ""
+"The information below have been successfully submitted to your university "
+"coordinator."
+msgstr ""
+"Thé ïnförmätïön ßélöw hävé ßéén süççéssfüllý süßmïttéd tö ýöür ünïvérsïtý "
+"çöördïnätör. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "At anytime you can review and change the information."
+msgstr ""
+"Àt änýtïmé ýöü çän révïéw änd çhängé thé ïnförmätïön. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт"
+" αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/templates/edraak_university/university_id.html
+msgid ""
+"Your university information is needed for your grade reports. Please enter "
+"the required information, and verify it is correct."
+msgstr ""
+"Ýöür ünïvérsïtý ïnförmätïön ïs néédéd för ýöür grädé répörts. Pléäsé éntér "
+"thé réqüïréd ïnförmätïön, änd vérïfý ït ïs çörréçt. Ⱡ'σяєм#"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "You can submit and change your information before {registration_end}"
+msgstr ""
+"Ýöü çän süßmït änd çhängé ýöür ïnförmätïön ßéföré {registration_end} Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid "Your Student University ID Has Been Saved"
+msgstr ""
+"Ýöür Stüdént Ûnïvérsïtý ÌD Häs Béén Sävéd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢тєтυя #"
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid ""
+"Your student university ID has been successfully submitted and will be used "
+"for your grade records."
+msgstr ""
+"Ýöür stüdént ünïvérsïtý ÌD häs ßéén süççéssfüllý süßmïttéd änd wïll ßé üséd "
+"för ýöür grädé réçörds. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid ""
+"Should your university coordinator have any comments on the information you "
+"entered, he/she will contact you."
+msgstr ""
+"Shöüld ýöür ünïvérsïtý çöördïnätör hävé äný çömménts ön thé ïnförmätïön ýöü "
+"éntéréd, hé/shé wïll çöntäçt ýöü. Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid "View the Course Content"
+msgstr "Vïéw thé Çöürsé Çöntént Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: lms/templates/edraak_university/instructor/delete.html
+msgid "Delete a University ID for {course_number}"
+msgstr ""
+"Délété ä Ûnïvérsïtý ÌD för {course_number} Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢т#"
+
+#: lms/templates/edraak_university/instructor/delete.html
+#: lms/templates/edraak_university/instructor/main.html
+#: lms/templates/edraak_university/instructor/update.html
+msgid "Students' University IDs"
+msgstr "Stüdénts' Ûnïvérsïtý ÌDs Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
+
+#: lms/templates/edraak_university/instructor/delete.html
+msgid ""
+"Are you sure you want to delete the university ID ({university_id}) for "
+"student \"{full_name}\"?"
+msgstr ""
+"Àré ýöü süré ýöü wänt tö délété thé ünïvérsïtý ÌD ({university_id}) för "
+"stüdént \"{full_name}\"? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Students' IDs List"
+msgstr "Stüdénts' ÌDs Lïst Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Edraak University IDs"
+msgstr "Édrääk Ûnïvérsïtý ÌDs Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Student's University ID"
+msgstr "Stüdént's Ûnïvérsïtý ÌD Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Section Number"
+msgstr "Séçtïön Nümßér Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "This university ID is a duplicate."
+msgstr ""
+"Thïs ünïvérsïtý ÌD ïs ä düplïçäté. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєт#"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "No student has entered his/her university ID yet."
+msgstr ""
+"Nö stüdént häs éntéréd hïs/hér ünïvérsïtý ÌD ýét. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
+"αмєт, ¢σηѕє¢тєтυя α#"
+
+#: lms/templates/edraak_university/instructor/settings.html
+msgid "University ID settings"
+msgstr "Ûnïvérsïtý ÌD séttïngs Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
+
+#: lms/templates/edraak_university/instructor/settings_success.html
+msgid "Your Settings Have Been Saved"
+msgstr "Ýöür Séttïngs Hävé Béén Sävéd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: lms/templates/edraak_university/instructor/settings_success.html
+msgid "View the Students List"
+msgstr "Vïéw thé Stüdénts Lïst Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
+
+#: lms/templates/edraak_university/instructor/update.html
+msgid "Update University ID for {course_number}"
+msgstr ""
+"Ûpdäté Ûnïvérsïtý ÌD för {course_number} Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢#"
 
 #: lms/templates/edxnotes/edxnotes.html
 msgid "Student Notes"
@@ -29655,13 +30016,18 @@ msgstr "À fïlé wäs délétéd: %s Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid ""
-"\n"
-"    The file may be referenced on other articles. Deleting it means that they will loose their references to this file. The following articles reference this file:\n"
-"    "
+"The file may be referenced on other articles. Deleting it means that they "
+"will loose their references to this file. The following articles reference "
+"this file:"
 msgstr ""
-"\n"
-"    Thé fïlé mäý ßé référénçéd ön öthér ärtïçlés. Délétïng ït méäns thät théý wïll löösé théïr référénçés tö thïs fïlé. Thé föllöwïng ärtïçlés référénçé thïs fïlé:\n"
-"     Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒ#"
+"Thé fïlé mäý ßé référénçéd ön öthér ärtïçlés. Délétïng ït méäns thät théý "
+"wïll löösé théïr référénçés tö thïs fïlé. Thé föllöwïng ärtïçlés référénçé "
+"thïs fïlé: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ"
+" єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ "
+"мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ "
+"єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє "
+"νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт "
+"¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυη#"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid "Delete it!"
@@ -29669,13 +30035,11 @@ msgstr "Délété ït! Ⱡ'σяєм ιρѕυм ∂σłσ#"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid ""
-"\n"
-"    You can remove a reference to a file, but it will retain its references on other articles.\n"
-"    "
+"You can remove a reference to a file, but it will retain its references on "
+"other articles."
 msgstr ""
-"\n"
-"    Ýöü çän rémövé ä référénçé tö ä fïlé, ßüt ït wïll rétäïn ïts référénçés ön öthér ärtïçlés.\n"
-"     Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+"Ýöü çän rémövé ä référénçé tö ä fïlé, ßüt ït wïll rétäïn ïts référénçés ön "
+"öthér ärtïçlés. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid "Remove reference"
@@ -29716,13 +30080,21 @@ msgstr "Ûsé thïs! Ⱡ'σяєм ιρѕυм ∂σł#"
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #, python-format
 msgid ""
-"\n"
-"  Replacing an attachment means adding a new file that will be used in its place. All references to the file will be replaced by the one you upload and the file will be downloaded as <strong>%(filename)s</strong>. Please note that this attachment is in use on other articles, you may distort contents. However, do not hestitate to take advantage of this and make replacements for the listed articles where necessary. This way of working is more efficient....\n"
-"  "
+"Replacing an attachment means adding a new file that will be used in its "
+"place. All references to the file will be replaced by the one you upload and"
+" the file will be downloaded as <strong>%(filename)s</strong>. Please note "
+"that this attachment is in use on other articles, you may distort contents. "
+"However, do not hestitate to take advantage of this and make replacements "
+"for the listed articles where necessary. This way of working is more "
+"efficient...."
 msgstr ""
-"\n"
-"  Répläçïng än ättäçhmént méäns äddïng ä néw fïlé thät wïll ßé üséd ïn ïts pläçé. Àll référénçés tö thé fïlé wïll ßé répläçéd ßý thé öné ýöü üplöäd änd thé fïlé wïll ßé döwnlöädéd äs <strong>%(filename)s</strong>. Pléäsé nöté thät thïs ättäçhmént ïs ïn üsé ön öthér ärtïçlés, ýöü mäý dïstört çönténts. Höwévér, dö nöt héstïtäté tö täké ädväntägé öf thïs änd mäké répläçéménts för thé lïstéd ärtïçlés whéré néçéssärý. Thïs wäý öf wörkïng ïs möré éffïçïént....\n"
-"  #"
+"Répläçïng än ättäçhmént méäns äddïng ä néw fïlé thät wïll ßé üséd ïn ïts "
+"pläçé. Àll référénçés tö thé fïlé wïll ßé répläçéd ßý thé öné ýöü üplöäd änd"
+" thé fïlé wïll ßé döwnlöädéd äs <strong>%(filename)s</strong>. Pléäsé nöté "
+"thät thïs ättäçhmént ïs ïn üsé ön öthér ärtïçlés, ýöü mäý dïstört çönténts. "
+"Höwévér, dö nöt héstïtäté tö täké ädväntägé öf thïs änd mäké répläçéménts "
+"för thé lïstéd ärtïçlés whéré néçéssärý. Thïs wäý öf wörkïng ïs möré "
+"éffïçïént....#"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 msgid "Articles using"
@@ -29731,13 +30103,19 @@ msgstr "Àrtïçlés üsïng Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #, python-format
 msgid ""
-"\n"
-"  Replacing an attachment means adding a new file that will be used in its place. All references to the file will be replaced by the one you upload and the file will be downloaded as <strong>%(filename)s</strong>.\n"
-"  "
+"Replacing an attachment means adding a new file that will be used in its "
+"place. All references to the file will be replaced by the one you upload and"
+" the file will be downloaded as <strong>%(filename)s</strong>."
 msgstr ""
-"\n"
-"  Répläçïng än ättäçhmént méäns äddïng ä néw fïlé thät wïll ßé üséd ïn ïts pläçé. Àll référénçés tö thé fïlé wïll ßé répläçéd ßý thé öné ýöü üplöäd änd thé fïlé wïll ßé döwnlöädéd äs <strong>%(filename)s</strong>.\n"
-"   Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι#"
+"Répläçïng än ättäçhmént méäns äddïng ä néw fïlé thät wïll ßé üséd ïn ïts "
+"pläçé. Àll référénçés tö thé fïlé wïll ßé répläçéd ßý thé öné ýöü üplöäd änd"
+" thé fïlé wïll ßé döwnlöädéd äs <strong>%(filename)s</strong>. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя "
+"ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ "
+"ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ "
+"¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
+"¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт "
+"ηση#"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #: wiki/plugins/images/templates/wiki/plugins/images/revision_add.html
@@ -30155,14 +30533,10 @@ msgstr "mätçhés,mätçh Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 
 #: wiki/templates/wiki/dir.html
 #, python-format
-msgid ""
-"\n"
-"        %(cnt)s %(articles_plur)s in this level %(match_plur)s your search.\n"
-"      "
+msgid "%(cnt)s %(articles_plur)s in this level %(match_plur)s your search."
 msgstr ""
-"\n"
-"        %(cnt)s %(articles_plur)s ïn thïs lévél %(match_plur)s ýöür séärçh.\n"
-"       Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+"%(cnt)s %(articles_plur)s ïn thïs lévél %(match_plur)s ýöür séärçh. Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
 
 #: wiki/templates/wiki/dir.html
 msgid "is,are"
@@ -30170,14 +30544,10 @@ msgstr "ïs,äré Ⱡ'σяєм ιρѕυ#"
 
 #: wiki/templates/wiki/dir.html
 #, python-format
-msgid ""
-"\n"
-"        There %(articles_plur_verb)s %(cnt)s %(articles_plur)s in this level.\n"
-"      "
+msgid "There %(articles_plur_verb)s %(cnt)s %(articles_plur)s in this level."
 msgstr ""
-"\n"
-"        Théré %(articles_plur_verb)s %(cnt)s %(articles_plur)s ïn thïs lévél.\n"
-"       Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+"Théré %(articles_plur_verb)s %(cnt)s %(articles_plur)s ïn thïs lévél. Ⱡ'σяєм"
+" ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тє#"
 
 #: wiki/templates/wiki/dir.html
 msgid "Last modified"
@@ -30261,6 +30631,16 @@ msgstr "Rööt ärtïçlé Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
 #: wiki/templates/wiki/article/create_root.html
 msgid "Create root"
 msgstr "Çréäté rööt Ⱡ'σяєм ιρѕυм ∂σłσя #"
+
+#: wiki/templates/wiki/includes/anonymous_blocked.html
+#, python-format
+msgid ""
+"You need to <a href=\"%(login_url)s\">log in</a> or <a "
+"href=\"%(signup_url)s\">sign up</a> to use this function."
+msgstr ""
+"Ýöü nééd tö <a href=\"%(login_url)s\">lög ïn</a> ör <a "
+"href=\"%(signup_url)s\">sïgn üp</a> tö üsé thïs fünçtïön. Ⱡ'σяєм ιρѕυм ∂σłσя"
+" ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
 #: wiki/templates/wiki/includes/anonymous_blocked.html
 msgid "You need to log in og sign up to use this function."

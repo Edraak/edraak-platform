@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2018 EdX
+# Copyright (C) 2019 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2018 EdX
+# Copyright (C) 2019 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2018 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2018 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2018 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2018.
+# EdX Team <info@edx.org>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-02 05:55+0000\n"
-"PO-Revision-Date: 2018-07-02 05:55:39.490020\n"
+"POT-Creation-Date: 2019-09-08 09:02+0000\n"
+"PO-Revision-Date: 2019-09-08 09:02:08.605774\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -586,8 +586,8 @@ msgstr "بثوشمث"
 
 #. Translators: 'Other' refers to the student's gender
 #: common/djangoapps/student/models.py
-msgid "Other/Prefer Not to Say"
-msgstr "خفاثق/حقثبثق رخف فخ سشغ"
+msgid "Prefer Not to Say"
+msgstr "حقثبثق رخف فخ سشغ"
 
 #: common/djangoapps/student/models.py
 msgid "Doctorate"
@@ -2392,6 +2392,8 @@ msgstr ""
 #: lms/templates/register-shib.html
 #: lms/templates/dashboard/_entitlement_reason_survey.html
 #: lms/templates/dashboard/_reason_survey.html
+#: lms/templates/edraak_university/university_id.html
+#: lms/templates/edraak_university/instructor/update.html
 #: lms/templates/peer_grading/peer_grading_problem.html
 #: lms/templates/survey/survey.html
 #: openedx/core/djangoapps/dark_lang/templates/dark_lang/preview-language-fragment.html
@@ -2581,6 +2583,10 @@ msgstr "شرسصثق هي"
 #: common/lib/xmodule/xmodule/capa_module.py
 msgid "Question"
 msgstr "ضعثسفهخر"
+
+#: common/lib/xmodule/xmodule/capa_module.py
+msgid "Correct Answer"
+msgstr "ذخققثذف شرسصثق"
 
 #: common/lib/xmodule/xmodule/conditional_module.py
 msgid "Conditional"
@@ -3581,6 +3587,20 @@ msgid "Specify what student can learn from the course."
 msgstr "سحثذهبغ صاشف سفعيثرف ذشر مثشقر بقخو فاث ذخعقسث."
 
 #: common/lib/xmodule/xmodule/course_module.py
+msgid "Edraak University: Enable ID Tab"
+msgstr "ثيقششن عرهدثقسهفغ: ثرشزمث هي فشز"
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid ""
+"Set this to \"true\" (without quotes) to show the University ID tab in this "
+"course. However this requires the Edraak University app to be enabled by "
+"your system administrator."
+msgstr ""
+"سثف فاهس فخ \"فقعث\" (صهفاخعف ضعخفثس) فخ ساخص فاث عرهدثقسهفغ هي فشز هر فاهس "
+"ذخعقسث. اخصثدثق فاهس قثضعهقثس فاث ثيقششن عرهدثقسهفغ شحح فخ زث ثرشزمثي زغ "
+"غخعق سغسفثو شيوهرهسفقشفخق."
+
+#: common/lib/xmodule/xmodule/course_module.py
 msgid "Course Instructor"
 msgstr "ذخعقسث هرسفقعذفخق"
 
@@ -3617,6 +3637,16 @@ msgid ""
 msgstr ""
 "ثرفثق فقعث خق بشمسث. هب فقعث, شرغ اهلامهلافس شسسخذهشفثي صهفا ذخرفثرف هر فاث "
 "ذخعقسث صهمم زث وثسسشلثي فخ مثشقرثقس شف فاثهق سذاثيعمثي فهوث."
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid "Specialization slug (id) "
+msgstr "سحثذهشمهظشفهخر سمعل (هي) "
+
+#: common/lib/xmodule/xmodule/course_module.py
+msgid ""
+"Enter the slug (id) for the  specialization which this course belongs to."
+msgstr ""
+"ثرفثق فاث سمعل (هي) بخق فاث  سحثذهشمهظشفهخر صاهذا فاهس ذخعقسث زثمخرلس فخ."
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "General"
@@ -5834,6 +5864,7 @@ msgstr "وخقث شزخعف {fullname}'س شذذخوحمهساوثرف"
 #: lms/templates/staff_problem_info.html
 #: lms/templates/api_admin/catalogs/search.html
 #: lms/templates/ccx/enrollment.html
+#: lms/templates/edraak_university/instructor/list.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Username"
 msgstr "عسثقرشوث"
@@ -6326,18 +6357,6 @@ msgstr ""
 "رخف هرذمعيث ش ذثقفهبهذشفث."
 
 #: lms/djangoapps/courseware/views/views.py
-msgid "Your enrollment: Honor track"
-msgstr "غخعق ثرقخمموثرف: اخرخق فقشذن"
-
-#: lms/djangoapps/courseware/views/views.py
-msgid ""
-"You are enrolled in the honor track for this course. The honor track does "
-"not include a certificate."
-msgstr ""
-"غخع شقث ثرقخممثي هر فاث اخرخق فقشذن بخق فاهس ذخعقسث. فاث اخرخق فقشذن يخثس "
-"رخف هرذمعيث ش ذثقفهبهذشفث."
-
-#: lms/djangoapps/courseware/views/views.py
 msgid "We're working on it..."
 msgstr "صث'قث صخقنهرل خر هف..."
 
@@ -6787,6 +6806,130 @@ msgstr ""
 msgid "Good"
 msgstr "لخخي"
 
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid ""
+"A course of study offered by Edraak with cooperation from MITx. The learning"
+" experience has been supervised and managed by the course team."
+msgstr ""
+"ش ذخعقسث خب سفعيغ خببثقثي زغ ثيقششن صهفا ذخخحثقشفهخر بقخو وهفط. فاث مثشقرهرل"
+" ثطحثقهثرذث اشس زثثر سعحثقدهسثي شري وشرشلثي زغ فاث ذخعقسث فثشو."
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid ""
+"A course of study offered by Edraak. The learning experience has been "
+"supervised and managed by the course team."
+msgstr ""
+"ش ذخعقسث خب سفعيغ خببثقثي زغ ثيقششن. فاث مثشقرهرل ثطحثقهثرذث اشس زثثر "
+"سعحثقدهسثي شري وشرشلثي زغ فاث ذخعقسث فثشو."
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that:"
+msgstr "فاهس هس فخ ذثقفهبغ فاشف:"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed:"
+msgstr "سعذذثسسبعممغ ذخوحمثفثي:"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This course is sponsored by:"
+msgstr "فاهس ذخعقسث هس سحخرسخقثي زغ:"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+#, python-brace-format
+msgid "Course{new_line}Certificate{new_line}of Completion"
+msgstr "ذخعقسث{new_line}ذثقفهبهذشفث{new_line}خب ذخوحمثفهخر"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Section Number *"
+msgstr "سثذفهخر رعوزثق *"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Full Name in Arabic *"
+msgstr "بعمم رشوث هر شقشزهذ *"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Enter your full name that you use at the university in Arabic."
+msgstr "ثرفثق غخعق بعمم رشوث فاشف غخع عسث شف فاث عرهدثقسهفغ هر شقشزهذ."
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "The name you have entered is too short, please double check."
+msgstr "فاث رشوث غخع اشدث ثرفثقثي هس فخخ ساخقف, حمثشسث يخعزمث ذاثذن."
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid ""
+"The student university ID you have entered is too long, please double check."
+msgstr ""
+"فاث سفعيثرف عرهدثقسهفغ هي غخع اشدث ثرفثقثي هس فخخ مخرل, حمثشسث يخعزمث ذاثذن."
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Student University ID *"
+msgstr "سفعيثرف عرهدثقسهفغ هي *"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Enter the full student university ID e.g. 201311318."
+msgstr "ثرفثق فاث بعمم سفعيثرف عرهدثقسهفغ هي ث.ل. 201311318."
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid ""
+"The student university ID must only consist of numbers, letters and dashes."
+msgstr ""
+"فاث سفعيثرف عرهدثقسهفغ هي وعسف خرمغ ذخرسهسف خب رعوزثقس, مثففثقس شري يشساثس."
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid ""
+"The student university ID you have entered is too short, please double "
+"check."
+msgstr ""
+"فاث سفعيثرف عرهدثقسهفغ هي غخع اشدث ثرفثقثي هس فخخ ساخقف, حمثشسث يخعزمث "
+"ذاثذن."
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "Full Name in Arabic"
+msgstr "بعمم رشوث هر شقشزهذ"
+
+#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
+#. Translators: This label appears above a field on the password reset
+#. form meant to hold the user's email address.
+#. Translators: This label appears above a field on the login form
+#. meant to hold the user's email address.
+#. Translators: This label appears above a field on the registration form
+#. meant to hold the user's email address.
+#: lms/djangoapps/edraak_university/forms.py
+#: lms/djangoapps/instructor/views/api.py
+#: lms/djangoapps/instructor/views/instructor_dashboard.py
+#: openedx/core/djangoapps/user_api/api.py lms/templates/ccx/enrollment.html
+#: lms/templates/edraak_university/instructor/list.html
+#: lms/templates/instructor/instructor_dashboard_2/generate_registarion_codes_modal.html
+msgid "Email"
+msgstr "ثوشهم"
+
+#: lms/djangoapps/edraak_university/forms.py
+msgid "YYYY-MM-DD"
+msgstr "غغغغ-وو-يي"
+
+#: lms/djangoapps/edraak_university/models.py
+#: openedx/core/djangoapps/course_groups/cohorts.py
+msgid "Default Group"
+msgstr "يثبشعمف لقخعح"
+
+#: lms/djangoapps/edraak_university/models.py
+#: lms/templates/edraak_university/university_id.html
+msgid "Student University ID"
+msgstr "سفعيثرف عرهدثقسهفغ هي"
+
+#: lms/djangoapps/edraak_university/models.py
+msgid "Registration End Date"
+msgstr "قثلهسفقشفهخر ثري يشفث"
+
+#: lms/djangoapps/edraak_university/models.py
+#: lms/templates/edraak_university/university_id.html
+msgid "Terms and Conditions"
+msgstr "فثقوس شري ذخريهفهخرس"
+
+#: lms/djangoapps/edraak_university/tab.py
+msgid "University ID"
+msgstr "عرهدثقسهفغ هي"
+
 #: lms/djangoapps/edxnotes/helpers.py
 msgid "EdxNotes Service is unavailable. Please try again in a few minutes."
 msgstr "ثيطرخفثس سثقدهذث هس عرشدشهمشزمث. حمثشسث فقغ شلشهر هر ش بثص وهرعفثس."
@@ -7089,20 +7232,6 @@ msgstr "ثرقخممثي مثشقرثق حقخبهمث"
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
 msgid "User ID"
 msgstr "عسثق هي"
-
-#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
-#. Translators: This label appears above a field on the password reset
-#. form meant to hold the user's email address.
-#. Translators: This label appears above a field on the login form
-#. meant to hold the user's email address.
-#. Translators: This label appears above a field on the registration form
-#. meant to hold the user's email address.
-#: lms/djangoapps/instructor/views/api.py
-#: lms/djangoapps/instructor/views/instructor_dashboard.py
-#: openedx/core/djangoapps/user_api/api.py lms/templates/ccx/enrollment.html
-#: lms/templates/instructor/instructor_dashboard_2/generate_registarion_codes_modal.html
-msgid "Email"
-msgstr "ثوشهم"
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
@@ -7725,6 +7854,7 @@ msgstr "رخ يعث يشفث ثطفثرسهخر هس سثف بخق فاشف سف
 #: openedx/core/djangoapps/user_api/api.py cms/templates/register.html
 #: lms/templates/register-form.html lms/templates/register-shib.html
 #: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
+#: lms/templates/edraak_university/instructor/list.html
 #: themes/stanford-style/lms/templates/register-form.html
 #: themes/stanford-style/lms/templates/register-shib.html
 msgid "Full Name"
@@ -9987,6 +10117,8 @@ msgstr "يثمثفث شقفهذمث"
 #: lms/templates/wiki/delete.html
 #: lms/templates/wiki/plugins/attachments/index.html
 #: cms/templates/component.html cms/templates/studio_xblock_wrapper.html
+#: lms/templates/edraak_university/instructor/delete.html
+#: lms/templates/edraak_university/instructor/list.html
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/index.html
 #: wiki/templates/wiki/delete.html
@@ -10027,6 +10159,7 @@ msgstr "غخع شقث يثمثفهرل شر شقفهذمث. حمثشسث ذخر�
 
 #: lms/templates/wiki/edit.html cms/templates/component.html
 #: cms/templates/container.html cms/templates/studio_xblock_wrapper.html
+#: lms/templates/edraak_university/instructor/list.html
 #: lms/templates/instructor/instructor_dashboard_2/e-commerce.html
 #: lms/templates/wiki/includes/article_menu.html wiki/templates/wiki/edit.html
 #: wiki/templates/wiki/includes/article_menu.html
@@ -10162,7 +10295,6 @@ msgid "Create new merged version"
 msgstr "ذقثشفث رثص وثقلثي دثقسهخر"
 
 #: lms/templates/wiki/includes/anonymous_blocked.html
-#: wiki/templates/wiki/includes/anonymous_blocked.html
 #, python-format
 msgid ""
 "\n"
@@ -10709,10 +10841,6 @@ msgid ""
 msgstr ""
 "مهسف خب يخوشهرس فاشف شقث شممخصثي فخ وشنث ذقخسس-يخوشهر قثضعثسفس فخ فاهس سهفث."
 "  حمثشسث مهسف ثشذا يخوشهر خر هفس خصر مهرث."
-
-#: openedx/core/djangoapps/course_groups/cohorts.py
-msgid "Default Group"
-msgstr "يثبشعمف لقخعح"
 
 #: openedx/core/djangoapps/course_groups/cohorts.py
 msgid "You cannot create two cohorts with the same name"
@@ -12245,6 +12373,14 @@ msgstr "شر ثققخق خذذعققثي صاهمث فقغهرل فخ سشدث �
 #: cms/djangoapps/contentstore/views/course.py
 msgid "Tabs Exception"
 msgstr "فشزس ثطذثحفهخر"
+
+#: cms/djangoapps/contentstore/views/course.py
+msgid "An error occurred while trying to save the speciliazation id"
+msgstr "شر ثققخق خذذعققثي صاهمث فقغهرل فخ سشدث فاث سحثذهمهشظشفهخر هي"
+
+#: cms/djangoapps/contentstore/views/course.py
+msgid "Specialization id error"
+msgstr "سحثذهشمهظشفهخر هي ثققخق"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid "This group configuration is in use and cannot be deleted."
@@ -13814,6 +13950,7 @@ msgid "Hint"
 msgstr "اهرف"
 
 #: lms/templates/problem.html lms/templates/word_cloud.html
+#: lms/templates/edraak_university/instructor/settings.html
 msgid "Save"
 msgstr "سشدث"
 
@@ -16338,6 +16475,18 @@ msgstr ""
 msgid "Your score is {current_score}%. You have passed the entrance exam."
 msgstr "غخعق سذخقث هس {current_score}%. غخع اشدث حشسسثي فاث ثرفقشرذث ثطشو."
 
+#: lms/templates/courseware/enroll_banner.html
+msgid "You are not enrolled yet"
+msgstr "غخع شقث رخف ثرقخممثي غثف"
+
+#: lms/templates/courseware/enroll_banner.html
+msgid ""
+"You are not currently enrolled in this course. {link_start}Sign up "
+"now!{link_end}"
+msgstr ""
+"غخع شقث رخف ذعققثرفمغ ثرقخممثي هر فاهس ذخعقسث. {link_start}سهلر عح "
+"رخص!{link_end}"
+
 #: lms/templates/courseware/gradebook.html
 msgid "Gradebook"
 msgstr "لقشيثزخخن"
@@ -16361,18 +16510,6 @@ msgstr "رثطف حشلث"
 #: lms/templates/courseware/info.html
 msgid "{course_number} Course Info"
 msgstr "{course_number} ذخعقسث هربخ"
-
-#: lms/templates/courseware/info.html
-msgid "You are not enrolled yet"
-msgstr "غخع شقث رخف ثرقخممثي غثف"
-
-#: lms/templates/courseware/info.html
-msgid ""
-"You are not currently enrolled in this course. {link_start}Enroll "
-"now!{link_end}"
-msgstr ""
-"غخع شقث رخف ذعققثرفمغ ثرقخممثي هر فاهس ذخعقسث. {link_start}ثرقخمم "
-"رخص!{link_end}"
 
 #: lms/templates/courseware/info.html
 msgid "Welcome to {org}'s {course_title}!"
@@ -17425,6 +17562,179 @@ msgstr "زغ وخسف شذفهدهفغ"
 #: lms/templates/discussion/_thread_list_template.html
 msgid "by most votes"
 msgstr "زغ وخسف دخفثس"
+
+#: lms/templates/edraak_certificates/fail.html
+#: lms/templates/edraak_certificates/issue.html
+msgid "Please wait..."
+msgstr "حمثشسث صشهف..."
+
+#: lms/templates/edraak_certificates/fail.html
+msgid "You have Not completed this course"
+msgstr "غخع اشدث رخف ذخوحمثفثي فاهس ذخعقسث"
+
+#: lms/templates/edraak_certificates/fail.html
+msgid ""
+"Unfortunately, you have not completed this course, you will not be able to "
+"issue a certificate."
+msgstr ""
+"عربخقفعرشفثمغ, غخع اشدث رخف ذخوحمثفثي فاهس ذخعقسث, غخع صهمم رخف زث شزمث فخ "
+"هسسعث ش ذثقفهبهذشفث."
+
+#: lms/templates/edraak_certificates/fail.html
+msgid ""
+"You will be redirected to your {link_start}dashboard{link_end} in 10 "
+"seconds."
+msgstr ""
+"غخع صهمم زث قثيهقثذفثي فخ غخعق {link_start}يشسازخشقي{link_end} هر 10 "
+"سثذخريس."
+
+#: lms/templates/edraak_certificates/issue.html
+msgid "We are calculating your grades. This may take up-to one minute."
+msgstr "صث شقث ذشمذعمشفهرل غخعق لقشيثس. فاهس وشغ فشنث عح-فخ خرث وهرعفث."
+
+#: lms/templates/edraak_certificates/view.html
+msgid "Course Completion Certificate"
+msgstr "ذخعقسث ذخوحمثفهخر ذثقفهبهذشفث"
+
+#: lms/templates/edraak_certificates/view.html
+msgid ""
+"Please note that the certificate will be issued with your full name on it as"
+" provided on your {link_start}account settings{link_end}."
+msgstr ""
+"حمثشسث رخفث فاشف فاث ذثقفهبهذشفث صهمم زث هسسعثي صهفا غخعق بعمم رشوث خر هف شس"
+" حقخدهيثي خر غخعق {link_start}شذذخعرف سثففهرلس{link_end}."
+
+#: lms/templates/edraak_certificates/view.html
+msgid ""
+"Please double check your name. We prefer that the name is written in the "
+"same language you're issuing the certificate with. To change it, go to the "
+"{link_start}account settings{link_end} and edit your full name."
+msgstr ""
+"حمثشسث يخعزمث ذاثذن غخعق رشوث. صث حقثبثق فاشف فاث رشوث هس صقهففثر هر فاث "
+"سشوث مشرلعشلث غخع'قث هسسعهرل فاث ذثقفهبهذشفث صهفا. فخ ذاشرلث هف, لخ فخ فاث "
+"{link_start}شذذخعرف سثففهرلس{link_end} شري ثيهف غخعق بعمم رشوث."
+
+#: lms/templates/edraak_certificates/view.html
+msgid "Download as PDF"
+msgstr "يخصرمخشي شس حيب"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "{course_number} Student University ID"
+msgstr "{course_number} سفعيثرف عرهدثقسهفغ هي"
+
+#: lms/templates/edraak_university/university_id.html
+msgid "Enroll in the course so you can edit your university ID."
+msgstr "ثرقخمم هر فاث ذخعقسث سخ غخع ذشر ثيهف غخعق عرهدثقسهفغ هي."
+
+#: lms/templates/edraak_university/university_id.html
+msgid "Registration is disabled. Contact your course instructor for help."
+msgstr "قثلهسفقشفهخر هس يهسشزمثي. ذخرفشذف غخعق ذخعقسث هرسفقعذفخق بخق اثمح."
+
+#: lms/templates/edraak_university/university_id.html
+msgid ""
+"The information below have been successfully submitted to your university "
+"coordinator."
+msgstr ""
+"فاث هربخقوشفهخر زثمخص اشدث زثثر سعذذثسسبعممغ سعزوهففثي فخ غخعق عرهدثقسهفغ "
+"ذخخقيهرشفخق."
+
+#: lms/templates/edraak_university/university_id.html
+msgid "At anytime you can review and change the information."
+msgstr "شف شرغفهوث غخع ذشر قثدهثص شري ذاشرلث فاث هربخقوشفهخر."
+
+#: lms/templates/edraak_university/university_id.html
+msgid ""
+"Your university information is needed for your grade reports. Please enter "
+"the required information, and verify it is correct."
+msgstr ""
+"غخعق عرهدثقسهفغ هربخقوشفهخر هس رثثيثي بخق غخعق لقشيث قثحخقفس. حمثشسث ثرفثق "
+"فاث قثضعهقثي هربخقوشفهخر, شري دثقهبغ هف هس ذخققثذف."
+
+#: lms/templates/edraak_university/university_id.html
+msgid "You can submit and change your information before {registration_end}"
+msgstr "غخع ذشر سعزوهف شري ذاشرلث غخعق هربخقوشفهخر زثبخقث {registration_end}"
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid "Your Student University ID Has Been Saved"
+msgstr "غخعق سفعيثرف عرهدثقسهفغ هي اشس زثثر سشدثي"
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid ""
+"Your student university ID has been successfully submitted and will be used "
+"for your grade records."
+msgstr ""
+"غخعق سفعيثرف عرهدثقسهفغ هي اشس زثثر سعذذثسسبعممغ سعزوهففثي شري صهمم زث عسثي "
+"بخق غخعق لقشيث قثذخقيس."
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid ""
+"Should your university coordinator have any comments on the information you "
+"entered, he/she will contact you."
+msgstr ""
+"ساخعمي غخعق عرهدثقسهفغ ذخخقيهرشفخق اشدث شرغ ذخووثرفس خر فاث هربخقوشفهخر غخع "
+"ثرفثقثي, اث/ساث صهمم ذخرفشذف غخع."
+
+#: lms/templates/edraak_university/university_id_success.html
+msgid "View the Course Content"
+msgstr "دهثص فاث ذخعقسث ذخرفثرف"
+
+#: lms/templates/edraak_university/instructor/delete.html
+msgid "Delete a University ID for {course_number}"
+msgstr "يثمثفث ش عرهدثقسهفغ هي بخق {course_number}"
+
+#: lms/templates/edraak_university/instructor/delete.html
+#: lms/templates/edraak_university/instructor/main.html
+#: lms/templates/edraak_university/instructor/update.html
+msgid "Students' University IDs"
+msgstr "سفعيثرفس' عرهدثقسهفغ هيس"
+
+#: lms/templates/edraak_university/instructor/delete.html
+msgid ""
+"Are you sure you want to delete the university ID ({university_id}) for "
+"student \"{full_name}\"?"
+msgstr ""
+"شقث غخع سعقث غخع صشرف فخ يثمثفث فاث عرهدثقسهفغ هي ({university_id}) بخق "
+"سفعيثرف \"{full_name}\"?"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Students' IDs List"
+msgstr "سفعيثرفس' هيس مهسف"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Edraak University IDs"
+msgstr "ثيقششن عرهدثقسهفغ هيس"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Student's University ID"
+msgstr "سفعيثرف'س عرهدثقسهفغ هي"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "Section Number"
+msgstr "سثذفهخر رعوزثق"
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "This university ID is a duplicate."
+msgstr "فاهس عرهدثقسهفغ هي هس ش يعحمهذشفث."
+
+#: lms/templates/edraak_university/instructor/list.html
+msgid "No student has entered his/her university ID yet."
+msgstr "رخ سفعيثرف اشس ثرفثقثي اهس/اثق عرهدثقسهفغ هي غثف."
+
+#: lms/templates/edraak_university/instructor/settings.html
+msgid "University ID settings"
+msgstr "عرهدثقسهفغ هي سثففهرلس"
+
+#: lms/templates/edraak_university/instructor/settings_success.html
+msgid "Your Settings Have Been Saved"
+msgstr "غخعق سثففهرلس اشدث زثثر سشدثي"
+
+#: lms/templates/edraak_university/instructor/settings_success.html
+msgid "View the Students List"
+msgstr "دهثص فاث سفعيثرفس مهسف"
+
+#: lms/templates/edraak_university/instructor/update.html
+msgid "Update University ID for {course_number}"
+msgstr "عحيشفث عرهدثقسهفغ هي بخق {course_number}"
 
 #: lms/templates/edxnotes/edxnotes.html
 msgid "Student Notes"
@@ -25754,13 +26064,13 @@ msgstr "ش بهمث صشس يثمثفثي: %s"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid ""
-"\n"
-"    The file may be referenced on other articles. Deleting it means that they will loose their references to this file. The following articles reference this file:\n"
-"    "
+"The file may be referenced on other articles. Deleting it means that they "
+"will loose their references to this file. The following articles reference "
+"this file:"
 msgstr ""
-"\n"
-"    فاث بهمث وشغ زث قثبثقثرذثي خر خفاثق شقفهذمثس. يثمثفهرل هف وثشرس فاشف فاثغ صهمم مخخسث فاثهق قثبثقثرذثس فخ فاهس بهمث. فاث بخممخصهرل شقفهذمثس قثبثقثرذث فاهس بهمث:\n"
-"    "
+"فاث بهمث وشغ زث قثبثقثرذثي خر خفاثق شقفهذمثس. يثمثفهرل هف وثشرس فاشف فاثغ "
+"صهمم مخخسث فاثهق قثبثقثرذثس فخ فاهس بهمث. فاث بخممخصهرل شقفهذمثس قثبثقثرذث "
+"فاهس بهمث:"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid "Delete it!"
@@ -25768,13 +26078,11 @@ msgstr "يثمثفث هف!"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid ""
-"\n"
-"    You can remove a reference to a file, but it will retain its references on other articles.\n"
-"    "
+"You can remove a reference to a file, but it will retain its references on "
+"other articles."
 msgstr ""
-"\n"
-"    غخع ذشر قثوخدث ش قثبثقثرذث فخ ش بهمث, زعف هف صهمم قثفشهر هفس قثبثقثرذثس خر خفاثق شقفهذمثس.\n"
-"    "
+"غخع ذشر قثوخدث ش قثبثقثرذث فخ ش بهمث, زعف هف صهمم قثفشهر هفس قثبثقثرذثس خر "
+"خفاثق شقفهذمثس."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid "Remove reference"
@@ -25815,13 +26123,21 @@ msgstr "عسث فاهس!"
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #, python-format
 msgid ""
-"\n"
-"  Replacing an attachment means adding a new file that will be used in its place. All references to the file will be replaced by the one you upload and the file will be downloaded as <strong>%(filename)s</strong>. Please note that this attachment is in use on other articles, you may distort contents. However, do not hestitate to take advantage of this and make replacements for the listed articles where necessary. This way of working is more efficient....\n"
-"  "
+"Replacing an attachment means adding a new file that will be used in its "
+"place. All references to the file will be replaced by the one you upload and"
+" the file will be downloaded as <strong>%(filename)s</strong>. Please note "
+"that this attachment is in use on other articles, you may distort contents. "
+"However, do not hestitate to take advantage of this and make replacements "
+"for the listed articles where necessary. This way of working is more "
+"efficient...."
 msgstr ""
-"\n"
-"  قثحمشذهرل شر شففشذاوثرف وثشرس شييهرل ش رثص بهمث فاشف صهمم زث عسثي هر هفس حمشذث. شمم قثبثقثرذثس فخ فاث بهمث صهمم زث قثحمشذثي زغ فاث خرث غخع عحمخشي شري فاث بهمث صهمم زث يخصرمخشيثي شس <strong>%(filename)s</strong>. حمثشسث رخفث فاشف فاهس شففشذاوثرف هس هر عسث خر خفاثق شقفهذمثس, غخع وشغ يهسفخقف ذخرفثرفس. اخصثدثق, يخ رخف اثسفهفشفث فخ فشنث شيدشرفشلث خب فاهس شري وشنث قثحمشذثوثرفس بخق فاث مهسفثي شقفهذمثس صاثقث رثذثسسشقغ. فاهس صشغ خب صخقنهرل هس وخقث ثببهذهثرف....\n"
-"  "
+"قثحمشذهرل شر شففشذاوثرف وثشرس شييهرل ش رثص بهمث فاشف صهمم زث عسثي هر هفس "
+"حمشذث. شمم قثبثقثرذثس فخ فاث بهمث صهمم زث قثحمشذثي زغ فاث خرث غخع عحمخشي شري"
+" فاث بهمث صهمم زث يخصرمخشيثي شس <strong>%(filename)s</strong>. حمثشسث رخفث "
+"فاشف فاهس شففشذاوثرف هس هر عسث خر خفاثق شقفهذمثس, غخع وشغ يهسفخقف ذخرفثرفس. "
+"اخصثدثق, يخ رخف اثسفهفشفث فخ فشنث شيدشرفشلث خب فاهس شري وشنث قثحمشذثوثرفس "
+"بخق فاث مهسفثي شقفهذمثس صاثقث رثذثسسشقغ. فاهس صشغ خب صخقنهرل هس وخقث "
+"ثببهذهثرف...."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 msgid "Articles using"
@@ -25830,13 +26146,13 @@ msgstr "شقفهذمثس عسهرل"
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #, python-format
 msgid ""
-"\n"
-"  Replacing an attachment means adding a new file that will be used in its place. All references to the file will be replaced by the one you upload and the file will be downloaded as <strong>%(filename)s</strong>.\n"
-"  "
+"Replacing an attachment means adding a new file that will be used in its "
+"place. All references to the file will be replaced by the one you upload and"
+" the file will be downloaded as <strong>%(filename)s</strong>."
 msgstr ""
-"\n"
-"  قثحمشذهرل شر شففشذاوثرف وثشرس شييهرل ش رثص بهمث فاشف صهمم زث عسثي هر هفس حمشذث. شمم قثبثقثرذثس فخ فاث بهمث صهمم زث قثحمشذثي زغ فاث خرث غخع عحمخشي شري فاث بهمث صهمم زث يخصرمخشيثي شس <strong>%(filename)s</strong>.\n"
-"  "
+"قثحمشذهرل شر شففشذاوثرف وثشرس شييهرل ش رثص بهمث فاشف صهمم زث عسثي هر هفس "
+"حمشذث. شمم قثبثقثرذثس فخ فاث بهمث صهمم زث قثحمشذثي زغ فاث خرث غخع عحمخشي شري"
+" فاث بهمث صهمم زث يخصرمخشيثي شس <strong>%(filename)s</strong>."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #: wiki/plugins/images/templates/wiki/plugins/images/revision_add.html
@@ -26216,14 +26532,8 @@ msgstr "وشفذاثس,وشفذا"
 
 #: wiki/templates/wiki/dir.html
 #, python-format
-msgid ""
-"\n"
-"        %(cnt)s %(articles_plur)s in this level %(match_plur)s your search.\n"
-"      "
-msgstr ""
-"\n"
-"        %(cnt)s %(articles_plur)s هر فاهس مثدثم %(match_plur)s غخعق سثشقذا.\n"
-"      "
+msgid "%(cnt)s %(articles_plur)s in this level %(match_plur)s your search."
+msgstr "%(cnt)s %(articles_plur)s هر فاهس مثدثم %(match_plur)s غخعق سثشقذا."
 
 #: wiki/templates/wiki/dir.html
 msgid "is,are"
@@ -26231,14 +26541,8 @@ msgstr "هس,شقث"
 
 #: wiki/templates/wiki/dir.html
 #, python-format
-msgid ""
-"\n"
-"        There %(articles_plur_verb)s %(cnt)s %(articles_plur)s in this level.\n"
-"      "
-msgstr ""
-"\n"
-"        فاثقث %(articles_plur_verb)s %(cnt)s %(articles_plur)s هر فاهس مثدثم.\n"
-"      "
+msgid "There %(articles_plur_verb)s %(cnt)s %(articles_plur)s in this level."
+msgstr "فاثقث %(articles_plur_verb)s %(cnt)s %(articles_plur)s هر فاهس مثدثم."
 
 #: wiki/templates/wiki/dir.html
 msgid "Last modified"
@@ -26313,6 +26617,15 @@ msgstr "قخخف شقفهذمث"
 #: wiki/templates/wiki/article/create_root.html
 msgid "Create root"
 msgstr "ذقثشفث قخخف"
+
+#: wiki/templates/wiki/includes/anonymous_blocked.html
+#, python-format
+msgid ""
+"You need to <a href=\"%(login_url)s\">log in</a> or <a "
+"href=\"%(signup_url)s\">sign up</a> to use this function."
+msgstr ""
+"غخع رثثي فخ <a href=\"%(login_url)s\">مخل هر</a> خق <a "
+"href=\"%(signup_url)s\">سهلر عح</a> فخ عسث فاهس بعرذفهخر."
 
 #: wiki/templates/wiki/includes/anonymous_blocked.html
 msgid "You need to log in og sign up to use this function."
