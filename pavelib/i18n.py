@@ -49,7 +49,7 @@ def i18n_fastgenerate():
     """
     Compile localizable strings from sources without re-extracting strings first.
     """
-    sh("i18n_tool generate")
+    sh("i18n_tool generate -v")
 
 
 @task
@@ -59,7 +59,7 @@ def i18n_generate():
     """
     Compile localizable strings from sources, extracting strings first.
     """
-    sh("i18n_tool generate")
+    sh("i18n_tool generate -v")
 
 
 @task
@@ -70,7 +70,7 @@ def i18n_generate_strict():
     Compile localizable strings from sources, extracting strings first.
     Complains if files are missing.
     """
-    sh("i18n_tool generate --strict")
+    sh("i18n_tool generate -v --strict")
 
 
 @task
@@ -88,7 +88,7 @@ def i18n_dummy(options):
 
     sh("i18n_tool dummy")
     # Need to then compile the new dummy strings
-    sh("i18n_tool generate")
+    sh("i18n_tool generate -v")
 
     # Generate static i18n JS files.
     for system in ['lms', 'cms']:
@@ -158,7 +158,7 @@ def i18n_transifex_pull():
     """
     Pull translated strings from Transifex
     """
-    sh("i18n_tool transifex pull")
+    sh("tx pull --force -l ar --mode=translator")
 
 
 @task
