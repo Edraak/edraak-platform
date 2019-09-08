@@ -158,7 +158,7 @@ def i18n_transifex_pull():
     """
     Pull translated strings from Transifex
     """
-    sh("tx pull --force -l ar --mode=reviewed")
+    sh("tx pull --force -l ar --mode=translator")
 
 
 @task
