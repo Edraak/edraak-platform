@@ -513,6 +513,20 @@ if AWS_SECRET_ACCESS_KEY == "":
 
 AWS_STORAGE_BUCKET_NAME = AUTH_TOKENS.get('AWS_STORAGE_BUCKET_NAME', 'edxuploads')
 
+try:
+    # IMPORTANT: Keep in sync with the cms/aws.py
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    if AUTH_TOKENS.get('SENTRY_DSN'):
+        sentry_sdk.init(
+            dsn=AUTH_TOKENS.get('SENTRY_DSN'),
+            integrations=[DjangoIntegration()]
+        )
+except ImportError:
+    # Disable it when Sentry isn't installed, useful for devstack
+    pass
+
 # Disabling querystring auth instructs Boto to exclude the querystring parameters (e.g. signature, access key) it
 # normally appends to every returned URL.
 AWS_QUERYSTRING_AUTH = AUTH_TOKENS.get('AWS_QUERYSTRING_AUTH', True)
