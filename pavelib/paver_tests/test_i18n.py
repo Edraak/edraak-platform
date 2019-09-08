@@ -162,7 +162,7 @@ class TestI18nDummy(PaverTestCase):
             [
                 u'i18n_tool extract',
                 u'i18n_tool dummy',
-                u'i18n_tool generate',
+                u'i18n_tool generate -v',
                 u'python manage.py lms --settings={} compilejsi18n'.format(Env.TEST_SETTINGS),
                 u'python manage.py cms --settings={} compilejsi18n'.format(Env.TEST_SETTINGS),
             ]
