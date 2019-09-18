@@ -4,8 +4,8 @@ from openedx.core.lib.api.permissions import ApiKeyHeaderPermission, ApiKeyHeade
 from rest_framework.response import Response
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
-from cors_csrf.decorators import ensure_csrf_cookie_cross_domain
-from cors_csrf.authentication import SessionAuthenticationCrossDomainCsrf
+from openedx.core.djangoapps.cors_csrf.decorators import ensure_csrf_cookie_cross_domain
+from openedx.core.djangoapps.cors_csrf.authentication import SessionAuthenticationCrossDomainCsrf
 from openedx.core.lib.api.authentication import (
     SessionAuthenticationAllowInactiveUser,
     OAuth2AuthenticationAllowInactiveUser,
