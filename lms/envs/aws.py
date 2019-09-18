@@ -686,7 +686,7 @@ if FEATURES.get('EDRAAK_UNIVERSITY_APP'):
 if FEATURES.get('EDRAAK_CERTIFICATES_APP') and FEATURES.get('ORGANIZATIONS_APP'):
     INSTALLED_APPS += ('edraak_certificates',)
 
-INSTALLED_APPS += ('edraak_specializations',)
+INSTALLED_APPS += ('edraak_specializations','edraak_dummy',)
 
 PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 

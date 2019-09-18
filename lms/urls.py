@@ -205,7 +205,8 @@ if edraak_certificates.utils.is_certificates_feature_enabled():
 
 urlpatterns += [
         url(r'', include('edraak_misc.urls', namespace='edraak_misc')),
-    ]
+        url(r'', include('edraak_dummy.urls', namespace='edraak_dummy')),
+]
 
 urlpatterns += [
     url(r'^support/', include('support.urls')),
