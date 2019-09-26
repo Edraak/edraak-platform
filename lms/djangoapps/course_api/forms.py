@@ -51,13 +51,30 @@ class CourseListGetForm(UsernameValidatorMixin, Form):
     search_term = CharField(required=False)
     username = CharField(required=False)
     org = CharField(required=False)
+    ids = CharField(required=False)
 
     # white list of all supported filter fields
     filter_type = namedtuple('filter_type', ['param_name', 'field_name'])
     supported_filters = [
         filter_type(param_name='mobile', field_name='mobile_available'),
+        filter_type(param_name='ids', field_name='id__in'),
     ]
     mobile = ExtendedNullBooleanField(required=False)
+
+    def clean_ids(self):
+        ids = self.cleaned_data.get('ids', '')
+        if not ids:
+            return None
+
+        ids = ids.replace(' ', '+')
+
+        if ids.endswith(','):
+            ids = ids[:-1]
+        ids = ids.split(',')
+
+        ids = list(map(lambda course_id: CourseKey.from_string(course_id), ids))
+        return ids
+
 
     def clean(self):
         """

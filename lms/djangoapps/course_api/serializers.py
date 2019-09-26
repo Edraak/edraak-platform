@@ -10,7 +10,7 @@ from rest_framework import serializers
 
 from openedx.core.djangoapps.models.course_details import CourseDetails
 from openedx.core.lib.api.fields import AbsoluteURLField
-
+from edraak_certificates.utils import is_student_pass
 
 class _MediaSerializer(serializers.Serializer):  # pylint: disable=abstract-method
     """
@@ -58,6 +58,7 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
     """
 
     blocks_url = serializers.SerializerMethodField()
+    duration = serializers.SerializerMethodField()
     effort = serializers.CharField()
     end = serializers.DateTimeField()
     enrollment_start = serializers.DateTimeField()
@@ -80,6 +81,14 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
 
     # 'course_id' is a deprecated field, please use 'id' instead.
     course_id = serializers.CharField(source='id', read_only=True)
+    def __init__(self, *args, **kwargs):
+        super(CourseSerializer, self).__init__(*args, **kwargs)
+
+        context = kwargs.get('context')
+        if context:
+            calculate_completion = context.get('calculate_completion')
+            if calculate_completion:
+                self.fields['completed'] = serializers.SerializerMethodField()
 
     def get_hidden(self, course_overview):
         """
@@ -98,6 +107,21 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
             urllib.urlencode({'course_id': course_overview.id}),
         ])
         return self.context['request'].build_absolute_uri(base_url)
+
+    def get_duration(self, obj):
+        if obj.self_paced:
+            return 0
+
+        try:
+            delta = obj.end - obj.start
+            return int(delta.days / 7)
+        except TypeError:
+            return 0
+
+    def get_completed(self, obj):
+        request = self.context['request']
+        course_id_str = str(obj.id)
+        return bool(is_student_pass(request.user, course_id_str))
 
 
 class CourseDetailMarketingSerializer(CourseSerializer):
