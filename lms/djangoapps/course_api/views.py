@@ -16,7 +16,15 @@ from . import USE_RATE_LIMIT_2_FOR_COURSE_LIST_API, USE_RATE_LIMIT_10_FOR_COURSE
 from .api import course_detail, list_courses
 from .forms import CourseDetailGetForm, CourseListGetForm
 from .serializers import CourseDetailSerializer, CourseDetailMarketingSerializer, CourseSerializer
+import branding
 
+def get_all_courses(org=None, filter_=None):
+    """
+    Returns a list of courses available, sorted by course.number and optionally
+    filtered by org code (case-insensitive).
+    """
+    courses = branding.get_visible_courses(org=org, filter_=filter_)
+    return courses
 
 @view_auth_classes(is_authenticated=False)
 class CourseDetailView(DeveloperErrorViewMixin, RetrieveAPIView):
@@ -118,6 +126,8 @@ class CourseDetailView(DeveloperErrorViewMixin, RetrieveAPIView):
                 course_key=self.kwargs['course_key_string'],
                 language=self.request.LANGUAGE_CODE,
             )
+        calculate_completion = self.request.GET.get('calculate_completion', 'false') in ['true', 'True']
+        context['calculate_completion'] = calculate_completion
 
         return context
 
@@ -254,6 +264,13 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
     # We should use 0 after upgrading to 1.1+:
     #   - https://github.com/elastic/elasticsearch/commit/8b0a863d427b4ebcbcfb1dcd69c996c52e7ae05e
     results_size_infinity = 10000
+    def get_serializer_context(self):
+        context = super(CourseListView, self).get_serializer_context()
+
+        calculate_completion = self.request.GET.get('calculate_completion', 'false') in ['true', 'True']
+        context['calculate_completion'] = calculate_completion
+
+        return context
 
     def get_queryset(self):
         """
@@ -262,6 +279,13 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
         form = CourseListGetForm(self.request.query_params, initial={'requesting_user': self.request.user})
         if not form.is_valid():
             raise ValidationError(form.errors)
+        spec_courses = self.request.GET.get('spec_courses', 'false') in ['true', 'True']
+        if spec_courses:
+            return get_all_courses(
+                org=form.cleaned_data['org'],
+                filter_=form.cleaned_data['filter_'],
+            )
+
 
         db_courses = list_courses(
             self.request,
