@@ -513,6 +513,7 @@ if AWS_SECRET_ACCESS_KEY == "":
     AWS_SECRET_ACCESS_KEY = None
 
 AWS_STORAGE_BUCKET_NAME = AUTH_TOKENS.get('AWS_STORAGE_BUCKET_NAME', 'edxuploads')
+GS_BUCKET_NAME = AUTH_TOKENS.get('GS_BUCKET_NAME', 'edxuploads')
 
 try:
     # IMPORTANT: Keep in sync with the cms/aws.py
