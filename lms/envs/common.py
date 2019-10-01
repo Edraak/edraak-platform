@@ -2223,6 +2223,9 @@ INSTALLED_APPS = [
     'mobile_api',
     'social_django',
 
+    # Edraak specific modules
+    'edraak_misc',
+
     # Surveys
     'survey.apps.SurveyConfig',
 
