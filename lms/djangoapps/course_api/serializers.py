@@ -10,7 +10,7 @@ from rest_framework import serializers
 
 from openedx.core.djangoapps.models.course_details import CourseDetails
 from openedx.core.lib.api.fields import AbsoluteURLField
-from edraak_certificates.utils import is_student_pass
+
 
 class _MediaSerializer(serializers.Serializer):  # pylint: disable=abstract-method
     """
@@ -119,6 +119,8 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
             return 0
 
     def get_completed(self, obj):
+        from edraak_certificates.utils import is_student_pass
+
         request = self.context['request']
         course_id_str = str(obj.id)
         return bool(is_student_pass(request.user, course_id_str))
