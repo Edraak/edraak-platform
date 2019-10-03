@@ -76,6 +76,7 @@ class TestCourseSerializer(CourseApiFactoryMixin, ModuleStoreTestCase):
 
             # 'course_id' is a deprecated field, please use 'id' instead.
             'course_id': u'edX/toy/2012_Fall',
+            'duration': 9,
         }
 
     def _get_request(self, user=None):

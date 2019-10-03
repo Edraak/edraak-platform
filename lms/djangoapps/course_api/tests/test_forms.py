@@ -71,6 +71,7 @@ class TestCourseListGetForm(FormTestMixin, UsernameTestMixin, SharedModuleStoreT
             'mobile': None,
             'search_term': '',
             'filter_': None,
+            'ids': None,
         }
 
     def test_basic(self):
