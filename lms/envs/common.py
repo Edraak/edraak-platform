@@ -2339,6 +2339,7 @@ CSRF_COOKIE_AGE = 60 * 60 * 24 * 7 * 52
 # It is highly recommended that you override this in any environment accessed by
 # end users
 CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_DOMAIN = ""
 
 ######################### Django Rest Framework ########################
 
