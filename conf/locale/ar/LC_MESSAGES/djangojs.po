@@ -8,6 +8,7 @@
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# Lina Bashayreh <lbashayreh@qrf.org>, 2019
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -18,6 +19,7 @@
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
+# Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 #
 # #-#-#-#-#  underscore.po (0.1a)  #-#-#-#-#
@@ -29,6 +31,7 @@
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2019
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2019
+# Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 #
 # #-#-#-#-#  underscore-studio.po (0.1a)  #-#-#-#-#
@@ -39,6 +42,7 @@
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
+# Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 #
 msgid ""
@@ -3082,7 +3086,7 @@ msgstr ""
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "You must select a session to access the course."
-msgstr ""
+msgstr "يجب ان تختار جلسة للوصول الى محتويات المساق "
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3095,14 +3099,14 @@ msgstr ""
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "Change Session"
-msgstr ""
+msgstr "تغيير الجلسة"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "Select Session"
-msgstr ""
+msgstr "اختر جلسة"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -7090,7 +7094,7 @@ msgstr "تجري معالجة إعادة طرح المساق"
 
 #: cms/static/js/views/course_video_settings.js
 msgid "An error has occurred. Wait a few minutes, and then try again."
-msgstr ""
+msgstr "حدث خطأ. انتظر بضع دقائق ، ثم حاول مرة أخرى"
 
 #: cms/static/js/views/course_video_settings.js
 msgid "Select turnaround"
@@ -7123,11 +7127,11 @@ msgstr "مطلوب"
 
 #: cms/static/js/views/course_video_settings.js
 msgid "Automatic transcripts are disabled."
-msgstr ""
+msgstr "تم تعطيل النصوص التلقائية "
 
 #: cms/static/js/views/course_video_settings.js
 msgid "{selectedProvider} credentials saved"
-msgstr ""
+msgstr "تم حفظ بيانات اعتماد {selectedProvider}"
 
 #: cms/static/js/views/export.js
 msgid "There has been an error while exporting."
@@ -7211,12 +7215,12 @@ msgstr "ليس قيد الاستخدام"
 #: cms/static/js/views/partition_group_details.js
 msgid "Used in {count} location"
 msgid_plural "Used in {count} locations"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "المستخدمة في {count} المواقع"
+msgstr[1] "المستخدمة في {count} المواقع"
+msgstr[2] "المستخدمة في {count} المواقع"
+msgstr[3] "المستخدمة في {count} المواقع"
+msgstr[4] "المستخدمة في {count} المواقع"
+msgstr[5] "المستخدمة في {count} المواقع"
 
 #. Translators: this refers to a collection of groups.
 #: cms/static/js/views/group_configuration_item.js
@@ -7621,7 +7625,7 @@ msgstr ""
 #: cms/static/js/views/video_transcripts.js
 #: cms/templates/js/video-transcripts.underscore
 msgid "{transcriptClientTitle}_{transcriptLanguageCode}.{fileExtension}"
-msgstr ""
+msgstr "{transcriptClientTitle}_{transcriptLanguageCode}.{fileExtension}"
 
 #: cms/static/js/views/video_transcripts.js
 msgid ""
@@ -7763,11 +7767,11 @@ msgstr "حدث خطأ في نشر رسالتك."
 #: common/static/common/templates/discussion/new-post-visibility.underscore
 #, python-format
 msgid "This post will be visible only to %(group_name)s."
-msgstr ""
+msgstr "هذا المنشور مرئيٌّ فقط ل%(group_name)s"
 
 #: common/static/common/templates/discussion/new-post-visibility.underscore
 msgid "This post will be visible to everyone."
-msgstr ""
+msgstr "هذا المنشور مرئيٌّ للجميع."
 
 #: common/static/common/templates/discussion/new-post.underscore
 msgid "Add a Post"
@@ -8206,11 +8210,11 @@ msgstr "غيِّر التسجيل"
 
 #: lms/djangoapps/support/static/support/templates/manage_user.underscore
 msgid "Date Joined"
-msgstr ""
+msgstr "تاريخ الانضمام"
 
 #: lms/djangoapps/support/static/support/templates/manage_user.underscore
 msgid "Password Status"
-msgstr ""
+msgstr "حالة كلمة المرور"
 
 #: lms/djangoapps/support/static/support/templates/manage_user.underscore
 msgid "Disable Account"
@@ -8497,7 +8501,7 @@ msgstr "انهِ الامتحان"
 
 #: lms/templates/courseware/proctored-exam-status.underscore
 msgid "Hide Timer"
-msgstr ""
+msgstr "إخفاء الموقت "
 
 #: lms/templates/discovery/course_card.underscore
 msgid "LEARN MORE"
@@ -8975,7 +8979,7 @@ msgstr "تغيير أو مغادرة الجلسة"
 
 #: lms/templates/learner_dashboard/course_card.underscore
 msgid "You must select a session by {expiration_date} to access the course."
-msgstr ""
+msgstr "يجب ان تختار الجلسة  {expiration_date}  للوصول الى محتويات المساق "
 
 #: lms/templates/learner_dashboard/course_card.underscore
 msgid "You can no longer change sessions."
@@ -8983,15 +8987,15 @@ msgstr "لا تتمكن من تغيير الجلسات بعد الآن."
 
 #: lms/templates/learner_dashboard/course_card.underscore
 msgid "You can change sessions until {expiration_date}."
-msgstr ""
+msgstr "يمكنك تغيير الجلسة حتى تاريخ  {expiration_date}."
 
 #: lms/templates/learner_dashboard/course_enroll.underscore
 msgid "Final Grade"
-msgstr ""
+msgstr "العلامة النهائية"
 
 #: lms/templates/learner_dashboard/course_enroll.underscore
 msgid "for {courseName}"
-msgstr ""
+msgstr "ل{courseName}"
 
 #: lms/templates/learner_dashboard/course_enroll.underscore
 msgid "View Archived Course"
@@ -9003,7 +9007,7 @@ msgstr "استعرض المساق"
 
 #: lms/templates/learner_dashboard/course_enroll.underscore
 msgid "Select a session:"
-msgstr ""
+msgstr "اختر الجلسة"
 
 #: lms/templates/learner_dashboard/course_enroll.underscore
 msgid "Enroll Now"
@@ -9023,35 +9027,35 @@ msgstr "غير متاحٍ الآن"
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "More sessions coming soon."
-msgstr ""
+msgstr "سيتم اصدار جلسات اخرى لهذا المساق "
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "Change to a different session or leave the current session."
-msgstr ""
+msgstr "قم باختيار جلسة اخرى او قم بمغادرة المساق"
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "To access the course, select a session."
-msgstr ""
+msgstr "لتصفح محتويات المساق قم باختيار جلسة "
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "Session Selection Dropdown for {courseName}"
-msgstr ""
+msgstr "قائمة اختيار الجلسة ل{courseName}"
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "{sessionDates} - Currently Selected"
-msgstr ""
+msgstr "{sessionDates} -المنتقاة حالياً"
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "{sessionDates} (Open until {enrollmentEnd})"
-msgstr ""
+msgstr "{sessionDates} (Open until {enrollmentEnd})"
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "More sessions coming soon"
-msgstr ""
+msgstr "سيتم اصدار جلسات اخرى لهذا المساق "
 
 #: lms/templates/learner_dashboard/course_entitlement.underscore
 msgid "Leave the current session and decide later"
-msgstr ""
+msgstr "انهاء الجلسة الحالية واختيارالجلسة لاحقاً "
 
 #: lms/templates/learner_dashboard/empty_programs_list.underscore
 msgid "You are not enrolled in any programs yet."
@@ -9075,12 +9079,12 @@ msgstr "استكشف تخصصات جديدة"
 #: lms/templates/verify_student/enrollment_confirmation_step.underscore
 msgid "Course"
 msgid_plural "Courses"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "المساقات"
+msgstr[1] "المساقات"
+msgstr[2] "المساقات"
+msgstr[3] "المساقات"
+msgstr[4] "المساقات"
+msgstr[5] "المساقات"
 
 #: lms/templates/learner_dashboard/program_card.underscore
 msgid "Completed"
@@ -9106,7 +9110,7 @@ msgstr "افتح الشهادة التي حصلت عليها لبرنامج %(ti
 
 #: lms/templates/learner_dashboard/program_details_sidebar.underscore
 msgid "View Program Record"
-msgstr ""
+msgstr "عرض سجل البرنامج"
 
 #: lms/templates/learner_dashboard/program_details_view.underscore
 msgid "Congratulations!"
@@ -9237,31 +9241,36 @@ msgstr "أنشئ حسابًا."
 #: lms/templates/student_account/login.underscore
 msgid "Sign in to continue learning as {email}"
 msgstr ""
+"للاستمرار بالتعلم قم بتسجيل الدخول بإستخدام عنوان بريدك الإلكتروني التالي  "
+"{email}"
 
 #: lms/templates/student_account/login.underscore
 msgid "Sign in to continue learning"
-msgstr ""
+msgstr "للاستمرار بالتعلم قم بتسجيل الخول "
 
 #: lms/templates/student_account/login.underscore
 msgid ""
 "You already have an edX account with your {enterprise_name} email address."
-msgstr ""
+msgstr "لديك حساب على إدراك بعنوان {enterprise_name} الخاص بك"
 
 #: lms/templates/student_account/login.underscore
 msgid ""
 "Going forward, your account information will be updated and maintained by "
 "{enterprise_name}."
 msgstr ""
+"للمضي قدمًا ، سيتم تحديث معلومات حسابك وصيانتها بواسطة {enterprise_name}."
 
 #: lms/templates/student_account/login.underscore
 msgid ""
 "You can view your information or unlink from {enterprise_name} anytime in "
 "your Account Settings."
 msgstr ""
+"بأمكانك مراجعة معلومات حسابك او فصل ربط حسابك من  {enterprise_name}  في اي "
+"وقت من خلال \"اعدادات الحساب\""
 
 #: lms/templates/student_account/login.underscore
 msgid "To continue learning with this account, sign in below."
-msgstr ""
+msgstr "للاستمرارية بالتعلم من خلال ها الحساب قم بتسجيل الدخول"
 
 #: lms/templates/student_account/login.underscore
 msgid "Sign In"
@@ -9339,7 +9348,7 @@ msgstr "أنشئ حسابًا"
 
 #: lms/templates/student_account/register.underscore
 msgid "Support education research by providing additional information"
-msgstr ""
+msgstr "دعم البحوث التعليمية من خلال توفير معلومات إضافية"
 
 #: lms/templates/verify_student/enrollment_confirmation_step.underscore
 #, python-format
@@ -9888,7 +9897,7 @@ msgstr "التقط الصورة"
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
 msgid "Add a New Allowance"
-msgstr ""
+msgstr "اضف تمديد جديد "
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
 msgid "Special Exam"
@@ -9923,11 +9932,11 @@ msgstr "اسم المستخدم أو البريد الإلكتروني"
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
 msgid "Allowances"
-msgstr ""
+msgstr "المنَح"
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
 msgid "Add Allowance"
-msgstr ""
+msgstr "اضف تمديد "
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
@@ -9936,7 +9945,7 @@ msgstr "اسم الامتحان"
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
 msgid "Allowance Value"
-msgstr ""
+msgstr "قيمة التمديد "
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 msgid "Time Limit"
@@ -9948,7 +9957,7 @@ msgstr "بدأ في"
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 msgid "Completed At"
-msgstr ""
+msgstr "استكمل في "
 
 #: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 #, python-format
@@ -10064,6 +10073,8 @@ msgid ""
 "minimum completion percentage to limit access to this subsection. Allowed "
 "values are 0-100"
 msgstr ""
+"اختر قسم متطلّب أساسي فرعي وأدخل النسبة المئوية الدنيا للعلامة للحّد من "
+"إمكانية الوصول إلى هذا القسم الفرعي.القيم المسموحة بين 0-100"
 
 #: cms/templates/js/access-editor.underscore
 msgid "Prerequisite:"
@@ -10079,7 +10090,7 @@ msgstr "الحدّ الأدنى للعلامة:"
 
 #: cms/templates/js/access-editor.underscore
 msgid "Minimum Completion:"
-msgstr ""
+msgstr "الحد الادني للاستكمال "
 
 #: cms/templates/js/access-editor.underscore
 msgid "The minimum score percentage must be a whole number between 0 and 100."
@@ -10089,6 +10100,7 @@ msgstr "يجب أن تكون النسبة المئوية الدنيا للمجم
 msgid ""
 "The minimum completion percentage must be a whole number between 0 and 100."
 msgstr ""
+"يجب ان تكون النسبة المئوية للحد الادنى لعلامة الاتمام عددا صحيحا بين 0 و100"
 
 #: cms/templates/js/access-editor.underscore
 msgid "Use as a Prerequisite"
@@ -10419,7 +10431,7 @@ msgstr "فعّال"
 
 #: cms/templates/js/course-highlights-enable.underscore
 msgid "Enable Now"
-msgstr ""
+msgstr "فعِّل الآن"
 
 #: cms/templates/js/course-instructor-details.underscore
 msgid "Instructor Name"
@@ -10568,7 +10580,7 @@ msgstr "مجدوَل:"
 #: cms/templates/js/course-outline.underscore
 #: cms/templates/js/highlights-editor.underscore
 msgid "Section Highlights"
-msgstr ""
+msgstr "النقاط المهمة في القسم "
 
 #: cms/templates/js/course-outline.underscore
 msgid "Graded as:"
@@ -10607,7 +10619,7 @@ msgstr "أضِف نتيجة تعلُّم هنا"
 
 #: cms/templates/js/course-video-settings-update-org-credentials-footer.underscore
 msgid "Press discard changes to discard your changes."
-msgstr ""
+msgstr "لتجاهل التغيرات اضغط على زر تجاهل التغيرات"
 
 #: cms/templates/js/course-video-settings-update-org-credentials-footer.underscore
 #: cms/templates/js/course-video-settings-update-settings-footer.underscore
@@ -10616,11 +10628,11 @@ msgstr "إعدادات التحديث"
 
 #: cms/templates/js/course-video-settings-update-org-credentials-footer.underscore
 msgid "Press update settings to update the information for your organization."
-msgstr ""
+msgstr "اضغط على إعدادات التحديث لتحديث معلومات المؤسسة"
 
 #: cms/templates/js/course-video-settings-update-settings-footer.underscore
 msgid "Press discard changes to discard changes."
-msgstr ""
+msgstr "لتجاهل التغيرات اضغط على زر تجاهل التغيرات"
 
 #: cms/templates/js/course-video-settings-update-settings-footer.underscore
 msgid "Press update settings to update course video settings"
@@ -10663,7 +10675,7 @@ msgstr "اضغط على إضافة إلى اللغة"
 
 #: cms/templates/js/course-video-transcript-provider-empty.underscore
 msgid "Automated Transcripts"
-msgstr ""
+msgstr "نص آلي"
 
 #: cms/templates/js/course-video-transcript-provider-selected.underscore
 msgid "Transcript Provider"
@@ -10675,7 +10687,7 @@ msgstr "تغيير"
 
 #: cms/templates/js/course-video-transcript-provider-selected.underscore
 msgid "Press change to change selected transcript provider."
-msgstr ""
+msgstr "لتغير مزود لنص المٌختار قم بلضغط على تغيير"
 
 #: cms/templates/js/course_grade_policy.underscore
 msgid "Assignment Type Name"
@@ -10924,20 +10936,24 @@ msgid ""
 "This feature is currently in testing. Course teams can enter highlights, but"
 " learners will not receive email messages."
 msgstr ""
+"هذه الميزة حاليا في مرحلة الاختبار،يمكن لفريق المساق اضافة نقاط مهمة لكن لن "
+"تصل رسائل البريد الالكتروني  للطلاب"
 
 #: cms/templates/js/highlights-editor.underscore
 msgid ""
 "Enter 3-5 highlights to include in the email message that learners receive "
 "for this section (250 character limit)."
 msgstr ""
+"أدخل 3-5 نقاط مميزة لتضمينها في رسالة البريد الإلكتروني التي يتلقاها "
+"المتعلمون لهذا القسم (250 حرفًا كحد أقصى)."
 
 #: cms/templates/js/highlights-editor.underscore
 msgid "Highlight {highlight_index}"
-msgstr ""
+msgstr "نقطة مظلِّلة {highlight_index}"
 
 #: cms/templates/js/highlights-editor.underscore
 msgid "A highlight to look forward to this week."
-msgstr ""
+msgstr "نقطة مهمة للتطلع على الاسبوع"
 
 #: cms/templates/js/license-selector.underscore
 msgid "License Type"
@@ -11060,7 +11076,7 @@ msgstr "النصوص"
 
 #: cms/templates/js/previous-video-upload-list.underscore
 msgid "Video Status"
-msgstr ""
+msgstr "حالة الفيديو"
 
 #: cms/templates/js/previous-video-upload.underscore
 msgid "Remove this video"
@@ -11474,19 +11490,19 @@ msgstr "حساب"
 #: cms/templates/js/transcript-organization-credentials.underscore
 msgid ""
 "This action updates the {provider} information for your entire organization."
-msgstr ""
+msgstr "يعمل هذا الإجراء على تحديث معلومات {provider} لمؤسستك بالكامل"
 
 #: cms/templates/js/transcript-organization-credentials.underscore
 msgid "Enter the account information for your organization."
-msgstr ""
+msgstr "ادخل معلومات حساب المؤسسة"
 
 #: cms/templates/js/transcript-organization-credentials.underscore
 msgid "API Key"
-msgstr ""
+msgstr "مفتاح عميل واجهة برمجة التطبيقات"
 
 #: cms/templates/js/transcript-organization-credentials.underscore
 msgid "API Secret"
-msgstr ""
+msgstr "كلمة مرور عميل واجهة برمجة التطبيقات"
 
 #: cms/templates/js/unit-access-editor.underscore
 msgid "Unit Access"
@@ -11560,15 +11576,15 @@ msgstr ""
 
 #: cms/templates/js/video-transcript-upload-status.underscore
 msgid "Read more"
-msgstr ""
+msgstr "اقرأ المزيد"
 
 #: cms/templates/js/video-transcripts.underscore
 msgid "Show transcripts ({totalTranscripts})"
-msgstr ""
+msgstr "اظهر النص ({totalTranscripts})"
 
 #: cms/templates/js/video-transcripts.underscore
 msgid "No transcript uploaded."
-msgstr ""
+msgstr "لم يتم تحميل النص "
 
 #: cms/templates/js/xblock-access-editor.underscore
 msgid "Set Access"
