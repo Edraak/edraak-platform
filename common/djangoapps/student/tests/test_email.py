@@ -14,11 +14,10 @@ from django.test.client import RequestFactory
 from mock import Mock, patch
 from six import text_type
 
-from edxmako.shortcuts import render_to_string, marketing_link
+from edxmako.shortcuts import marketing_link
 from openedx.core.djangoapps.ace_common.tests.mixins import EmailTemplateTagMixin
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.theming.tests.test_util import with_comprehensive_theme
-from openedx.core.djangoapps.site_configuration.tests.test_util import with_site_configuration
 from openedx.core.djangoapps.user_api.config.waffle import PREVENT_AUTH_USER_WRITES, SYSTEM_MAINTENANCE_MSG, waffle
 from openedx.core.djangolib.testing.utils import CacheIsolationTestCase, CacheIsolationMixin
 from student.models import (
@@ -27,16 +26,14 @@ from student.models import (
     UserProfile,
     get_retired_email_by_email
 )
-from student.tests.factories import PendingEmailChangeFactory, RegistrationFactory, UserFactory
+from student.tests.factories import PendingEmailChangeFactory, UserFactory
 from student.views import (
     SETTING_CHANGE_INITIATED,
     confirm_email_change,
     do_email_change_request,
     validate_new_email
 )
-from student.views import generate_activation_email_context, send_reactivation_email_for_user
 from third_party_auth.views import inactive_user_view
-from util.request import safe_get_host
 from util.testing import EventTestMixin
 
 
@@ -106,7 +103,7 @@ class ActivationEmailTests(EmailTemplateTagMixin, CacheIsolationTestCase):
     # sent from an OpenEdX installation.
     OPENEDX_FRAGMENTS = [
         (
-            u"You're almost there! Use the link below to activate your account to access engaging, "
+            u"Use the link below to activate your account to access engaging, "
             u"high-quality {platform_name} courses. Note that you will not be able to log back into your "
             u"account until you have activated it.".format(
                 platform_name=settings.PLATFORM_NAME
