@@ -794,6 +794,7 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
 
             # Build the notification message based on the notification type and translate it.
             ungettext = self.runtime.service(self, "i18n").ungettext
+            _ = self.runtime.service(self, "i18n").ugettext
             if answer_notification_type == 'incorrect':
                 if progress is not None:
                     answer_notification_message = ungettext(
