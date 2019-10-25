@@ -51,34 +51,36 @@ FEATURES.update({
     'ENABLE_ENTERPRISE_INTEGRATION': False,
 })
 
-ENABLE_MKTG_SITE = os.environ.get('ENABLE_MARKETING_SITE', False)
-MARKETING_SITE_ROOT = os.environ.get('MARKETING_SITE_ROOT', 'http://localhost:8080')
+if not FEATURES.get('ENABLE_EDRAAK_LOGISTRATION'):
+    # Edraak: Make it possible to configure the Edraak marketing site
+    ENABLE_MKTG_SITE = os.environ.get('ENABLE_MARKETING_SITE', False)
+    MARKETING_SITE_ROOT = os.environ.get('MARKETING_SITE_ROOT', 'http://localhost:8080')
 
-MKTG_URLS = {
-    'ABOUT': '/about',
-    'ACCESSIBILITY': '/accessibility',
-    'AFFILIATES': '/affiliate-program',
-    'BLOG': '/blog',
-    'CAREERS': '/careers',
-    'CONTACT': '/support/contact_us',
-    'COURSES': '/course',
-    'DONATE': '/donate',
-    'ENTERPRISE': '/enterprise',
-    'FAQ': '/student-faq',
-    'HONOR': '/edx-terms-service',
-    'HOW_IT_WORKS': '/how-it-works',
-    'MEDIA_KIT': '/media-kit',
-    'NEWS': '/news-announcements',
-    'PRESS': '/press',
-    'PRIVACY': '/edx-privacy-policy',
-    'ROOT': MARKETING_SITE_ROOT,
-    'SCHOOLS': '/schools-partners',
-    'SITE_MAP': '/sitemap',
-    'TRADEMARKS': '/trademarks',
-    'TOS': '/edx-terms-service',
-    'TOS_AND_HONOR': '/edx-terms-service',
-    'WHAT_IS_VERIFIED_CERT': '/verified-certificate',
-}
+    MKTG_URLS = {
+        'ABOUT': '/about',
+        'ACCESSIBILITY': '/accessibility',
+        'AFFILIATES': '/affiliate-program',
+        'BLOG': '/blog',
+        'CAREERS': '/careers',
+        'CONTACT': '/support/contact_us',
+        'COURSES': '/course',
+        'DONATE': '/donate',
+        'ENTERPRISE': '/enterprise',
+        'FAQ': '/student-faq',
+        'HONOR': '/edx-terms-service',
+        'HOW_IT_WORKS': '/how-it-works',
+        'MEDIA_KIT': '/media-kit',
+        'NEWS': '/news-announcements',
+        'PRESS': '/press',
+        'PRIVACY': '/edx-privacy-policy',
+        'ROOT': MARKETING_SITE_ROOT,
+        'SCHOOLS': '/schools-partners',
+        'SITE_MAP': '/sitemap',
+        'TRADEMARKS': '/trademarks',
+        'TOS': '/edx-terms-service',
+        'TOS_AND_HONOR': '/edx-terms-service',
+        'WHAT_IS_VERIFIED_CERT': '/verified-certificate',
+    }
 
 CREDENTIALS_SERVICE_USERNAME = 'credentials_worker'
 
