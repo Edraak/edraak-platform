@@ -56,6 +56,15 @@ class UserProfilePropertiesTest(CacheIsolationTestCase):
         age = years_ago - 1
         self.assertEqual(self.profile.age, age)
 
+    def test_empty_default_english_name(self):
+        """Test that the English name is empty by default."""
+        assert self.profile.name_en == ''
+
+    def test_set_get_default_english_name(self):
+        """Test that the English name can be set correctly."""
+        self.profile.name_en = 'Mr. Hello World'
+        assert self.profile.name_en == 'Mr. Hello World'
+
     def test_age_no_birth_year(self):
         """Verify nothing is returned."""
         self.assertIsNone(self.profile.age)
