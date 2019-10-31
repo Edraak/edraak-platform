@@ -8,14 +8,13 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 from courseware.courses import get_course_by_id
+from opaque_keys.edx.django.models import UsageKeyField
 from openedx.core.djangoapps.course_groups.cohorts import (
-    DEFAULT_COHORT_NAME,
     add_user_to_cohort,
     get_cohort,
     remove_user_from_cohort,
     get_course_cohorts,
 )
-from openedx.core.djangoapps.xmodule_django.models import CourseKeyField
 from student.models import UserProfile
 
 
@@ -32,7 +31,7 @@ class UniversityID(models.Model):
     """
 
     user = models.ForeignKey(User)
-    course_key = CourseKeyField(max_length=255, db_index=True)
+    course_key = UsageKeyField(max_length=255, db_index=True)
     university_id = models.CharField(verbose_name=_('Student University ID'), max_length=100)
 
     # This is set=True once an instructor edits a student's record
@@ -128,7 +127,7 @@ class UniversityIDSettings(models.Model):
     """
     This model stores university id settings for each course.
     """
-    course_key = CourseKeyField(primary_key=True, max_length=255, db_index=True)
+    course_key = UsageKeyField(primary_key=True, max_length=255, db_index=True)
     registration_end_date = models.DateField(null=True, blank=True, verbose_name=_('Registration End Date'))
     terms_and_conditions = models.TextField(null=True, blank=True, verbose_name=_('Terms and Conditions'))
 

@@ -11,8 +11,7 @@ import ddt
 
 from xmodule.modulestore.tests.factories import CourseFactory
 from lms.djangoapps.instructor_task.tasks_helper.grades import CourseGradeReport
-from lms.djangoapps.instructor_task.tests.test_tasks_helper import InstructorGradeReportTestCase, TestReportMixin
-from student.models import UserProfile
+from lms.djangoapps.instructor_task.tests.test_tasks_helper import InstructorGradeReportTestCase
 
 from edraak_university.models import UniversityID
 from edraak_university.helpers import is_csv_export_enabled_on_course
@@ -43,7 +42,7 @@ class TestInstructorEdraakGradeReport(InstructorGradeReportTestCase):
         if email == self.EMAIL_WITH_ID:
             UniversityID.objects.create(
                 user=student,
-                course_key=unicode(self.course.id),
+                course_key=self.course.id,
                 university_id='2011A-500',
             )
 

@@ -7,7 +7,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from courseware.access import has_access
-from opaque_keys.edx.locator import CourseLocator
+from opaque_keys.edx.locator import UsageKey
 from edraak_university.models import UniversityID, UniversityIDSettings
 from student.models import CourseEnrollment
 
@@ -38,7 +38,7 @@ def get_university_id(user, course_id):
     try:
         return UniversityID.objects.get(
             user=user,
-            course_key=CourseLocator.from_string(course_id),
+            course_key=course_id,
         )
     except UniversityID.DoesNotExist:
         return None
@@ -61,7 +61,7 @@ def is_student_form_disabled(user, course_key):
         * The user is not enrolled in the course
     :return: True if the form must be disabled, False otherwise
     """
-    student_uid = get_university_id(user=user, course_id=unicode(course_key))
+    student_uid = get_university_id(user=user, course_id=course_key)
     if student_uid and not student_uid.can_edit:
         return True
 
@@ -107,7 +107,7 @@ def university_id_is_required(user, course):
         return False
 
     if course.enable_university_id:
-        if not has_valid_university_id(user, unicode(course.id)):
+        if not has_valid_university_id(user, course.id):
             return True
 
     return False

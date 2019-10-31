@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import openedx.core.djangoapps.xmodule_django.models
+import opaque_keys.edx.django.models
 
 
 class Migration(migrations.Migration):
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UniversityIDSettings',
             fields=[
-                ('course_key', openedx.core.djangoapps.xmodule_django.models.CourseKeyField(max_length=255, serialize=False, primary_key=True, db_index=True)),
+                ('course_key', opaque_keys.edx.django.models.UsageKeyField(max_length=255, serialize=False, primary_key=True, db_index=True)),
                 ('registration_end_date', models.DateField(null=True, verbose_name='Registration End Date', blank=True)),
                 ('terms_and_conditions', models.TextField(null=True, verbose_name='Terms and Conditions', blank=True)),
             ],

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.utils.timezone
 from django.conf import settings
-import openedx.core.djangoapps.xmodule_django.models
+import opaque_keys.edx.django.models
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='UniversityID',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('course_key', openedx.core.djangoapps.xmodule_django.models.CourseKeyField(max_length=255, db_index=True)),
+                ('course_key', opaque_keys.edx.django.models.UsageKeyField(max_length=255, db_index=True)),
                 ('university_id', models.CharField(max_length=100, verbose_name='Student University ID')),
                 ('section_number', models.CharField(max_length=10, verbose_name='Section Number')),
                 ('date_created', models.DateTimeField(default=django.utils.timezone.now)),

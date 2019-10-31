@@ -4,7 +4,7 @@ Mixins for the University ID django app.
 
 from django.shortcuts import Http404
 
-from opaque_keys.edx.locator import CourseLocator
+from opaque_keys.edx.locator import UsageKey
 from courseware.courses import get_course_with_access
 from courseware.access import has_access
 
@@ -19,9 +19,9 @@ class ContextMixin(object):
 
     def get_course_key(self):
         """
-        Get the CourseLocator object from the URL course id param.
+        Get the UsageKey object from the URL course id param.
         """
-        return CourseLocator.from_string(self.kwargs['course_id'])
+        return UsageKey.from_string(self.kwargs['course_id'])
 
     def get_course(self):
         """
