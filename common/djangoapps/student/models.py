@@ -463,6 +463,28 @@ class UserProfile(models.Model):
     profile_image_uploaded_at = models.DateTimeField(null=True, blank=True)
 
     @property
+    def name_en(self):
+        """
+        Convenience method to get the learner name in English if available.
+
+        Note: Keep in sync with the Edraak progs.
+        """
+        meta = self.get_meta()
+        return meta.get('edraak_name_en', '')
+
+    @name_en.setter
+    def name_en(self, new):
+        """
+        Convenience method to set the learner name in English.
+
+        Note: Keep in sync with the Edraak progs.
+        """
+        from django.utils.encoding import force_text
+        meta = self.get_meta()
+        meta['edraak_name_en'] = force_text(new)
+        self.set_meta(meta)
+
+    @property
     def has_profile_image(self):
         """
         Convenience method that returns a boolean indicating whether or not
