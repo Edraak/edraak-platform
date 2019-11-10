@@ -389,12 +389,14 @@
 
         .u-field-message {
           position: relative;
-          padding: $baseline*0.75 0 0 ($baseline*4);
+          // TODO: Edraak: Contribute to upstream
+          @include padding($baseline*0.75, 0, 0, ($baseline*4));
           width: 60%;
 
           .u-field-message-notification {
             position: absolute;
-            left: 0;
+          // TODO: Edraak: Contribute to upstream
+            @include left(0);
             top: 0;
             bottom: 0;
             margin: auto;
