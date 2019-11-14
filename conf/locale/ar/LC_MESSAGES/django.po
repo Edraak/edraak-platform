@@ -63,7 +63,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-27 07:00+0000\n"
+"POT-Creation-Date: 2019-11-14 13:21+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Omar Al-Ithawi <i@omardo.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -1898,9 +1898,7 @@ msgstr ""
 msgid ""
 "Your answer has been submitted. As soon as your submission is graded, this "
 "message will be replaced with the grader's feedback."
-msgstr ""
-"تمّ تسليم الإجابة. ستتحول هذه الرسالة إلى ملاحظات المُصَحِّح حالما يتم تصحيح"
-" إجابتك."
+msgstr "تمّ تسليم الإجابة ،سيتم استبدال هذه الرسالة بالعلامة عند التقييم."
 
 #: common/lib/capa/capa/inputtypes.py
 #, python-brace-format
@@ -4669,9 +4667,7 @@ msgstr "هذا القسم الفرعي متاح للمتعلمين عند است
 msgid ""
 "This section is a prerequisite. You must complete this section in order to "
 "unlock additional content."
-msgstr ""
-"هذا القسم  متطلب سابق. عليك اتمام هذا المساث لتتمكن من تصفح المزيد من "
-"المحتوى"
+msgstr "هذا القسم  متطلب سابق. عليك اتمامه لتتمكن من تصفح المزيد من المحتوى."
 
 #: common/lib/xmodule/xmodule/seq_module.py
 msgid ""
@@ -6261,7 +6257,8 @@ msgstr ""
 #, python-brace-format
 msgid "This course is ending in {time_remaining_string} at {course_end_time}."
 msgstr ""
-"ينتهي هذا المساق خلال {time_remaining_string} على الساعة {course_end_time}."
+"ينتهي هذا المساق خلال {time_remaining_string} في تمام تاريخ/ساعة: "
+"{course_end_time}."
 
 #: lms/djangoapps/courseware/date_summary.py
 msgid "Certificate Available"
@@ -8066,7 +8063,7 @@ msgstr "أُرسِلَت"
 #. messages as {action}.
 #: lms/djangoapps/instructor_task/tasks.py
 msgid "graded"
-msgstr "صُحِّحَت"
+msgstr "قيمت"
 
 #. Translators: This is a past-tense phrase that is inserted into task
 #. progress messages as {action}.
@@ -12911,7 +12908,7 @@ msgstr "رقم المساق "
 #: cms/templates/course_outline.html
 #: openedx/features/course_experience/templates/course_experience/course-home-fragment.html
 msgid "Course Outline"
-msgstr "مخطّط المساق"
+msgstr "الخطة الدراسيّة"
 
 #: cms/templates/html_error.html lms/templates/module-error.html
 msgid "Error:"
@@ -20288,7 +20285,7 @@ msgstr "موعد التسليم"
 
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Graded"
-msgstr "مصحَّحة"
+msgstr "تم التقييم"
 
 #: lms/templates/peer_grading/peer_grading.html
 #: lms/templates/shoppingcart/receipt.html
@@ -21347,7 +21344,7 @@ msgstr "تكبير جميع الأقسام"
 
 #: openedx/features/course_experience/templates/course_experience/course-outline-fragment.html
 msgid "Prerequisite: "
-msgstr ""
+msgstr "متطلب سابق:"
 
 #: openedx/features/course_experience/templates/course_experience/course-outline-fragment.html
 msgid "{subsection_format} due {{date}}"
@@ -22010,7 +22007,7 @@ msgstr "افتح محتويات المساق في نظام إدارة التعل
 
 #: cms/templates/container.html
 msgid "View Live Version"
-msgstr "اعرض النسخة الحية"
+msgstr "اعرض النسخة الحالية"
 
 #: cms/templates/container.html
 msgid "Preview the courseware in the LMS"
@@ -25197,7 +25194,7 @@ msgstr "تصفّح المساق"
 
 #: cms/templates/widgets/header.html
 msgid "Outline"
-msgstr "الخطة الدراسيّة"
+msgstr "الخطة الدراسية"
 
 #: cms/templates/widgets/header.html
 msgid "Import"
