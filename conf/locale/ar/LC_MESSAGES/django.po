@@ -9,6 +9,7 @@
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -32,6 +33,7 @@
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -44,6 +46,7 @@
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
+# Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -131,7 +134,7 @@ msgstr "هذه المعطيات مطلوبة:{missing}."
 #: common/lib/xmodule/xmodule/video_module/video_handlers.py
 #, python-brace-format
 msgid "A transcript with the \"{language_code}\" language code already exists."
-msgstr "النص  \"{language_code}\" كود اللغة"
+msgstr "النص بكود اللغة \"{language_code}\" موجود مسبقا."
 
 #: cms/djangoapps/contentstore/views/transcript_settings.py
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
@@ -1645,7 +1648,7 @@ msgstr "كلمة السر غير صحيحة."
 #: common/djangoapps/util/password_policy_validators.py
 #, python-brace-format
 msgid "Enter a password with at least {requirements}."
-msgstr "ادخل كلمة السر ب{requirements}. عالأقل"
+msgstr "يجب ان تحتوي كلمة السر على {requirements}."
 
 #: common/djangoapps/util/password_policy_validators.py
 #, python-brace-format
@@ -3752,7 +3755,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Specialization slug (id) "
-msgstr "(id) slug التخصص"
+msgstr "(id) عنوان التخصص"
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid ""
@@ -3782,7 +3785,7 @@ msgstr "{section_type} {index}غير صادر - 0% (?/?)"
 #: common/lib/xmodule/xmodule/graders.py
 #, python-brace-format
 msgid "The lowest {drop_count} {section_type} scores are dropped."
-msgstr "الاقل {drop_count} {section_type} يتم الغاؤه"
+msgstr "الاقل من {drop_count} {section_type} سيتم الغاؤه"
 
 #. Translators: "Homework Average = 0%"
 #: common/lib/xmodule/xmodule/graders.py
@@ -3794,7 +3797,7 @@ msgstr "{section_type}معدل = {percent:.0%} "
 #: common/lib/xmodule/xmodule/graders.py
 #, python-brace-format
 msgid "{short_label} Avg"
-msgstr " {short_label} معدل"
+msgstr "معدل {short_label}"
 
 #: common/lib/xmodule/xmodule/html_module.py
 msgid "Text"
@@ -5275,7 +5278,7 @@ msgstr ""
 
 #: common/templates/student/edx_ace/passwordreset/email/body.html
 msgid "Change my Password"
-msgstr "غيِّر كلمة مروري"
+msgstr "غيِّر كلمة السر"
 
 #: common/templates/student/edx_ace/passwordreset/email/body.txt
 msgid "Please go to the following page and choose a new password:"
@@ -6251,13 +6254,14 @@ msgstr ""
 #: lms/djangoapps/courseware/date_summary.py
 #, python-brace-format
 msgid "This course is ending in {time_remaining_string} on {course_end_date}."
-msgstr "ينتهي هذا المساق في {time_remaining_string} بتاريخ {course_end_date}."
+msgstr ""
+"ينتهي هذا المساق خلال {time_remaining_string} بتاريخ {course_end_date}."
 
 #: lms/djangoapps/courseware/date_summary.py
 #, python-brace-format
 msgid "This course is ending in {time_remaining_string} at {course_end_time}."
 msgstr ""
-"ينتهي هذا المساق في {time_remaining_string} على الساعة {course_end_time}."
+"ينتهي هذا المساق خلال {time_remaining_string} على الساعة {course_end_time}."
 
 #: lms/djangoapps/courseware/date_summary.py
 msgid "Certificate Available"
@@ -14869,16 +14873,6 @@ msgid ""
 " you do not understand or do not wish to be bound by the Terms, you should "
 "not use the APIs."
 msgstr ""
-"مرحبًا بك في {platform_name}. نشكرك على استخدام واجهة برمجة التطبيقات (API) "
-"لاستكشاف مساقات {platform_name} وأي مشروع او واجهات API أخرى قد نقدمها من "
-"وقت لآخر (يُشار إليها إجمالاً، \"واجهات API\"). نرجو منك قراءة شروط الخدمة "
-"هذه قبل الوصول إلى واجهات API أو استخدامها. إنّ شروط الخدمة هذه، وأي شروط "
-"إضافية تأتي في إطار وثائق API المصاحبة، وأي سياسات معمول بها، وأي توجيهات "
-"تتيحها {platform_name} وأي تحديثات تظهر من وقت لآخر، تُعتبر كلُّها بمثابة "
-"اتفاقيات (تسمى إجمالاً، \"الشروط\") بينك وبين {platform_name}. ومن خلال "
-"الوصول إلى واجهات API أو استخدامها، فأنت تقبل هذه الشروط وتوافق على الالتزام"
-" بها بشكل قانوني، سواء كنت مستخدمًا مسجّلًا أم لا. إذا لم تستوعب الشروط أو "
-"إذا لم ترغب في أن تكون مُلزَمًا فيها قانونًا، فيجب ألا تستخدم واجهات API."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "API Access"
@@ -16693,7 +16687,7 @@ msgstr ""
 
 #: lms/templates/credit_notifications/credit_eligibility_email.html
 msgid "There are 2 steps to getting course credit."
-msgstr " خطوتان للحصول على الساعات المعتمدة "
+msgstr " خطوتان للحصول على الساعات المعتمدة."
 
 #: lms/templates/credit_notifications/credit_eligibility_email.html
 msgid ""
@@ -17141,7 +17135,7 @@ msgstr ""
 
 #: lms/templates/dashboard/_dashboard_show_consent.html
 msgid "Consent to share your data"
-msgstr "Consent to share your data"
+msgstr "الاذن بمشاركة بيناتك"
 
 #: lms/templates/dashboard/_dashboard_show_consent.html
 msgid ""
@@ -22860,7 +22854,7 @@ msgstr ""
 
 #: cms/templates/export.html
 msgid "The following content is not exported."
-msgstr "هذا المحتوى غير مصدر"
+msgstr "هذا المحتوى غير مصدّر"
 
 #: cms/templates/export.html cms/templates/import.html
 msgid ""
