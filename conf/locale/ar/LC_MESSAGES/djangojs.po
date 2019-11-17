@@ -7,8 +7,8 @@
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
-# Omar Al-Ithawi <i@omardo.com>, 2019
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
+# Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
@@ -35,6 +35,7 @@
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  underscore-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -3078,19 +3079,19 @@ msgstr "(مساق دائم) إنتهى بتاريخ {end}"
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/models/course_card_model.js
 msgid "Starts {start}"
-msgstr ""
+msgstr "يبدأ {start}"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/models/course_card_model.js
 msgid "Started {start}"
-msgstr ""
+msgstr "بدء {start}"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/models/course_card_model.js
 msgid "Ends {end}"
-msgstr ""
+msgstr "ينتهي {end}"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3102,7 +3103,7 @@ msgstr "يجب ان تختار جلسة للوصول الى محتويات ال�
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "There was an error. Please reload the page and try again."
-msgstr ""
+msgstr "حدث خطأ، يرجى إعادة فتح الصفحة ثم إعادة المحاولة."
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3122,19 +3123,19 @@ msgstr "اختر جلسة"
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "Leave Current Session"
-msgstr ""
+msgstr "مغادرة الجلسة الحالية"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "Are you sure you want to select this session?"
-msgstr ""
+msgstr "هل أنت واثق من أنّك تريد اختيار هذه الجلسة؟"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "Are you sure you want to change to a different session?"
-msgstr ""
+msgstr "هل أنت واثق من أنّك تريد اختيار جلسة اخرئ؟"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3375,6 +3376,10 @@ msgid ""
 "these for your records before proceeding with deletion, follow the "
 "instructions for {htmlStart}printing or downloading a certificate{htmlEnd}."
 msgstr ""
+"قد تفقد أيضًا الوصول إلى الشهادات التي تم التحقق منها وبيانات اعتماد "
+"البرنامج الأخرى مثل شهادات التخصصات. إذا كنت ترغب في عمل نسخة من السجلات "
+"الخاصة بك قبل متابعة الحذف ، فاتبع الإرشادات الخاصة بـ {htmlStart} طباعة أو "
+"تنزيل شهادة {htmlEnd}."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3415,13 +3420,15 @@ msgid ""
 "sites offered by MIT Open Learning, Wharton Executive Education, and Harvard"
 " Medical School."
 msgstr ""
+"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات edraak"
+" أو edraak.org أو أي موقع آخر تستضيفه edraak."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Delete My Account"
-msgstr ""
+msgstr "حذف حسابي"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3463,6 +3470,8 @@ msgid ""
 " data is permanent and cannot be undone. EdX will not be able to recover "
 "your account or the data that is deleted."
 msgstr ""
+"لقد اخترت \"حذف حسابي\". يعد حذف حسابك والبيانات الشخصية دائمًا ولا يمكن "
+"التراجع عنه. لن يتمكن اداراك من استعادة حسابك أو البيانات التي تم حذفها."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -6196,6 +6205,8 @@ msgid ""
 "The name that identifies you on {platform_name}. You cannot change your "
 "username."
 msgstr ""
+"الاسم الذي يعرّف عنك في {platform_name}. لا يمكنك تغيير اسم المستخدم الخاص "
+"بك."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 #: lms/templates/student_account/account.underscore
@@ -7811,7 +7822,7 @@ msgstr "انشر أمام الزملاء من دون الكشف عن الهوي�
 
 #: common/static/common/templates/discussion/post-user-display.underscore
 msgid "(Community TA)"
-msgstr "(مجموعة مساعدي هيئة التدريس المجتمعية)"
+msgstr "(مجموعة مساعدي التدريس المتطوِّعين)"
 
 #: common/static/common/templates/discussion/post-user-display.underscore
 msgid "(Staff)"
@@ -8464,8 +8475,8 @@ msgid ""
 " to verify your identity."
 msgstr ""
 "إذا لن تقم بالتحقق من هويتك الآن، فسيظلُّ بإمكانك استكشاف الدورة من خلال "
-"صفحة \"مكتبي\". سوف تتلقى رسائل تذكير دورية من {platformName} للتحقق من "
-"هويتك."
+"صفحة \"لوحتي التعليمية\". سوف تتلقى رسائل تذكير دورية من {platformName} "
+"للتحقق من هويتك."
 
 #: lms/templates/commerce/receipt.underscore
 #: lms/templates/verify_student/payment_confirmation_step.underscore
@@ -9166,7 +9177,7 @@ msgstr "بحاجة لشهادة موثقة "
 
 #: lms/templates/learner_dashboard/upgrade_message.underscore
 msgid "Upgrade to Verified"
-msgstr "قم بالترقية لتحصل على شهادة موثّقة"
+msgstr "سجِّل للحصول على شهادة موثقة"
 
 #: lms/templates/student_account/account.underscore
 msgid "New Address"
@@ -9366,7 +9377,7 @@ msgstr "استكشف مساقك!"
 
 #: lms/templates/verify_student/enrollment_confirmation_step.underscore
 msgid "Go to your Dashboard"
-msgstr "اذهب إلى صفحة \"مكتبي\""
+msgstr "اذهب إلى صفحة \"لوحتي التعليمية\""
 
 #: lms/templates/verify_student/enrollment_confirmation_step.underscore
 msgid "Verified Status"
@@ -9783,8 +9794,8 @@ msgid ""
 "from your dashboard. You will receive periodic reminders from "
 "%(platformName)s to verify your identity."
 msgstr ""
-"إذا لم تؤكّد هويّتك الآن، سيبقى بإمكانك استكشاف مساقك من خلال صفحة \"مكتبي\""
-" وستتلقّى رسائل تذكيرية دوريًّا من %(platformName)s لتأكيد هويّتك. "
+"إذا لم تؤكّد هويّتك الآن، سيبقى بإمكانك استكشاف مساقك من خلال صفحة لوحتي "
+"التعليمية وستتلقّى رسائل تذكيرية دوريًّا من %(platformName)s لتأكيد هويّتك. "
 
 #: lms/templates/verify_student/reverify_success_step.underscore
 msgid "Identity Verification In Progress"
@@ -9803,7 +9814,7 @@ msgstr ""
 
 #: lms/templates/verify_student/reverify_success_step.underscore
 msgid "Return to Your Dashboard"
-msgstr "العودة إلى \"مكتبي\""
+msgstr "العودة إلى \"لوحتي التعليمية\""
 
 #: lms/templates/verify_student/review_photos_step.underscore
 msgid "Review Your Photos"
@@ -11340,8 +11351,8 @@ msgid ""
 msgstr ""
 "استخدم امتحانًا موقوتًا للحدّ من الوقت الذي يمكن للمتعلّمين قضاؤه في حل "
 "مسائل هذا القسم الفرعي. يجب أن يقدّم المتعلّمون الإجابات قبل انتهاء الوقت "
-"المحدّد. يمكنك السماح لأحد المتعلّمين بوقت إضافي باستخدام صفحة \"مكتبي\" "
-"الخاصة بالمدرِّسين."
+"المحدّد. يمكنك السماح لأحد المتعلّمين بوقت إضافي باستخدام صفحة اللوحة "
+"التعليمية الخاصة بالمدرِّسين."
 
 #: cms/templates/js/timed-examination-preference-editor.underscore
 msgid "Proctored"
@@ -11381,7 +11392,7 @@ msgid ""
 msgstr ""
 "اختر مدة زمنية مخصّصة لإجراء الامتحان. إذا زادت القيمة عن 24 ساعة،أدخل "
 "مقدارًا من الوقت. يمكنك منح متعلّمين محددين زمنًا إضافيًا لإجراء الامتحان من"
-" خلال صفحة \"مكتبي\" الخاصة بالمدرسين."
+" خلال صفحة لوحتي التعليمية الخاصة بالمدرسين."
 
 #: cms/templates/js/timed-examination-preference-editor.underscore
 msgid "Review Rules"

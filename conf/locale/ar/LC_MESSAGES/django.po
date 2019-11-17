@@ -21,6 +21,7 @@
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -29,8 +30,8 @@
 # EdX Team <info@edx.org>, 2019.
 #
 # Translators:
-# Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
+# Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
@@ -44,8 +45,8 @@
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
-# Omar Al-Ithawi <i@omardo.com>, 2019
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
+# Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
@@ -802,7 +803,7 @@ msgid ""
 "your dashboard."
 msgstr ""
 "استخدِم اسم المستخدّم وكلمة المرور لحسابك في {platform_name} للدخول، ثم اربط"
-" حسابك في {platform_name} بحسابك في {provider_name} من صفحة \"مكتبي\"."
+" حسابك في {platform_name} بحسابك في {provider_name} من لوحتك التعليمية."
 
 #: common/djangoapps/student/views/login.py
 #, python-brace-format
@@ -3230,9 +3231,9 @@ msgid ""
 "certificates are generated, enter early_no_info."
 msgstr ""
 "أدخِل ’end‘ أو ’early_with_info‘ أو ’early_no_info‘. وبعد إنشاء الشهادة، "
-"سيرى الطلّاب الناجحون رابطًا لشهاداتهم على لصفحة \"مكتبي\" الخاصة بهم، بينما"
-" سيرى الطلّاب الراسبون معلومات عن إعدادات التقييم. الإعداد الافتراضي هو "
-"’end‘ الذي يعرِض هذه المعلومات عن الشهادة لكل الطلّاب بعد تاريخ نهاية "
+"سيرى الطلّاب الناجحون رابطًا لشهاداتهم على اللوحة التعليمية الخاصة بهم، "
+"بينما سيرى الطلّاب الراسبون معلومات عن إعدادات التقييم. الإعداد الافتراضي هو"
+" ’end‘ الذي يعرِض هذه المعلومات عن الشهادة لكل الطلّاب بعد تاريخ نهاية "
 "المساق. أدخِل ’early_with_info‘ لعرض هذه المعلومات عن الشهادة لجميع الطلّاب "
 "حالما يتم إنشاء الشهادات، أو أدخِل ’early_no_info‘ لعرض الروابط للطلّاب "
 "الناجحين فقط حالما يتم إنشاء الشهادات."
@@ -3546,9 +3547,9 @@ msgid ""
 "http://www.edx.org/course/Introduction-to-MOOCs-ITM001"
 msgstr ""
 "في حال تفعيل كل من رابط المشاركة على مواقع التواصل الاجتماعي ورابط المساقات "
-"المخصَّصة في صفحة \"مكتبي\"، يمكنك توفير رابط (كرابط صفحة ’لمحة عن المساق‘) "
-"يُمكن لمواقع التواصل الاجتماعي الارتباط به. يجب أن تكون جميع الروابط بصيغة "
-"صحيحة. مثلًا: "
+"المخصَّصة في صفحة لوحتي التعليمية، يمكنك توفير رابط (كرابط صفحة ’لمحة عن "
+"المساق‘) يُمكن لمواقع التواصل الاجتماعي الارتباط به. يجب أن تكون جميع "
+"الروابط بصيغة صحيحة. مثلًا: "
 "https://www.edraak.org/course/course-v1:Edraak+FL100+FL_2017_SP"
 
 #: common/lib/xmodule/xmodule/course_module.py cms/templates/settings.html
@@ -3677,8 +3678,8 @@ msgid ""
 "Bypass the course home tab when students arrive from the dashboard, sending "
 "them directly to course content."
 msgstr ""
-"تجاوز تبويب الصفحة الرئيسية عندما يصلها الطلاب من صفحة \"مكتبي\"، وذلك "
-"بإرسالهم مباشرةً إلى محتوى المساق."
+"تجاوز تبويب الصفحة الرئيسية عندما يصلها الطلاب من صفحة \"لوحتي التعليمية\"، "
+"وذلك بإرسالهم مباشرةً إلى محتوى المساق."
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Enable Subsection Prerequisites"
@@ -6121,7 +6122,7 @@ msgid ""
 "If your course does not appear on your dashboard, contact "
 "{payment_support_link}."
 msgstr ""
-"إذا لم يظهر مساقك على صفحة \"مكتبي\" الخاصة بك، يُرجى الاتصال بـ "
+"إذا لم يظهر مساقك على صفحة \"لوحتي التعليمية\" الخاصة بك، يُرجى الاتصال بـ "
 "{payment_support_link}."
 
 #: lms/djangoapps/course_goals/models.py
@@ -7847,7 +7848,7 @@ msgstr "الشُعب"
 #: lms/djangoapps/instructor/views/instructor_dashboard.py
 #: lms/djangoapps/discussion/templates/discussion/discussion_board_fragment.html
 msgid "Discussions"
-msgstr "نقاشات"
+msgstr "مناقشات"
 
 #: lms/djangoapps/instructor/views/instructor_dashboard.py
 #: lms/templates/ccx/coach_dashboard.html
@@ -8502,8 +8503,8 @@ msgstr "التسجيل للمساق: {course_name}"
 msgid ""
 "Please visit your {link_start}dashboard{link_end} to see your new course."
 msgstr ""
-"تُرجى زيارة {link_start}صفحة \"مكتبي\"{link_end} الخاصة بك لرؤية مساقك "
-"الجديد."
+"تُرجى زيارة {link_start}صفحة لوحتي التعليمية{link_end} الخاصة بك لرؤية مساقك"
+" الجديد."
 
 #: lms/djangoapps/shoppingcart/models.py
 #, python-brace-format
@@ -12094,7 +12095,7 @@ msgstr ""
 #: openedx/features/enterprise_support/utils.py
 #: lms/templates/peer_grading/peer_grading_problem.html
 msgid "Continue"
-msgstr "استمرار"
+msgstr "استمر "
 
 #: openedx/features/learner_profile/views/learner_profile.py
 #, python-brace-format
@@ -12128,7 +12129,7 @@ msgstr ""
 
 #: cms/djangoapps/api/v1/serializers/course_runs.py
 msgid "Course team user does not exist"
-msgstr ""
+msgstr "المدرس غير موجود"
 
 #: cms/djangoapps/contentstore/course_group_config.py
 msgid ""
@@ -12390,11 +12391,11 @@ msgstr "استثناء التبويبات"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid "An error occurred while trying to save the speciliazation id"
-msgstr ""
+msgstr "حدث خطأ أثناء حفظ الID الخاص بالتخصص"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid "Specialization id error"
-msgstr ""
+msgstr "خطأ في الID الخاص بالتخصص"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid "This group configuration is in use and cannot be deleted."
@@ -12535,7 +12536,7 @@ msgstr "لا يسمح إلاّ بدخول: {list_of_groups}"
 
 #: cms/djangoapps/contentstore/views/transcript_settings.py
 msgid "The information you entered is incorrect."
-msgstr ""
+msgstr "المعلومات المدخلة غير صحيحة"
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Transcripts are supported only for \"video\" modules."
@@ -12543,19 +12544,19 @@ msgstr "يتوفّر دعم التفريغ النصي لوحدات الفيدي�
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Cannot find item by locator."
-msgstr ""
+msgstr "تعذّر العثور على العنصر باستخدام مُحدّد الموقع."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Video locator is required."
-msgstr ""
+msgstr "محدد مواقع الفيديو (Video locator) مطلوب."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "This transcript file type is not supported."
-msgstr ""
+msgstr "نوع ملف نص الفيديو غير مدعوم."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Video ID is required."
-msgstr ""
+msgstr "معرِّف الفيديو (video ID) مطلوب"
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Incoming video data is empty."
@@ -12567,25 +12568,25 @@ msgstr "تعذّر العثور على العنصر باستخدام مُحدّ�
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "No such transcript."
-msgstr ""
+msgstr "لا يوجد تفريغ النصيّ بالاسم المطلوب."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "There is a problem with the chosen transcript file."
-msgstr ""
+msgstr "هناك مشكلة في ملف نص الفيديو المحدد."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid ""
 "There is a problem with the existing transcript file. Please upload a "
 "different file."
-msgstr ""
+msgstr "هناك مشكلة في ملف نص الفيديو هذا.حاول تحميل ملف مختلف "
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "YouTube ID is required."
-msgstr ""
+msgstr "معرِّف اليوتيوب (YouTube ID) مطلوب"
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "There is a problem with the YouTube transcript file."
-msgstr ""
+msgstr "هناك مشكلة في ملف نص فيديو اليوتيوب المحدد."
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Insufficient permissions"
@@ -13293,7 +13294,7 @@ msgstr "اعرض جميع المساقات"
 #: lms/templates/header/user_dropdown.html
 #: themes/edx.org/lms/templates/dashboard.html
 msgid "Dashboard"
-msgstr "مكتبي"
+msgstr "لوحتي التعليمية"
 
 #: lms/templates/dashboard.html themes/edx.org/lms/templates/dashboard.html
 msgid "You are not enrolled in any courses yet."
@@ -13379,8 +13380,8 @@ msgstr "نجح تغيير البريد الإلكتروني"
 #: lms/templates/email_change_successful.html
 msgid "You should see your new email in your {link_start}dashboard{link_end}."
 msgstr ""
-"سيظهر عنوان بريدك الإلكتروني الجديد في صفحة {link_start}\"مكتبي\"{link_end} "
-"الخاصة بحسابك."
+"سيظهر عنوان بريدك الإلكتروني الجديد في صفحة {link_start}\"لوحتي "
+"التعليمية\"{link_end} الخاصة بحسابك."
 
 #: lms/templates/email_exists.html
 msgid "An account with the new e-mail address already exists."
@@ -14276,8 +14277,8 @@ msgid ""
 "{dashboard_link_start}return to your dashboard{link_end}."
 msgstr ""
 "لقد أعدتَ تفعيل رسائل البريد الإلكتروني الواردة من {platform_name} بشأن "
-"إشعارات المنتدى. يمكنك {dashboard_link_start} العودة إلى صفحة "
-"\"مكتبي\"الخاصّة بك {link_end}."
+"إشعارات المنتدى. يمكنك {dashboard_link_start} العودة إلى صفحة \"لوحتي "
+"التعليمية\"الخاصّة بك {link_end}."
 
 #: lms/templates/seq_module.html
 msgid "Important!"
@@ -14638,13 +14639,13 @@ msgid ""
 " not mean to do this, {undo_link_start}you can re-subscribe{link_end}."
 msgstr ""
 "لن تتلقّى بعد الآن أي رسائل بريد إلكتروني تخص إشعارات منتدى من "
-"{platform_name}. يُمكنك {dashboard_link_start}العودة إلى صفحة \"مكتبي\" "
-"الخاصّة بك {link_end}. أما إذا لم تقصد القيام بذلك، {undo_link_start}يُمكنك "
-"إعادة التسجيل{link_end}."
+"{platform_name}. يُمكنك {dashboard_link_start}العودة إلى صفحة \"لوحتي "
+"التعليمية\" الخاصّة بك {link_end}. أما إذا لم تقصد القيام بذلك، "
+"{undo_link_start}يُمكنك إعادة التسجيل{link_end}."
 
 #: lms/templates/user_dropdown.html lms/templates/header/user_dropdown.html
 msgid "Dashboard for:"
-msgstr "صفحة \"مكتبي\" لـ:"
+msgstr "صفحة \"لوحتي التعليمية\" لـ:"
 
 #: lms/templates/user_dropdown.html
 msgid "More options"
@@ -17005,8 +17006,8 @@ msgid ""
 "on your dashboard when the verification process is complete (usually within "
 "1-2 days)."
 msgstr ""
-"لقد قدّمتَ معلومات إعادة التوثيق الخاصة بك. سسترى رسالة في صفحة \"مكتبي\" "
-"الخاصة بك عندما تتم عملية التوثيق (عادة خلال 1يوم أو اثنين)."
+"لقد قدّمتَ معلومات إعادة التوثيق الخاصة بك. سسترى رسالة في صفحة \"لوحتي "
+"التعليمية\" الخاصة بك عندما تتم عملية التوثيق (عادة خلال 1يوم أو اثنين)."
 
 #: lms/templates/dashboard/_dashboard_course_listing.html
 msgid "You have successfully verified your ID with edX"
@@ -17880,7 +17881,7 @@ msgid ""
 "on your student dashboard at {url}"
 msgstr ""
 "(4) يجب أن تتمكّن من النقر على زر \"اعرض المساق\" أو أن ترى مساقك على صفحة "
-"\"مكتبي\" الخاصة بك عبر الرابط {url}"
+"\"لوحتي التعليمية\" الخاصة بك عبر الرابط {url}"
 
 #: lms/templates/emails/business_order_confirmation_email.txt
 msgid ""
@@ -17998,7 +17999,7 @@ msgid ""
 "course staff. The course should now appear on your {site_name} dashboard."
 msgstr ""
 "لقد سجّلك احد أعضاء طاقم مساق {course_name} في {site_name} في المساق. يفترضّ"
-" أن يظهر المساق الآن في صفحة \"مكتبي\" الخاصة بك في {site_name}."
+" أن يظهر المساق الآن في صفحة \"لوحتي التعليمية\" الخاصة بك في {site_name}."
 
 #: lms/templates/emails/enroll_email_enrolledmessage.txt
 #: lms/templates/emails/unenroll_email_enrolledmessage.txt
@@ -18105,8 +18106,8 @@ msgid ""
 "After you enroll, you can see the course on your student dashboard. You can "
 "see course materials after the course start date."
 msgstr ""
-"يمكنك بعد التسجيل أن ترى مساقك في صفحة \"مكتبي\" الخاصة بك. يمكنك أن ترى "
-"المواد الدراسيّة بعد تاريخ بدء المساق."
+"يمكنك بعد التسجيل أن ترى مساقك في صفحة \"لوحتي التعليمية\" الخاصة بك. يمكنك "
+"أن ترى المواد الدراسيّة بعد تاريخ بدء المساق."
 
 #. Translators: please translate the text inside [[ ]]. This is meant as a
 #. template for course teams to use.
@@ -18201,8 +18202,8 @@ msgid ""
 "you will no longer be part of the beta testing group."
 msgstr ""
 "لقد قام أحد أفراد طاقم المساق بإلغائك من مجموعة مختبري الإصدار التجريبي "
-"(بيتا) للمساق  {course_name} في {site_name}. سيبقى المساق على صفحة \"مكتبي\""
-" الخاصة بك، لكنك لن تكون ضمن مجموعة اختبار بيتا."
+"(بيتا) للمساق  {course_name} في {site_name}. سيبقى المساق على صفحة \"لوحتي "
+"التعليمية\" الخاصة بك، لكنك لن تكون ضمن مجموعة اختبار بيتا."
 
 #: lms/templates/emails/remove_beta_tester_email_message.txt
 #: lms/templates/emails/unenroll_email_enrolledmessage.txt
@@ -18285,7 +18286,7 @@ msgid ""
 "dashboard."
 msgstr ""
 "لقد ألغى أحد أفراد طاقم المساق تسجيلك في مساق {course_name}. لن يظهر المساق "
-"بعد الآن على صفحة \"مكتبي\" الخاصة بك في {site_name}."
+"بعد الآن على صفحة \"لوحتي التعليمية\" الخاصة بك في {site_name}."
 
 #: lms/templates/emails/unenroll_email_subject.txt
 msgid "You have been un-enrolled from {course_name}"
@@ -19490,7 +19491,7 @@ msgstr ""
 
 #: lms/templates/instructor/instructor_dashboard_2/instructor_dashboard_2.html
 msgid "Instructor Dashboard"
-msgstr "صفحة \"مكتبي\"  للمدرّس"
+msgstr "لوحة المدرّس التعليمية"
 
 #: lms/templates/instructor/instructor_dashboard_2/instructor_dashboard_2.html
 msgid "View Course in Studio"
@@ -19773,7 +19774,7 @@ msgstr ""
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Add Community TA"
-msgstr "أضف مساعد تدريس متطوِّع"
+msgstr "أضف مساعد تدريس متطوّع"
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "CCX Coaches"
@@ -20603,7 +20604,7 @@ msgstr "شكرًا لك!"
 #: lms/templates/shoppingcart/receipt.html
 #: lms/templates/shoppingcart/registration_code_redemption.html
 msgid "View Dashboard"
-msgstr "اعرض \"مكتبي\""
+msgstr "اعرض \"لوحتي التعليمية\""
 
 #: lms/templates/shoppingcart/receipt.html
 msgid ""
@@ -20771,8 +20772,8 @@ msgid ""
 "Check your {link_start}course dashboard{link_end} to see if you're enrolled "
 "in the course, or contact your company's administrator."
 msgstr ""
-"لقد نقرت على رابط لرمز تسجيل مستخدم سابقًا. تحقق من {link_start}صفحة "
-"\"مكتبي\" الخاصة بمساقاتك{link_end} لترى ما إذا كنتَ مسجلاً في المساق أو "
+"لقد نقرت على رابط لرمز تسجيل مستخدم سابقًا. تحقق من {link_start}صفحة \"لوحتي"
+" التعليمية\" الخاصة بمساقاتك{link_end} لترى ما إذا كنتَ مسجلاً في المساق أو "
 "اتصل بالإداري المسؤول في شركتك."
 
 #: lms/templates/shoppingcart/registration_code_receipt.html
@@ -20781,8 +20782,8 @@ msgid ""
 "You have successfully enrolled in {course_name}. This course has now been "
 "added to your dashboard."
 msgstr ""
-"لقد سجلت بنجاح في {course_name}، لقد أضيفَ هذا المساق الآن إلى صفحة "
-"\"مكتبي\" الخاصة بك."
+"لقد سجلت بنجاح في {course_name}، لقد أضيفَ هذا المساق الآن إلى صفحة \"لوحتي "
+"التعليمية\" الخاصة بك."
 
 #: lms/templates/shoppingcart/registration_code_receipt.html
 #: lms/templates/shoppingcart/registration_code_redemption.html
@@ -21097,7 +21098,7 @@ msgstr "لقد تركت الحقول الضرورية التالية فارغة:
 
 #: lms/templates/survey/survey.html
 msgid "Cancel and Return to Dashboard"
-msgstr "الغِ وارجِع إلى \"مكتبي\""
+msgstr "الغِ وارجِع إلى \"لوحتي التعليمية\""
 
 #: lms/templates/survey/survey.html
 msgid "Why do I need to complete this information?"
@@ -21224,8 +21225,8 @@ msgid ""
 "message on your dashboard when the verification process is complete (usually"
 " within 1-2 days)."
 msgstr ""
-"لقد سبق لك أن قدّمتَ معلومات توثيقك. سترى رسالة على صفحة \"مكتبي\" الخاصة بة"
-" عند إتمام عملية التوثيق (عادة خلاليوم أو يومين)."
+"لقد سبق لك أن قدّمتَ معلومات توثيقك. سترى رسالة على صفحة \"لوحتي التعليمية\""
+" الخاصة بة عند إتمام عملية التوثيق (عادة خلال يوم أو يومين)."
 
 #: lms/templates/verify_student/reverify_not_allowed.html
 msgid "You cannot verify your identity at this time."
@@ -22569,10 +22570,10 @@ msgid ""
 "{link_start}contact {studio_name} support{link_end} for further help."
 msgstr ""
 "عُذرًا. لم نتمكن من العثور على صفحة {studio_name} التي تبحث عنها. قد ترغب في"
-" العودة إلى صفحة \"مكتبي\" لهذا الاستوديو {studio_name} وإعادة المحاولة. "
-"وإذا ما زلت تواجه صعوبات في الوصول إلى ما تريد، يُرجى عدم التردّد في "
-"{link_start}التواصل مع فريق دعم{studio_name}{link_end} للحصول على مزيد من "
-"المساعدة."
+" العودة إلى صفحة \"لوحتي التعليمية\" لهذا الاستوديو {studio_name} وإعادة "
+"المحاولة. وإذا ما زلت تواجه صعوبات في الوصول إلى ما تريد، يُرجى عدم التردّد "
+"في {link_start}التواصل مع فريق دعم{studio_name}{link_end} للحصول على مزيد من"
+" المساعدة."
 
 #: cms/templates/error.html
 msgid "The Server Encountered an Error"
@@ -22587,13 +22588,14 @@ msgid ""
 "further help."
 msgstr ""
 "عُذرًا. حدثت مشكلة في الخادم أثناء محاولة معالجة طلبك الأخير. قد ترغب في "
-"العودة إلى صفحة \"مكتبي\" في {studio_name} وإعادة المحاولة. وإذا ما زلت "
-"تواجه صعوبات في الوصول إلى ما تريد، يُرجى عدم التردّد في {link_start}التواصل"
-" مع فريق دعم {studio_name}{link_end} للحصول على مزيد من المساعدة."
+"العودة إلى صفحة \"لوحتي التعليمية\" في {studio_name} وإعادة المحاولة. وإذا "
+"ما زلت تواجه صعوبات في الوصول إلى ما تريد، يُرجى عدم التردّد في "
+"{link_start}التواصل مع فريق دعم {studio_name}{link_end} للحصول على مزيد من "
+"المساعدة."
 
 #: cms/templates/error.html
 msgid "Back to dashboard"
-msgstr "العودة إلى مكتبي"
+msgstr "العودة إلى لوحتي التعليمية"
 
 #: cms/templates/export.html
 msgid "Library Export"
@@ -24496,6 +24498,8 @@ msgid ""
 "Custom sidebar content for {a_link_start}your course summary "
 "page{a_link_end} (formatted in HTML)"
 msgstr ""
+"محتوى مخصص للبار الجانبي {a_link_start}صفحة ملخص المساق{a_link_end} (بصيغة "
+"html)"
 
 #: cms/templates/settings.html
 msgid "Course Card Image"
@@ -25168,7 +25172,7 @@ msgstr "السياسات"
 
 #: cms/templates/widgets/footer.html
 msgid "Accessibility Accommodation Request"
-msgstr ""
+msgstr "طلب تعديل خاص بذوي التحديات الخاصة"
 
 #: cms/templates/widgets/footer.html
 msgid "LMS"
