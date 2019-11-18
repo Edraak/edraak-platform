@@ -341,20 +341,20 @@
         .subsection {
           list-style-type: none;
           border-top: 1px solid $border-color;
-          margin: 0 0 0 35px;
+          @include margin(0, 0, 0, 35px);
 
           .subsection-title {
             display: inline-block;
             margin: 0;
             font-weight: $font-regular;
-            margin-left: $baseline - 2;
+            @include margin-left($baseline - 2);
           }
 
           .subsection-text {
             .details {
               font-size: $body-font-size;
               color: theme-color("secondary");
-              margin-left: 34px;
+              @include margin-left(34px);
             }
             .prerequisite {
               color: theme-color("secondary");
@@ -372,7 +372,7 @@
               justify-content: space-between;
               align-items: center;
               padding: ($baseline / 2) 0 ($baseline / 2) 0;
-              margin: 0 0 0 ($baseline);
+              @include margin(0, 0, 0, $baseline);
               border-top: 1px solid $border-color;
             }
 
@@ -389,7 +389,7 @@
             }
 
             .vertical-details {
-              float:left;
+              @include float(left);
             }
 
             &:hover,
@@ -414,21 +414,22 @@
 
 // Course outline accordion
 button.accordion-trigger, button.prerequisite-button {
-  padding: 10px 0 10px 2px;
+  @include padding(10px, 0, 10px, 2px);
   border: none;
   width: 100%;
-  text-align: left;
+  @include text-align(left);
   margin: 0px;
   background: none;
   cursor: pointer;
 
   .fa {
     color: $blue;
+    @include margin-left(5px);
   }
 }
 
 #expand-collapse-outline-all-button {
-  float: right;
+  @include float(right);
   background-color: $white;
   color: $black;
   cursor: pointer;
