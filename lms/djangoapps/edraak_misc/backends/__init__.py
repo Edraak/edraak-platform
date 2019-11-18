@@ -1,3 +1,0 @@
-"""
-Edraak.org misc modules.
-"""
