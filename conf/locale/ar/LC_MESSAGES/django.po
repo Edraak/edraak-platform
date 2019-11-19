@@ -59,6 +59,7 @@
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# Ali Hasan <ahasan@qrf.org>, 2019
 #
 msgid ""
 msgstr ""
@@ -66,7 +67,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
 "POT-Creation-Date: 2019-11-14 13:21+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
-"Last-Translator: Omar Al-Ithawi <i@omardo.com>, 2019\n"
+"Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -1120,6 +1121,9 @@ msgid ""
 "address associated with their account is changed as a part of this "
 "synchronization."
 msgstr ""
+"مزامنة بيانات ملف تعريف المستخدم المستلمة من موفر الهوية مع حساب مستخدم edX "
+"على كل تسجيل دخول إلى خدمة الدخول الموحد. سيتم إعلام المستخدم إذا تم تغيير "
+"عنوان البريد الإلكتروني المرتبط بحسابه كجزء من هذه المزامنة."
 
 #: common/djangoapps/third_party_auth/models.py
 msgid "The Site that this SAML configuration belongs to."
@@ -7096,11 +7100,12 @@ msgstr "قالب رسائل Sailthru الصادرة لاستخدامه في ال
 
 #: lms/djangoapps/email_marketing/models.py
 msgid "Sailthru send template to use on passed ID verification."
-msgstr ""
+msgstr "قالب رسائل Sailthru الصادرة لاستخدامه في حال نجاح التحقق من هوياتهم."
 
 #: lms/djangoapps/email_marketing/models.py
 msgid "Sailthru send template to use on failed ID verification."
 msgstr ""
+"قالب رسائل Sailthru الصادرة لاستخدامه رسائل التي فشل في التحقق من هوياتهم."
 
 #: lms/djangoapps/email_marketing/models.py
 msgid "Sailthru send template to use on upgrading a course. Deprecated "
@@ -10099,6 +10104,12 @@ msgid ""
 "note that {platform_name} has a different {privacy_policy_link_start}Privacy"
 " Policy{privacy_policy_link_end} from {enterprise_name}."
 msgstr ""
+"لقد تركت موقع ويب  {start_bold}{enterprise_name}{end_bold} وأنت الآن على في "
+"منصة {platform_name}. تم عقد شراكة بين {enterprise_name} ومنصة "
+"{platform_name} لتقديم برامج تعليمية عالية الجودة ومتاحة دائمًا لمساعدتك في "
+"تطوير معرفتك وحياتك المهنية.{line_break} يرجى ملاحظة أن منصة {platform_name}"
+" لديه {privacy_policy_link_start} سياسة خصوصية {privacy_policy_link_end} "
+"مختلفة عن {enterprise_name}."
 
 #: lms/templates/logout.html
 msgid "Signed Out"
@@ -10137,7 +10148,7 @@ msgstr "يطلب التطبيق أعلاه الصلاحيات التالية م�
 msgid ""
 "These permissions will be granted for data from your courses associated with"
 " the following content providers:"
-msgstr ""
+msgstr "سيتم منح الوصول للبيانات من مساقاتك المرتبطة بموفري المحتوى التاليين:"
 
 #: lms/templates/oauth2_provider/authorize.html
 msgid ""
@@ -10888,7 +10899,7 @@ msgstr ""
 
 #: openedx/core/djangoapps/catalog/models.py
 msgid "Long Term Cache Time To Live"
-msgstr ""
+msgstr "مدّة الحفظ طويل الامد (Long Term Cache)"
 
 #: openedx/core/djangoapps/catalog/models.py
 msgid ""
@@ -10896,6 +10907,9 @@ msgid ""
 "does needs to be refreshed less frequently. Enable long term caching of API "
 "responses by setting this to a value greater than 0."
 msgstr ""
+"Specified in seconds (defaults to 86400s, 24hr). In some cases the cache "
+"does needs to be refreshed less frequently. Enable long term caching of API "
+"responses by setting this to a value greater than 0."
 
 #: openedx/core/djangoapps/catalog/models.py
 msgid ""
@@ -11209,7 +11223,7 @@ msgstr ""
 msgid ""
 "Comma-separated list of scopes that this application will be allowed to "
 "request."
-msgstr ""
+msgstr "قائمة مفصولة بفاصلة بال(scopes) التي سيسمح لهذا التطبيق باستخدامها."
 
 #: openedx/core/djangoapps/oauth_dispatch/models.py
 msgid "Content Provider"
@@ -11227,6 +11241,10 @@ msgid ""
 "\"Forgot password?\" link below to continue using the site. Thank you for "
 "helping us keep your data safe."
 msgstr ""
+"يتطلب {platform_name} الآن كلمات مرور أكثر تعقيدًا. كلمة المرور الحالية لا "
+"تفي بالمتطلبات الجديدة. يمكنك تغيير كلمة المرور الخاصة بك الآن استخدام رابط "
+"\"هل نسيت كلمة المرور؟\" أدناه لمواصلة استخدام الموقع. شكرًا لك على مساعدتنا"
+" في الحفاظ على أمان بياناتك."
 
 #: openedx/core/djangoapps/password_policy/compliance.py
 #, python-brace-format
@@ -11238,6 +11256,12 @@ msgid ""
 "\"Account\". You can reset your password from this page. Thank you for "
 "helping us keep your data safe."
 msgstr ""
+"يتطلب {platform_name} الآن كلمات مرور أكثر تعقيدًا. كلمة المرور الحالية لا "
+"تفي بالمتطلبات الجديدة. يجب عليك تغيير كلمة المرور الخاصة بك بموعد اقصاه "
+"تاريخ {deadline} لتتمكن من متابعة استخدام الموقع. لتغيير كلمة المرور الخاصة "
+"بك ، اختر القائمة المنسدلة بجوار اسم المستخدم الخاص بك اعلاه ، ثم حدد "
+"\"الحساب\". يمكنك إعادة تعيين كلمة المرور الخاصة بك من هذه الصفحة. شكرًا لك "
+"على مساعدتنا في الحفاظ على أمان بياناتك."
 
 #: openedx/core/djangoapps/profile_images/images.py
 #, python-brace-format
@@ -11410,6 +11434,9 @@ msgid ""
 "completing more problems every week, and participating in the discussion "
 "forums. What do you want to do to keep learning?"
 msgstr ""
+"يقوم العديد من طلّاب <strong>%(platform_name)s</strong> في مساق "
+"%(course_name)s بإتمام المزيد من المسائل كل أسبوع، والمشاركة في منتديات "
+"المحادثة. ماذا تريد أن تفعل أنت للحفاظ على نسق الدراسة؟"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day10/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day10/email/body.txt
@@ -11424,6 +11451,9 @@ msgid ""
 "%(platform_name)s? We do, and we’re glad to have you! Come see what everyone"
 " is learning."
 msgstr ""
+"هل تذكر اشتراكك في مساق %(course_name)s ومساقات اخرى على منصة  "
+"%(platform_name)s؟ نحن نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا يتعلم"
+" الجميع في المساق."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
@@ -11432,6 +11462,8 @@ msgid ""
 "Remember when you enrolled in %(course_name)s on %(platform_name)s? We do, "
 "and we’re glad to have you! Come see what everyone is learning."
 msgstr ""
+"هل تذكر اشتراكك في مساق %(course_name)s على منصة  %(platform_name)s؟ نحن "
+"نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا يتعلم الجميع في المساق."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 msgid "Keep learning today"
@@ -11444,6 +11476,9 @@ msgid ""
 "courses on %(platform_name)s? We do, and we’re glad to have you! Come see "
 "what everyone is learning."
 msgstr ""
+"هل تذكر اشتراكك في مساق <strong>%(course_name)s</strong> ومساقات اخرى على "
+"منصة  %(platform_name)s؟ نحن نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا"
+" يتعلم الجميع في المساق."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 #, python-format
@@ -11452,6 +11487,9 @@ msgid ""
 "%(platform_name)s? We do, and we’re glad to have you! Come see what everyone"
 " is learning."
 msgstr ""
+"هل تذكر اشتراكك في مساق <strong>%(course_name)s</strong> على منصة  "
+"%(platform_name)s؟ نحن نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا يتعلم"
+" الجميع في المساق."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
@@ -11478,6 +11516,10 @@ msgid ""
 "An %(platform_name)s certificate is official and easily shareable. Upgrade "
 "by %(user_schedule_upgrade_deadline_time)s."
 msgstr ""
+"نأمل أن مستمتع بالتعلم معنا في %(platform_name)s ! تتيح لك الشهادة الموثقة "
+"إبراز المهاراتك والمعارف الجديدة التي تعلمتها. شهادة %(platform_name)s هي "
+"شهادة رسمية وسهلة المشاركة على منصات التواصل.طور اشتراكك عن طريق "
+"%(user_schedule_upgrade_deadline_time)s."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.txt
@@ -11488,6 +11530,10 @@ msgid ""
 " An %(platform_name)s certificate is official and easily shareable. Upgrade "
 "by %(user_schedule_upgrade_deadline_time)s."
 msgstr ""
+"نأمل أن مستمتع بالتعلم معنا حتى الآن 1%(first_course_name)s1! تتيح لك "
+"الشهادة الموثقة إبراز المهاراتك والمعارف الجديدة التي تعلمتها. شهادة "
+"%(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل.طور "
+"اشتراكك عن طريق %(user_schedule_upgrade_deadline_time)s"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 msgid "Upgrade now"
@@ -11501,6 +11547,9 @@ msgid ""
 "highlight your new knowledge and skills. An %(platform_name)s certificate is"
 " official and easily shareable."
 msgstr ""
+"نأمل أن مستمتع بالتعلم معنا في <strong>%(platform_name)s</strong> ! تتيح لك "
+"الشهادة الموثقة إبراز المهاراتك والمعارف الجديدة التي تعلمتها. شهادة "
+"%(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 #, python-format
@@ -11510,6 +11559,9 @@ msgid ""
 " highlight your new knowledge and skills. An %(platform_name)s certificate "
 "is official and easily shareable."
 msgstr ""
+"نأمل أن مستمتع بالتعلم معنا حتى الآن <strong>%(first_course_name)s</strong>!"
+" تتيح لك الشهادة الموثقة إبراز المهاراتك والمعارف الجديدة التي تعلمتها. "
+"شهادة %(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 #, python-format
@@ -11519,7 +11571,7 @@ msgstr ""
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 msgid "You are eligible to upgrade in these courses:"
-msgstr ""
+msgstr "انت مؤهل لتطوير اشتراكك بالمساقات التالية:"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 msgid "Example of a verified certificate"
@@ -11532,12 +11584,13 @@ msgstr "قم بالترقية الآن بـ"
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/subject.txt
 #, python-format
 msgid "Upgrade to earn a verified certificate on %(platform_name)s"
-msgstr ""
+msgstr "طور تسجيلك بالمساق للحصول على شهادة موثقة من %(platform_name)s"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/subject.txt
 #, python-format
 msgid "Upgrade to earn a verified certificate in %(first_course_name)s"
 msgstr ""
+"طور تسجيلك بالمساق للحصول على شهادة موثقة في مساق %(first_course_name)s"
 
 #: openedx/core/djangoapps/self_paced/models.py
 msgid "Enable course home page improvements."
@@ -11779,6 +11832,8 @@ msgid ""
 "I agree to the {platform_name} "
 "{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
 msgstr ""
+"انا اوافق على {platform_name} "
+"{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
 
 #. Translators: "Terms of Service" is a legal document users must agree to
 #. in order to register a new account.
@@ -11798,6 +11853,11 @@ msgid ""
 "                   and agree to our {privacy_policy_link_start}Privacy "
 "Policy{privacy_policy_link_end}."
 msgstr ""
+"بعملك حساب على منصة  {platform_name}, انت توافق على الالتزام بـ "
+"{platform_name}                   "
+"{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
+"                    وتوافق على {privacy_policy_link_start}Privacy "
+"Policy{privacy_policy_link_end}."
 
 #. Translators: "Terms of service" is a legal document users must agree to
 #. in order to register a new account.
@@ -11807,10 +11867,11 @@ msgid ""
 "I agree to the {platform_name} "
 "{tos_link_start}{terms_of_service}{tos_link_end}"
 msgstr ""
+"اوافق على {platform_name} {tos_link_start}{terms_of_service}{tos_link_end}"
 
 #: openedx/core/djangoapps/user_api/config/waffle.py
 msgid "System maintenance in progress. Please try again later."
-msgstr ""
+msgstr "يُجرى عمل صيانة للنظام، الرجاء المحاولة لاحقاً."
 
 #: openedx/core/djangoapps/user_api/preferences/api.py
 #, python-brace-format
@@ -11871,6 +11932,7 @@ msgid ""
 "We received a deletion request for your account on %(platform_name)s. We're "
 "sorry to see you go!"
 msgstr ""
+"لقد تلقينا طلب حذف حسابك على %(platform_name)s نحن آسفون أن نراك تغادر!"
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
@@ -11880,6 +11942,10 @@ msgid ""
 "If you want to opt-out of emails before then, please unsubscribe from the "
 "footer of any email."
 msgstr ""
+"سيتم حذف حسابك قريبا. قد يستغرق حذف الحساب بعض الوقت، بما في ذلك الإزالة من "
+"قوائم البريد الإلكتروني ، بضعة أسابيع للمعالجة الكاملة من خلال نظامنا. إذا "
+"كنت ترغب في إلغاء الاشتراك في رسائل البريد الإلكتروني قبل ذلك ، فالرجاء "
+"إلغاء الاشتراك من تذييل أي بريد إلكتروني."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
@@ -14871,6 +14937,16 @@ msgid ""
 " you do not understand or do not wish to be bound by the Terms, you should "
 "not use the APIs."
 msgstr ""
+"مرحبًا بك في {platform_name}. نشكرك على استخدام واجهة برمجة التطبيقات (API) "
+"لاستكشاف مساقات {platform_name} وأي واجهات API أخرى قد نقدمها من وقت لآخر "
+"(يُشار إليها إجمالاً، \"واجهات API\"). نرجو منك قراءة شروط الخدمة هذه قبل "
+"الوصول إلى واجهات API أو استخدامها. إنّ شروط الخدمة هذه، وأي شروط إضافية "
+"تأتي في إطار وثائق API المصاحبة، وأي سياسات معمول بها، وأي توجيهات تتيحها "
+"{platform_name} وأي تحديثات تظهر من وقت لآخر، تُعتبر كلُّها بمثابة اتفاقيات "
+"(تسمى إجمالاً، \"الشروط\") بينك وبين {platform_name}. ومن خلال الوصول إلى "
+"واجهات API أو استخدامها، فأنت تقبل هذه الشروط وتوافق على الالتزام بها بشكل "
+"قانوني، سواء كنت مستخدمًا مسجّلًا أم لا. إذا لم تستوعب الشروط أو إذا لم ترغب"
+" في أن تكون مُلزَمًا فيها قانونًا، فيجب ألا تستخدم واجهات API."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "API Access"
@@ -14919,6 +14995,18 @@ msgid ""
 "credentials anywhere other than on the {platform_name} website at "
 "{platform_url}."
 msgstr ""
+"أنت توافق على استخدام واجهات API فقط لغرض تقديم المحتوى الذي يتم الوصول إليه"
+" عن طريق واجهات API (\"محتوى API\") على موقعك الإلكتروني، أو موقعك للأجهزة "
+"النقالة، أو تطبيقك، أو مدونتك، أو قائمتك البريدية، أو ملكية شبكات التواصل "
+"الاجتماعي، أو لأي استخدام تجاري آخر وصفته في طلبك للوصول وأقرّته "
+"{platform_name} عملاً بقاعدة التعامل مع كل حالة على حدة. قد تقوم "
+"{platform_name_capitalized} بمراقبة استخدامك لواجهات API للتحقق من الالتزام "
+"بالشروط وقد تمنع دخولك أو تقوم بإيقاف خصائص التكامل التي تتمتع بها إذا قمت "
+"بأي محاولة للالتفاف على المتطلبات والقيود التي تضعها {platform_name} أو "
+"تجاوزها. لا يجوز لتطبيقك أو أي استخدام آخر متفق عليه لواجهة API أو محتوي API"
+" أن يطلب من المستخدمين النهائيين لديك تقديم اسم مستخدم {platform_name}، أو "
+"كلمة المرور، أو أي بيانات اعتماد أخرى لمستخدم {platform_name} في أي مكان "
+"بخلاف موقع {platform_name} على {platform_url}."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Prohibited Uses and Activities"
@@ -14932,6 +15020,11 @@ msgid ""
 "at any time, in its sole discretion, does not benefit or serve the best "
 "interests of {platform_name}, its users and its partners."
 msgstr ""
+"لـ{platform_name_capitalized} وحدها فقط الحق في تحديد ما إذا كان أي استخدام "
+"محدد لواجهات API مقبولا أم لا. كما تحتفظ {platform_name} بالحق في إلغاء "
+"الوصول إلى API لأي استخدام ترى {platform_name} في أي وقت، ووفقاً لتقديرها "
+"فقط، أنه لا يفيد {platform_name} ولا يخدم مصالحها، ولا مصالح مستخدميها، ولا "
+"شركائها."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15013,6 +15106,10 @@ msgid ""
 "calls made by you or Your Application to the APIs. You must not attempt to "
 "circumvent any restrictions or limitations imposed by {platform_name}."
 msgstr ""
+"تحتفظ {platform_name_capitalized} لنفسها بالحق، وفقاً لتقديرها الخاص، في فرض"
+" القيود والحدود على عدد ومعدل تكرار الاستدعاءات التي تصدرها أنت أو تطبيقك "
+"لواجهات API. ولا يجوز لك محاولة التحايل على أي من القيود أو الحدود التي "
+"نفرضها {platform_name}."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Compliance"
@@ -15030,6 +15127,14 @@ msgid ""
 "or mask either your identity or Your Application's identity when using the "
 "APIs."
 msgstr ""
+"أنت توافق على الامتثال لجميع القوانين المعمول بها، والضوابط، وحقوق أي طرف "
+"ثالث (بما في ذلك، وبدون حصر، القوانين التي تتعلق باستيراد أو تصدير البيانات "
+"أو البرامج، والخصوصية، وحقوق الطبع والنشر، والقوانين المحلية). ولا يحق لك "
+"استخدام واجهات API لتشجيع نشاط غير قانوني أو انتهاك حقوق الغير أو الترويج "
+"لذلك. ولا يحق لك مخالفة أي شرط من شروط الخدمة الأخرى التي تم الاتفاق عليها "
+"مع {platform_name}. ويحق لك فقط الوصول (أو محاولة الوصول) إلى واجهة API عبر "
+"الطرق المذكورة في وثائق واجهة API تلك. ولا يحق لك تمويه أو إخفاء هويتك أو "
+"هوية تطبيقك عند استخدام واجهات API."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Ownership"
@@ -15082,6 +15187,20 @@ msgid ""
 "other entities providing information, API Content or services for the APIs, "
 "the course instructors and their staffs."
 msgstr ""
+"جميع الأسماء والشعارات والأختام (\"العلامات التجارية\") التي تظهر في واجهات "
+"برمجة التطبيقات أو محتوى API أو على أو من خلال الخدمات المتاحة على أو من "
+"خلال واجهات برمجة التطبيقات ، إن وجدت ، هي ملك لأصحابها المعنيين. لا يجوز لك"
+" إزالة أو تغيير أو إخفاء أي حقوق طبع ونشر أو علامة تجارية أو إشعارات حقوق "
+"ملكية أخرى مدمجة في محتوى واجهة برمجة التطبيقات أو مرافقة له. إذا قام أي "
+"{platform_name} مشارك (كما هو محدد فيما يلي) أو أي جهة خارجية أخرى بإلغاء "
+"الوصول إلى محتوى API الذي يملكه أو يتحكم فيه ذلك {platform_name} مشارك أو "
+"جهة خارجية ، بما في ذلك على سبيل المثال لا الحصر أي علامات تجارية ، يجب عليك"
+" التأكد من أن جميع محتوى API المتعلق بذلك {platform_name} يتم حذف المشارك أو"
+" الطرف الثالث من التطبيق الخاص بك والشبكات والأنظمة والخوادم الخاصة بك في "
+"أسرع وقت ممكن. \"المشاركون في {platform_name_capitalized}\" يعني معهد "
+"ماساتشوستس للتكنولوجيا وجامعة هارفارد والكيانات الأخرى التي توفر المعلومات "
+"أو محتوى أو خدمات واجهة برمجة التطبيقات لواجهة برمجة التطبيقات ومدرسي الدورة"
+" التدريبية وموظفيها."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15117,6 +15236,11 @@ msgid ""
 " collect and how you may use and share such information (including for "
 "advertising) with {platform_name} and other third parties."
 msgstr ""
+"أنت توافق على الامتثال لجميع قوانين ولوائح الخصوصية المعمول بها وعلى أن تكون"
+" نزيهاً فيما يتعلق بأي جمع واستخدام لبيانات المستخدم النهائي. ويجب عليك أن "
+"تضع سياسة خصوصية وتلتزم بها للتطبيق الخاص بك، بحيث تصف بوضوح وبدقة "
+"للمستخدمين النهائيين معلومات المستخدم التي تجمعها وطريقة استخدامك لها وإطلاع"
+" الآخرين عليها (بما في ذلك الإعلان) مع {platform_name} وأي طرف ثالث آخر."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Right to Charge"
@@ -15128,6 +15252,8 @@ msgid ""
 "{platform_name} reserves the right to charge fees for future use or access "
 "to the APIs."
 msgstr ""
+"قد يتم اتاحة الوصول إلى بعض الAPI مجانًا ، ولكن منصة {platform_name} تحتفظ "
+"بالحق في فرض رسوم على الاستخدام في المستقبل أو الوصول إلى الAPIs."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15139,6 +15265,8 @@ msgid ""
 "changes.  Be sure to return to this page periodically to ensure familiarity "
 "with the most current version of the Terms."
 msgstr ""
+"تحتفظ {platform_name_capitalized} لنفسها بالحق في تعديل الشروط في أي وقت وبدون إخطار مسبق. وأي تغييرات قد تطرأ على الشروط تعتبر نافذة فور نشرها على هذه الصفحة، مع تحديث تاريخ السريان. ومن خلال الوصول إلى واجهات API أو استخدامها بعد حدوث أية تغييرات، فإنك تؤكد على موافقتك المُسبقة على الشروط المعدلة وجميع التغييرات. احرص على الرجوع إلى هذه الصفحة من وقت لآخر للاطلاع على أحدث نسخة من الشروط.\n"
+" "
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15148,6 +15276,11 @@ msgid ""
 "that is unacceptable to you, you should stop using the APIs. Continued use "
 "of the APIs means you accept the change."
 msgstr ""
+"قد تقوم {platform_name_capitalized} بتحديث أو تعديل واجهات API من وقت لآخر "
+"دون إشعار مسبق. وقد تؤثر هذه التغييرات على استخدامك لواجهات API أو طريقة "
+"تفاعل التكامل مع API لديك. وإذا قمنا بإجراء تغيير غير مقبول بالنسبة لك، فيجب"
+" عليك التوقف عن استخدام واجهات API. الاستمرار في استخدام واجهات API يعني أنك"
+" تقبل التغيير."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Confidentiality"
@@ -15160,6 +15293,10 @@ msgid ""
 "discourage others from using your credentials. Your credentials may not be "
 "embedded in open source projects."
 msgstr ""
+"بيانات الاعتماد الخاصة بك (مثل كلمة مرور العميل والمعرفات) مخصصة لاستخدامك "
+"الشخصي فقط. ويجب عليك الحفاظ على سرية بيانات الاعتماد الخاصة بك ومنع الآخرين"
+" من استخدامها. ولا يجوز دمج بيانات الاعتماد الخاصة بك في مشاريع مفتوحة "
+"المصدر."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15179,6 +15316,19 @@ msgid ""
 "to do so by law if you provide {platform_name} with reasonable prior notice,"
 " unless a court orders that {platform_name} not receive notice."
 msgstr ""
+"في حالة قيام {platform_name} بمنحك إمكانية الوصول إلى معلومات التي تخص "
+"{platform_name} و/أو واجهات API المصنفة تحت بند \"سري\" والتي قد يفترض أي "
+"شخص معقول أنها سرية أو ملكية خاصة مع تحديد شروط للإفصاح عنها (\"سرية "
+"المعلومات\")، فإنك توافق على استخدام هذه المعلومات فقط من أجل استخدام واجهات"
+" API واستعمالها في عمليات الإنشاء. ولا يجوز لك الكشف عن المعلومات السرية لأي"
+" شخص بدون موافقة خطية مسبقة من {platform_name}، وأنت توافق على حماية "
+"المعلومات السرية من الاستخدام والإفصاح غير المصرح بهما بنفس الطريقة التي "
+"تحمي بها المعلومات السرية الخاصة بك. لا تتضمن المعلومات السرية المعلومات "
+"التي وضعتها بشكل مستقل، أو التي أعطاها لك طرف ثالث بدون إلزامك بالسرية، أو "
+"المعلومات التي يتم نشرها بدون خطأ منك. يجوز لك الكشف عن معلومات سرية عندما "
+"تُجْبَر على القيام بذلك بموجب القانون شرط أن تقدم إشعارًا مسبقًا ومعقولًا "
+"إلى {platform_name}، وذلك ما لم تأمر المحكمة بأنه لا يجب أن تحصل "
+"{platform_name} على أي إشعار."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Disclaimer of Warranty / Limitation of Liabilities"
@@ -15209,6 +15359,15 @@ msgid ""
 "COMPLETENESS, TIMELINESS, OR QUALITY OF THE APIS OR ANY API CONTENT, OR THAT"
 " ANY PARTICULAR API CONTENT WILL CONTINUE TO BE MADE AVAILABLE."
 msgstr ""
+"لا تضمن {platform_name} والمشاركون لدى {platform_name} (كما هو موضح لاحقاً) "
+"أن تعمل واجهات API بطريقة دائمة أو خالية من الأخطاء، أو خلو واجهات API من "
+"الفيروسات أو غيرها من المكونات الضارة، أو تلبية واجهات API أو محتوى API "
+"المقدم لكل احتياجاتك أو توقعاتك. ولا تقدم {platform_name} والمشاركون لدى "
+"{platform_name} أي ضمان على دقة أو اكتمال أو ديمومة أو جودة واجهات API أو أي"
+" محتوى من محتويات API، أو أن يظل أي محتوى معين من محتويات API متاحاً "
+"باستمرار. المقصود بالمشاركين\" لدى \"{platform_name} هم MIT، وهارفارد، "
+"والأعضاء الآخرين، والمؤسسات التي تقوم بتوفير المعلومات أو محتوى API أو خدمات"
+" API، والمدربون، وموظفوهم."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15220,6 +15379,13 @@ msgid ""
 "DOWNLOAD OR USE OF SUCH INFORMATION, MATERIALS OR DATA, UNLESS OTHERWISE "
 "EXPRESSLY PROVIDED FOR IN THE {platform_name} PRIVACY POLICY."
 msgstr ""
+"استخدامك لواجهات API ومحتوى API وأي خدمات يتم الحصول عليها من خلال واجهات "
+"API يكون على مسؤوليتك الخاصة. وصولك إلى وتنزيلك للمعلومات، أو المواد، أو "
+"البيانات، من خلال واجهات API أو تحميلها يكون بناءً على تقديرك الشخصي، وعلى "
+"مسؤوليتك وتتحمل وحدك المسؤولية عن أي ضرر قد يلحق بممتلكاتك (بما في ذلك نظام "
+"الحاسوب الخاص بك) أو فقدان للبيانات ينتج عن تحميل أو استخدام مثل هذه المواد "
+"أو البيانات، ما لم يُذكر خلاف ذلك بشكل صريح في سياسة الخصوصية لدى "
+"{platform_name}."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15231,6 +15397,13 @@ msgid ""
 "INFORMATION OBTAINED FROM OR THROUGH THE APIS, WHETHER YOUR CLAIM IS BASED "
 "IN CONTRACT, TORT, STATUTORY OR OTHER LAW."
 msgstr ""
+"إلى أقصى حد يسمح به القانون المعمول به، أنت توافق على عدم تحمل "
+"{platform_name} أو أي من المشاركين لدى {platform_name} لأي مسئولية تجاهك عن "
+"أي خسارة أو أضرار، سواء كانت فعلية أو مترتبة على شيء آخر، تنشأ من أو تتعلق "
+"بهذه البنود، أو استخدامك (أو استخدام أي طرف ثالث) أو عدم القدرة على استخدام "
+"واجهات API أو أي محتوى من محتويات API، أو اعتمادك على المعلومات التي يتم "
+"الحصول عليها من أو عبر واجهات API، سواء كانت مطالبتك قائمة على عقد، أو "
+"مسؤولية تقصيرية، أو قانونية، أو أي قانون آخر."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15273,6 +15446,12 @@ msgid ""
 "that may be offered at these third-party sites. If you decide to access "
 "linked third-party websites, you do so at your own risk."
 msgstr ""
+"يمكن أن تشمل واجهات API ومحتوى API على روابط إلى مواقع خارجية تقوم جهات أخرى"
+" غير تابعة ل{platform_name} بصيانتها أو إدارتها. لا تتحمل "
+"{platform_name_capitalized} أو المشاركون لدى {platform_name} أي مسؤولية "
+"عنها، ولا تقوم بترشيح، أو اعتماد، أو مراجعة، أو إقرار محتويات أي من المنتجات"
+" أو الخدمات التي قد يتم تقديمها في هذه المواقع أو استخدامها. إذا قررت الدخول"
+" إلى مواقع أطراف أخرى عبر هذه الروابط، فإنك تقوم بذلك على مسؤوليتك الشخصية."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15288,6 +15467,17 @@ msgid ""
 "{platform_name} or one of the {platform_name} Participants will provide you "
 "with written notice of such claim, action or demand."
 msgstr ""
+"إلى أقصى حد يسمح به القانون المعمول به، أنت توافق على أن تدافع عن وتحافظ "
+"وتعوض {platform_name} والمشاركين لدى {platform_name}، والشركات التابعة لها، "
+"وفروعها، وموظفيها، وجامعتها، وطلابها، وزملائها، والأعضاء التنظيميين لمجلس "
+"الإدارة، والوكلاء، والموظفين ضد ومقابل أي مطالبات أو إجراءات أو ادعاءات "
+"لأطراف أخرى قد تنتج عن أو ترتبط باستخدامك لواجهات API وأي محتوى من محتويات "
+"API بأي شكل من الأشكال، بما في ذلك أي مسؤولية أو مصاريف التي قد تنشأ من أي "
+"مصدر وجميع المطالبات والخسائر والأضرار (الفعلية والمترتبة)، والدعاوى، "
+"والأحكام، وتكاليف التقاضي، وأتعاب المحاماة، من أي نوع وأياً كانت طبيعتها. "
+"وفي مثل هذه الحالة، تقوم {platform_name} أو أحد المشاركين لدى "
+"{platform_name} بإرسال إشعار مكتوب إليك لإبلاغك بهذه المطالبة، أو الحكم، أو "
+"الإجراء."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "General Legal Terms"
@@ -15336,6 +15526,17 @@ msgid ""
 "still be allowed to apply for injunctive remedies (or an equivalent type of "
 "urgent legal relief) in any jurisdiction."
 msgstr ""
+"أنت توافق على أن الشروط، وواجهات API، وأية مطالبة أو نزاع قد تنشأ عن أو "
+"تتعلق بالشروط أو بواجهات API، ستخضع لقوانين ماساتشوستس، باستثناء التناقُضات "
+"بين أحكام القانون. كما توافق على أن جميع هذه المطالبات والمنازعات سوف يتم "
+"النظر فيها وحلها بشكل حصري في المحاكم الفدرالية أو محاكم الولاية الواقعة في "
+"وتخدم كامبريدج، ماساتشوستس، الولايات المتحدة الأمريكية. كما أنك توافق على "
+"الاختصاص الشخصي لتلك المحاكم وسلطتها عليك في هذا الشأن، وأنت تتنازل وتوافق "
+"على عدم إبداء أي اعتراض على هذه الإجراءات في تلك المحاكم (بما في ذلك أي دفاع"
+" أو اعتراض على عدم صلاحية السلطة أو الاختصاص المكاني أو الانزعاج من "
+"المحكمة). وعلى الرغم مما سبق، فأنت توافق على السماح بقيام {platform_name} "
+"بتطبيق تعويضات قضائية (أو أي نوع مماثل من التعويضات القانونية المستعجلة) في "
+"أي ولاية قضائية."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Termination"
@@ -16946,6 +17147,9 @@ msgid ""
 "received. You can contact the account holder to request payment, or you can "
 "unenroll from this course"
 msgstr ""
+"لم يعد بإمكانك الوصول إلى هذه الدورة التدريبية لأن الدفع لم يتم استلامها "
+"بعد. يمكنك الاتصال بصاحب الحساب لطلب الدفع ، أو يمكنك إلغاء التسجيل في هذه "
+"الدورة التدريبية"
 
 #: lms/templates/dashboard/_dashboard_course_listing.html
 msgid ""
@@ -17129,7 +17333,7 @@ msgstr ""
 
 #: lms/templates/dashboard/_dashboard_entitlement_actions.html
 msgid "Course options for {courseName}"
-msgstr ""
+msgstr "اعدادات مساق {courseName}"
 
 #: lms/templates/dashboard/_dashboard_show_consent.html
 msgid "Consent to share your data"
@@ -17140,6 +17344,8 @@ msgid ""
 "To access this course, you must first consent to share your learning "
 "achievements with {enterprise_customer_name}."
 msgstr ""
+"للدخول إلى هذا المساق ، يجب عليك أولاً الموافقة على مشاركة إنجازاتك "
+"التعليمية مع {enterprise_customer_name}."
 
 #: lms/templates/dashboard/_dashboard_show_consent.html
 msgid "View Consent"
@@ -18042,6 +18248,9 @@ msgid ""
 "your verification was successful.You can also check the status of the "
 "verification process on your dashboard."
 msgstr ""
+"لقد تلقينا معلوماتك وبدأت عملية التحقق من الهوية. ستتلقى رسالة بريد إلكتروني"
+" منا في الأيام القليلة القادمة لتأكيد ما إذا كان التحقق قد نجح أم لا. يمكنك "
+"أيضًا التحقق من حالة عملية التحقق على لوحة التحكم."
 
 #: lms/templates/emails/photo_submission_confirmation.txt
 #: lms/templates/emails/reverification_processed.txt
@@ -18460,7 +18669,7 @@ msgstr "الملف الشخصي"
 
 #: lms/templates/header/navbar-authenticated.html
 msgid "Discover New"
-msgstr ""
+msgstr "اكتشف الجديد"
 
 #. Translators: This is short for "System administration".
 #: lms/templates/header/navbar-authenticated.html
@@ -18479,7 +18688,7 @@ msgstr "سلّة المشتريات"
 
 #: lms/templates/header/navbar-not-authenticated.html
 msgid "Supplemental Links"
-msgstr ""
+msgstr "روابط تكميلية"
 
 #: lms/templates/header/navbar-not-authenticated.html
 #: lms/templates/navigation/navbar-not-authenticated.html
@@ -18494,7 +18703,7 @@ msgstr "المؤسسات التعليمية"
 
 #: lms/templates/header/user_dropdown.html
 msgid "Resume your last course"
-msgstr ""
+msgstr "استئناف الدراسة في المساقك الأخير"
 
 #: lms/templates/instructor/instructor_dashboard_2/add_coupon_modal.html
 #: lms/templates/instructor/instructor_dashboard_2/e-commerce.html
@@ -19531,7 +19740,7 @@ msgstr ""
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Role of the users being enrolled."
-msgstr ""
+msgstr "دور المستخدمين المسجلين."
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid ""
@@ -19771,6 +19980,11 @@ msgid ""
 "open threads, and endorse responses. Their posts are marked as 'Community "
 "TA'. Only enrolled learners can be added as Community TAs."
 msgstr ""
+"Community TA هم أعضاء في المجتمع الذين يساعدون فريق المساق في ادارة مراكز "
+"المناقشة. يمكنهم مشاهدة المنشورات من قبل المتعلمين في الشعب المخصص لهم أو "
+"مسار التسجيل ، ويمكنهم تعديل أو حذف المنشورات ، ومسح العلامات ، وإغلاق أو "
+"إعادة فتح الرسائل ، والتصديق على الردود. تم وضع علامة على مشاركاتهم كـ "
+"\"Community TA\". يمكن إضافة المتعلمين المسجلين فقط كـCommunity TAs."
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Add Community TA"
@@ -20203,19 +20417,19 @@ msgstr "تفاصيل البرنامج"
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "Get the {platform_name} Mobile App!"
-msgstr ""
+msgstr "احصل على تطبيق {platform_name} للهواتف الذكية!"
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "We'll send you a one time SMS with a link to download the app."
-msgstr ""
+msgstr "سنرسل لك رسالة نصية (sms) لمرة واحدة مع رابط لتنزيل التطبيق."
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "Mobile phone number"
-msgstr ""
+msgstr "رقم الهاتف الجوال"
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "Send me a text with the link"
-msgstr ""
+msgstr "ارسل لي رسالة نصية (sms) بالرابط"
 
 #: lms/templates/modal/_modal-settings-language.html
 msgid "Change Preferred Language"
@@ -21031,7 +21245,7 @@ msgstr "دعم الطلاب: التسجيل"
 
 #: lms/templates/support/manage_user.html
 msgid "Student Support: Manage User"
-msgstr ""
+msgstr "دعم الطلاب: إدارة المستخدم"
 
 #: lms/templates/support/refund.html
 msgid "About to refund this order:"
@@ -21333,7 +21547,7 @@ msgstr "تعديل هدف المساق:"
 
 #: openedx/features/course_experience/templates/course_experience/course-home-fragment.html
 msgid "Pursue a verified certificate"
-msgstr ""
+msgstr "العمل على شهادة موثقة"
 
 #: openedx/features/course_experience/templates/course_experience/course-home-fragment.html
 msgid "Upgrade ({price})"
@@ -21353,15 +21567,15 @@ msgstr "{subsection_format} تستحقّ في {{date}}"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Learn About Verified Certificates"
-msgstr ""
+msgstr "تعرف على الشهادات الموثقة"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "{platform_name} Verified Certificate"
-msgstr ""
+msgstr "{platform_name} شهادة موثقة"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Why upgrade?"
-msgstr ""
+msgstr "لماذا التطوير؟"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Official proof of completion"
@@ -21379,30 +21593,32 @@ msgstr "حافز مؤكد لاستكمال المساق"
 msgid ""
 "Certificate purchases help {platform_name} continue to offer free courses"
 msgstr ""
+"عملية دفعك لتوثيق شهادتك تساعدنا في منصة {platform_name} على تقديم المزيد من"
+" المساقات المجانية"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "How it works"
-msgstr ""
+msgstr "كيف تتعلم عبر إدراك"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Pay the Verified Certificate upgrade fee"
-msgstr ""
+msgstr "دفع رسوم توثيق الشهادة"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Verify your identity with a webcam and government-issued ID"
-msgstr ""
+msgstr "تحقق من هويتك باستخدام كاميرا ويب وهوية حكومية (هوية شخصية، جواز سفر)"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Study hard and pass the course"
-msgstr ""
+msgstr "ادرس بجد وانجح بالمساق"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Share your certificate with friends, employers, and others"
-msgstr ""
+msgstr "شارك شهادتك مع الأصدقاء وأرباب العمل وغيرهم"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "edX Learner Stories"
-msgstr ""
+msgstr "قصص نجاح المتعلمين"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid ""
@@ -21410,10 +21626,12 @@ msgid ""
 "                             resume - I feel like this certificate could "
 "really help me land                             my dream job!"
 msgstr ""
+"ساعدت شهادتي في عرض معرفتي في سيرتي الذاتية - أشعر أن هذه الشهادة قد تساعدني"
+" حقًا في الحصول على وظيفة أحلامي!"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "{learner_name}, edX Learner"
-msgstr ""
+msgstr "{learner_name} ، متعلم ادراك"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid ""
@@ -21422,10 +21640,13 @@ msgid ""
 "I have and that I have                             achieved something while "
 "I was unemployed."
 msgstr ""
+"كنت أرغب في تضمين شهادة تم التحقق منها في سيرتي الذاتية وملفي الشخصي لتوضيح "
+"أنني أعمل على تحقيق هذا الهدف الذي حققته وأنني حققت شيئًا بينما كنت عاطلاً "
+"عن العمل."
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Upgrade ({course_price})"
-msgstr ""
+msgstr "تطوير اشتراكي ({course_price})"
 
 #: openedx/features/course_experience/templates/course_experience/course-updates-fragment.html
 msgid "This course does not have any updates."
@@ -21445,7 +21666,7 @@ msgstr "البحث في النتائج"
 
 #: openedx/features/learner_analytics/templates/learner_analytics/dashboard.html
 msgid "My Stats (Beta)"
-msgstr ""
+msgstr "إحصائياتي (تجريبية)"
 
 #. Translators: this section lists all the third-party authentication
 #. providers
@@ -21496,7 +21717,7 @@ msgstr "استكشف المساقات الجديدة"
 
 #: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
 msgid "View My Records"
-msgstr ""
+msgstr "عرض سجلاتي"
 
 #: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
 msgid "My Profile"
@@ -21539,11 +21760,11 @@ msgstr "الصفحة الرئيسية لـ edX"
 
 #: themes/edx.org/lms/templates/footer.html
 msgid "© 2012–{year} edX Inc. "
-msgstr ""
+msgstr "© 2012– {year} edX Inc."
 
 #: themes/edx.org/lms/templates/footer.html
 msgid "EdX, Open edX, and MicroMasters are registered trademarks of edX Inc. "
-msgstr ""
+msgstr "EdX و Open edX و MicroMasters هي علامات تجارية مسجلة لشركة edX."
 
 #: themes/edx.org/lms/templates/certificates/_about-accomplishments.html
 msgid "About edX Verified Certificates"
@@ -25765,24 +25986,26 @@ msgid ""
 "will loose their references to this file. The following articles reference "
 "this file:"
 msgstr ""
+"يمكن الرجوع إلى الملف في مقالات أخرى. حذفها يعني أنهم سيفقدون إشاراتهم إلى "
+"هذا الملف. تشير المقالات التالية إلى هذا الملف:"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid "Delete it!"
-msgstr ""
+msgstr "احذفه!"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid ""
 "You can remove a reference to a file, but it will retain its references on "
 "other articles."
-msgstr ""
+msgstr "يمكنك إزالة مرجع إلى ملف ، لكنه سيحتفظ بمراجعه في مقالات أخرى."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/delete.html
 msgid "Remove reference"
-msgstr ""
+msgstr "إزالة المرجع"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/history.html
 msgid "History of"
-msgstr ""
+msgstr "تاريخ"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/history.html
 msgid "User"
@@ -25801,7 +26024,7 @@ msgstr "الإجراء"
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/history.html
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
 msgid "<em>No description</em>"
-msgstr ""
+msgstr "<em>بدون وصف</em>"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/history.html
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
@@ -25810,7 +26033,7 @@ msgstr "تحميل"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/history.html
 msgid "Use this!"
-msgstr ""
+msgstr "استخدم هذا!"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #, python-format
@@ -25823,10 +26046,15 @@ msgid ""
 "for the listed articles where necessary. This way of working is more "
 "efficient...."
 msgstr ""
+"استبدال مرفق يعني إضافة ملف جديد سيتم استخدامه في مكانه. سيتم استبدال جميع "
+"الإشارات إلى الملف بالإشارة التي تحمّلها وسيتم تنزيل الملف كـ "
+"<strong>%(filename)s</strong> . يرجى ملاحظة أن هذا المرفق قيد الاستخدام في "
+"مقالات أخرى ، يمكنك تشويه المحتويات. ومع ذلك ، لا تتردد في الاستفادة من هذا "
+"وجعل بدائل للمواد المدرجة عند الاقتضاء. طريقة العمل هذه أكثر فعالية ...."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 msgid "Articles using"
-msgstr ""
+msgstr "مقالات باستخدام"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #, python-format
@@ -25835,40 +26063,43 @@ msgid ""
 "place. All references to the file will be replaced by the one you upload and"
 " the file will be downloaded as <strong>%(filename)s</strong>."
 msgstr ""
+"استبدال مرفق يعني إضافة ملف جديد سيتم استخدامه في مكانه. سيتم استبدال جميع "
+"الإشارات إلى الملف بالإشارة التي تحمّلها وسيتم تنزيل الملف كـ "
+"<strong>%(filename)s</strong> ."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #: wiki/plugins/images/templates/wiki/plugins/images/revision_add.html
 msgid "Upload replacement"
-msgstr ""
+msgstr "تحميل بديل"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
 msgid "Add file to"
-msgstr ""
+msgstr "إضافة ملف إلى"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
 msgid "Add attachment from other article"
-msgstr ""
+msgstr "إضافة مرفق من المادة الأخرى"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
 msgid "Main article"
-msgstr ""
+msgstr "المادة الرئيسية"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
 msgid "Add to article"
-msgstr ""
+msgstr "أضف إلى المقال"
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/search.html
 msgid "Your search did not return any results"
-msgstr ""
+msgstr "ان بحثك لا يعد باي نتائج"
 
 #: wiki/plugins/help/templates/wiki/plugins/help/sidebar.html
 msgid "Adding new articles"
-msgstr ""
+msgstr "إضافة مقالات جديدة"
 
 #: wiki/plugins/help/templates/wiki/plugins/help/sidebar.html
 #: wiki/plugins/links/templates/wiki/plugins/links/sidebar.html
 msgid "An external link"
-msgstr ""
+msgstr "رابط خارجي"
 
 #: wiki/plugins/help/templates/wiki/plugins/help/sidebar.html
 msgid "Headers"
@@ -25878,15 +26109,15 @@ msgstr "ترويسات"
 msgid ""
 "Use these codes for headers and to automatically generate Tables of "
 "Contents."
-msgstr ""
+msgstr "استخدم هذه الرموز للرؤوس ولإنشاء جداول المحتويات تلقائيًا."
 
 #: wiki/plugins/help/templates/wiki/plugins/help/sidebar.html
 msgid "Typography"
-msgstr ""
+msgstr "طباعة"
 
 #: wiki/plugins/help/templates/wiki/plugins/help/sidebar.html
 msgid "Lists"
-msgstr ""
+msgstr "قوائم"
 
 #: wiki/plugins/images/forms.py
 #, python-format
@@ -25966,67 +26197,69 @@ msgid ""
 "The following images are available for this article. Copy the markdown tag "
 "to directly refer to an image from the article text."
 msgstr ""
+"الصور التالية متاحة لهذا المقال. انسخ علامة تخفيض السعر للإشارة مباشرةً إلى "
+"صورة من نص المقالة."
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "Back to edit page"
-msgstr ""
+msgstr "العودة إلى تحرير الصفحة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "No file"
-msgstr ""
+msgstr "لا ملف"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "Upload new image"
-msgstr ""
+msgstr "تحميل صورة جديدة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "Restore image"
-msgstr ""
+msgstr "استعادة الصورة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "Remove image"
-msgstr ""
+msgstr "إزالة الصورة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "Completely delete"
-msgstr ""
+msgstr "حذف تماما"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "Revert to this version"
-msgstr ""
+msgstr "العودة إلى هذا الإصدار"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/index.html
 msgid "There are no images for this article."
-msgstr ""
+msgstr "لا توجد صور لهذا المقال."
 
 #: wiki/plugins/images/templates/wiki/plugins/images/purge.html
 #: wiki/templates/wiki/deleted.html
 msgid "Purge deletion"
-msgstr ""
+msgstr "تطهير الحذف"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/purge.html
 msgid "Purge image: Completely remove image file and all revisions."
-msgstr ""
+msgstr "تطهير الصورة: قم بإزالة ملف الصورة بالكامل وجميع المراجعات."
 
 #: wiki/plugins/images/templates/wiki/plugins/images/purge.html
 msgid "Remove it completely!"
-msgstr ""
+msgstr "إزالته تماما!"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/render.html
 msgid "Image not found"
-msgstr ""
+msgstr "الصورة غير موجودة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/revision_add.html
 msgid "Replace image"
-msgstr ""
+msgstr "استبدال الصورة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/revision_add.html
 msgid "Choose an image file to replace current image."
-msgstr ""
+msgstr "اختر ملف صورة لاستبدال الصورة الحالية."
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "Image id"
-msgstr ""
+msgstr "معرف الصورة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 #: wiki/plugins/links/templates/wiki/plugins/links/sidebar.html
@@ -26035,27 +26268,27 @@ msgstr "إضافة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "No images found for this article"
-msgstr ""
+msgstr "لا توجد صور لهذا المقال"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "Manage images"
-msgstr ""
+msgstr "إدارة الصور"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "Add new image"
-msgstr ""
+msgstr "أضف صورة جديدة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "Add image"
-msgstr ""
+msgstr "إضافة صورة"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "You do not have permissions to add images."
-msgstr ""
+msgstr "ليس لديك أذونات لإضافة الصور."
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid "How to use images"
-msgstr ""
+msgstr "كيفية استخدام الصور"
 
 #: wiki/plugins/images/templates/wiki/plugins/images/sidebar.html
 msgid ""
@@ -26067,6 +26300,13 @@ msgid ""
 "Markdown in the caption. The markdown code syntax for images looks like "
 "this, possible values for align are left/center/right:"
 msgstr ""
+"بعد تحميل صورة ، يتم إرفاقها بهذه التقنية المعينة ويمكن استخدامها هنا فقط. "
+"يمكن للمستخدمين الآخرين استبدال الصورة ، ولكن يتم الاحتفاظ بالإصدارات "
+"القديمة. ربما تريد أن تظهر الصورة مع تعليق لطيف. لتحقيق ذلك ، اضغط على الزر "
+"&quot;إدراج&quot; وقم بملء حقول التسمية التوضيحية ، وربما اخترت جعل الصورة "
+"تطفو يمينًا أو يسارًا من المحتوى. يمكنك استخدام تخفيض السعر في التسمية "
+"التوضيحية. يشبه بناء جملة كود تخفيض السعر للصور ، والقيم المحتملة للمحاذاة "
+"هي يسار / وسط / يمين:"
 
 #: wiki/plugins/links/wiki_plugin.py
 msgid "Links"
@@ -26074,19 +26314,23 @@ msgstr "روابط "
 
 #: wiki/plugins/links/templates/wiki/plugins/links/sidebar.html
 msgid "Link to another wiki page"
-msgstr ""
+msgstr "رابط إلى صفحة ويكي أخرى"
 
 #: wiki/plugins/links/templates/wiki/plugins/links/sidebar.html
 msgid ""
 "Type in something from another wiki page's title and auto-complete will help"
 " you create a tag for you wiki link. Tags for links look like this:"
 msgstr ""
+"اكتب شيئًا من عنوان صفحة wiki أخرى وسيساعدك الإكمال التلقائي في إنشاء علامة "
+"لرابط wiki. علامات الروابط تبدو كالتالي:"
 
 #: wiki/plugins/links/templates/wiki/plugins/links/sidebar.html
 msgid ""
 "You can link to another website simply by inserting an address example.com "
 "or http://example.com or by using the markdown syntax:"
 msgstr ""
+"يمكنك الارتباط بموقع ويب آخر ببساطة عن طريق إدخال عنوان example.com أو "
+"http://example.com أو باستخدام بناء الجملة markdown:"
 
 #: wiki/plugins/notifications/forms.py
 msgid "Notifications"
@@ -26130,15 +26374,15 @@ msgstr "أُنشئ مقال جديد: %s "
 
 #: wiki/plugins/notifications/templates/wiki/plugins/notifications/menubaritem.html
 msgid "notifications"
-msgstr ""
+msgstr "إشعارات"
 
 #: wiki/plugins/notifications/templates/wiki/plugins/notifications/menubaritem.html
 msgid "No notifications"
-msgstr ""
+msgstr "لا إشعارات"
 
 #: wiki/plugins/notifications/templates/wiki/plugins/notifications/menubaritem.html
 msgid "Clear notifications list"
-msgstr ""
+msgstr "مسح قائمة الإخطارات"
 
 #: wiki/templates/wiki/base.html
 msgid "Search..."
@@ -26155,63 +26399,65 @@ msgstr "التسجيل "
 
 #: wiki/templates/wiki/deleted.html
 msgid "Article deleted"
-msgstr ""
+msgstr "تم حذف المادة"
 
 #: wiki/templates/wiki/deleted.html
 msgid "Article Deleted"
-msgstr ""
+msgstr "المادة المحذوفة"
 
 #: wiki/templates/wiki/deleted.html
 msgid "The article you were looking for has been deleted."
-msgstr ""
+msgstr "تم حذف المقال الذي كنت تبحث عنه."
 
 #: wiki/templates/wiki/deleted.html
 msgid "You may restore this article and its children by clicking restore."
-msgstr ""
+msgstr "يمكنك استعادة هذه المقالة وأطفالها بالنقر فوق استعادة."
 
 #: wiki/templates/wiki/deleted.html
 msgid ""
 "You may remove this article and any children permanently and free their "
 "slugs by clicking the below button. This action cannot be undone."
 msgstr ""
+"يمكنك إزالة هذه المقالة وأي الأطفال بشكل دائم وتحرير الرخويات الخاصة بهم عن "
+"طريق النقر فوق الزر أدناه. لا يمكن التراجع عن هذا الإجراء."
 
 #: wiki/templates/wiki/dir.html
 msgid "Listing articles in"
-msgstr ""
+msgstr "ادراج المقالات في"
 
 #: wiki/templates/wiki/dir.html
 msgid "Up one level"
-msgstr ""
+msgstr "مستوى واحد أعلى"
 
 #: wiki/templates/wiki/dir.html
 msgid "clear"
-msgstr ""
+msgstr "واضح"
 
 #: wiki/templates/wiki/dir.html
 msgid "article,articles"
-msgstr ""
+msgstr "المادة، مقالات"
 
 #: wiki/templates/wiki/dir.html
 msgid "matches,match"
-msgstr ""
+msgstr "مباريات، مباراة"
 
 #: wiki/templates/wiki/dir.html
 #, python-format
 msgid "%(cnt)s %(articles_plur)s in this level %(match_plur)s your search."
-msgstr ""
+msgstr "%(cnt)s %(articles_plur)s في هذا المستوى %(match_plur)s بحثك."
 
 #: wiki/templates/wiki/dir.html
 msgid "is,are"
-msgstr ""
+msgstr "هو، هي"
 
 #: wiki/templates/wiki/dir.html
 #, python-format
 msgid "There %(articles_plur_verb)s %(cnt)s %(articles_plur)s in this level."
-msgstr ""
+msgstr "هناك %(articles_plur_verb)s %(cnt)s %(articles_plur)s في هذا المستوى."
 
 #: wiki/templates/wiki/dir.html
 msgid "Last modified"
-msgstr ""
+msgstr "آخر تعديل"
 
 #: wiki/templates/wiki/history.html
 msgid "no log message"
@@ -26219,11 +26465,11 @@ msgstr "لا يوجد رسائل في السجل"
 
 #: wiki/templates/wiki/permission_denied.html
 msgid "Permission Denied"
-msgstr ""
+msgstr "طلب الاذن مرفوض"
 
 #: wiki/templates/wiki/permission_denied.html
 msgid "Sorry, you don't have permission to view this page."
-msgstr ""
+msgstr "عذرا ، ليس لديك إذن لعرض هذه الصفحة."
 
 #: wiki/templates/wiki/preview_inline.html
 msgid "Previewing revision"
@@ -26239,27 +26485,27 @@ msgstr "و"
 
 #: wiki/templates/wiki/source.html
 msgid "Source of"
-msgstr ""
+msgstr "مصدر"
 
 #: wiki/templates/wiki/source.html
 msgid "This article is currently locked for editing."
-msgstr ""
+msgstr "هذه المقالة مقفلة حاليًا للتحرير."
 
 #: wiki/templates/wiki/accounts/login.html
 msgid "Log me in..."
-msgstr ""
+msgstr "تسجيل الدخول لي ..."
 
 #: wiki/templates/wiki/accounts/login.html
 msgid "Don't have an account?"
-msgstr ""
+msgstr "ليس لديك حساب؟"
 
 #: wiki/templates/wiki/accounts/signup.html
 msgid "Sign me up..."
-msgstr ""
+msgstr "أشركني..."
 
 #: wiki/templates/wiki/article/create_root.html
 msgid "Create root article"
-msgstr ""
+msgstr "إنشاء مقالة الجذر"
 
 #: wiki/templates/wiki/article/create_root.html
 msgid "Congratulations!"
@@ -26271,14 +26517,17 @@ msgid ""
 " create the first one, the root article. In the beginning, it will only be "
 "editable by administrators, but you can define permissions after."
 msgstr ""
+"لقد قمت بتثبيت django-wiki ... لكن لا توجد مقالات. لذلك حان الوقت لإنشاء أول"
+" واحد ، المادة الجذر. في البداية ، سيتم تعديله فقط من قبل المسؤولين ، ولكن "
+"يمكنك تحديد الأذونات بعد ذلك."
 
 #: wiki/templates/wiki/article/create_root.html
 msgid "Root article"
-msgstr ""
+msgstr "المادة الجذر"
 
 #: wiki/templates/wiki/article/create_root.html
 msgid "Create root"
-msgstr ""
+msgstr "إنشاء الجذر"
 
 #: wiki/templates/wiki/includes/anonymous_blocked.html
 #, python-format
@@ -26286,50 +26535,52 @@ msgid ""
 "You need to <a href=\"%(login_url)s\">log in</a> or <a "
 "href=\"%(signup_url)s\">sign up</a> to use this function."
 msgstr ""
+"تحتاج إلى <a href=\"%(login_url)s\">تسجيل الدخول</a> أو <a "
+"href=\"%(signup_url)s\">التسجيل</a> لاستخدام هذه الوظيفة."
 
 #: wiki/templates/wiki/includes/anonymous_blocked.html
 msgid "You need to log in og sign up to use this function."
-msgstr ""
+msgstr "تحتاج إلى تسجيل الدخول og التسجيل لاستخدام هذه الوظيفة."
 
 #: wiki/templates/wiki/includes/article_menu.html
 msgid "View Source"
-msgstr ""
+msgstr "أنظر المصدر"
 
 #: wiki/templates/wiki/includes/breadcrumbs.html
 msgid "Sub-articles for"
-msgstr ""
+msgstr "مقالات فرعية لـ"
 
 #: wiki/templates/wiki/includes/breadcrumbs.html
 msgid "No sub-articles"
-msgstr ""
+msgstr "لا مقالات فرعية"
 
 #: wiki/templates/wiki/includes/breadcrumbs.html
 msgid "...and more"
-msgstr ""
+msgstr "...و اكثر"
 
 #: wiki/templates/wiki/includes/breadcrumbs.html
 msgid "Browse articles in this level"
-msgstr ""
+msgstr "تصفح المقالات في هذا المستوى"
 
 #: wiki/templates/wiki/includes/breadcrumbs.html
 msgid "New article next to"
-msgstr ""
+msgstr "مقال جديد بجوار"
 
 #: wiki/templates/wiki/includes/breadcrumbs.html
 msgid "New article below"
-msgstr ""
+msgstr "مقالة جديدة أدناه"
 
 #: wiki/templates/wiki/includes/revision_info.html
 msgid "by"
-msgstr ""
+msgstr "بواسطة"
 
 #: wiki/templates/wiki/includes/revision_info.html
 msgid "restored"
-msgstr ""
+msgstr "رمم"
 
 #: wiki/templates/wiki/includes/revision_info.html
 msgid "unlocked"
-msgstr ""
+msgstr "مفتوحة"
 
 #: wiki/views/accounts.py
 msgid "You are now sign up... and now you can sign in!"
