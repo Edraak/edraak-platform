@@ -10,6 +10,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# leena <labualnil@qrf.org>, 2019
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -35,6 +36,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# leena <labualnil@qrf.org>, 2019
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -10842,7 +10844,7 @@ msgstr ""
 #: lms/templates/courseware/courseware.html
 #: openedx/features/course_bookmarks/templates/course_bookmarks/course-bookmarks.html
 msgid "Bookmarks"
-msgstr "العلامات"
+msgstr "العناوين المحفوظة"
 
 #: openedx/core/djangoapps/bookmarks/views.py
 msgid "An error has occurred. Please try again."
@@ -13330,7 +13332,7 @@ msgstr "اخفِ الملاحظات"
 
 #: lms/templates/bookmark_button.html lms/templates/seq_module.html
 msgid "Bookmarked"
-msgstr "مضاف إلى العلامات"
+msgstr "مضاف إلى العناوين المحفوظة"
 
 #: lms/templates/bookmark_button.html
 msgid "Bookmark this page"
