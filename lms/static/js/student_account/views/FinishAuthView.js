@@ -47,6 +47,7 @@
             initialize: function(obj) {
                 var queryParams = {
                     next: $.url('?next'),
+                    nextOrigin: $.url( '?next_origin' ),
                     enrollmentAction: $.url('?enrollment_action'),
                     courseId: $.url('?course_id'),
                     courseMode: $.url('?course_mode'),
@@ -63,6 +64,7 @@
                 this.courseMode = queryParams.courseMode;
                 this.emailOptIn = queryParams.emailOptIn;
                 this.nextUrl = this.urls.defaultNextUrl;
+                this.nextOrigin = queryParams.nextOrigin;
                 this.purchaseWorkflow = queryParams.purchaseWorkflow;
                 if (queryParams.next) {
                     // Ensure that the next URL is internal for security reasons
@@ -163,12 +165,33 @@
             },
 
             /**
+             * Check if the target url is same as current domain or a subdomain.
+             * @param url Target url
+             * @returns {boolean}
+             */
+            isAllowedOrigin: function( url ) {
+                url = !url.includes('http') ? location.protocol + '//' + url : url;
+                var target = new URL(url);
+                var splittedDomain = location.host.split('.');
+                var domain = splittedDomain[splittedDomain.length-2] + '.' + splittedDomain[splittedDomain.length-1]
+                return target.host.includes(domain);
+            },
+
+            /**
              * Redirect to a URL.  Mainly useful for mocking out in tests.
              * @param  {string} url The URL to redirect to.
              */
             redirect: function(url) {
-                this.updateTaskDescription(gettext('Loading your courses'));
-                window.location.replace(url);
+                // Handle redirection to other origins (Edraak Programs/Marketing site) if 'next_origin' parameter exist.
+                if (this.nextOrigin && this.isAllowedOrigin(this.nextOrigin)) {
+                    this.nextOrigin = !this.nextOrigin.includes('http') ? location.protocol + '//' + this.nextOrigin : this.nextOrigin;
+                    var redirectURL = new URL(url, this.nextOrigin);
+                    window.location.replace(redirectURL.href);
+
+                } else {
+                    this.updateTaskDescription(gettext("Loading your courses"));
+                    window.location.replace(url);
+                }
             }
         });
         return FinishAuthView;

@@ -57,14 +57,6 @@ from util import views as util_views
 
 from course_modes.edraak_helpers import get_progs_url
 
-# Edraak: Redirect dashboard to Programs
-DASHBOARD_VIEW = student_views.student_dashboard
-if settings.PROGS_URLS and settings.PROGS_URLS.get('DASHBOARD'):
-    DASHBOARD_VIEW = RedirectView.as_view(
-        url=get_progs_url(settings.PROGS_URLS['DASHBOARD']),
-        permanent=True
-    )
-
 if settings.DEBUG or settings.FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
     django_autodiscover()
     admin.site.site_header = _('LMS Administration')
@@ -79,8 +71,7 @@ urlpatterns = [
 
     url(r'', include('student.urls')),
     # TODO: Move lms specific student views out of common code
-    # Edraak: Redirect dashboard to Programs
-    url(r'^dashboard$', DASHBOARD_VIEW, name="dashboard"),
+    url(r'^dashboard/?$', student_views.student_dashboard, name='dashboard'),
     url(r'^change_enrollment$', student_views.change_enrollment, name='change_enrollment'),
 
     # Event tracking endpoints
