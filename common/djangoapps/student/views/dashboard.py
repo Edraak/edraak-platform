@@ -22,6 +22,7 @@ from six import text_type, iteritems
 
 import track.views
 from bulk_email.models import BulkEmailFlag, Optout  # pylint: disable=import-error
+from course_modes.edraak_helpers import get_progs_url
 from course_modes.models import CourseMode
 from courseware.access import has_access
 from edxmako.shortcuts import render_to_response, render_to_string
@@ -546,6 +547,9 @@ def student_dashboard(request):
         The dashboard response.
 
     """
+    if settings.PROGS_URLS and settings.PROGS_URLS.get('DASHBOARD', None):
+        return redirect(get_progs_url(settings.PROGS_URLS.get('DASHBOARD')))
+
     user = request.user
     if not UserProfile.objects.filter(user=user).exists():
         return redirect(reverse('account_settings'))

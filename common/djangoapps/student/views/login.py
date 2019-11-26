@@ -49,6 +49,7 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.djangoapps.user_api.accounts.utils import generate_password
 from openedx.core.djangoapps.util.user_messages import PageLevelMessages
 from openedx.features.course_experience import course_home_url_name
+from student.constants import CHILD_USER_PERMISSION_GROUP
 from student.cookies import delete_logged_in_cookies, set_logged_in_cookies
 from student.forms import AccountCreationForm
 from student.helpers import (
@@ -150,7 +151,7 @@ def _get_user_by_email(request):
     email = request.POST['email']
 
     try:
-        return User.objects.get(email=email)
+        return User.objects.exclude(groups__name=CHILD_USER_PERMISSION_GROUP).get(email=email)
     except User.DoesNotExist:
         if settings.FEATURES['SQUELCH_PII_IN_LOGS']:
             AUDIT_LOG.warning(u"Login failed - Unknown user email")
@@ -435,6 +436,8 @@ def login_user(request):
     third_party_auth_requested = third_party_auth.is_enabled() and pipeline.running(request)
     trumped_by_first_party_auth = bool(request.POST.get('email')) or bool(request.POST.get('password'))
     was_authenticated_third_party = False
+    parent_user = None
+    child_user = None
 
     try:
         if third_party_auth_requested and not trumped_by_first_party_auth:
@@ -450,12 +453,28 @@ def login_user(request):
                 was_authenticated_third_party = True
             except AuthFailedError as e:
                 return HttpResponse(e.value, content_type="text/plain", status=403)
+
+        elif 'child_user_id' in request.POST:
+            child_user_id = request.POST['child_user_id']
+            try:
+                child_user = User.objects.get(id=child_user_id)
+            except User.DoesNotExist:
+                if settings.FEATURES['SQUELCH_PII_IN_LOGS']:
+                    AUDIT_LOG.warning(u"Child login failed - Unknown child user id")
+                else:
+                    AUDIT_LOG.warning(u"Child login failed - Unknown child user id: {0}".format(child_user_id))
+
         else:
             email_user = _get_user_by_email(request)
 
         _check_shib_redirect(email_user)
         _check_excessive_login_attempts(email_user)
         _check_forced_password_reset(email_user)
+
+        # set the user object to child_user object if a child is being logged in
+        if child_user:
+            parent_user = request.user
+            email_user = child_user
 
         possibly_authenticated_user = email_user
 
@@ -469,6 +488,13 @@ def login_user(request):
             _handle_failed_authentication(email_user)
 
         _handle_successful_authentication_and_login(possibly_authenticated_user, request)
+        if parent_user:
+            request.session['parent_user'] = json.dumps({
+                'user_id': parent_user.id,
+                'username': parent_user.username,
+                'email': parent_user.email,
+                'name': parent_user.profile.name
+            })
 
         redirect_url = None  # The AJAX method calling should know the default destination upon success
         if was_authenticated_third_party:
