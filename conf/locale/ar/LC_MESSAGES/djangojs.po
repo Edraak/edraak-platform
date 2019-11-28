@@ -8,9 +8,10 @@
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
-# Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 # leena <labualnil@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
+# Omar Al-Ithawi <i@omardo.com>, 2019
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -24,6 +25,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  underscore.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -37,6 +39,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  underscore-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -50,6 +53,7 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 msgid ""
 msgstr ""
@@ -57,7 +61,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
 "POT-Creation-Date: 2019-11-14 13:20+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
-"Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
+"Last-Translator: Omar Aldabbas <oaldabbas@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -1101,7 +1105,7 @@ msgstr[2] "%(num_points)s النقاط المحتملة (لم تصحّح، أخ�
 msgstr[3] "%(num_points)s النقاط المحتملة (لم تصحّح، أخفيت النتائج)"
 msgstr[4] "%(num_points)s النقاط المحتملة (لم تصحّح، أخفيت النتائج)"
 msgstr[5] ""
-"%(num_points)s النقاط المحتملة (ليس جزئاً من التقييم، أخفيت النتائج)"
+"%(num_points)s النقاط المحتملة (ليس جزءاً من التقييم، النتائج مخفية)"
 
 #. Translators: %(num_points)s is the number of points possible (examples: 1,
 #. 3, 10).;
@@ -1127,7 +1131,7 @@ msgstr[1] "توجد %(num_points)s نقطة محتملة (ليس جزئاً من
 msgstr[2] "توجد %(num_points)s نقطة محتملة (ليس جزئاً من التقييم)"
 msgstr[3] "توجد %(num_points)s نقاط محتملة (ليس جزئاً من التقييم)"
 msgstr[4] "توجد %(num_points)s نقطة محتملة (ليس جزئاً من التقييم)"
-msgstr[5] "توجد %(num_points)s نقطة محتملة (ليس جزئاً من التقييم)"
+msgstr[5] "توجد %(num_points)s نقطة محتملة (ليست جزءاً من التقييم)"
 
 #. Translators: %(earned)s is the number of points earned. %(possible)s is the
 #. total number of points (examples: 0/1, 1/1, 2/3, 5/10). The total number of
@@ -1157,7 +1161,7 @@ msgstr[1] "%(earned)s نقطة (ليس جزئاً من التقييم) من أص
 msgstr[2] "%(earned)s نقطة (ليس جزئاً من التقييم) من أصل %(possible)s"
 msgstr[3] "%(earned)s نقاط (ليس جزئاً من التقييم) من أصل %(possible)s"
 msgstr[4] "%(earned)s نقطة (ليس جزئاً من التقييم) من أصل %(possible)s"
-msgstr[5] "%(earned)s نقطة (ليس جزئاً من التقييم) من أصل %(possible)s"
+msgstr[5] "%(earned)s نقطة (ليس جزءاً من التقييم) من أصل %(possible)s"
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
@@ -1222,6 +1226,7 @@ msgstr "غير مسلَّمة"
 msgid ""
 "{paragraph}=p;{preformatted}=pre;{heading3}=h3;{heading4}=h4;{heading5}=h5;{heading6}=h6"
 msgstr ""
+"{paragraph}=p;{preformatted}=pre;{heading3}=h3;{heading4}=h4;{heading5}=h5;{heading6}=h6"
 
 #. Translators: this is a message from the raw HTML editor displayed in the
 #. browser when a user needs to edit HTML
@@ -3080,13 +3085,13 @@ msgstr "(مساق دائم) إنتهى بتاريخ {end}"
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/models/course_card_model.js
 msgid "Starts {start}"
-msgstr "يبدأ {start}"
+msgstr "ابدأ {start}"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/models/course_card_model.js
 msgid "Started {start}"
-msgstr "بدء {start}"
+msgstr "بدأ {start}"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3104,7 +3109,7 @@ msgstr "يجب ان تختار جلسة للوصول الى محتويات ال�
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "There was an error. Please reload the page and try again."
-msgstr "حدث خطأ، يرجى إعادة فتح الصفحة ثم إعادة المحاولة."
+msgstr "حدث خطأ، يرجى إعادة تحميل الصفحة ثم المحاولة."
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3136,13 +3141,13 @@ msgstr "هل أنت واثق من أنّك تريد اختيار هذه الجل
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "Are you sure you want to change to a different session?"
-msgstr "هل أنت واثق من أنّك تريد اختيار جلسة اخرئ؟"
+msgstr "هل أنت واثق من أنّك تريد اختيار جلسة أخرى؟"
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/course_entitlement_view.js
 msgid "Any course progress or grades from your current session will be lost."
-msgstr "سيتم فقد أي تقدم دراسي أو درجات من جلستك الحالية."
+msgstr "سيتم خسارة أي تحصيل دراسي أو درجات من جلستك الحالية."
 
 #: common/static/bundles/EntitlementFactory.js
 #: common/static/bundles/ProgramDetailsFactory.js
@@ -3162,7 +3167,7 @@ msgid ""
 "Are you sure you want to unenroll from {courseName} ({courseNumber})? You "
 "will be refunded the amount you paid."
 msgstr ""
-"هل انت متاكد انك تريد إلغاء التسجيل من {courseName} ({courseNumber}) ؟ سيتم "
+"هل انت متاكد أنك تريد إلغاء التسجيل من {courseName} ({courseNumber}) ؟ سيتم "
 "رد المبلغ الذي دفعته."
 
 #: common/static/bundles/PasswordResetConfirmation.js
@@ -3232,8 +3237,8 @@ msgid ""
 "Files that you upload must be PDFs or image files in .gif, .jpg, .jpeg, or "
 ".png format."
 msgstr ""
-"يجب أن تكون الملفات التي تحمّلها ملفات PDF أو ملفات صور بتنسيقات .gif أو "
-".jpg أو .jpeg أو .png."
+"يجب أن تكون الملفات التي تحمّلها بصيغة PDF أو ملفات صور بصيغ .gif أو .jpg أو"
+" .jpeg أو .png."
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/file_upload.jsx
@@ -3286,7 +3291,7 @@ msgstr "التفاصيل"
 #: lms/djangoapps/support/static/support/jsx/logged_in_user.jsx
 msgid "The more you tell us, the more quickly and helpfully we can respond!"
 msgstr ""
-"اخبرنا باكبر قدر ممكن من التفاصيل، لنتمكن من مساعدتك بسرعة وبالشكل المناسب!"
+"كلما أعطيتنا تفاصيل أكثر، سيكون بإمكاننا مساعدتك بسرعة وبالشكل المناسب!"
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/logged_in_user.jsx
@@ -3317,20 +3322,20 @@ msgstr "قم بإنشاء حساب {platform}"
 msgid ""
 "If you are unable to access your account contact us via email using {email}."
 msgstr ""
-"إذا لم تتمكن من الوصول إلى حسابك ، فاتصل بنا عبر البريد الإلكتروني باستخدام "
-"{email}."
+"إذا لم تتمكن من الوصول إلى حسابك ، يرجى التواصل معنا عبر البريد الإلكتروني "
+"على {email}."
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/single_support_form.jsx
 msgid ""
 "Select a course or select \"Not specific to a course\" for your support "
 "request."
-msgstr "اختر مساق او اختر \"غير متعلق بمساق محدد\" لطلب الدعم."
+msgstr "اختر مساق أو اختر \"غير متعلق بمساق محدد\" لطلب المساعدة."
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/single_support_form.jsx
 msgid "Enter a subject for your support request."
-msgstr "أدخل موضوعًا لطلب الدعم الخاص بك."
+msgstr "أدخل موضوع طلب الدعم الخاص بك."
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/single_support_form.jsx
@@ -3346,7 +3351,7 @@ msgstr "اتصل بنا"
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/single_support_form.jsx
 msgid "Find answers to the top questions asked by learners."
-msgstr "ابحث عن إجابات عن اكثر الأسئلة التي طرحها المتعلمون."
+msgstr "ابحث عن إجابات أكثر الأسئلة التي طرحها المتعلمون."
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/single_support_form.jsx
@@ -3356,7 +3361,7 @@ msgstr "ابحث في مركز مساعدة {platform}"
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/success.jsx
 msgid "Go to my Dashboard"
-msgstr "اذهب إلى لوحتي التعليمية"
+msgstr "اذهب إلى \"لوحتي التعليمية\""
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/success.jsx
@@ -3367,7 +3372,7 @@ msgstr "اذهب الى صفحة {platform} الرئيسيّة"
 #: lms/djangoapps/support/static/support/jsx/success.jsx
 msgid ""
 "Thank you for submitting a request! We will contact you within 24 hours."
-msgstr "شكرا لتقديم طلب! سوف نتصل بك في غضون 24 ساعة."
+msgstr "شكرا لتقديم الطلب! سوف نتواصل معك في غضون 24 ساعة."
 
 #: common/static/bundles/SingleSupportForm.js
 #: lms/djangoapps/support/static/support/jsx/upload_progress.jsx
@@ -3384,10 +3389,10 @@ msgid ""
 "these for your records before proceeding with deletion, follow the "
 "instructions for {htmlStart}printing or downloading a certificate{htmlEnd}."
 msgstr ""
-"قد تفقد أيضًا الوصول إلى الشهادات التي تم التحقق منها وبيانات اعتماد "
-"البرنامج الأخرى مثل شهادات التخصصات. إذا كنت ترغب في عمل نسخة من السجلات "
-"الخاصة بك قبل متابعة الحذف ، فاتبع الإرشادات الخاصة بـ {htmlStart} طباعة أو "
-"تنزيل شهادة {htmlEnd}."
+"قد تفقد أيضًا الوصول إلى الشهادات الموثّقة وبيانات اعتماد البرنامج الأخرى "
+"مثل شهادات التخصصات. إذا كنت ترغب بعمل نسخة من السجلات الخاصة بك قبل متابعة "
+"الحذف ، قم باتّباع الإرشادات الخاصة بـ {htmlStart} طباعة أو تنزيل شهادة "
+"{htmlEnd}."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3403,7 +3408,7 @@ msgstr ""
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid "Before proceeding, please {htmlStart}activate your account{htmlEnd}."
-msgstr "قبل المتابعة ، يرجى {htmlStart} تنشيط حسابك {htmlEnd}."
+msgstr "قبل المتابعة ، يرجى {htmlStart} تفعيل حسابك {htmlEnd}."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3419,8 +3424,8 @@ msgid ""
 "cannot be undone. EdX will not be able to recover your account or the data "
 "that is deleted."
 msgstr ""
-"يرجى ملاحظة: حذف حسابك وبياناتك الشخصية دائم ولا يمكن التراجع عنه. لن تتمكن "
-"منصة ادراك من استعادة حسابك أو البيانات التي تم حذفها."
+"يرجى الملاحظة: حذف حسابك وبياناتك الشخصية دائم ولا يمكن التراجع عنه. لن "
+"تتمكن منصة ادراك من استعادة حسابك أو البيانات التي تم حذفها."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3432,8 +3437,8 @@ msgid ""
 "sites offered by MIT Open Learning, Wharton Executive Education, and Harvard"
 " Medical School."
 msgstr ""
-"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات edraak"
-" أو edraak.org أو أي موقع آخر تستضيفه edraak."
+"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات Edraak"
+" أو Edraak.org أو أي موقع آخر تستضيفه Edraak."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3452,13 +3457,13 @@ msgstr "كلمة المرور غير صحيحة"
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid "Unable to delete account"
-msgstr "لا يمكن حذف الحساب"
+msgstr "تعذّر حذف الحساب"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid "Please re-enter your password."
-msgstr "من فضلك أعد إدخال كلمة المرور."
+msgstr "يرجى إعادة إدخال كلمة المرور."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3484,8 +3489,8 @@ msgid ""
 " data is permanent and cannot be undone. EdX will not be able to recover "
 "your account or the data that is deleted."
 msgstr ""
-"لقد اخترت \"حذف حسابي\". يعد حذف حسابك والبيانات الشخصية دائمًا ولا يمكن "
-"التراجع عنه. لن يتمكن اداراك من استعادة حسابك أو البيانات التي تم حذفها."
+"لقد اخترت \"حذف حسابي\". حذف الحساب والبيانات الشخصية نهائي ولا يمكن التراجع"
+" عنه. لن تتمكن إدراك من استعادة حسابك أو البيانات التي تم حذفها."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3497,8 +3502,8 @@ msgid ""
 " sites offered by MIT Open Learning, Wharton Executive Education, and "
 "Harvard Medical School."
 msgstr ""
-"إذا تابعت، لن تتمكن من استخدام حسابك لأخذ دورات تدريبية على تطبيقات edraak "
-"أو edraak.org أو أي موقع آخر تستضيفه edraak."
+"إذا تابعت، لن تتمكن من استخدام حسابك لأخذ مساقات على تطبيقات Edraak أو "
+"Edraak.org أو أي موقع آخر تستضيفه Edraak."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3507,7 +3512,7 @@ msgid ""
 "If you still wish to continue and delete your account, please enter your "
 "account password:"
 msgstr ""
-"إذا كنت لا تزال ترغب في المتابعة وحذف حسابك ، فيرجى إدخال كلمة مرور حسابك:"
+"إذا كنت لا تزال ترغب في المتابعة وحذف حسابك، فيرجى إدخال كلمة مرور حسابك:"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3519,7 +3524,7 @@ msgstr "نعم احذف"
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid "We're sorry to see you go! Your account will be deleted shortly."
-msgstr "ناسف أن نراك تغادر المنصة! سيتم حذف حسابك قريبا."
+msgstr "ناسف أن نراك تغادر المنصة! سيتم حذف حسابك في أقرب وقت."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3531,7 +3536,7 @@ msgid ""
 msgstr ""
 "قد يستغرق حذف الحساب - بما في ذلك الإزالة من قوائم البريد الإلكتروني - بضعة "
 "أسابيع للمعالجة الكاملة من خلال نظامنا. إذا كنت ترغب في إلغاء الاشتراك في "
-"رسائل البريد الإلكتروني قبل ذلك ، فالرجاء إلغاء الاشتراك من تذييل أي بريد "
+"رسائل البريد الإلكتروني قبل ذلك، الرجاء إلغاء الاشتراك من تذييل أي بريد "
 "إلكتروني."
 
 #: common/static/bundles/UnenrollmentFactory.js
@@ -5553,7 +5558,7 @@ msgstr "لا يمكن ترك حقل السبب فارغًا."
 
 #: lms/static/js/instructor_dashboard/membership.js
 msgid "Role field should not be left unselected."
-msgstr "لا ينبغي ترك حقل الدور بدون اختيار."
+msgstr "لا يمكن ترك حقل الدور فارغاً"
 
 #: lms/static/js/instructor_dashboard/membership.js
 msgid "Error enrolling/unenrolling users."
@@ -6184,8 +6189,8 @@ msgid ""
 "Your profile settings are managed by {enterprise_name}. Contact your "
 "administrator or {link_start}edX Support{link_end} for help."
 msgstr ""
-"تتم إدارة إعدادات ملف التعريف الخاص بك بواسطة {enterprise_name}. اتصل بادارة"
-" الموسسة أو {link_start} تواصل معنا {link_end} للحصول على المساعدة."
+"تتم إدارة إعدادات ملف التعريف الخاص بك بواسطة {enterprise_name}. اتصل بإدارة"
+" المؤسسة أو {link_start} تواصل معنا {link_end} للحصول على المساعدة."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Email Address (Sign In)"
@@ -6194,7 +6199,7 @@ msgstr "عنوان البريد الإلكتروني (تسجيل الدخول)"
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid ""
 "You receive messages from {platform_name} and course teams at this address."
-msgstr "تتلقى رسائل من {platform_name} وفريق المساق على هذا العنوان."
+msgstr "تتلقى رسائل من {platform_name} وفريق المساق على هذا البريد."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 #: openedx/features/learner_profile/static/learner_profile/js/learner_profile_factory.js
@@ -6205,7 +6210,7 @@ msgstr "الاسم الكامل"
 msgid ""
 "The name that is used for ID verification and that appears on your "
 "certificates."
-msgstr "الاسم المستخدم للتحقق من الهوية والذي يظهر في شهاداتك."
+msgstr "الاسم المستخدم للتحقق من الهوية والذي سيظهر في شهاداتك."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Country or Region of Residence"
@@ -6239,7 +6244,7 @@ msgstr "كلمة المرور"
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Check your email account for instructions to reset your password."
 msgstr ""
-"تحقق من حساب البريد الإلكتروني للحصول على تعليمات لإعادة تعيين كلمة المرور "
+"يرجى التحقق من بريدك الإلكتروني للحصول على تعليمات إعادة تعيين كلمة المرور "
 "الخاصة بك."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
@@ -6249,7 +6254,7 @@ msgid ""
 "the page to refresh."
 msgstr ""
 "اللغة المستخدمة في هذا الموقع. هذا الموقع متاح حاليًا بعدد محدود من اللغات. "
-"سيؤدي تغيير قيمة هذا الحقل إلى تحديث الصفحة."
+"سيؤدي تغيير قيمة هذا الحقل إلى تحديث الصفحة تلقائيًا."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Time Zone"
@@ -7675,7 +7680,7 @@ msgid ""
 "If you remove this transcript, the transcript will not be available for any "
 "components that use this video."
 msgstr ""
-"إذا قمت بإزالة هذا النص ، فلن يكون النص متاحًا لأي مكون يستخدم هذا الفيديو."
+"إذا قمت بإزالة هذا النص ، فلن يكون النص متاحًا لأي مكوّن يستخدم هذا الفيديو."
 
 #: cms/static/js/xblock_asides/structured_tags.js
 msgid "Updating Tags"
@@ -9822,8 +9827,8 @@ msgid ""
 "from your dashboard. You will receive periodic reminders from "
 "%(platformName)s to verify your identity."
 msgstr ""
-"إذا لم تؤكّد هويّتك الآن، سيبقى بإمكانك استكشاف مساقك من خلال صفحة لوحتي "
-"التعليمية وستتلقّى رسائل تذكيرية دوريًّا من %(platformName)s لتأكيد هويّتك. "
+"إذا لم تقم بتأكيد هويتك الآن، سيبقى بإمكانك استكشاف مساقك من خلال لوحتك "
+"التعليمية. ستتلقّى رسائل تذكيرية دوريًّا من %(platformName)sلتأكيد هويّتك. "
 
 #: lms/templates/verify_student/reverify_success_step.underscore
 msgid "Identity Verification In Progress"
@@ -11377,10 +11382,10 @@ msgid ""
 "allow additional time for individual learners through the Instructor "
 "Dashboard."
 msgstr ""
-"استخدم امتحانًا موقوتًا للحدّ من الوقت الذي يمكن للمتعلّمين قضاؤه في حل "
-"مسائل هذا القسم الفرعي. يجب أن يقدّم المتعلّمون الإجابات قبل انتهاء الوقت "
-"المحدّد. يمكنك السماح لأحد المتعلّمين بوقت إضافي باستخدام صفحة اللوحة "
-"التعليمية الخاصة بالمدرِّسين."
+"استخدم امتحانًا مؤقتاً لتحديد الوقت الذي يمكن للمتعلّمين قضاؤه في حل مسائل "
+"هذا القسم الفرعي. يجب أن يقوم المتعلّمون بتسليم الإجابات قبل انتهاء الوقت "
+"المحدّد. يمكنك منح متعلّمين محددين وقتاً إضافياً باستخدام صفحة \"اللوحة "
+"التعليمية\" الخاصة بالمدرِّسين."
 
 #: cms/templates/js/timed-examination-preference-editor.underscore
 msgid "Proctored"
@@ -11418,9 +11423,9 @@ msgid ""
 "amount of time. You can grant individual learners extra time to complete the"
 " exam through the Instructor Dashboard."
 msgstr ""
-"اختر مدة زمنية مخصّصة لإجراء الامتحان. إذا زادت القيمة عن 24 ساعة،أدخل "
-"مقدارًا من الوقت. يمكنك منح متعلّمين محددين زمنًا إضافيًا لإجراء الامتحان من"
-" خلال صفحة لوحتي التعليمية الخاصة بالمدرسين."
+"اختر مدة زمنية مخصّصة لإجراء الامتحان. إذا كانت المدة أكثر من 24 ساعة،أدخل "
+"مقدار الوقت. يمكنك منح متعلّمين محددين زمنًا إضافيًا لإتمام الامتحان من خلال"
+" صفحة \"اللوحة التعليمية\" الخاصة بالمدرسين."
 
 #: cms/templates/js/timed-examination-preference-editor.underscore
 msgid "Review Rules"
