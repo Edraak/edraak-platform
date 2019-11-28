@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-19 11:17+0000\n"
-"PO-Revision-Date: 2019-11-19 11:17:30.881935\n"
+"POT-Creation-Date: 2019-11-20 13:17+0000\n"
+"PO-Revision-Date: 2019-11-20 13:17:52.447258\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -1128,7 +1128,6 @@ msgid "unsubmitted"
 msgstr ""
 
 #: common/lib/xmodule/xmodule/js/src/html/edit.js
-#: common/static/bundles/commons.js
 msgid ""
 "{paragraph}=p;{preformatted}=pre;{heading3}=h3;{heading4}=h4;{heading5}=h5;{heading6}=h6"
 msgstr ""

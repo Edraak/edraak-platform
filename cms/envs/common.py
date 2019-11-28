@@ -1038,6 +1038,7 @@ INSTALLED_APPS = [
 
     # comment common
     'django_comment_common',
+    'edraak_misc',
 
     # for course creator table
     'django.contrib.admin',
