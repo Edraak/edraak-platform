@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     % for uni_id in object_list:
-                        <tr class="university-id-entry" class="${'conflicted' if uni_id.is_conflicted else ''}">
+                        <tr class="university-id-entry ${'conflicted' if uni_id.is_conflicted else ''}">
                             <td class="break">
                                 ${uni_id.university_id}
 
