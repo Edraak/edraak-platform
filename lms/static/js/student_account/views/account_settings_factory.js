@@ -276,11 +276,16 @@
                     {
                         view: new AccountSettingsFieldViews.SocialLinkTextFieldView({
                             model: userAccountModel,
-                            title: gettext(platformData.display_name + ' Link'),
+                            // Edraak: Make the string translatable, TODO: Contribute.
+                            title: StringUtils.interpolate(
+                                gettext('{platform} Link'),
+                                {platform: platformData.display_name}
+                            ),
                             valueAttribute: 'social_links',
-                            helpMessage: gettext(
-                                'Enter your ' + platformData.display_name + ' username or the URL to your ' +
-                                platformData.display_name + ' page. Delete the URL to remove the link.'
+                            helpMessage: StringUtils.interpolate(
+                                // Edraak: Make the string translatable, TODO: Contribute.
+                                gettext('Enter your {platform} username or the URL to your {platform} page. Delete the URL to remove the link.'),  // eslint-disable-line max-len
+                                {platform: platformData.display_name}
                             ),
                             platform: socialPlatform,
                             persistChanges: true,
