@@ -10,7 +10,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
-# leena <labualnil@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -23,6 +23,7 @@
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -36,7 +37,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
-# leena <labualnil@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -50,6 +51,7 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -805,8 +807,8 @@ msgid ""
 "below, and then link your {platform_name} account with {provider_name} from "
 "your dashboard."
 msgstr ""
-"استخدِم اسم المستخدّم وكلمة المرور لحسابك في {platform_name} للدخول، ثم اربط"
-" حسابك في {platform_name} بحسابك في {provider_name} من لوحتك التعليمية."
+"استخدِم اسم المستخدم وكلمة المرور لحسابك في {platform_name} للدخول، ثم اربط "
+"حسابك في {platform_name} بحسابك في {provider_name} من لوحتك التعليمية."
 
 #: common/djangoapps/student/views/login.py
 #, python-brace-format
@@ -1123,9 +1125,9 @@ msgid ""
 "address associated with their account is changed as a part of this "
 "synchronization."
 msgstr ""
-"مزامنة بيانات ملف تعريف المستخدم المستلمة من موفر الهوية مع حساب مستخدم edX "
-"على كل تسجيل دخول إلى خدمة الدخول الموحد. سيتم إعلام المستخدم إذا تم تغيير "
-"عنوان البريد الإلكتروني المرتبط بحسابه كجزء من هذه المزامنة."
+"قم بمزامنة بيانات ملف تعريف المستخدم المأخوذة من موفر الهوية مع حساب مستخدم "
+"edX على كل تسجيل دخول في خدمة الدخول الموحد SSO. سيتم إعلام المستخدم إذا تم "
+"تغيير عنوان البريد الإلكتروني المرتبط بحسابه كجزء من هذه المزامنة."
 
 #: common/djangoapps/third_party_auth/models.py
 msgid "The Site that this SAML configuration belongs to."
@@ -1905,7 +1907,9 @@ msgstr ""
 msgid ""
 "Your answer has been submitted. As soon as your submission is graded, this "
 "message will be replaced with the grader's feedback."
-msgstr "تمّ تسليم الإجابة ،سيتم استبدال هذه الرسالة بالعلامة عند التقييم."
+msgstr ""
+"تمّ تسليم الإجابة، عندما يتم تقييم إجابتك، ستظهر العلامة أو ملاحظات المقيّم "
+"لك هنا."
 
 #: common/lib/capa/capa/inputtypes.py
 #, python-brace-format
@@ -3241,8 +3245,8 @@ msgstr ""
 "بينما سيرى الطلّاب الراسبون معلومات عن إعدادات التقييم. الإعداد الافتراضي هو"
 " ’end‘ الذي يعرِض هذه المعلومات عن الشهادة لكل الطلّاب بعد تاريخ نهاية "
 "المساق. أدخِل ’early_with_info‘ لعرض هذه المعلومات عن الشهادة لجميع الطلّاب "
-"حالما يتم إنشاء الشهادات، أو أدخِل ’early_no_info‘ لعرض الروابط للطلّاب "
-"الناجحين فقط حالما يتم إنشاء الشهادات."
+"عندما يتم إنشاء الشهادات، أو أدخِل ’early_no_info‘ لعرض الروابط للطلّاب "
+"الناجحين فقط عندما يتم إنشاء الشهادات."
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Course About Page Image"
@@ -3552,10 +3556,10 @@ msgid ""
 "sites can link to. URLs must be fully qualified. For example: "
 "http://www.edx.org/course/Introduction-to-MOOCs-ITM001"
 msgstr ""
-"في حال تفعيل كل من رابط المشاركة على مواقع التواصل الاجتماعي ورابط المساقات "
-"المخصَّصة في صفحة لوحتي التعليمية، يمكنك توفير رابط (كرابط صفحة ’لمحة عن "
-"المساق‘) يُمكن لمواقع التواصل الاجتماعي الارتباط به. يجب أن تكون جميع "
-"الروابط بصيغة صحيحة. مثلًا: "
+"إذا كان رابط المشاركة على مواقع التواصل الاجتماعي ورابط المساقات المخصَّصة "
+"في صفحة لوحتي التعليمية مفعّلاً، يمكنك استخدام رابط (كرابط صفحة ’لمحة عن "
+"المساق‘) يُمكن لمواقع التواصل الاجتماعي الربط عليه. يجب أن تكون جميع الروابط"
+" بصيغة صحيحة وكاملة. مثلًا: "
 "https://www.edraak.org/course/course-v1:Edraak+FL100+FL_2017_SP"
 
 #: common/lib/xmodule/xmodule/course_module.py cms/templates/settings.html
@@ -4674,7 +4678,7 @@ msgstr "هذا القسم الفرعي متاح للمتعلمين عند است
 msgid ""
 "This section is a prerequisite. You must complete this section in order to "
 "unlock additional content."
-msgstr "هذا القسم  متطلب سابق. عليك اتمامه لتتمكن من تصفح المزيد من المحتوى."
+msgstr "هذا القسم  متطلب أساسي عليك إتمامه لتتمكن من مشاهدة المزيد من المحتوى"
 
 #: common/lib/xmodule/xmodule/seq_module.py
 msgid ""
@@ -6128,7 +6132,7 @@ msgid ""
 "If your course does not appear on your dashboard, contact "
 "{payment_support_link}."
 msgstr ""
-"إذا لم يظهر مساقك على صفحة \"لوحتي التعليمية\" الخاصة بك، يُرجى الاتصال بـ "
+"إذا لم يظهر مساقك على صفحة \"لوحتي التعليمية\" الخاصة بك، يُرجى التواصل مع "
 "{payment_support_link}."
 
 #: lms/djangoapps/course_goals/models.py
@@ -6264,7 +6268,7 @@ msgstr ""
 #, python-brace-format
 msgid "This course is ending in {time_remaining_string} at {course_end_time}."
 msgstr ""
-"ينتهي هذا المساق خلال {time_remaining_string} في تمام تاريخ/ساعة: "
+"ينتهي هذا المساق خلال {time_remaining_string} في تمام الساعة: "
 "{course_end_time}."
 
 #: lms/djangoapps/courseware/date_summary.py
@@ -7102,12 +7106,11 @@ msgstr "قالب رسائل Sailthru الصادرة لاستخدامه في ال
 
 #: lms/djangoapps/email_marketing/models.py
 msgid "Sailthru send template to use on passed ID verification."
-msgstr "قالب رسائل Sailthru الصادرة لاستخدامه في حال نجاح التحقق من هوياتهم."
+msgstr "قالب رسائل Sailthru الصادرة لاستخدامه في حال نجاح التحقق من الهوية."
 
 #: lms/djangoapps/email_marketing/models.py
 msgid "Sailthru send template to use on failed ID verification."
-msgstr ""
-"قالب رسائل Sailthru الصادرة لاستخدامه رسائل التي فشل في التحقق من هوياتهم."
+msgstr "قالب رسائل Sailthru الصادرة لاستخدامه في حال فشل التحقق من الهوية."
 
 #: lms/djangoapps/email_marketing/models.py
 msgid "Sailthru send template to use on upgrading a course. Deprecated "
@@ -8510,7 +8513,7 @@ msgstr "التسجيل للمساق: {course_name}"
 msgid ""
 "Please visit your {link_start}dashboard{link_end} to see your new course."
 msgstr ""
-"تُرجى زيارة {link_start}صفحة لوحتي التعليمية{link_end} الخاصة بك لرؤية مساقك"
+"يُرجى زيارة {link_start}صفحة لوحتي التعليمية{link_end} الخاصة بك لرؤية مساقك"
 " الجديد."
 
 #: lms/djangoapps/shoppingcart/models.py
@@ -10106,12 +10109,12 @@ msgid ""
 "note that {platform_name} has a different {privacy_policy_link_start}Privacy"
 " Policy{privacy_policy_link_end} from {enterprise_name}."
 msgstr ""
-"لقد تركت موقع ويب  {start_bold}{enterprise_name}{end_bold} وأنت الآن على في "
-"منصة {platform_name}. تم عقد شراكة بين {enterprise_name} ومنصة "
-"{platform_name} لتقديم برامج تعليمية عالية الجودة ومتاحة دائمًا لمساعدتك في "
-"تطوير معرفتك وحياتك المهنية.{line_break} يرجى ملاحظة أن منصة {platform_name}"
-" لديه {privacy_policy_link_start} سياسة خصوصية {privacy_policy_link_end} "
-"مختلفة عن {enterprise_name}."
+"لقد تركت موقع {start_bold}{enterprise_name}{end_bold} وأنت الآن على في منصة "
+"{platform_name}. تم عقد شراكة بين {enterprise_name} ومنصة {platform_name} "
+"لتقديم برامج تعليمية عالية الجودة ومتاحة دائمًا لمساعدتك في تطوير معرفتك "
+"وحياتك المهنية.{line_break} يرجى ملاحظة أن منصة {platform_name} لديه "
+"{privacy_policy_link_start} سياسة خصوصية {privacy_policy_link_end} مختلفة عن"
+" {enterprise_name}."
 
 #: lms/templates/logout.html
 msgid "Signed Out"
@@ -10150,7 +10153,8 @@ msgstr "يطلب التطبيق أعلاه الصلاحيات التالية م�
 msgid ""
 "These permissions will be granted for data from your courses associated with"
 " the following content providers:"
-msgstr "سيتم منح الوصول للبيانات من مساقاتك المرتبطة بموفري المحتوى التاليين:"
+msgstr ""
+"سيتم منح الوصول للبيانات من مساقاتك المرتبطة بمزوّدي المحتوى التاليين:"
 
 #: lms/templates/oauth2_provider/authorize.html
 msgid ""
@@ -10844,7 +10848,7 @@ msgstr ""
 #: lms/templates/courseware/courseware.html
 #: openedx/features/course_bookmarks/templates/course_bookmarks/course-bookmarks.html
 msgid "Bookmarks"
-msgstr "العناوين المحفوظة"
+msgstr "الإشارات المرجعية"
 
 #: openedx/core/djangoapps/bookmarks/views.py
 msgid "An error has occurred. Please try again."
@@ -10901,7 +10905,7 @@ msgstr ""
 
 #: openedx/core/djangoapps/catalog/models.py
 msgid "Long Term Cache Time To Live"
-msgstr "مدّة الحفظ طويل الامد (Long Term Cache)"
+msgstr "حفظ الـ Cache لمدة طويلة"
 
 #: openedx/core/djangoapps/catalog/models.py
 msgid ""
@@ -10909,9 +10913,9 @@ msgid ""
 "does needs to be refreshed less frequently. Enable long term caching of API "
 "responses by setting this to a value greater than 0."
 msgstr ""
-"Specified in seconds (defaults to 86400s, 24hr). In some cases the cache "
-"does needs to be refreshed less frequently. Enable long term caching of API "
-"responses by setting this to a value greater than 0."
+"محدد بالثواني (بوضع افتراضي 86400 ثانية \"24 ساعة\"). في بعض الحالات يجب "
+"تفريغ الـ Cache بتكرار أقل. يمكن السماح لمدد Cache طويلة لطلبات API عن طريق "
+"تحديد قيمة أعلى من صفر."
 
 #: openedx/core/djangoapps/catalog/models.py
 msgid ""
@@ -11225,7 +11229,7 @@ msgstr ""
 msgid ""
 "Comma-separated list of scopes that this application will be allowed to "
 "request."
-msgstr "قائمة مفصولة بفاصلة بال(scopes) التي سيسمح لهذا التطبيق باستخدامها."
+msgstr "قائمة مفصولة بفاصلة بالـ (scopes) التي سيسمح لهذا التطبيق باستخدامها."
 
 #: openedx/core/djangoapps/oauth_dispatch/models.py
 msgid "Content Provider"
@@ -11243,10 +11247,10 @@ msgid ""
 "\"Forgot password?\" link below to continue using the site. Thank you for "
 "helping us keep your data safe."
 msgstr ""
-"يتطلب {platform_name} الآن كلمات مرور أكثر تعقيدًا. كلمة المرور الحالية لا "
-"تفي بالمتطلبات الجديدة. يمكنك تغيير كلمة المرور الخاصة بك الآن استخدام رابط "
-"\"هل نسيت كلمة المرور؟\" أدناه لمواصلة استخدام الموقع. شكرًا لك على مساعدتنا"
-" في الحفاظ على أمان بياناتك."
+"يتطلب {platform_name} الآن كلمات مرور أكثر تعقيدًا. كلمة المرور الحالية "
+"الخاصة بك لا توافق المتطلبات الجديدة. عليك تغييرها الآن باستخدام رابط \"هل "
+"نسيت كلمة المرور؟\" أدناه لمواصلة استخدام الموقع. شكرًا لك على مساعدتنا في "
+"الحفاظ على أمان بياناتك."
 
 #: openedx/core/djangoapps/password_policy/compliance.py
 #, python-brace-format
@@ -11258,12 +11262,12 @@ msgid ""
 "\"Account\". You can reset your password from this page. Thank you for "
 "helping us keep your data safe."
 msgstr ""
-"يتطلب {platform_name} الآن كلمات مرور أكثر تعقيدًا. كلمة المرور الحالية لا "
-"تفي بالمتطلبات الجديدة. يجب عليك تغيير كلمة المرور الخاصة بك بموعد اقصاه "
-"تاريخ {deadline} لتتمكن من متابعة استخدام الموقع. لتغيير كلمة المرور الخاصة "
-"بك ، اختر القائمة المنسدلة بجوار اسم المستخدم الخاص بك اعلاه ، ثم حدد "
-"\"الحساب\". يمكنك إعادة تعيين كلمة المرور الخاصة بك من هذه الصفحة. شكرًا لك "
-"على مساعدتنا في الحفاظ على أمان بياناتك."
+"يتطلب {platform_name} الآن كلمات مرور أكثر تعقيدًا. كلمة المرور الحالية "
+"الخاصة بك لا توافق المتطلبات الجديدة. عليك تغييرها بموعد اقصاه {deadline} "
+"لمواصلة استخدام الموقع. لتغيير كلمة المرور الخاصة بك ، اختر القائمة المنسدلة"
+" بحانب اسم المستخدم الخاص بك أعلاه، ثم اختر \"الحساب\". يمكنك إعادة تعيين "
+"كلمة المرور الخاصة بك من هذه الصفحة. شكرًا لك على مساعدتنا في الحفاظ على "
+"أمان بياناتك."
 
 #: openedx/core/djangoapps/profile_images/images.py
 #, python-brace-format
@@ -11436,9 +11440,9 @@ msgid ""
 "completing more problems every week, and participating in the discussion "
 "forums. What do you want to do to keep learning?"
 msgstr ""
-"يقوم العديد من طلّاب <strong>%(platform_name)s</strong> في مساق "
-"%(course_name)s بإتمام المزيد من المسائل كل أسبوع، والمشاركة في منتديات "
-"المحادثة. ماذا تريد أن تفعل أنت للحفاظ على نسق الدراسة؟"
+"يقوم العديد من متعلّمي <strong>%(platform_name)s</strong> في مساق "
+"%(course_name)s بحل العديد من المسائل كل أسبوع، والمشاركة في منتديات النقاش."
+" ماذا تريد أن تفعل أنت للحفاظ على استمرارية دراستك؟"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day10/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day10/email/body.txt
@@ -11453,9 +11457,9 @@ msgid ""
 "%(platform_name)s? We do, and we’re glad to have you! Come see what everyone"
 " is learning."
 msgstr ""
-"هل تذكر اشتراكك في مساق %(course_name)s ومساقات اخرى على منصة  "
-"%(platform_name)s؟ نحن نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا يتعلم"
-" الجميع في المساق."
+"هل تذكر اشتراكك في مساق %(course_name)sومساقات أخرى على منصة "
+"%(platform_name)s؟ نحن نتذكر، ونحن فخورون بوجودك معنا! تعال وانظر ماذا يتعلم"
+" الجميع."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
@@ -11464,8 +11468,8 @@ msgid ""
 "Remember when you enrolled in %(course_name)s on %(platform_name)s? We do, "
 "and we’re glad to have you! Come see what everyone is learning."
 msgstr ""
-"هل تذكر اشتراكك في مساق %(course_name)s على منصة  %(platform_name)s؟ نحن "
-"نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا يتعلم الجميع في المساق."
+"هل تذكر أنك اشتركت في مساق %(course_name)sعلى منصة  %(platform_name)s؟ نحن "
+"نتذكر، ونحن فخورون بوجودك معنا! تعال وانظر ماذا يتعلم الجميع."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 msgid "Keep learning today"
@@ -11478,8 +11482,8 @@ msgid ""
 "courses on %(platform_name)s? We do, and we’re glad to have you! Come see "
 "what everyone is learning."
 msgstr ""
-"هل تذكر اشتراكك في مساق <strong>%(course_name)s</strong> ومساقات اخرى على "
-"منصة  %(platform_name)s؟ نحن نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا"
+"هل تذكر اشتراكك في مساق <strong>%(course_name)s</strong> ومساقات أخرى على "
+"منصة  %(platform_name)s؟ نحن نتذكر، ونحن فخورون بوجودك معنا! تعال وانظر ماذا"
 " يتعلم الجميع في المساق."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
@@ -11489,9 +11493,9 @@ msgid ""
 "%(platform_name)s? We do, and we’re glad to have you! Come see what everyone"
 " is learning."
 msgstr ""
-"هل تذكر اشتراكك في مساق <strong>%(course_name)s</strong> على منصة  "
-"%(platform_name)s؟ نحن نتذكر، ونحن فخورين بوجودك معنا! تعال وانظر ماذا يتعلم"
-" الجميع في المساق."
+"هل تذكر اشتراكك في مساق <strong>%(course_name)s</strong>على منصة  "
+"%(platform_name)s؟ نحن نتذكر، ونحن فخورون بوجودك معنا! تعال وانظر ماذا يتعلم"
+" الجميع!"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
@@ -11518,9 +11522,9 @@ msgid ""
 "An %(platform_name)s certificate is official and easily shareable. Upgrade "
 "by %(user_schedule_upgrade_deadline_time)s."
 msgstr ""
-"نأمل أن مستمتع بالتعلم معنا في %(platform_name)s ! تتيح لك الشهادة الموثقة "
-"إبراز المهاراتك والمعارف الجديدة التي تعلمتها. شهادة %(platform_name)s هي "
-"شهادة رسمية وسهلة المشاركة على منصات التواصل.طور اشتراكك عن طريق "
+"نأمل أن تكون مستمتعاً بالتعلم معنا فيما شاهدته في %(platform_name)s! تتيح لك"
+" الشهادة الموثقة إبراز مهاراتك ومعلوماتك الجديدة.. شهادة %(platform_name)s "
+"هي شهادة رسمية وسهلة المشاركة على منصات التواصل. طوّر اشتراكك قبل "
 "%(user_schedule_upgrade_deadline_time)s."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
@@ -11532,9 +11536,9 @@ msgid ""
 " An %(platform_name)s certificate is official and easily shareable. Upgrade "
 "by %(user_schedule_upgrade_deadline_time)s."
 msgstr ""
-"نأمل أن مستمتع بالتعلم معنا حتى الآن 1%(first_course_name)s1! تتيح لك "
-"الشهادة الموثقة إبراز المهاراتك والمعارف الجديدة التي تعلمتها. شهادة "
-"%(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل.طور "
+"نأمل أنك مستمتع بالتعلم معنا حتى الآن 1%(first_course_name)s1! تتيح لك "
+"الشهادة الموثقة إبراز مهاراتك ومعلوماتك التي تعلمتها. شهادة "
+"%(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل. طوّر "
 "اشتراكك عن طريق %(user_schedule_upgrade_deadline_time)s"
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
@@ -11549,8 +11553,8 @@ msgid ""
 "highlight your new knowledge and skills. An %(platform_name)s certificate is"
 " official and easily shareable."
 msgstr ""
-"نأمل أن مستمتع بالتعلم معنا في <strong>%(platform_name)s</strong> ! تتيح لك "
-"الشهادة الموثقة إبراز المهاراتك والمعارف الجديدة التي تعلمتها. شهادة "
+"نأمل أنك مستمتع بالتعلم معنا في <strong>%(platform_name)s</strong> ! تتيح لك"
+" الشهادة الموثقة إبراز مهاراتك ومعلوماتك التي تعلمتها. شهادة "
 "%(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
@@ -11561,9 +11565,10 @@ msgid ""
 " highlight your new knowledge and skills. An %(platform_name)s certificate "
 "is official and easily shareable."
 msgstr ""
-"نأمل أن مستمتع بالتعلم معنا حتى الآن <strong>%(first_course_name)s</strong>!"
-" تتيح لك الشهادة الموثقة إبراز المهاراتك والمعارف الجديدة التي تعلمتها. "
-"شهادة %(platform_name)s هي شهادة رسمية وسهلة المشاركة على منصات التواصل."
+"نأمل أنك مستمتع بالتعلم معنا حتى الآن "
+"<strong>%(first_course_name)s</strong>! تتيح لك الشهادة الموثقة إبراز "
+"مهاراتك ومعارفك التي تعلمتها. شهادة %(platform_name)sهي شهادة رسمية وسهلة "
+"المشاركة على منصات التواصل."
 
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/upgradereminder/email/body.html
 #, python-format
@@ -11834,7 +11839,7 @@ msgid ""
 "I agree to the {platform_name} "
 "{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
 msgstr ""
-"انا اوافق على {platform_name} "
+"أوافق على {platform_name} "
 "{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
 
 #. Translators: "Terms of Service" is a legal document users must agree to
@@ -11855,8 +11860,8 @@ msgid ""
 "                   and agree to our {privacy_policy_link_start}Privacy "
 "Policy{privacy_policy_link_end}."
 msgstr ""
-"بعملك حساب على منصة  {platform_name}, انت توافق على الالتزام بـ "
-"{platform_name}                   "
+"بإنشاءك حساباً على منصة  {platform_name}, أنت توافق على الالتزام بـ "
+"{platform_name}  "
 "{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
 "                    وتوافق على {privacy_policy_link_start}Privacy "
 "Policy{privacy_policy_link_end}."
@@ -11869,11 +11874,11 @@ msgid ""
 "I agree to the {platform_name} "
 "{tos_link_start}{terms_of_service}{tos_link_end}"
 msgstr ""
-"اوافق على {platform_name} {tos_link_start}{terms_of_service}{tos_link_end}"
+"أوافق على {platform_name} {tos_link_start}{terms_of_service}{tos_link_end}"
 
 #: openedx/core/djangoapps/user_api/config/waffle.py
 msgid "System maintenance in progress. Please try again later."
-msgstr "يُجرى عمل صيانة للنظام، الرجاء المحاولة لاحقاً."
+msgstr "يجري عمل صيانة للنظام، الرجاء المحاولة لاحقاً."
 
 #: openedx/core/djangoapps/user_api/preferences/api.py
 #, python-brace-format
@@ -11933,8 +11938,7 @@ msgstr "مرحباً%(full_name)s"
 msgid ""
 "We received a deletion request for your account on %(platform_name)s. We're "
 "sorry to see you go!"
-msgstr ""
-"لقد تلقينا طلب حذف حسابك على %(platform_name)s نحن آسفون أن نراك تغادر!"
+msgstr "لقد تلقينا طلب حذف حسابك على %(platform_name)s نأسف لمغادرتك منصتنا."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
@@ -11944,10 +11948,10 @@ msgid ""
 "If you want to opt-out of emails before then, please unsubscribe from the "
 "footer of any email."
 msgstr ""
-"سيتم حذف حسابك قريبا. قد يستغرق حذف الحساب بعض الوقت، بما في ذلك الإزالة من "
-"قوائم البريد الإلكتروني ، بضعة أسابيع للمعالجة الكاملة من خلال نظامنا. إذا "
-"كنت ترغب في إلغاء الاشتراك في رسائل البريد الإلكتروني قبل ذلك ، فالرجاء "
-"إلغاء الاشتراك من تذييل أي بريد إلكتروني."
+"سيتم حذف حسابك في أقرب وقت. قد يستغرق حذف الحساب - بما في ذلك الحذف من قوائم"
+" البريد الإلكتروني - بضعة أسابيع لإزالته كلياً من نظامنا. إذا كنت ترغب "
+"بإلغاء الاشتراك في رسائل البريد الإلكتروني بشكل أسرع، الرجاء إلغاء الاشتراك "
+"من تذييل أي بريد إلكتروني."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
@@ -12197,7 +12201,7 @@ msgstr ""
 
 #: cms/djangoapps/api/v1/serializers/course_runs.py
 msgid "Course team user does not exist"
-msgstr "المدرس غير موجود"
+msgstr "اسم المستخدم لفريق المساق غير موجود"
 
 #: cms/djangoapps/contentstore/course_group_config.py
 msgid ""
@@ -12459,7 +12463,7 @@ msgstr "استثناء التبويبات"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid "An error occurred while trying to save the speciliazation id"
-msgstr "حدث خطأ أثناء حفظ الID الخاص بالتخصص"
+msgstr "حدث خطأ أثناء حفظ الـ ID الخاص بالتخصص"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid "Specialization id error"
@@ -12624,7 +12628,7 @@ msgstr "نوع ملف نص الفيديو غير مدعوم."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Video ID is required."
-msgstr "معرِّف الفيديو (video ID) مطلوب"
+msgstr "معرِّف الفيديو (Video ID) مطلوب"
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Incoming video data is empty."
@@ -12646,7 +12650,7 @@ msgstr "هناك مشكلة في ملف نص الفيديو المحدد."
 msgid ""
 "There is a problem with the existing transcript file. Please upload a "
 "different file."
-msgstr "هناك مشكلة في ملف نص الفيديو هذا.حاول تحميل ملف مختلف "
+msgstr "هناك مشكلة في ملف نص الفيديو هذا. حاول تحميل ملف مختلف."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "YouTube ID is required."
@@ -13332,7 +13336,7 @@ msgstr "اخفِ الملاحظات"
 
 #: lms/templates/bookmark_button.html lms/templates/seq_module.html
 msgid "Bookmarked"
-msgstr "مضاف إلى العناوين المحفوظة"
+msgstr "تم إضافته إلى الإشارات المرجعية"
 
 #: lms/templates/bookmark_button.html
 msgid "Bookmark this page"
@@ -14939,16 +14943,9 @@ msgid ""
 " you do not understand or do not wish to be bound by the Terms, you should "
 "not use the APIs."
 msgstr ""
-"مرحبًا بك في {platform_name}. نشكرك على استخدام واجهة برمجة التطبيقات (API) "
-"لاستكشاف مساقات {platform_name} وأي واجهات API أخرى قد نقدمها من وقت لآخر "
-"(يُشار إليها إجمالاً، \"واجهات API\"). نرجو منك قراءة شروط الخدمة هذه قبل "
-"الوصول إلى واجهات API أو استخدامها. إنّ شروط الخدمة هذه، وأي شروط إضافية "
-"تأتي في إطار وثائق API المصاحبة، وأي سياسات معمول بها، وأي توجيهات تتيحها "
-"{platform_name} وأي تحديثات تظهر من وقت لآخر، تُعتبر كلُّها بمثابة اتفاقيات "
-"(تسمى إجمالاً، \"الشروط\") بينك وبين {platform_name}. ومن خلال الوصول إلى "
-"واجهات API أو استخدامها، فأنت تقبل هذه الشروط وتوافق على الالتزام بها بشكل "
-"قانوني، سواء كنت مستخدمًا مسجّلًا أم لا. إذا لم تستوعب الشروط أو إذا لم ترغب"
-" في أن تكون مُلزَمًا فيها قانونًا، فيجب ألا تستخدم واجهات API."
+"مرحبًا بك في {platform_name}. نشكرك على استخدام واجهة برمجة التطبيقات (API) لاستكشاف مساقات {platform_name} وأي واجهات API أخرى قد نقدمها من وقت لآخر (يُشار إليها إجمالاً، \"واجهات API\"). نرجو منك قراءة شروط الخدمة هذه قبل الوصول إلى واجهات API أو استخدامها. إنّ شروط الخدمة هذه، وأي شروط إضافية تأتي في إطار وثائق API المصاحبة، وأي سياسات معمول بها، وأي توجيهات تتيحها {platform_name} وأي تحديثات تظهر من وقت لآخر، تُعتبر كلُّها بمثابة اتفاقيات (تسمى إجمالاً، \"الشروط\") بينك وبين {platform_name}. \n"
+"هذه الشروط الصادرة والمندرجة تحت اتفاقية المنتج المؤسسي، أو اتفاقية اشتراك الأعضاء، أو أي اتفاقية أخرى متعلقة بشراء منتجات {platform_name}.\n"
+"ومن خلال الوصول إلى واجهات API أو استخدامها، فأنت تقبل هذه الشروط وتوافق على الالتزام بها بشكل قانوني، سواء كنت مستخدمًا مسجّلًا أم لا. إذا كنت تصل أو تستخدم الواجهات نيابة عن شركة، منظمة، أو أي جهة قانونية أخرى، فأنت توافق على هذه الشروط للشركة، وتقرّ لـ {platform_name} أن لديك كامل الصلاحية للموافقة على هذه الشروط.  إذا لم تستوعب الشروط أو إذا لم ترغب في أن تكون مُلزَمًا فيها قانونًا، فيجب ألا تستخدم واجهات API."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "API Access"
@@ -15024,8 +15021,8 @@ msgid ""
 msgstr ""
 "لـ{platform_name_capitalized} وحدها فقط الحق في تحديد ما إذا كان أي استخدام "
 "محدد لواجهات API مقبولا أم لا. كما تحتفظ {platform_name} بالحق في إلغاء "
-"الوصول إلى API لأي استخدام ترى {platform_name} في أي وقت، ووفقاً لتقديرها "
-"فقط، أنه لا يفيد {platform_name} ولا يخدم مصالحها، ولا مصالح مستخدميها، ولا "
+"الوصول إلى API لأي سبب تراه {platform_name} في أي وقت، ووفقاً لتقديرها فقط، "
+"أنه لا يفيد {platform_name} ولا يخدم مصالحها، ولا مصالح مستخدميها، ولا "
 "شركائها."
 
 #: lms/templates/api_admin/terms_of_service.html
@@ -15367,9 +15364,9 @@ msgstr ""
 "المقدم لكل احتياجاتك أو توقعاتك. ولا تقدم {platform_name} والمشاركون لدى "
 "{platform_name} أي ضمان على دقة أو اكتمال أو ديمومة أو جودة واجهات API أو أي"
 " محتوى من محتويات API، أو أن يظل أي محتوى معين من محتويات API متاحاً "
-"باستمرار. المقصود بالمشاركين\" لدى \"{platform_name} هم MIT، وهارفارد، "
-"والأعضاء الآخرين، والمؤسسات التي تقوم بتوفير المعلومات أو محتوى API أو خدمات"
-" API، والمدربون، وموظفوهم."
+"باستمرار. المقصود بالمشاركين لدى {platform_name} هم MIT، وهارفارد، والأعضاء "
+"الآخرين، والمؤسسات التي تقوم بتوفير المعلومات أو محتوى API أو خدمات API، "
+"والمدربون، وموظفوهم."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15385,8 +15382,8 @@ msgstr ""
 "API يكون على مسؤوليتك الخاصة. وصولك إلى وتنزيلك للمعلومات، أو المواد، أو "
 "البيانات، من خلال واجهات API أو تحميلها يكون بناءً على تقديرك الشخصي، وعلى "
 "مسؤوليتك وتتحمل وحدك المسؤولية عن أي ضرر قد يلحق بممتلكاتك (بما في ذلك نظام "
-"الحاسوب الخاص بك) أو فقدان للبيانات ينتج عن تحميل أو استخدام مثل هذه المواد "
-"أو البيانات، ما لم يُذكر خلاف ذلك بشكل صريح في سياسة الخصوصية لدى "
+"الحاسوب الخاص بك) أو أي فقدان للبيانات ينتج عن تحميل أو استخدام مثل هذه "
+"المواد أو البيانات، ما لم يُذكر خلاف ذلك بشكل صريح في سياسة الخصوصية لدى "
 "{platform_name}."
 
 #: lms/templates/api_admin/terms_of_service.html
@@ -15400,7 +15397,7 @@ msgid ""
 "IN CONTRACT, TORT, STATUTORY OR OTHER LAW."
 msgstr ""
 "إلى أقصى حد يسمح به القانون المعمول به، أنت توافق على عدم تحمل "
-"{platform_name} أو أي من المشاركين لدى {platform_name} لأي مسئولية تجاهك عن "
+"{platform_name} أو أي من المشاركين لدى {platform_name} لأي مسؤولية تجاهك عن "
 "أي خسارة أو أضرار، سواء كانت فعلية أو مترتبة على شيء آخر، تنشأ من أو تتعلق "
 "بهذه البنود، أو استخدامك (أو استخدام أي طرف ثالث) أو عدم القدرة على استخدام "
 "واجهات API أو أي محتوى من محتويات API، أو اعتمادك على المعلومات التي يتم "
@@ -15532,7 +15529,7 @@ msgstr ""
 "تتعلق بالشروط أو بواجهات API، ستخضع لقوانين ماساتشوستس، باستثناء التناقُضات "
 "بين أحكام القانون. كما توافق على أن جميع هذه المطالبات والمنازعات سوف يتم "
 "النظر فيها وحلها بشكل حصري في المحاكم الفدرالية أو محاكم الولاية الواقعة في "
-"وتخدم كامبريدج، ماساتشوستس، الولايات المتحدة الأمريكية. كما أنك توافق على "
+"كامبريدج، ماساتشوستس، الولايات المتحدة الأمريكية وتخدمها. كما أنك توافق على "
 "الاختصاص الشخصي لتلك المحاكم وسلطتها عليك في هذا الشأن، وأنت تتنازل وتوافق "
 "على عدم إبداء أي اعتراض على هذه الإجراءات في تلك المحاكم (بما في ذلك أي دفاع"
 " أو اعتراض على عدم صلاحية السلطة أو الاختصاص المكاني أو الانزعاج من "
@@ -17212,8 +17209,8 @@ msgid ""
 "on your dashboard when the verification process is complete (usually within "
 "1-2 days)."
 msgstr ""
-"لقد قدّمتَ معلومات إعادة التوثيق الخاصة بك. سسترى رسالة في صفحة \"لوحتي "
-"التعليمية\" الخاصة بك عندما تتم عملية التوثيق (عادة خلال 1يوم أو اثنين)."
+"لقد قمت بتقديم معلومات إعادة التوثيق الخاصة بك. سترى رسالة في صفحة \"لوحتي "
+"التعليمية\" الخاصة بك عندما تتم عملية التوثيق (عادة خلال يوم واحد أو يومين)."
 
 #: lms/templates/dashboard/_dashboard_course_listing.html
 msgid "You have successfully verified your ID with edX"
@@ -17346,8 +17343,8 @@ msgid ""
 "To access this course, you must first consent to share your learning "
 "achievements with {enterprise_customer_name}."
 msgstr ""
-"للدخول إلى هذا المساق ، يجب عليك أولاً الموافقة على مشاركة إنجازاتك "
-"التعليمية مع {enterprise_customer_name}."
+"للدخول إلى هذا المساق ، عليك أولاً الموافقة على مشاركة إنجازاتك التعليمية مع"
+" {enterprise_customer_name}."
 
 #: lms/templates/dashboard/_dashboard_show_consent.html
 msgid "View Consent"
@@ -18705,7 +18702,7 @@ msgstr "المؤسسات التعليمية"
 
 #: lms/templates/header/user_dropdown.html
 msgid "Resume your last course"
-msgstr "استئناف الدراسة في المساقك الأخير"
+msgstr "متابعة التعلّم في مساقك الأخير"
 
 #: lms/templates/instructor/instructor_dashboard_2/add_coupon_modal.html
 #: lms/templates/instructor/instructor_dashboard_2/e-commerce.html
@@ -19742,7 +19739,7 @@ msgstr ""
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Role of the users being enrolled."
-msgstr "دور المستخدمين المسجلين."
+msgstr "دور المستخدمين المسجِّلين."
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid ""
@@ -20431,7 +20428,7 @@ msgstr "رقم الهاتف الجوال"
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "Send me a text with the link"
-msgstr "ارسل لي رسالة نصية (sms) بالرابط"
+msgstr "أرسل الرابط برسالة نصية (SMS)"
 
 #: lms/templates/modal/_modal-settings-language.html
 msgid "Change Preferred Language"
@@ -20820,7 +20817,7 @@ msgstr "شكرًا لك!"
 #: lms/templates/shoppingcart/receipt.html
 #: lms/templates/shoppingcart/registration_code_redemption.html
 msgid "View Dashboard"
-msgstr "اعرض \"لوحتي التعليمية\""
+msgstr "شاهد لوحتك التعليمية"
 
 #: lms/templates/shoppingcart/receipt.html
 msgid ""
@@ -20990,7 +20987,7 @@ msgid ""
 msgstr ""
 "لقد نقرت على رابط لرمز تسجيل مستخدم سابقًا. تحقق من {link_start}صفحة \"لوحتي"
 " التعليمية\" الخاصة بمساقاتك{link_end} لترى ما إذا كنتَ مسجلاً في المساق أو "
-"اتصل بالإداري المسؤول في شركتك."
+"تواصل مع الشخص المسؤول في شركتك."
 
 #: lms/templates/shoppingcart/registration_code_receipt.html
 #: lms/templates/shoppingcart/registration_code_redemption.html
@@ -21573,7 +21570,7 @@ msgstr "تعرف على الشهادات الموثقة"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "{platform_name} Verified Certificate"
-msgstr "{platform_name} شهادة موثقة"
+msgstr "شهادة موثقة من {platform_name} "
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Why upgrade?"
@@ -21595,8 +21592,8 @@ msgstr "حافز مؤكد لاستكمال المساق"
 msgid ""
 "Certificate purchases help {platform_name} continue to offer free courses"
 msgstr ""
-"عملية دفعك لتوثيق شهادتك تساعدنا في منصة {platform_name} على تقديم المزيد من"
-" المساقات المجانية"
+"تطوير شهادتك تساعدنا في منصة {platform_name} على تقديم المزيد من المساقات "
+"المجانية"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "How it works"
@@ -21628,8 +21625,8 @@ msgid ""
 "                             resume - I feel like this certificate could "
 "really help me land                             my dream job!"
 msgstr ""
-"ساعدت شهادتي في عرض معرفتي في سيرتي الذاتية - أشعر أن هذه الشهادة قد تساعدني"
-" حقًا في الحصول على وظيفة أحلامي!"
+"ساعدتني شهادتي على عرض مهاراتي في سيرتي الذاتية - أشعر أن هذه الشهادة قد "
+"تساعدني حقًا في الحصول على وظيفة أحلامي!"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "{learner_name}, edX Learner"
@@ -21642,9 +21639,8 @@ msgid ""
 "I have and that I have                             achieved something while "
 "I was unemployed."
 msgstr ""
-"كنت أرغب في تضمين شهادة تم التحقق منها في سيرتي الذاتية وملفي الشخصي لتوضيح "
-"أنني أعمل على تحقيق هذا الهدف الذي حققته وأنني حققت شيئًا بينما كنت عاطلاً "
-"عن العمل."
+"أردت إضافة شهادة موثّقة في سيرتي الذاتية وملفي الشخصي لتوضيح أنني أعمل على "
+"تحقيق هذا الهدف، وأنني حققت شيئًا بينما كنت عاطلاً عن العمل."
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Upgrade ({course_price})"
@@ -22231,7 +22227,7 @@ msgstr "افتح محتويات المساق في نظام إدارة التعل
 
 #: cms/templates/container.html
 msgid "View Live Version"
-msgstr "اعرض النسخة الحالية"
+msgstr "شاهد النسخة الحالية"
 
 #: cms/templates/container.html
 msgid "Preview the courseware in the LMS"
