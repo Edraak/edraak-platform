@@ -19,7 +19,7 @@ define(
 
         $script(
             '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js' +
-            '?config=TeX-MML-AM_SVG&delayStartupUntil=configured',
+            '?config=TeX-MML-AM_HTMLorMML-full&delayStartupUntil=configured',
             'mathjax',
             function() {
                 window.MathJax.Hub.Config({
