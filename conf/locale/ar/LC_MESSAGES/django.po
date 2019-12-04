@@ -35,9 +35,9 @@
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
-# Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
+# Omar Al-Ithawi <i@omardo.com>, 2019
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -69,7 +69,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-14 13:21+0000\n"
+"POT-Creation-Date: 2019-12-04 07:02+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -8074,7 +8074,7 @@ msgstr "أُرسِلَت"
 #. messages as {action}.
 #: lms/djangoapps/instructor_task/tasks.py
 msgid "graded"
-msgstr "قيمت"
+msgstr "قُيِّمت"
 
 #. Translators: This is a past-tense phrase that is inserted into task
 #. progress messages as {action}.
@@ -11860,10 +11860,10 @@ msgid ""
 "                   and agree to our {privacy_policy_link_start}Privacy "
 "Policy{privacy_policy_link_end}."
 msgstr ""
-"بإنشاءك حساباً على منصة  {platform_name}, أنت توافق على الالتزام بـ "
-"{platform_name}  "
-"{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end}"
-"                    وتوافق على {privacy_policy_link_start}Privacy "
+"بإنشاءك حساباً على منصة {platform_name}, أنت توافق على الالتزام بـ "
+"{platform_name} "
+"{terms_of_service_link_start}{terms_of_service}{terms_of_service_link_end} "
+"الخاصّة بالمنصة، وتوافق أيضاً على {privacy_policy_link_start}Privacy "
 "Policy{privacy_policy_link_end}."
 
 #. Translators: "Terms of service" is a legal document users must agree to
@@ -14060,6 +14060,10 @@ msgstr "إحفظ إجابتك"
 msgid "Reset your answer"
 msgstr "تغيير إجابتك"
 
+#: lms/templates/problem.html
+msgid "Answers are displayed within the problem"
+msgstr "ستظهر الإجابات داخل المسألة"
+
 #: lms/templates/problem_notifications.html
 msgid "Next Hint"
 msgstr "التلميح التالي"
@@ -15002,7 +15006,7 @@ msgstr ""
 "{platform_name_capitalized} بمراقبة استخدامك لواجهات API للتحقق من الالتزام "
 "بالشروط وقد تمنع دخولك أو تقوم بإيقاف خصائص التكامل التي تتمتع بها إذا قمت "
 "بأي محاولة للالتفاف على المتطلبات والقيود التي تضعها {platform_name} أو "
-"تجاوزها. لا يجوز لتطبيقك أو أي استخدام آخر متفق عليه لواجهة API أو محتوي API"
+"تجاوزها. لا يجوز لتطبيقك أو أي استخدام آخر متفق عليه لواجهة API أو محتوى API"
 " أن يطلب من المستخدمين النهائيين لديك تقديم اسم مستخدم {platform_name}، أو "
 "كلمة المرور، أو أي بيانات اعتماد أخرى لمستخدم {platform_name} في أي مكان "
 "بخلاف موقع {platform_name} على {platform_url}."
@@ -15188,18 +15192,18 @@ msgid ""
 msgstr ""
 "جميع الأسماء والشعارات والأختام (\"العلامات التجارية\") التي تظهر في واجهات "
 "برمجة التطبيقات أو محتوى API أو على أو من خلال الخدمات المتاحة على أو من "
-"خلال واجهات برمجة التطبيقات ، إن وجدت ، هي ملك لأصحابها المعنيين. لا يجوز لك"
-" إزالة أو تغيير أو إخفاء أي حقوق طبع ونشر أو علامة تجارية أو إشعارات حقوق "
+"خلال واجهات برمجة التطبيقات، إن وجدت، هي ملك لأصحابها المعنيين. لا يحقّ لك "
+"إزالة أو تغيير أو إخفاء أي حقوق طبع ونشر أو علامة تجارية أو إشعارات حقوق "
 "ملكية أخرى مدمجة في محتوى واجهة برمجة التطبيقات أو مرافقة له. إذا قام أي "
 "{platform_name} مشارك (كما هو محدد فيما يلي) أو أي جهة خارجية أخرى بإلغاء "
-"الوصول إلى محتوى API الذي يملكه أو يتحكم فيه ذلك {platform_name} مشارك أو "
-"جهة خارجية ، بما في ذلك على سبيل المثال لا الحصر أي علامات تجارية ، يجب عليك"
-" التأكد من أن جميع محتوى API المتعلق بذلك {platform_name} يتم حذف المشارك أو"
-" الطرف الثالث من التطبيق الخاص بك والشبكات والأنظمة والخوادم الخاصة بك في "
-"أسرع وقت ممكن. \"المشاركون في {platform_name_capitalized}\" يعني معهد "
-"ماساتشوستس للتكنولوجيا وجامعة هارفارد والكيانات الأخرى التي توفر المعلومات "
-"أو محتوى أو خدمات واجهة برمجة التطبيقات لواجهة برمجة التطبيقات ومدرسي الدورة"
-" التدريبية وموظفيها."
+"الوصول إلى محتوى API الذي يملكه أو يتحكم فيه ذلك {platform_name} أو جهة "
+"خارجية ، بما في ذلك على سبيل المثال لا الحصر أي علامات تجارية ، يجب عليك "
+"التأكد من أن جميع محتوى API المتعلق بذلك {platform_name} يتم حذفها أو الطرف "
+"الثالث من التطبيق الخاص بك والشبكات والأنظمة والخوادم الخاصة بك في أسرع وقت "
+"ممكن. \"المشاركون في {platform_name_capitalized}\" يعني معهد ماساتشوستس "
+"للتكنولوجيا وجامعة هارفارد والكيانات الأخرى التي توفر المعلومات أو محتوى أو "
+"خدمات واجهة برمجة التطبيقات لواجهة برمجة التطبيقات ومدرسي الدورة التدريبية "
+"وموظفيها."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15251,8 +15255,8 @@ msgid ""
 "{platform_name} reserves the right to charge fees for future use or access "
 "to the APIs."
 msgstr ""
-"قد يتم اتاحة الوصول إلى بعض الAPI مجانًا ، ولكن منصة {platform_name} تحتفظ "
-"بالحق في فرض رسوم على الاستخدام في المستقبل أو الوصول إلى الAPIs."
+"قد يتم إتاحة الوصول إلى بعض الAPI مجانًا، ولكن منصة {platform_name} تحتفظ "
+"بالحق في فرض رسوم على الاستخدام في المستقبل أو الوصول إلى الـ APIs."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -15277,9 +15281,9 @@ msgid ""
 msgstr ""
 "قد تقوم {platform_name_capitalized} بتحديث أو تعديل واجهات API من وقت لآخر "
 "دون إشعار مسبق. وقد تؤثر هذه التغييرات على استخدامك لواجهات API أو طريقة "
-"تفاعل التكامل مع API لديك. وإذا قمنا بإجراء تغيير غير مقبول بالنسبة لك، فيجب"
-" عليك التوقف عن استخدام واجهات API. الاستمرار في استخدام واجهات API يعني أنك"
-" تقبل التغيير."
+"تفاعل الربط مع API لديك. وإذا قمنا بإجراء تغيير غير مقبول بالنسبة لك، فيجب "
+"عليك التوقف عن استخدام واجهات API. الاستمرار في استخدام واجهات API يعني أنك "
+"موافق على التغييرات."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid "Confidentiality"
@@ -15445,8 +15449,8 @@ msgid ""
 "that may be offered at these third-party sites. If you decide to access "
 "linked third-party websites, you do so at your own risk."
 msgstr ""
-"يمكن أن تشمل واجهات API ومحتوى API على روابط إلى مواقع خارجية تقوم جهات أخرى"
-" غير تابعة ل{platform_name} بصيانتها أو إدارتها. لا تتحمل "
+"يمكن أن تشمل واجهات API ومحتوى API على روابط مواقع خارجية تقوم جهات أخرى غير"
+" تابعة ل{platform_name} بصيانتها أو إدارتها. لا تتحمل "
 "{platform_name_capitalized} أو المشاركون لدى {platform_name} أي مسؤولية "
 "عنها، ولا تقوم بترشيح، أو اعتماد، أو مراجعة، أو إقرار محتويات أي من المنتجات"
 " أو الخدمات التي قد يتم تقديمها في هذه المواقع أو استخدامها. إذا قررت الدخول"
@@ -17146,9 +17150,9 @@ msgid ""
 "received. You can contact the account holder to request payment, or you can "
 "unenroll from this course"
 msgstr ""
-"لم يعد بإمكانك الوصول إلى هذه الدورة التدريبية لأن الدفع لم يتم استلامها "
-"بعد. يمكنك الاتصال بصاحب الحساب لطلب الدفع ، أو يمكنك إلغاء التسجيل في هذه "
-"الدورة التدريبية"
+"لم يعد بإمكانك الوصول إلى هذه الدورة التدريبية لأن الدفعة لم يتم استلامها "
+"بعد. يمكنك التواصل مع صاحب الحساب لطلب الدفع ، أو يمكنك إلغاء التسجيل في هذه"
+" الدورة التدريبية"
 
 #: lms/templates/dashboard/_dashboard_course_listing.html
 msgid ""
@@ -17332,7 +17336,7 @@ msgstr ""
 
 #: lms/templates/dashboard/_dashboard_entitlement_actions.html
 msgid "Course options for {courseName}"
-msgstr "اعدادات مساق {courseName}"
+msgstr "خيارات مساق {courseName}"
 
 #: lms/templates/dashboard/_dashboard_show_consent.html
 msgid "Consent to share your data"
@@ -18687,7 +18691,7 @@ msgstr "سلّة المشتريات"
 
 #: lms/templates/header/navbar-not-authenticated.html
 msgid "Supplemental Links"
-msgstr "روابط تكميلية"
+msgstr "روابط تدعيمية"
 
 #: lms/templates/header/navbar-not-authenticated.html
 #: lms/templates/navigation/navbar-not-authenticated.html
@@ -19979,10 +19983,10 @@ msgid ""
 "open threads, and endorse responses. Their posts are marked as 'Community "
 "TA'. Only enrolled learners can be added as Community TAs."
 msgstr ""
-"Community TA هم أعضاء في المجتمع الذين يساعدون فريق المساق في ادارة مراكز "
-"المناقشة. يمكنهم مشاهدة المنشورات من قبل المتعلمين في الشعب المخصص لهم أو "
-"مسار التسجيل ، ويمكنهم تعديل أو حذف المنشورات ، ومسح العلامات ، وإغلاق أو "
-"إعادة فتح الرسائل ، والتصديق على الردود. تم وضع علامة على مشاركاتهم كـ "
+"مساعدو المدرّسين هم أعضاء في المجتمع الذين يساعدون فريق المساق في ادارة "
+"مراكز المناقشة. يمكنهم مشاهدة المنشورات من قبل المتعلمين في الشعب المخصصة "
+"لهم أو مسار التسجيل، ويمكنهم تعديل أو حذف المنشورات، ومسح العلامات، وإغلاق "
+"أو إعادة فتح الرسائل، والمصادقة على الردود. تم وضع علامة على مشاركاتهم كـ "
 "\"Community TA\". يمكن إضافة المتعلمين المسجلين فقط كـCommunity TAs."
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
@@ -20420,7 +20424,7 @@ msgstr "احصل على تطبيق {platform_name} للهواتف الذكية!"
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "We'll send you a one time SMS with a link to download the app."
-msgstr "سنرسل لك رسالة نصية (sms) لمرة واحدة مع رابط لتنزيل التطبيق."
+msgstr "سنرسل لك رسالة نصية (SMS) لمرة واحدة مع رابط لتنزيل التطبيق."
 
 #: lms/templates/learner_dashboard/text-me-fragment.html
 msgid "Mobile phone number"
@@ -21546,7 +21550,7 @@ msgstr "تعديل هدف المساق:"
 
 #: openedx/features/course_experience/templates/course_experience/course-home-fragment.html
 msgid "Pursue a verified certificate"
-msgstr "العمل على شهادة موثقة"
+msgstr "اسعَ للحصول على شهادة موثقة"
 
 #: openedx/features/course_experience/templates/course_experience/course-home-fragment.html
 msgid "Upgrade ({price})"
@@ -21566,7 +21570,7 @@ msgstr "{subsection_format} تستحقّ في {{date}}"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Learn About Verified Certificates"
-msgstr "تعرف على الشهادات الموثقة"
+msgstr "اعرف المزيد عن الشهادات الموثقة"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "{platform_name} Verified Certificate"
@@ -21597,7 +21601,7 @@ msgstr ""
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "How it works"
-msgstr "كيف تتعلم عبر إدراك"
+msgstr "كيف تعمل"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Pay the Verified Certificate upgrade fee"
@@ -21605,7 +21609,7 @@ msgstr "دفع رسوم توثيق الشهادة"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Verify your identity with a webcam and government-issued ID"
-msgstr "تحقق من هويتك باستخدام كاميرا ويب وهوية حكومية (هوية شخصية، جواز سفر)"
+msgstr "تحقق من هويتك باستخدام كاميرا ويب وهوية رسمية (هوية شخصية، جواز سفر)"
 
 #: openedx/features/course_experience/templates/course_experience/course-sock-fragment.html
 msgid "Study hard and pass the course"
@@ -24717,8 +24721,8 @@ msgid ""
 "Custom sidebar content for {a_link_start}your course summary "
 "page{a_link_end} (formatted in HTML)"
 msgstr ""
-"محتوى مخصص للبار الجانبي {a_link_start}صفحة ملخص المساق{a_link_end} (بصيغة "
-"html)"
+"محتوى مخصص للعمود الجانبي {a_link_start} صفحة ملخص المساق{a_link_end} (بصيغة"
+" html)"
 
 #: cms/templates/settings.html
 msgid "Course Card Image"
@@ -25391,7 +25395,7 @@ msgstr "السياسات"
 
 #: cms/templates/widgets/footer.html
 msgid "Accessibility Accommodation Request"
-msgstr "طلب تعديل خاص بذوي التحديات الخاصة"
+msgstr "طلب خاص بذوي التحديات الخاصة"
 
 #: cms/templates/widgets/footer.html
 msgid "LMS"
