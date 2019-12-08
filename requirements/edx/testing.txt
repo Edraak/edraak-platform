@@ -334,3 +334,5 @@ zope.interface==4.5.0     # via twisted
 # Used for printing the Edraak certificates
 python-bidi==0.4.0
 wand==0.5.1
+qrcode==6.1
+arabic-reshaper==2.0.14

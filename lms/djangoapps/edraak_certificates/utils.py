@@ -1,3 +1,9 @@
+import logging
+
+from courseware.courses import get_course_about_section
+from opaque_keys.edx import locator
+from xmodule.modulestore.django import modulestore
+from .edraakcertificate import EdraakCertificate
 from bidi.algorithm import get_display
 from django.conf import settings
 from django.core.cache import cache
@@ -9,7 +15,26 @@ from lms.djangoapps.courseware.views.views import is_course_passed
 from opaque_keys.edx import locator
 from xmodule.modulestore.django import modulestore
 
-from edraak_certificates import arabic_reshaper
+logger = logging.getLogger(__name__)
+
+
+def generate_certificate(request, course_id):
+    course_key = locator.CourseLocator.from_string(course_id)
+
+    path_builder = request.build_absolute_uri
+    course = modulestore().get_course(course_key)
+    course_short_desc = get_course_about_section(
+        request, course, 'short_description')
+
+    preview_mode = request.GET.get('preview', None)
+    cert = EdraakCertificate(course=course,
+                             user=request.user,
+                             course_desc=course_short_desc,
+                             preview_mode=preview_mode,
+                             path_builder=path_builder)
+
+    cert.generate_and_save()
+    return cert.temp_file
 
 
 STATIC_DIR = os.path.join(os.path.dirname(__file__), 'assets')
@@ -65,7 +90,7 @@ def is_certificate_allowed(user, course):
 
 
 @cached_function(
-    cache_key_format='edraak_misc.utils.is_student_pass.{0.id}.{1.id}',
+    cache_key_format='.utils.is_student_pass.{0.id}.{1.id}',
     timeout=60 * 5,  # Cache up to 5 minutes
 )
 def cached_is_course_passed(user, course):
@@ -190,14 +215,6 @@ def get_course_sponsor(course_id):
         return "crescent_petroleum"
 
     return None
-
-
-def text_to_bidi(text):
-    text = normalize_spaces(text)
-
-    reshaped_text = arabic_reshaper.reshape(text)
-    bidi_text = get_display(reshaped_text)
-    return bidi_text
 
 
 def normalize_spaces(text):

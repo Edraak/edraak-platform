@@ -243,6 +243,8 @@ zendesk==1.1.1
 # Used for printing the Edraak certificates
 python-bidi==0.4.0
 wand==0.5.1
+qrcode==6.1
+arabic-reshaper==2.0.14
 
 # For gcloud
 gcloud==0.18.3

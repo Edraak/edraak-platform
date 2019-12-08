@@ -470,6 +470,7 @@ def get_active_web_certificate(course, is_preview_mode=None):
     configurations = certificates.get('certificates', [])
     for config in configurations:
         if config.get('is_active') or is_preview_mode:
+            config['course_title'] = config.get('course_title', course.display_name)
             return config
     return None
 

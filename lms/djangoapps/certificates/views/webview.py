@@ -39,6 +39,8 @@ from courseware.access import has_access
 from courseware.courses import get_course_by_id
 from edxmako.shortcuts import render_to_response
 from edxmako.template import Template
+
+from lms.djangoapps.edraak_certificates.utils import contains_rtl_text
 from openedx.core.djangoapps.catalog.utils import get_course_run_details
 from openedx.core.djangoapps.lang_pref.api import get_closest_released_language
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
@@ -141,12 +143,11 @@ def _update_certificate_context(context, course, user_certificate, platform_name
         context['certificate_type_description'] = certificate_type_description
 
     # Translators: This text describes the purpose (and therefore, value) of a course certificate
-    context['certificate_info_description'] = _("{platform_name} acknowledges achievements through "
-                                                "certificates, which are awarded for course activities "
-                                                "that {platform_name} students complete.").format(
+    context['certificate_info_description'] = _("{platform_name} acknowledges achievements through certificates, which "
+                                                "are awarded for various activities. {platform_name} students complete "
+                                                "under the <a href='{tos_url}'>{platform_name} Honor Code</a>.").format(
         platform_name=platform_name,
-        tos_url=context.get('company_tos_url'),
-        verified_cert_url=context.get('company_verified_certificate_url'))
+        tos_url=context.get('company_tos_url'))
 
 
 def _update_context_with_basic_info(context, course_id, platform_name, configuration):
@@ -209,8 +210,15 @@ def _update_context_with_basic_info(context, course_id, platform_name, configura
     context['certificate_verify_urltext'] = _("Validate this certificate for yourself")
 
     # Translators:  This text describes (at a high level) the mission and charter the edX platform and organization
-    context['company_about_description'] = _("{platform_name} offers interactive online classes and MOOCs.").format(
-        platform_name=platform_name)
+    # Translators:  (EDRAAK) This text describes (at a high level) the mission and charter the edX platform and organization
+    context['company_about_description'] = _("{platform_name} is a massive open online course (MOOC) platform, that "
+                                             "is an initiative of the Queen Rania Foundation (QRF). QRF is determined "
+                                             "to ensure that the Arab world is at the forefront of educational innovation. "
+                                             "As such, QRF has capitalized on regional Arab talent to leverage technology "
+                                             "developed by the Harvard-MIT consortium, edX, to create the first non-profit "
+                                             "Arabic MOOC platform. The new MOOC platform will present the Arab world with "
+                                             "unique and vital opportunities that can be part of a necessary revolution in "
+                                             "education and learning.").format(platform_name=platform_name)
 
     context['company_about_title'] = _("About {platform_name}").format(platform_name=platform_name)
 
@@ -271,7 +279,7 @@ def _update_social_context(request, context, course, user, user_certificate, pla
     context['twitter_share_enabled'] = share_settings.get('CERTIFICATE_TWITTER', False)
     context['twitter_share_text'] = share_settings.get(
         'CERTIFICATE_TWITTER_TEXT',
-        _("I completed a course at {platform_name}. Take a look at my certificate.").format(
+        _("I completed a course on #{platform_name}. Take a look at my certificate.").format(
             platform_name=platform_name
         )
     )
@@ -548,6 +556,17 @@ def render_html_view(request, user_id, course_id):
 
     # Get data from Discovery service that will be necessary for rendering this Certificate.
     catalog_data = _get_catalog_data_for_course(course_key)
+
+    # Determine the certificate language
+    course_title = active_configuration.get('course_title', '')
+    course_title = course_title if course_title else course.display_name
+    language = 'ar' if contains_rtl_text(course_title) else 'en'
+    context['language'] = language
+    translation.activate(language)
+    request.session[translation.LANGUAGE_SESSION_KEY] = language
+
+    # Reload the basic info with activated language
+    _update_context_with_basic_info(context, course_id, platform_name, configuration)
 
     # Determine whether to use the standard or custom template to render the certificate.
     custom_template = None
