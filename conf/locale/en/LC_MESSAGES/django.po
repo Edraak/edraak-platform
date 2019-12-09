@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-28 19:44+0000\n"
-"PO-Revision-Date: 2019-11-28 19:44:47.375735\n"
+"POT-Creation-Date: 2019-12-04 07:09+0000\n"
+"PO-Revision-Date: 2019-12-04 07:09:40.872828\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -12660,6 +12660,10 @@ msgstr ""
 
 #: lms/templates/problem.html
 msgid "Reset your answer"
+msgstr ""
+
+#: lms/templates/problem.html
+msgid "Answers are displayed within the problem"
 msgstr ""
 
 #: lms/templates/problem_notifications.html
