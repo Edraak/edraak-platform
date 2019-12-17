@@ -561,12 +561,12 @@ def render_html_view(request, user_id, course_id):
     course_title = active_configuration.get('course_title', '')
     course_title = course_title if course_title else course.display_name
     language = 'ar' if contains_rtl_text(course_title) else 'en'
-    context['language'] = language
+    # context['language'] = language
     translation.activate(language)
     request.session[translation.LANGUAGE_SESSION_KEY] = language
 
-    # Reload the basic info with activated language
-    _update_context_with_basic_info(context, course_id, platform_name, configuration)
+    # # Reload the basic info with activated language
+    # _update_context_with_basic_info(context, course_id, platform_name, configuration)
 
     # Determine whether to use the standard or custom template to render the certificate.
     custom_template = None
