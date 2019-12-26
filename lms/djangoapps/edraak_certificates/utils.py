@@ -1,10 +1,7 @@
 import logging
 
 from courseware.courses import get_course_about_section
-from opaque_keys.edx import locator
-from xmodule.modulestore.django import modulestore
-from .edraakcertificate import EdraakCertificate
-from bidi.algorithm import get_display
+from edraak_certificates.generator import EdraakCertificate
 from django.conf import settings
 from django.core.cache import cache
 import os
@@ -90,7 +87,7 @@ def is_certificate_allowed(user, course):
 
 
 @cached_function(
-    cache_key_format='.utils.is_student_pass.{0.id}.{1.id}',
+    cache_key_format='edraak_certificates.utils.is_student_pass.{0.id}.{1.id}',
     timeout=60 * 5,  # Cache up to 5 minutes
 )
 def cached_is_course_passed(user, course):

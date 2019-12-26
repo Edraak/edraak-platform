@@ -1,9 +1,7 @@
-
 # -*- coding: utf-8 -*-
 from datetime import datetime
 import logging
 
-from organizations.models import Organization
 from os import path
 import re
 from uuid import uuid4
@@ -48,12 +46,12 @@ for font_file, font_name in fonts.iteritems():
 
 def text_to_bidi(text):
     text = normalize_spaces(text)
-    Reshaper = ArabicReshaper(
+    configured_reshaper = ArabicReshaper(
         configuration={
             'use_unshaped_instead_of_isolated': True
         }
     )
-    reshaped_text = Reshaper.reshape(text)
+    reshaped_text = configured_reshaper.reshape(text)
     bidi_text = get_display(reshaped_text)
     return bidi_text
 
@@ -573,8 +571,8 @@ class EdraakCertificate(object):
         y = 7
         self.add_certificate_bg()
 
-        # Add the debugging grid above the background image.
-        self.draw_debugging_grid()
+        # Uncomment following line to draw debugging grid above the background image
+        # self.draw_debugging_grid()
 
         self.add_edraak_logo()
         self.add_course_org_logo()
