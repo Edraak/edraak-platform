@@ -697,6 +697,7 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
             html = self.handle_problem_html_error(err)
 
         html = self.remove_tags_from_html(html)
+        _ = self.runtime.service(self, "i18n").ugettext
 
         # Enable/Disable Submit button if should_enable_submit_button returns True/False.
         submit_button = self.submit_button_name()
