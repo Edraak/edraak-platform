@@ -1654,6 +1654,7 @@ PIPELINE_CSS = {
         'source_filenames': [
             'certificates/css/main-ltr.css',
             'css/vendor/font-awesome.css',
+            'css/edraak_certificate.css',
         ],
         'output_filename': 'css/certificates-style.css'
     },
@@ -1661,6 +1662,7 @@ PIPELINE_CSS = {
         'source_filenames': [
             'certificates/css/main-rtl.css',
             'css/vendor/font-awesome.css',
+            'css/edraak_certificate-rtl.css',
         ],
         'output_filename': 'css/certificates-style-rtl.css'
     },

@@ -2,7 +2,6 @@
 <%!
 from django.utils.translation import ugettext as _
 from openedx.core.djangolib.js_utils import js_escaped_string
-from django.core.urlresolvers import reverse
 %>
 <%namespace name='static' file='../static_content.html'/>
 <%block name="js_extra">
@@ -27,15 +26,6 @@ from django.core.urlresolvers import reverse
               };
               Logger.log('edx.certificate.shared', data);
               window.open('${linked_in_url | n, js_escaped_string}');
-          });
-          $("#action-download-view").click(function() {
-            let queryIndex = window.location.href.indexOf('?');
-            var queryString = "";
-
-            if (queryIndex > 0) {
-              queryString = window.location.href.slice(queryIndex);
-            }
-            window.location.href = "${reverse('edraak_certificates:edraak_certificates_download', args=(course_id,))}" + queryString;
           });
       });
 
@@ -93,7 +83,7 @@ from django.core.urlresolvers import reverse
                     </button>
                     %endif
 
-                    <button class="action action-print btn-inverse btn-small" id="action-download-view">
+                    <button class="action action-print btn-inverse btn-small" id="action-print-view">
                         <span class="icon fa fa-print" aria-hidden="true"></span>
                         ${_("Print Certificate")}
                     </button>
