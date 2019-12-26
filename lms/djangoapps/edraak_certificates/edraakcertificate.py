@@ -505,7 +505,6 @@ class EdraakCertificate(object):
         else:
             date = self.cert.modified_date.strftime('%d %B, %Y')
 
-
         self.draw_bidi_text(
             self._('COURSE CERTIFICATE'), x, y, size=font_size)
 
