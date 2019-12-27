@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-10-09 08:57+0000\n"
-"PO-Revision-Date: 2019-10-09 08:57:07.445047\n"
+"POT-Creation-Date: 2019-12-27 18:34+0000\n"
+"PO-Revision-Date: 2019-12-27 18:34:06.274676\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -13961,6 +13961,10 @@ msgstr "سشدث غخعق شرسصثق"
 #: lms/templates/problem.html
 msgid "Reset your answer"
 msgstr "قثسثف غخعق شرسصثق"
+
+#: lms/templates/problem.html
+msgid "Answers are displayed within the problem"
+msgstr "شرسصثقس شقث يهسحمشغثي صهفاهر فاث حقخزمثو"
 
 #: lms/templates/problem_notifications.html
 msgid "Next Hint"
