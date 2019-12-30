@@ -202,7 +202,7 @@ def i18n_ltr():
     "pavelib.i18n.i18n_clean",
     "pavelib.i18n.i18n_transifex_pull",
     "pavelib.i18n.i18n_extract",
-    # "pavelib.i18n.i18n_dummy",
+    "pavelib.i18n.i18n_dummy",
     "pavelib.i18n.i18n_generate_strict",
 )
 @timed

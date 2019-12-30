@@ -38,6 +38,16 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
+LANGUAGES += [
+    # Enable languages that are needed for the tests
+    ('es-419', u'Español (Latinoamérica)'),  # Spanish (Latin America)
+    ('es-es', u'Español (España)'),  # Spanish (Spain)
+    ('fa', u'فارسی'),  # Persian
+    ('fa-ir', u'فارسی (ایران)'),  # Persian (Iran)
+    ('fr', u'Français'),  # French
+    ('uk', u'Українська'),  # Ukranian
+]
+
 # Silence noisy logs to make troubleshooting easier when tests fail.
 import logging
 LOG_OVERRIDES = [
