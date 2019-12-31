@@ -557,13 +557,6 @@ def render_html_view(request, user_id, course_id):
     # Get data from Discovery service that will be necessary for rendering this Certificate.
     catalog_data = _get_catalog_data_for_course(course_key)
 
-    # Determine the certificate language
-    course_title = active_configuration.get('course_title', '')
-    course_title = course_title if course_title else course.display_name
-    language = 'ar' if contains_rtl_text(course_title) else 'en'
-    translation.activate(language)
-    request.session[translation.LANGUAGE_SESSION_KEY] = language
-
     # Determine whether to use the standard or custom template to render the certificate.
     custom_template = None
     custom_template_language = None
@@ -577,7 +570,10 @@ def render_html_view(request, user_id, course_id):
     # Determine the language that should be used to render the certificate.
     # For the standard certificate template, use the user language. For custom templates, use
     # the language associated with the template.
-    user_language = translation.get_language()
+
+    course_title = active_configuration.get('course_title', '') or course.display_name
+    # Edraak Hack: Determine the course language from the title and ignore the user language
+    user_language = 'ar' if contains_rtl_text(course_title) else 'en'
     certificate_language = custom_template_language if custom_template else user_language
 
     # Generate the certificate context in the correct language, then render the template.
