@@ -28,7 +28,7 @@ from user_tasks.conf import settings as user_tasks_settings
 from user_tasks.models import UserTaskArtifact, UserTaskStatus
 from wsgiref.util import FileWrapper
 
-from contentstore.storage import course_import_export_storage
+from contentstore.storage import get_course_import_export_storage
 from contentstore.tasks import CourseExportTask, CourseImportTask, export_olx, import_olx
 from contentstore.utils import reverse_course_url, reverse_library_url
 from edxmako.shortcuts import render_to_response
@@ -201,6 +201,7 @@ def _write_chunk(request, courselike_key):
         log.info("Course import %s: Upload complete", courselike_key)
         with open(temp_filepath, 'rb') as local_file:
             django_file = File(local_file)
+            course_import_export_storage = get_course_import_export_storage()
             storage_path = course_import_export_storage.save(u'olx_import/' + filename, django_file)
         import_olx.delay(
             request.user.id, text_type(courselike_key), storage_path, filename, request.LANGUAGE_CODE)
@@ -424,6 +425,7 @@ def export_output_handler(request, course_key_string):
         artifact = None
         try:
             artifact = UserTaskArtifact.objects.get(status=task_status, name='Output')
+            course_import_export_storage = get_course_import_export_storage()
             tarball = course_import_export_storage.open(artifact.file.name)
             return send_tarball(tarball, artifact.file.storage.size(artifact.file.name))
         except UserTaskArtifact.DoesNotExist:

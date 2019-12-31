@@ -17,7 +17,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from user_tasks.models import UserTaskStatus
 
-from contentstore.storage import course_import_export_storage
+from contentstore.storage import get_course_import_export_storage
 from contentstore.tasks import CourseImportTask, import_olx
 from openedx.core.lib.api.view_utils import DeveloperErrorViewMixin, view_auth_classes
 
@@ -142,6 +142,7 @@ class CourseImportView(CourseImportExportViewMixin, GenericAPIView):
             log.info("Course import %s: Upload complete", course_key)
             with open(temp_filepath, 'rb') as local_file:
                 django_file = File(local_file)
+                course_import_export_storage = get_course_import_export_storage()
                 storage_path = course_import_export_storage.save(u'olx_import/' + filename, django_file)
 
             async_result = import_olx.delay(
