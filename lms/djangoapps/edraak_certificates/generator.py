@@ -197,7 +197,6 @@ class EdraakCertificate(object):
         # Initializing the size of the background
         self.size = landscape(A4)
 
-        # TODO: Look into this
         ctx = canvas.Canvas(self.temp_file.name)
         ctx.setPageSize(self.size)
         self.ctx = ctx
@@ -571,8 +570,9 @@ class EdraakCertificate(object):
         y = 7
         self.add_certificate_bg()
 
-        # Uncomment following line to draw debugging grid above the background image
-        # self.draw_debugging_grid()
+        # This debugging grid shows up when `settings.DEBUG = True`,
+        # so don't worry about it in development, it'll go away in production
+        self.draw_debugging_grid()
 
         self.add_edraak_logo()
         self.add_course_org_logo()
