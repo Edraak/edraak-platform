@@ -37,7 +37,7 @@ from user_tasks.tasks import UserTask
 
 import dogstats_wrapper as dog_stats_api
 from contentstore.courseware_index import CoursewareSearchIndexer, LibrarySearchIndexer, SearchIndexingError
-from contentstore.storage import course_import_export_storage
+from contentstore.storage import get_course_import_export_storage
 from contentstore.utils import initialize_permissions, reverse_usage_url
 from course_action_state.models import CourseRerunState
 from models.settings.course_metadata import CourseMetadata
@@ -690,6 +690,7 @@ def import_olx(self, user_id, course_key_string, archive_path, archive_name, lan
 
         LOGGER.debug(u'importing course to {0}'.format(temp_filepath))
 
+        course_import_export_storage = get_course_import_export_storage()
         # Copy the OLX archive from where it was uploaded to (S3, Swift, file system, etc.)
         if not course_import_export_storage.exists(archive_path):
             LOGGER.info(u'Course import %s: Uploaded file %s not found', courselike_key, archive_path)

@@ -18,5 +18,18 @@ class ImportExportS3Storage(S3BotoStorage):  # pylint: disable=abstract-method
         bucket = setting('COURSE_IMPORT_EXPORT_BUCKET', settings.AWS_STORAGE_BUCKET_NAME)
         super(ImportExportS3Storage, self).__init__(bucket=bucket, custom_domain=None, querystring_auth=True)
 
-# pylint: disable=invalid-name
-course_import_export_storage = get_storage_class(settings.COURSE_IMPORT_EXPORT_STORAGE)()
+
+def get_course_import_export_storage():
+    """
+    Configures and returns a django Storage instance that can be used
+    to store course export import tgz files.
+
+    This class is Edraak-specific to work with GCloud and any other provider.
+    """
+    config = settings.COURSE_IMPORT_EXPORT_BACKEND
+    if config:
+        storage_class = get_storage_class(config['class'])
+        return storage_class(**config['options'])
+
+    # Backward compatibility if `COURSE_IMPORT_EXPORT_BACKEND` is not configured.
+    return get_storage_class(settings.COURSE_IMPORT_EXPORT_STORAGE)()

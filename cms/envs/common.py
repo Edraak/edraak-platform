@@ -676,6 +676,7 @@ derived('LOCALE_PATHS')
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 COURSE_IMPORT_EXPORT_STORAGE = 'django.core.files.storage.FileSystemStorage'
+COURSE_IMPORT_EXPORT_BACKEND = None  # Edraak's method to use GCloud but defaults to hardcoded edX-compatible behaviour.
 
 ##### EMBARGO #####
 EMBARGO_SITE_REDIRECT_URL = None
