@@ -446,11 +446,11 @@ button.accordion-trigger, button.prerequisite-button {
 
 .fa-check.fa.complete-checkmark {
   border: 1px solid $green;
-  margin-right: $baseline / 2;
+  @include margin-right($baseline / 2);
   border-radius: 100px;
   color: white;
   background-color: $green;
-  float: right;
+  @include float(right);
 }
 
 // date summary
