@@ -67,6 +67,7 @@ class ContextMixinTest(ModuleStoreTestCase):
 
         data = self.view.get_context_data()
         self.assertEquals(data['course'].id, self.course.id)
+        self.assertEquals(data['course_key'], course_key)
 
     def test_access_control(self):
         with self.assertRaises(Http404):
@@ -278,6 +279,22 @@ class UniversityIDViewStudentTestCase(ModuleStoreLoggedInTestCase):
         data_after = view.get_context_data(**kwargs)
         self.assertEquals(data_after['terms_conditions'], 'Hello World!')
         self.assertIn(unicode(timezone.now().date().year), unicode(data_after['registration_end']))
+
+    def test_enroll_now_button(self):
+        # Get course university page - user should be already enrolled
+        response = self.client.get(self.url)
+
+        # It must not contain (Enroll now)
+        self.assertNotContains(response, 'Enroll now')
+
+        # Un-enroll from course
+        CourseEnrollment.unenroll(self.user, self.course.id, skip_refund=True)
+
+        # Get course university page after un-enrollment
+        response = self.client.get(self.url)
+
+        # It must contain (Enroll now)
+        self.assertContains(response, 'Enroll now')
 
 
 @ddt.ddt
