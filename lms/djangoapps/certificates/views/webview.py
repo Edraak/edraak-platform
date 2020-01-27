@@ -36,7 +36,7 @@ from lms.djangoapps.certificates.models import (
     GeneratedCertificate
 )
 from courseware.access import has_access
-from courseware.courses import get_course_by_id
+from courseware.courses import get_course_by_id, get_course_about_section
 from edxmako.shortcuts import render_to_response
 from edxmako.template import Template
 
@@ -260,6 +260,8 @@ def _update_course_context(request, context, course, course_key, platform_name):
                                                               '{partner_short_name}.').format(
             partner_short_name=context['organization_short_name'],
             platform_name=platform_name)
+
+    context['course_description'] = get_course_about_section(request, course, 'short_description')
 
 
 def _update_social_context(request, context, course, user, user_certificate, platform_name):
