@@ -48,4 +48,5 @@ class ContextMixin(object):
         data = super(ContextMixin, self).get_context_data(**kwargs)
         data['course'] = self.get_course()
         data['is_staff'] = self.is_staff()
+        data['course_key'] = self.get_course_key()
         return data

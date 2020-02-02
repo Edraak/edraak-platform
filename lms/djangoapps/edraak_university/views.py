@@ -18,6 +18,7 @@ from django.contrib.auth.decorators import login_required
 from util.date_utils import strftime_localized
 from util.views import ensure_valid_course_key
 
+from courseware.views.views import CourseTabView
 from student.models import UserProfile
 
 from edraak_university.forms import UniversityIDStudentForm
@@ -56,6 +57,8 @@ class UniversityIDView(ContextMixin, generic.FormView):
 
         if self.is_staff():
             return redirect('edraak_university:id_staff', course_id=course.id)
+
+        CourseTabView.register_user_access_warning_messages(self.request, self.get_course_key())
 
         return super(UniversityIDView, self).get(*args, **kwargs)
 
