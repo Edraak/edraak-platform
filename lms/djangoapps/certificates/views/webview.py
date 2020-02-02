@@ -143,11 +143,12 @@ def _update_certificate_context(context, course, user_certificate, platform_name
         context['certificate_type_description'] = certificate_type_description
 
     # Translators: This text describes the purpose (and therefore, value) of a course certificate
-    context['certificate_info_description'] = _("{platform_name} acknowledges achievements through certificates, which "
-                                                "are awarded for various activities. {platform_name} students complete "
-                                                "under the <a href='{tos_url}'>{platform_name} Honor Code</a>.").format(
+    context['certificate_info_description'] = _("{platform_name} acknowledges achievements through "
+                                                "certificates, which are awarded for course activities "
+                                                "that {platform_name} students complete.").format(
         platform_name=platform_name,
-        tos_url=context.get('company_tos_url'))
+        tos_url=context.get('company_tos_url'),
+        verified_cert_url=context.get('company_verified_certificate_url'))
 
 
 def _update_context_with_basic_info(context, course_id, platform_name, configuration):
@@ -210,15 +211,8 @@ def _update_context_with_basic_info(context, course_id, platform_name, configura
     context['certificate_verify_urltext'] = _("Validate this certificate for yourself")
 
     # Translators:  This text describes (at a high level) the mission and charter the edX platform and organization
-    # Translators:  (EDRAAK) This text describes (at a high level) the mission and charter the edX platform and organization
-    context['company_about_description'] = _("{platform_name} is a massive open online course (MOOC) platform, that "
-                                             "is an initiative of the Queen Rania Foundation (QRF). QRF is determined "
-                                             "to ensure that the Arab world is at the forefront of educational innovation. "
-                                             "As such, QRF has capitalized on regional Arab talent to leverage technology "
-                                             "developed by the Harvard-MIT consortium, edX, to create the first non-profit "
-                                             "Arabic MOOC platform. The new MOOC platform will present the Arab world with "
-                                             "unique and vital opportunities that can be part of a necessary revolution in "
-                                             "education and learning.").format(platform_name=platform_name)
+    context['company_about_description'] = _("{platform_name} offers interactive online classes and MOOCs.").format(
+        platform_name=platform_name)
 
     context['company_about_title'] = _("About {platform_name}").format(platform_name=platform_name)
 
@@ -261,6 +255,7 @@ def _update_course_context(request, context, course, course_key, platform_name):
             partner_short_name=context['organization_short_name'],
             platform_name=platform_name)
 
+    # Edraak - Add course description from course settings
     context['course_description'] = get_course_about_section(request, course, 'short_description')
 
 
@@ -281,7 +276,7 @@ def _update_social_context(request, context, course, user, user_certificate, pla
     context['twitter_share_enabled'] = share_settings.get('CERTIFICATE_TWITTER', False)
     context['twitter_share_text'] = share_settings.get(
         'CERTIFICATE_TWITTER_TEXT',
-        _(u"I completed a course at {platform_name}. Take a look at my certificate.").format(
+        _("I completed a course at {platform_name}. Take a look at my certificate.").format(
             platform_name=platform_name
         )
     )
