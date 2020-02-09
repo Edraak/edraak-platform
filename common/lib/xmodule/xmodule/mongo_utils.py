@@ -34,6 +34,9 @@ def connect_to_mongodb(
         # No 'replicaSet' in kwargs - so no secondary reads.
         mongo_client_class = pymongo.MongoClient
 
+    # If the MongoDB server uses a separate authentication database that should be specified here
+    auth_source = kwargs.pop('authsource', '') or None
+
     # If read_preference is given as a name of a valid ReadPreference.<NAME> constant
     # such as "SECONDARY_PREFERRED", convert it. Otherwise pass it through unchanged.
     if 'read_preference' in kwargs:
@@ -57,13 +60,9 @@ def connect_to_mongodb(
             mongo_conn,
             wait_time=retry_wait_time
         )
-
     # If credentials were provided, authenticate the user.
-    auth_src = None
-    if kwargs.get('authSource'):
-        auth_src=kwargs.get('authSource')
     if user is not None and password is not None:
-        mongo_conn.authenticate(user, password, source=auth_src)
+        mongo_conn.authenticate(user, password, source=auth_source)
 
     return mongo_conn
 
