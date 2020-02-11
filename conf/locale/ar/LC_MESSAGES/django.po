@@ -1,8 +1,8 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
-# edX translation file.
-# Copyright (C) 2019 EdX
+# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/).
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -11,12 +11,13 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
+# Shadi Naif <shadinaif@gmail.com>, 2020
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
-# edX translation file.
-# Copyright (C) 2019 EdX
+# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/).
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -26,10 +27,10 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
-# edX translation file
-# Copyright (C) 2019 edX
+# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -40,10 +41,10 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
-# edX translation file
-# Copyright (C) 2019 edX
+# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -54,10 +55,10 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
-# edX translation file
-# Copyright (C) 2019 edX
+# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -69,7 +70,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-04 07:02+0000\n"
+"POT-Creation-Date: 2020-02-02 07:45+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -5809,16 +5810,16 @@ msgstr ""
 #, python-brace-format
 msgid ""
 "{platform_name} acknowledges achievements through certificates, which are "
-"awarded for course activities that {platform_name} students complete."
+"awarded for various activities. {platform_name} students complete under the "
+"<a href='{tos_url}'>{platform_name} Honor Code</a>."
 msgstr ""
-"تُقرّ {platform_name} الإنجازات من خلال شهادات، تُمنح وِفقًا لأنشطة المساق "
-"التي يُكملها طلّاب {platform_name}."
 
 #. Translators:  'All rights reserved' is a legal term used in copyrighting to
 #. protect published content
 #: lms/djangoapps/certificates/views/webview.py
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 msgid "All rights reserved"
 msgstr "جميع الحقوق محفوظة"
 
@@ -5887,12 +5888,27 @@ msgstr "وثِّق هذه الشهادة لنفسك"
 
 #. Translators:  This text describes (at a high level) the mission and charter
 #. the edX platform and organization
+#. Translators:  (EDRAAK) This text describes (at a high level) the mission
+#. and charter the edX platform and organization
 #: lms/djangoapps/certificates/views/webview.py
 #, python-brace-format
-msgid "{platform_name} offers interactive online classes and MOOCs."
+msgid ""
+"{platform_name} is a massive open online course (MOOC) platform, that is an "
+"initiative of the Queen Rania Foundation (QRF). QRF is determined to ensure "
+"that the Arab world is at the forefront of educational innovation. As such, "
+"QRF has capitalized on regional Arab talent to leverage technology developed"
+" by the Harvard-MIT consortium, edX, to create the first non-profit Arabic "
+"MOOC platform. The new MOOC platform will present the Arab world with unique"
+" and vital opportunities that can be part of a necessary revolution in "
+"education and learning."
 msgstr ""
-"تُقدّم المنصّة {platform_name} صفوفًا ومساقات MOOC تفاعلية مُتاحة عبر "
-"الإنترنت."
+"{platform_name} هي منصة إلكترونية عربية للمساقات الجماعية مفتوحة المصادر "
+"(MOOC). تم تأسيس إدراك بمبادرة من (مؤسسة الملكة رانيا للتعليم والتنمية) "
+"والتي تحرص على بذل كافة الجهود والمساعي للمساهمة في وضع العالم العربي في "
+"المقدمة في مجال التربية والتعليم كونهما حجر الأساس لتطور وازدهار الشعوب. "
+"تعمل إدراك بالشراكة مع edX وهي إحدى المنصات التعليمية الإلكترونية الأولى على"
+" مستوى العالم والتابعة لجامعة هارفرد الأميركية و معهد ماساتشوستس "
+"للتكنولوجيا."
 
 #: lms/djangoapps/certificates/views/webview.py
 #, python-brace-format
@@ -5963,7 +5979,7 @@ msgstr "المزيد من المعلومات عن شهادة {user_name}:"
 #: lms/djangoapps/certificates/views/webview.py
 #, python-brace-format
 msgid "{fullname}, you earned a certificate!"
-msgstr "تهانينا يا {fullname}؛ لقد حصلت على شهادة!"
+msgstr "تهانينا يا {fullname}؛ لقد حصلت على شهادة."
 
 #. Translators: This line congratulates the user and instructs them to share
 #. their accomplishment on social networks
@@ -5972,8 +5988,9 @@ msgid ""
 "Congratulations! This page summarizes what you accomplished. Show it off to "
 "family, friends, and colleagues in your social and professional networks."
 msgstr ""
-"تهانينا! تلخِّص هذه الصفحة إنجازاتك. شارك نجاحَك مع كُلٍّ من عائلتك وأصدقائك"
-" وزملائك ضمن دائرتك الاجتماعية والمهنية."
+"تهانينا! في هذه الصفحة تجد شهادتك المستحقة لهذا المساق. نحن تؤمن بأنك قد حزت"
+" على هذه الشهادة بجدارتك بعد بذلك لجهد متواصل وعطاء لم ينضب؛ بإمكانك مشاركة "
+"إنجازك هذا مع عائلتك وأصدقائك وزملائك في العمل في أي وقت"
 
 #. Translators: This line leads the reader to understand more about the
 #. certificate that a student has been awarded
@@ -6500,7 +6517,9 @@ msgstr "تهانينا، لقد تأهلت للحصول على شهادة!"
 
 #: lms/djangoapps/courseware/views/views.py
 msgid "You've earned a certificate for this course."
-msgstr "لقد حصلت على شهادة في هذا المساق."
+msgstr ""
+"يمكنك الاستمرار في إتمام اختبارات هذا المساق لتحصل على علامة أعلى أو يمكنك "
+"إصدار شهادتك الآن حسب علامتك الحالية"
 
 #: lms/djangoapps/courseware/views/views.py
 msgid "Certificate unavailable"
@@ -6924,37 +6943,37 @@ msgid "Good"
 msgstr "جيّد"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak with cooperation from MITx. The learning"
-" experience has been supervised and managed by the course team."
+msgid "Brought to you by"
+msgstr "مقدم من"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "In Sponsorship with"
+msgstr "بدعم من"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "COURSE CERTIFICATE"
 msgstr ""
-"مساق دراسيّ تقدّمه إدراك بالتعاون مع MITx. يدير تجربة التعلم في هذا المساق "
-"ويُشرِف عليه فريق المساق."
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak. The learning experience has been "
-"supervised and managed by the course team."
-msgstr ""
-"مساق دراسيّ تقدّمه إدراك. يدير تجربة التعلم في هذا المساق ويُشرِف عليه فريق "
-"المساق."
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "This is to certify that:"
-msgstr "لقد تم مُنِح:"
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "Successfully completed:"
-msgstr "هذه الشهادة لإتمامه بنجاح مساق:"
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "This course is sponsored by:"
-msgstr "هذا المساق برعاية:"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 #, python-brace-format
-msgid "Course{new_line}Certificate{new_line}of Completion"
-msgstr "شهادة {new_line} إتمام المساق"
+msgid "Issued {date}"
+msgstr ""
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Verify the authenticity of this certificate at"
+msgstr ""
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "CERTIFICATE OF COMPLETION"
+msgstr "شهادة إتمام مساق"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that"
+msgstr "تم منح شهادة إتمام المساق هذه إلى"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed"
+msgstr "لإتمام المساق التالي بنجاح"
 
 #: lms/djangoapps/edraak_university/forms.py
 msgid "Section Number *"
@@ -10682,12 +10701,14 @@ msgstr " ACE المشتركة"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #, python-format
 msgid "Go to %(platform_name)s Home Page"
 msgstr "الصفحة الرئيسية لمنصّة %(platform_name)s"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #: cms/templates/login.html cms/templates/widgets/header.html
 #: themes/red-theme/cms/templates/login.html
 msgid "Sign In"
@@ -10695,46 +10716,54 @@ msgstr "تسجيل الدخول"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #, python-format
 msgid "%(platform_name)s on LinkedIn"
 msgstr "%(platform_name)s على لينكد إن"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #, python-format
 msgid "%(platform_name)s on Twitter"
 msgstr "%(platform_name)s على تويتر"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #, python-format
 msgid "%(platform_name)s on Facebook"
 msgstr "%(platform_name)s على فيسبوك"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #, python-format
 msgid "%(platform_name)s on Google Plus"
 msgstr "%(platform_name)s على جوجل بلاس"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 #, python-format
 msgid "%(platform_name)s on Reddit"
 msgstr "%(platform_name)s على راديت"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 msgid "Download the iOS app on the Apple Store"
 msgstr "نزل تطبيق iOS على متجر أبل"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 msgid "Download the Android app on the Google Play Store"
 msgstr "نزّل تطبيق أندرويد على متجر جوجل بلاي"
 
 #: openedx/core/djangoapps/ace_common/templates/ace_common/edx_ace/common/base_body.html
 #: themes/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
+#: themesx/red-theme/lms/templates/ace_common/edx_ace/common/base_body.html
 msgid "Our mailing address is"
 msgstr "عنواننا البريدي هو"
 
@@ -11500,6 +11529,7 @@ msgstr ""
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.html
 #: openedx/core/djangoapps/schedules/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
 #: themes/red-theme/lms/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
+#: themesx/red-theme/lms/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
 msgid "Start learning now"
 msgstr "ابدأ التعلم الآن"
 
@@ -12181,6 +12211,7 @@ msgstr ""
 "{learn_more_link_start}مزيد من المعلومات{learn_more_link_end}"
 
 #: themes/red-theme/lms/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
+#: themesx/red-theme/lms/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
 #, python-format
 msgid ""
 "Remember when you enrolled in %(course_name)s, and other courses on edX.org?"
@@ -12191,6 +12222,7 @@ msgstr ""
 "الآخرون."
 
 #: themes/red-theme/lms/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
+#: themesx/red-theme/lms/templates/schedules/edx_ace/recurringnudge_day3/email/body.txt
 #, python-format
 msgid ""
 "Remember when you enrolled in %(course_name)s on edX.org? We do, and we’re "

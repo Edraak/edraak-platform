@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2019 EdX
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2019 EdX
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-27 18:34+0000\n"
-"PO-Revision-Date: 2019-12-27 18:34:06.274676\n"
+"POT-Creation-Date: 2020-02-11 09:32+0000\n"
+"PO-Revision-Date: 2020-02-11 09:32:37.127086\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -7897,45 +7897,39 @@ msgid "Good"
 msgstr "Gööd Ⱡ'σяєм ι#"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak with cooperation from MITx. The learning"
-" experience has been supervised and managed by the course team."
-msgstr ""
-"À çöürsé öf stüdý öfféréd ßý Édrääk wïth çööpérätïön fröm MÌTx. Thé léärnïng"
-" éxpérïénçé häs ßéén süpérvïséd änd mänägéd ßý thé çöürsé téäm. Ⱡ'σяєм ιρѕυм"
-" ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя "
-"ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ "
-"ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ "
-"¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
-"¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт "
-"ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυηт мσłłιт αηιм ι∂ єѕт łα#"
+msgid "Brought to you by"
+msgstr "Bröüght tö ýöü ßý Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмє#"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak. The learning experience has been "
-"supervised and managed by the course team."
-msgstr ""
-"À çöürsé öf stüdý öfféréd ßý Édrääk. Thé léärnïng éxpérïénçé häs ßéén "
-"süpérvïséd änd mänägéd ßý thé çöürsé téäm. Ⱡ'σяєм ιρѕυм ∂σłσя#"
+msgid "In Sponsorship with"
+msgstr "Ìn Spönsörshïp wïth Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid "This is to certify that:"
-msgstr "Thïs ïs tö çértïfý thät: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "Successfully completed:"
-msgstr "Süççéssfüllý çömplétéd: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "This course is sponsored by:"
-msgstr "Thïs çöürsé ïs spönsöréd ßý: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+msgid "COURSE CERTIFICATE"
+msgstr "ÇÖÛRSÉ ÇÉRTÌFÌÇÀTÉ Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 #, python-brace-format
-msgid "Course{new_line}Certificate{new_line}of Completion"
+msgid "Issued {date}"
+msgstr "Ìssüéd {date} Ⱡ'σяєм ιρѕυм ∂σłσ#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Verify the authenticity of this certificate at"
 msgstr ""
-"Çöürsé{new_line}Çértïfïçäté{new_line}öf Çömplétïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
-"αмєт, ¢σηѕє¢тєтυ#"
+"Vérïfý thé äüthéntïçïtý öf thïs çértïfïçäté ät Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢тєтυя α#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "CERTIFICATE OF COMPLETION"
+msgstr "ÇÉRTÌFÌÇÀTÉ ÖF ÇÖMPLÉTÌÖN Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that"
+msgstr "Thïs ïs tö çértïfý thät Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed"
+msgstr "Süççéssfüllý çömplétéd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
 
 #: lms/djangoapps/edraak_university/forms.py
 msgid "Section Number *"
@@ -18825,18 +18819,6 @@ msgstr ""
 "Ýöür sçöré ïs {current_score}%. Ýöü hävé pässéd thé éntränçé éxäm. Ⱡ'σяєм "
 "ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
-#: lms/templates/courseware/enroll_banner.html
-msgid "You are not enrolled yet"
-msgstr "Ýöü äré nöt énrölléd ýét Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
-
-#: lms/templates/courseware/enroll_banner.html
-msgid ""
-"You are not currently enrolled in this course. {link_start}Sign up "
-"now!{link_end}"
-msgstr ""
-"Ýöü äré nöt çürréntlý énrölléd ïn thïs çöürsé. {link_start}Sïgn üp "
-"nöw!{link_end} Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
 #: lms/templates/courseware/gradebook.html
 msgid "Gradebook"
 msgstr "Grädéßöök Ⱡ'σяєм ιρѕυм ∂σł#"
@@ -18860,6 +18842,18 @@ msgstr "néxt pägé Ⱡ'σяєм ιρѕυм ∂σł#"
 #: lms/templates/courseware/info.html
 msgid "{course_number} Course Info"
 msgstr "{course_number} Çöürsé Ìnfö Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
+
+#: lms/templates/courseware/info.html
+msgid "You are not enrolled yet"
+msgstr "Ýöü äré nöt énrölléd ýét Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
+
+#: lms/templates/courseware/info.html
+msgid ""
+"You are not currently enrolled in this course. {link_start}Enroll "
+"now!{link_end}"
+msgstr ""
+"Ýöü äré nöt çürréntlý énrölléd ïn thïs çöürsé. {link_start}Énröll "
+"nöw!{link_end} Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
 #: lms/templates/courseware/info.html
 msgid "Welcome to {org}'s {course_title}!"
