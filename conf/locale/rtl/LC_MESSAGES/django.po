@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2019 EdX
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2019 EdX
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-27 18:34+0000\n"
-"PO-Revision-Date: 2019-12-27 18:34:06.274676\n"
+"POT-Creation-Date: 2020-02-11 09:32+0000\n"
+"PO-Revision-Date: 2020-02-11 09:32:37.127086\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -6807,37 +6807,37 @@ msgid "Good"
 msgstr "لخخي"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak with cooperation from MITx. The learning"
-" experience has been supervised and managed by the course team."
-msgstr ""
-"ش ذخعقسث خب سفعيغ خببثقثي زغ ثيقششن صهفا ذخخحثقشفهخر بقخو وهفط. فاث مثشقرهرل"
-" ثطحثقهثرذث اشس زثثر سعحثقدهسثي شري وشرشلثي زغ فاث ذخعقسث فثشو."
+msgid "Brought to you by"
+msgstr "زقخعلاف فخ غخع زغ"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak. The learning experience has been "
-"supervised and managed by the course team."
-msgstr ""
-"ش ذخعقسث خب سفعيغ خببثقثي زغ ثيقششن. فاث مثشقرهرل ثطحثقهثرذث اشس زثثر "
-"سعحثقدهسثي شري وشرشلثي زغ فاث ذخعقسث فثشو."
+msgid "In Sponsorship with"
+msgstr "هر سحخرسخقساهح صهفا"
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid "This is to certify that:"
-msgstr "فاهس هس فخ ذثقفهبغ فاشف:"
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "Successfully completed:"
-msgstr "سعذذثسسبعممغ ذخوحمثفثي:"
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "This course is sponsored by:"
-msgstr "فاهس ذخعقسث هس سحخرسخقثي زغ:"
+msgid "COURSE CERTIFICATE"
+msgstr "ذخعقسث ذثقفهبهذشفث"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 #, python-brace-format
-msgid "Course{new_line}Certificate{new_line}of Completion"
-msgstr "ذخعقسث{new_line}ذثقفهبهذشفث{new_line}خب ذخوحمثفهخر"
+msgid "Issued {date}"
+msgstr "هسسعثي {date}"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Verify the authenticity of this certificate at"
+msgstr "دثقهبغ فاث شعفاثرفهذهفغ خب فاهس ذثقفهبهذشفث شف"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "CERTIFICATE OF COMPLETION"
+msgstr "ذثقفهبهذشفث خب ذخوحمثفهخر"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that"
+msgstr "فاهس هس فخ ذثقفهبغ فاشف"
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed"
+msgstr "سعذذثسسبعممغ ذخوحمثفثي"
 
 #: lms/djangoapps/edraak_university/forms.py
 msgid "Section Number *"
@@ -16479,18 +16479,6 @@ msgstr ""
 msgid "Your score is {current_score}%. You have passed the entrance exam."
 msgstr "غخعق سذخقث هس {current_score}%. غخع اشدث حشسسثي فاث ثرفقشرذث ثطشو."
 
-#: lms/templates/courseware/enroll_banner.html
-msgid "You are not enrolled yet"
-msgstr "غخع شقث رخف ثرقخممثي غثف"
-
-#: lms/templates/courseware/enroll_banner.html
-msgid ""
-"You are not currently enrolled in this course. {link_start}Sign up "
-"now!{link_end}"
-msgstr ""
-"غخع شقث رخف ذعققثرفمغ ثرقخممثي هر فاهس ذخعقسث. {link_start}سهلر عح "
-"رخص!{link_end}"
-
 #: lms/templates/courseware/gradebook.html
 msgid "Gradebook"
 msgstr "لقشيثزخخن"
@@ -16514,6 +16502,18 @@ msgstr "رثطف حشلث"
 #: lms/templates/courseware/info.html
 msgid "{course_number} Course Info"
 msgstr "{course_number} ذخعقسث هربخ"
+
+#: lms/templates/courseware/info.html
+msgid "You are not enrolled yet"
+msgstr "غخع شقث رخف ثرقخممثي غثف"
+
+#: lms/templates/courseware/info.html
+msgid ""
+"You are not currently enrolled in this course. {link_start}Enroll "
+"now!{link_end}"
+msgstr ""
+"غخع شقث رخف ذعققثرفمغ ثرقخممثي هر فاهس ذخعقسث. {link_start}ثرقخمم "
+"رخص!{link_end}"
 
 #: lms/templates/courseware/info.html
 msgid "Welcome to {org}'s {course_title}!"

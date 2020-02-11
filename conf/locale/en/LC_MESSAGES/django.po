@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2019 EdX
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2019 EdX
+# Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2019 edX
+# Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2019.
+# EdX Team <info@edx.org>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-27 18:34+0000\n"
-"PO-Revision-Date: 2019-12-27 18:34:06.274676\n"
+"POT-Creation-Date: 2020-02-11 09:32+0000\n"
+"PO-Revision-Date: 2020-02-11 09:32:37.127086\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -6143,32 +6143,36 @@ msgid "Good"
 msgstr ""
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak with cooperation from MITx. The learning"
-" experience has been supervised and managed by the course team."
+msgid "Brought to you by"
 msgstr ""
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid ""
-"A course of study offered by Edraak. The learning experience has been "
-"supervised and managed by the course team."
+msgid "In Sponsorship with"
 msgstr ""
 
 #: lms/djangoapps/edraak_certificates/generator.py
-msgid "This is to certify that:"
-msgstr ""
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "Successfully completed:"
-msgstr ""
-
-#: lms/djangoapps/edraak_certificates/generator.py
-msgid "This course is sponsored by:"
+msgid "COURSE CERTIFICATE"
 msgstr ""
 
 #: lms/djangoapps/edraak_certificates/generator.py
 #, python-brace-format
-msgid "Course{new_line}Certificate{new_line}of Completion"
+msgid "Issued {date}"
+msgstr ""
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Verify the authenticity of this certificate at"
+msgstr ""
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "CERTIFICATE OF COMPLETION"
+msgstr ""
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "This is to certify that"
+msgstr ""
+
+#: lms/djangoapps/edraak_certificates/generator.py
+msgid "Successfully completed"
 msgstr ""
 
 #: lms/djangoapps/edraak_university/forms.py
@@ -14794,16 +14798,6 @@ msgstr ""
 msgid "Your score is {current_score}%. You have passed the entrance exam."
 msgstr ""
 
-#: lms/templates/courseware/enroll_banner.html
-msgid "You are not enrolled yet"
-msgstr ""
-
-#: lms/templates/courseware/enroll_banner.html
-msgid ""
-"You are not currently enrolled in this course. {link_start}Sign up "
-"now!{link_end}"
-msgstr ""
-
 #: lms/templates/courseware/gradebook.html
 msgid "Gradebook"
 msgstr ""
@@ -14826,6 +14820,16 @@ msgstr ""
 
 #: lms/templates/courseware/info.html
 msgid "{course_number} Course Info"
+msgstr ""
+
+#: lms/templates/courseware/info.html
+msgid "You are not enrolled yet"
+msgstr ""
+
+#: lms/templates/courseware/info.html
+msgid ""
+"You are not currently enrolled in this course. {link_start}Enroll "
+"now!{link_end}"
 msgstr ""
 
 #: lms/templates/courseware/info.html
