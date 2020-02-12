@@ -18,6 +18,7 @@ from importlib import import_module
 import logging
 import pymongo
 import re
+import six
 import sys
 from uuid import uuid4
 
