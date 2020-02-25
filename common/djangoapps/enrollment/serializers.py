@@ -8,6 +8,7 @@ from rest_framework import serializers
 from course_modes.models import CourseMode
 from course_api.serializers import CourseDetailMarketingSerializer as EdraakCourseSerializer
 from student.models import CourseEnrollment
+from bulk_email.models import Optout
 
 from edraak_specializations.models import CourseSpecializationInfo
 
@@ -109,14 +110,21 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
     edraak_course_details = EdraakCourseSerializer(source="course_overview")
     is_certificate_allowed = serializers.SerializerMethodField()
     specialization_slug = serializers.SerializerMethodField()
+    subscribed_to_emails = serializers.SerializerMethodField()
+
+    def _get_user(self):
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            return request.user
+        return None
 
     def get_is_certificate_allowed(self, obj):
         # Keep this import local to hide LMS related stuff from pytest when testing CMS
         from edraak_certificates.utils import is_certificate_allowed
 
-        request = self.context.get('request')
-        if request and hasattr(request, 'user'):
-            allowed = obj.course_overview and is_certificate_allowed(request.user, obj.course_overview)
+        user = self._get_user()
+        if user:
+            allowed = obj.course_overview and is_certificate_allowed(user, obj.course_overview)
         else:
             log.warning(
                 'EDRAAK: Certificate is not allowed because EdraakCourseEnrollmentSerializer cannot find user!'
@@ -132,6 +140,13 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
             return None
         return specialization_info.specialization_slug
 
+    def get_subscribed_to_emails(self, obj):
+        user = self._get_user()
+        if not user or not user.is_authenticated:
+            return False
+
+        return not Optout.objects.filter(user=user, course_id=obj.course_id).exists()
+
     class Meta(object):
         model = CourseEnrollment
         fields = (
@@ -142,6 +157,7 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
             'edraak_course_details',
             'is_certificate_allowed',
             'specialization_slug',
-            'user'
+            'user',
+            'subscribed_to_emails'
         )
         lookup_field = 'username'
