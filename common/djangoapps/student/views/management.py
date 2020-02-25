@@ -110,6 +110,8 @@ from util.bad_request_rate_limiter import BadRequestRateLimiter
 from util.db import outer_atomic
 from util.json_request import JsonResponse
 from util.password_policy_validators import SecurityPolicyError, validate_password
+from edraak_marketing_email.helpers import unsubscribe_from_marketing_emails
+
 
 log = logging.getLogger("edx.student")
 
@@ -842,6 +844,10 @@ def create_account_with_params(request, params):
     # and is not yet an active user.
     if new_user is not None:
         AUDIT_LOG.info(u"Login success on new account creation - {0}".format(new_user.username))
+
+    subscribe_to_marketing_emails = params.get('marketing_consent', 'false').lower() == 'true'
+    if not subscribe_to_marketing_emails:
+        unsubscribe_from_marketing_emails(new_user)
 
     return new_user
 
