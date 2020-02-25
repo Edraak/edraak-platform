@@ -2301,6 +2301,8 @@ INSTALLED_APPS = [
     # Email marketing integration
     'email_marketing.apps.EmailMarketingConfig',
 
+    'edraak_marketing_email.apps.EdraakMarketingEmailConfig',
+
     # additional release utilities to ease automation
     'release_util',
 
