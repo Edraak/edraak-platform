@@ -1041,6 +1041,8 @@ INSTALLED_APPS = [
     'django_comment_common',
     'edraak_misc',
 
+    'edraak_marketing_email.apps.EdraakMarketingEmailConfig',
+
     # for course creator table
     'django.contrib.admin',
 
