@@ -199,6 +199,10 @@ urlpatterns += [
     ]
 
 urlpatterns += [
+        url(r'', include('edraak_marketing_email.urls', namespace='edraak_marketing_email')),
+    ]
+
+urlpatterns += [
     url(r'^support/', include('support.urls')),
 ]
 
