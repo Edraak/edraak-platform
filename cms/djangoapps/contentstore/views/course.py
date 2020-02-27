@@ -800,7 +800,7 @@ def _create_or_rerun_course(request):
         if display_name is not None:
             fields['display_name'] = display_name
 
-        if video_upload_token is not None:
+        if video_upload_token:
             fields['video_upload_pipeline'] = {
                 "course_video_upload_token": video_upload_token
             }
