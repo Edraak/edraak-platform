@@ -786,6 +786,7 @@ def _create_or_rerun_course(request):
         # force the start date for reruns and allow us to override start via the client
         start = request.json.get('start', CourseFields.start.default)
         run = request.json.get('run')
+        video_upload_token = settings.VIDEO_UPLOAD_PIPELINE.get('COURSE_VIDEO_UPLOAD_TOKEN')
 
         # allow/disable unicode characters in course_id according to settings
         if not settings.FEATURES.get('ALLOW_UNICODE_COURSE_ID'):
@@ -798,6 +799,11 @@ def _create_or_rerun_course(request):
         fields = {'start': start}
         if display_name is not None:
             fields['display_name'] = display_name
+
+        if video_upload_token:
+            fields['video_upload_pipeline'] = {
+                'course_video_upload_token': video_upload_token
+            }
 
         # Set a unique wiki_slug for newly created courses. To maintain active wiki_slugs for
         # existing xml courses this cannot be changed in CourseDescriptor.
