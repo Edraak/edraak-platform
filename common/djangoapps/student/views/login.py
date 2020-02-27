@@ -5,6 +5,7 @@ Much of this file was broken out from views.py, previous history can be found th
 """
 
 import datetime
+import json
 import logging
 import uuid
 import warnings
@@ -267,7 +268,7 @@ def _authenticate_first_party(request, unauthenticated_user):
     try:
         return authenticate(
             username=username,
-            password=request.POST['password'],
+            password=request.POST.get('password', None),
             request=request)
 
     # This occurs when there are too many attempts from the same IP address
@@ -467,15 +468,16 @@ def login_user(request):
         else:
             email_user = _get_user_by_email(request)
 
+        if child_user:
+            parent_user = request.user
+            email_user = child_user
+
+
         _check_shib_redirect(email_user)
         _check_excessive_login_attempts(email_user)
         _check_forced_password_reset(email_user)
 
         # set the user object to child_user object if a child is being logged in
-        if child_user:
-            parent_user = request.user
-            email_user = child_user
-
         possibly_authenticated_user = email_user
 
         if not was_authenticated_third_party:
