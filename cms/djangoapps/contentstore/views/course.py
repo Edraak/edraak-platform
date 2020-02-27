@@ -802,7 +802,7 @@ def _create_or_rerun_course(request):
 
         if video_upload_token:
             fields['video_upload_pipeline'] = {
-                "course_video_upload_token": video_upload_token
+                'course_video_upload_token': video_upload_token
             }
 
         # Set a unique wiki_slug for newly created courses. To maintain active wiki_slugs for
