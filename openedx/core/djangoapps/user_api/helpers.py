@@ -114,6 +114,39 @@ def require_post_params(required_params):
     return _decorator
 
 
+def require_any_post_params(required_params):
+    """
+    View decorator that ensures any of the required POST params are
+    present.  If not, returns an HTTP response with status 400.
+
+    Args:
+        required_params (list): The required parameter keys.
+        i.e. [['email', 'password'], ['token']]
+
+    Returns:
+        HttpResponse
+
+    """
+    def _decorator(func):  # pylint: disable=missing-docstring
+        @wraps(func)
+        def _wrapped(*args, **_kwargs):  # pylint: disable=missing-docstring
+            request = args[0]
+
+            for params in required_params:
+                missing_params = set(params) - set(request.POST.keys())
+
+                if not missing_params:
+                    return func(request)
+
+            msg = u"Missing POST parameters: {missing}".format(
+                missing=' or '.join(['[' + ', '.join(params) + ']' for params in required_params])
+            )
+            return HttpResponseBadRequest(msg)
+
+        return _wrapped
+    return _decorator
+
+
 class InvalidFieldError(Exception):
     """The provided field definition is not valid. """
 
