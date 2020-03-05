@@ -1,9 +1,12 @@
 """HTTP end-points for the User API. """
 
 import logging
+import jwt
+
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS, PermissionDenied, ValidationError
 from django.db import transaction
+from django.conf import settings
 from django.db.utils import DatabaseError
 from django.http import HttpResponse, HttpResponseForbidden
 from django.utils.decorators import method_decorator
@@ -29,7 +32,11 @@ from openedx.core.djangoapps.user_api.api import (
     get_login_session_form,
     get_password_reset_form
 )
-from openedx.core.djangoapps.user_api.helpers import require_post_params, shim_student_view
+from openedx.core.djangoapps.user_api.helpers import (
+    require_post_params,
+    require_any_post_params,
+    shim_student_view
+)
 from openedx.core.djangoapps.user_api.models import UserPreference
 from student.models import UserProfile
 from openedx.core.djangoapps.user_api.preferences.api import get_country_time_zones, update_email_opt_in
@@ -55,7 +62,7 @@ class LoginSessionView(APIView):
     def get(self, request):
         return HttpResponse(get_login_session_form(request).to_json(), content_type="application/json")
 
-    @method_decorator(require_post_params(["email", "password"]))
+    @method_decorator(require_any_post_params([["email", "password"], ["data_token"]]))
     @method_decorator(csrf_protect)
     def post(self, request):
         """Log in a user.
@@ -129,6 +136,43 @@ class RegistrationView(APIView):
             HttpResponse: 403 operation not allowed
         """
         data = request.POST.copy()
+
+        # Decrypt form data if it is encrypted
+        if 'data_token' in request.POST:
+            data_token = request.POST.get('data_token')
+
+            try:
+                decoded_data = jwt.decode(data_token,
+                                          settings.EDRAAK_LOGISTRATION_SECRET_KEY,
+                                          algorithms=[settings.EDRAAK_LOGISTRATION_SIGNING_ALGORITHM])
+                data.update(decoded_data)
+
+            except jwt.ExpiredSignatureError:
+                err_msg = u"The provided data_token has been expired"
+                log.warning(err_msg)
+
+                return JsonResponse({
+                    "success": False,
+                    "value": err_msg,
+                }, status=400)
+
+            except jwt.DecodeError:
+                err_msg = u"Signature verification failed"
+                log.warning(err_msg)
+
+                return JsonResponse({
+                    "success": False,
+                    "value": err_msg,
+                }, status=400)
+
+            except (jwt.InvalidTokenError, ValueError):
+                err_msg = u"Invalid token"
+                log.warning(err_msg)
+
+                return JsonResponse({
+                    "success": False,
+                    "value": err_msg,
+                }, status=400)
 
         email = data.get('email')
         username = data.get('username')

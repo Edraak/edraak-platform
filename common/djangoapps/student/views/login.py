@@ -9,6 +9,7 @@ import json
 import logging
 import uuid
 import warnings
+import jwt
 from urlparse import parse_qs, urlsplit, urlunsplit
 
 import analytics
@@ -142,14 +143,14 @@ def _do_third_party_auth(request):
         raise AuthFailedError(message)
 
 
-def _get_user_by_email(request):
+def _get_user_by_email(request, post_data):
     """
     Finds a user object in the database based on the given request, ignores all fields except for email.
     """
-    if 'email' not in request.POST or 'password' not in request.POST:
+    if 'email' not in post_data or 'password' not in post_data:
         raise AuthFailedError(_('There was an error receiving your login information. Please email us.'))
 
-    email = request.POST['email']
+    email = post_data['email']
 
     try:
         return User.objects.exclude(groups__name=CHILD_USER_PERMISSION_GROUP).get(email=email)
@@ -196,9 +197,9 @@ def _check_forced_password_reset(user):
                                 '"Forgot Password" link on this page to reset your password before logging in again.'))
 
 
-def _enforce_password_policy_compliance(request, user):
+def _enforce_password_policy_compliance(request, post_data, user):
     try:
-        password_policy_compliance.enforce_compliance_on_login(user, request.POST.get('password'))
+        password_policy_compliance.enforce_compliance_on_login(user, post_data.get('password'))
     except password_policy_compliance.NonCompliantPasswordWarning as e:
         # Allow login, but warn the user that they will be required to reset their password soon.
         PageLevelMessages.register_warning_message(request, e.message)
@@ -256,7 +257,7 @@ def _log_and_raise_inactive_user_auth_error(unauthenticated_user):
     raise AuthFailedError(_generate_not_activated_message(unauthenticated_user))
 
 
-def _authenticate_first_party(request, unauthenticated_user):
+def _authenticate_first_party(request, post_data, unauthenticated_user):
     """
     Use Django authentication on the given request, using rate limiting if configured
     """
@@ -268,7 +269,7 @@ def _authenticate_first_party(request, unauthenticated_user):
     try:
         return authenticate(
             username=username,
-            password=request.POST.get('password', None),
+            password=post_data.get('password', None),
             request=request)
 
     # This occurs when there are too many attempts from the same IP address
@@ -298,18 +299,18 @@ def _handle_failed_authentication(user):
     raise AuthFailedError(_('Email or password is incorrect.'))
 
 
-def _handle_successful_authentication_and_login(user, request):
+def _handle_successful_authentication_and_login(user, request, post_data):
     """
     Handles clearing the failed login counter, login tracking, and setting session timeout.
     """
     if LoginFailures.is_feature_enabled():
         LoginFailures.clear_lockout_counter(user)
 
-    _track_user_login(user, request)
+    _track_user_login(user, post_data)
 
     try:
         django_login(request, user)
-        if request.POST.get('remember') == 'true':
+        if post_data.get('remember') == 'true':
             request.session.set_expiry(604800)
             log.debug("Setting user session to never expire")
         else:
@@ -321,7 +322,7 @@ def _handle_successful_authentication_and_login(user, request):
         raise
 
 
-def _track_user_login(user, request):
+def _track_user_login(user, post_data):
     """
     Sends a tracking event for a successful login.
     """
@@ -330,7 +331,7 @@ def _track_user_login(user, request):
         analytics.identify(
             user.id,
             {
-                'email': request.POST['email'],
+                'email': post_data['email'],
                 'username': user.username
             },
             {
@@ -346,7 +347,7 @@ def _track_user_login(user, request):
             "edx.bi.user.account.authenticated",
             {
                 'category': "conversion",
-                'label': request.POST.get('course_id'),
+                'label': post_data.get('course_id'),
                 'provider': None
             },
             context={
@@ -434,8 +435,47 @@ def login_user(request):
     """
     AJAX request to log in the user.
     """
+    post_data = request.POST.copy()
+
+    # Decrypt form data if it is encrypted
+    if 'data_token' in request.POST:
+        data_token = request.POST.get('data_token')
+
+        try:
+            decoded_data = jwt.decode(data_token,
+                                      settings.EDRAAK_LOGISTRATION_SECRET_KEY,
+                                      algorithms=[settings.EDRAAK_LOGISTRATION_SIGNING_ALGORITHM])
+            post_data.update(decoded_data)
+
+        except jwt.ExpiredSignatureError:
+            err_msg = u"The provided data_token has been expired"
+            AUDIT_LOG.warning(err_msg)
+
+            return JsonResponse({
+                "success": False,
+                "value": err_msg,
+            }, status=400)
+
+        except jwt.DecodeError:
+            err_msg = u"Signature verification failed"
+            AUDIT_LOG.warning(err_msg)
+
+            return JsonResponse({
+                "success": False,
+                "value": err_msg,
+            }, status=400)
+
+        except (jwt.InvalidTokenError, ValueError):
+            err_msg = u"Invalid token"
+            AUDIT_LOG.warning(err_msg)
+
+            return JsonResponse({
+                "success": False,
+                "value": err_msg,
+            }, status=400)
+
     third_party_auth_requested = third_party_auth.is_enabled() and pipeline.running(request)
-    trumped_by_first_party_auth = bool(request.POST.get('email')) or bool(request.POST.get('password'))
+    trumped_by_first_party_auth = bool(post_data.get('email')) or bool(post_data.get('password'))
     was_authenticated_third_party = False
     parent_user = None
     child_user = None
@@ -455,8 +495,8 @@ def login_user(request):
             except AuthFailedError as e:
                 return HttpResponse(e.value, content_type="text/plain", status=403)
 
-        elif 'child_user_id' in request.POST:
-            child_user_id = request.POST['child_user_id']
+        elif 'child_user_id' in post_data:
+            child_user_id = post_data['child_user_id']
             try:
                 child_user = User.objects.get(id=child_user_id)
             except User.DoesNotExist:
@@ -466,7 +506,7 @@ def login_user(request):
                     AUDIT_LOG.warning(u"Child login failed - Unknown child user id: {0}".format(child_user_id))
 
         else:
-            email_user = _get_user_by_email(request)
+            email_user = _get_user_by_email(request, post_data=post_data)
 
         if child_user:
             parent_user = request.user
@@ -481,15 +521,15 @@ def login_user(request):
         possibly_authenticated_user = email_user
 
         if not was_authenticated_third_party:
-            possibly_authenticated_user = _authenticate_first_party(request, email_user)
+            possibly_authenticated_user = _authenticate_first_party(request, post_data, email_user)
             if possibly_authenticated_user and password_policy_compliance.should_enforce_compliance_on_login():
                 # Important: This call must be made AFTER the user was successfully authenticated.
-                _enforce_password_policy_compliance(request, possibly_authenticated_user)
+                _enforce_password_policy_compliance(request, post_data, possibly_authenticated_user)
 
         if possibly_authenticated_user is None or not possibly_authenticated_user.is_active:
             _handle_failed_authentication(email_user)
 
-        _handle_successful_authentication_and_login(possibly_authenticated_user, request)
+        _handle_successful_authentication_and_login(possibly_authenticated_user, request, post_data)
         if parent_user:
             request.session['parent_user'] = json.dumps({
                 'user_id': parent_user.id,
