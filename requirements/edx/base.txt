@@ -248,4 +248,4 @@ arabic-reshaper==2.0.14
 
 # For gcloud
 gcloud==0.18.3
-google-cloud-storage==1.12.0
+google-cloud-storage==1.26.0
