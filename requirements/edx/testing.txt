@@ -171,7 +171,7 @@ help-tokens==1.0.3
 html5lib==0.999
 httplib2==0.11.3
 httpretty==0.9.5
-idna==2.7
+idna==2.9
 incremental==17.5.0       # via twisted
 inflect==0.3.1
 ipaddr==2.1.11
@@ -276,7 +276,7 @@ radon==2.2.0
 redis==2.10.6
 reportlab==3.1.44
 requests-oauthlib==0.6.1
-requests==2.9.1
+requests==2.23.0
 rest-condition==1.0.3
 rfc6266-parser==0.0.5.post2
 rules==1.3
@@ -313,7 +313,7 @@ unicodecsv==0.14.1
 unidecode==1.0.22         # via python-slugify
 unittest2==1.1.0          # via testtools
 uritemplate==3.0.0
-urllib3==1.23
+urllib3==1.25.8           # via requests
 urlobject==2.4.3          # via pa11ycrawler
 user-util==0.1.5
 virtualenv==16.0.0        # via tox
