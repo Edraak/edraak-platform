@@ -462,6 +462,11 @@ div.problem {
         display: inline;
         content: "Answer: ";
 
+        @include rtl {
+          // TODO: (Edraak-hack) fix the issue upstream by moving the text into HTML/Python instead of hardcoding in CSS.
+          content: "الجواب: ";
+        }
+
       }
 
       &:empty {
