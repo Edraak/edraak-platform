@@ -33,7 +33,7 @@ def get_specialization_info(course_id):
 
     info["link"] = urljoin(
         settings.PROGS_URLS.get('ROOT'),
-        settings.PROGS_URLS.get("SPECIALIZATION_INFO", "").format(
+        settings.PROGS_URLS.get('SPECIALIZATION_INFO', '').format(
             slug=info_obj.specialization_slug
         )
     )
