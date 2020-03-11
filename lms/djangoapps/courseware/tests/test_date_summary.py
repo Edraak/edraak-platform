@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Tests for course home page date summary blocks."""
 from datetime import datetime, timedelta
+from unittest import expectedFailure
 
 import ddt
 import waffle
@@ -541,6 +542,7 @@ class TestDateAlerts(SharedModuleStoreTestCase):
             else:
                 self.assertEqual(len(messages), 0)
 
+    @expectedFailure  # Edraak: Details of alert message has been deleted. Also see date_summary.py
     @ddt.data(
         ['2017-07-15 08:00:00', None],
         ['2017-07-15 09:00:00', u'If you have earned a certificate, you will be able to access it 1 week from now.'],
