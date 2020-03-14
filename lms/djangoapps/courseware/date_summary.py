@@ -366,18 +366,7 @@ class CertificateAvailableDate(DateSummary):
         if self.date > self.current_time:
             CourseHomeMessages.register_info_message(
                 request,
-                Text(_(
-                    'If you have earned a certificate, you will be able to access it {time_remaining_string}'
-                    ' from now. You will also be able to view your certificates on your {learner_profile_link}.'
-                )).format(
-                    time_remaining_string=self.time_remaining_string,
-                    learner_profile_link=HTML(
-                        '<a href="{learner_profile_url}">{learner_profile_name}</a>'
-                    ).format(
-                        learner_profile_url=reverse('learner_profile', kwargs={'username': request.user.username}),
-                        learner_profile_name=_('Learner Profile'),
-                    ),
-                ),
+                Text(' '),  # Edraak: Details of alert message has been deleted. Also see test_date_summary.py
                 title=Text(_('We are working on generating course certificates.'))
             )
 
