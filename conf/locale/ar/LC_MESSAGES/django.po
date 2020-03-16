@@ -1,5 +1,5 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/).
+# edX translation file.
 # Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -9,12 +9,13 @@
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
-# Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # Shadi Naif <shadinaif@gmail.com>, 2020
+# Ali Hasan <ahasan@qrf.org>, 2020
+# leena <labualnil@qrf.org>, 2020
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/).
+# edX translation file.
 # Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -27,7 +28,7 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# edX translation file
 # Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -39,9 +40,10 @@
 # Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
+# leena <labualnil@qrf.org>, 2020
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# edX translation file
 # Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -55,7 +57,7 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# edX translation file
 # Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -2578,8 +2580,8 @@ msgstr[0] "صحيحة (لا شيء)"
 msgstr[1] "صحيحة (نقطة واحدة)"
 msgstr[2] "صحيحة (نقطتان)"
 msgstr[3] "صحيحة ({progress} نقاط)"
-msgstr[4] "غير صحيحة ({progress} نقطة)"
-msgstr[5] "غير صحيحة ({progress} نقطة)"
+msgstr[4] "صحيحة ({progress} نقطة)"
+msgstr[5] "صحيحة ({progress} نقطة)"
 
 #: common/lib/xmodule/xmodule/capa_base.py
 #, python-brace-format
@@ -2868,7 +2870,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Pre-Requisite Courses"
-msgstr "المتطلبات السابقة"
+msgstr "المتطلبات الأساسية"
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Pre-Requisite Course key if this course has a pre-requisite course"
@@ -5813,6 +5815,9 @@ msgid ""
 "awarded for various activities. {platform_name} students complete under the "
 "<a href='{tos_url}'>{platform_name} Honor Code</a>."
 msgstr ""
+"يقر {platform_name} بالإنجازات من خلال الشهادات التي يتم منحها لمختلف "
+"الأنشطة التي يكملها الطلاب تحت <a href='{tos_url}'>كود الشرف "
+"{platform_name}</a> ."
 
 #. Translators:  'All rights reserved' is a legal term used in copyrighting to
 #. protect published content
@@ -6952,16 +6957,16 @@ msgstr "بدعم من"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 msgid "COURSE CERTIFICATE"
-msgstr ""
+msgstr "شهادة المساق"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 #, python-brace-format
 msgid "Issued {date}"
-msgstr ""
+msgstr "صدرت {date}"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 msgid "Verify the authenticity of this certificate at"
-msgstr ""
+msgstr "تحقق من صحة هذه الشهادة في"
 
 #: lms/djangoapps/edraak_certificates/generator.py
 msgid "CERTIFICATE OF COMPLETION"
@@ -21594,7 +21599,7 @@ msgstr "تكبير جميع الأقسام"
 
 #: openedx/features/course_experience/templates/course_experience/course-outline-fragment.html
 msgid "Prerequisite: "
-msgstr "متطلب سابق:"
+msgstr "متطلب أساسي:"
 
 #: openedx/features/course_experience/templates/course_experience/course-outline-fragment.html
 msgid "{subsection_format} due {{date}}"
