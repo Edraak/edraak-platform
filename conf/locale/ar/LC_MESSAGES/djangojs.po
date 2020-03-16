@@ -1,5 +1,5 @@
 # #-#-#-#-#  djangojs-partial.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/).
+# edX translation file.
 # Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -13,7 +13,7 @@
 # Omar Al-Ithawi <i@omardo.com>, 2020
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/).
+# edX translation file.
 # Copyright (C) 2020 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -27,7 +27,7 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  underscore.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# edX translation file
 # Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.
@@ -41,7 +41,7 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 #
 # #-#-#-#-#  underscore-studio.po (0.1a)  #-#-#-#-#
-# edX community translations have been downloaded from Arabic (https://www.transifex.com/edraak/teams/27178/ar/)
+# edX translation file
 # Copyright (C) 2020 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # EdX Team <info@edx.org>, 2020.

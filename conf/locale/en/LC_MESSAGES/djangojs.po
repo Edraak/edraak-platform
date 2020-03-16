@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-11 09:32+0000\n"
-"PO-Revision-Date: 2020-02-11 09:32:37.632453\n"
+"POT-Creation-Date: 2020-03-16 09:40+0000\n"
+"PO-Revision-Date: 2020-03-16 09:40:23.680141\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -6378,6 +6378,7 @@ msgstr ""
 
 #: cms/static/js/factories/manage_users.js
 #: cms/static/js/factories/manage_users_lib.js
+#: common/static/common/templates/discussion/post-user-display.underscore
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Staff"
 msgstr ""
@@ -7312,11 +7313,8 @@ msgid "post anonymously to classmates"
 msgstr ""
 
 #: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Community TA)"
-msgstr ""
-
-#: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Staff)"
+#: common/static/common/templates/discussion/thread-list-item.underscore
+msgid "Community TA"
 msgstr ""
 
 #: common/static/common/templates/discussion/profile-thread.underscore
@@ -7378,10 +7376,6 @@ msgstr ""
 
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Following"
-msgstr ""
-
-#: common/static/common/templates/discussion/thread-list-item.underscore
-msgid "Community TA"
 msgstr ""
 
 #: common/static/common/templates/discussion/thread-list-item.underscore

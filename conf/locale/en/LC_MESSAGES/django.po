@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-11 09:32+0000\n"
-"PO-Revision-Date: 2020-02-11 09:32:37.127086\n"
+"POT-Creation-Date: 2020-03-16 09:40+0000\n"
+"PO-Revision-Date: 2020-03-16 09:40:23.165152\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -5539,19 +5539,6 @@ msgstr ""
 
 #: lms/djangoapps/courseware/date_summary.py
 msgid "Day certificates will become available for passing verified learners."
-msgstr ""
-
-#: lms/djangoapps/courseware/date_summary.py
-#, python-brace-format
-msgid ""
-"If you have earned a certificate, you will be able to access it "
-"{time_remaining_string} from now. You will also be able to view your "
-"certificates on your {learner_profile_link}."
-msgstr ""
-
-#: lms/djangoapps/courseware/date_summary.py
-#: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
-msgid "Learner Profile"
 msgstr ""
 
 #: lms/djangoapps/courseware/date_summary.py
@@ -19520,6 +19507,10 @@ msgstr ""
 #: openedx/features/learner_profile/templates/learner_profile/learner-achievements-fragment.html
 #: themes/edx.org/lms/templates/dashboard.html
 msgid "Explore New Courses"
+msgstr ""
+
+#: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
+msgid "Learner Profile"
 msgstr ""
 
 #: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
