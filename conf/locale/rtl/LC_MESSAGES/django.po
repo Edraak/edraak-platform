@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-11 09:32+0000\n"
-"PO-Revision-Date: 2020-02-11 09:32:37.127086\n"
+"POT-Creation-Date: 2020-03-17 13:44+0000\n"
+"PO-Revision-Date: 2020-03-17 13:44:31.373679\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -6151,22 +6151,6 @@ msgstr "ذثقفهبهذشفث شدشهمشزمث"
 #: lms/djangoapps/courseware/date_summary.py
 msgid "Day certificates will become available for passing verified learners."
 msgstr "يشغ ذثقفهبهذشفثس صهمم زثذخوث شدشهمشزمث بخق حشسسهرل دثقهبهثي مثشقرثقس."
-
-#: lms/djangoapps/courseware/date_summary.py
-#, python-brace-format
-msgid ""
-"If you have earned a certificate, you will be able to access it "
-"{time_remaining_string} from now. You will also be able to view your "
-"certificates on your {learner_profile_link}."
-msgstr ""
-"هب غخع اشدث ثشقرثي ش ذثقفهبهذشفث, غخع صهمم زث شزمث فخ شذذثسس هف "
-"{time_remaining_string} بقخو رخص. غخع صهمم شمسخ زث شزمث فخ دهثص غخعق "
-"ذثقفهبهذشفثس خر غخعق {learner_profile_link}."
-
-#: lms/djangoapps/courseware/date_summary.py
-#: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
-msgid "Learner Profile"
-msgstr "مثشقرثق حقخبهمث"
 
 #: lms/djangoapps/courseware/date_summary.py
 msgid "We are working on generating course certificates."
@@ -21724,6 +21708,10 @@ msgstr "غخع اشدثر'ف ثشقرثي شرغ ذثقفهبهذشفثس غثف
 #: themes/edx.org/lms/templates/dashboard.html
 msgid "Explore New Courses"
 msgstr "ثطحمخقث رثص ذخعقسثس"
+
+#: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
+msgid "Learner Profile"
+msgstr "مثشقرثق حقخبهمث"
 
 #: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
 msgid "View My Records"

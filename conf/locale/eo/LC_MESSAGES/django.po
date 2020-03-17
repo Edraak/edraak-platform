@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-11 09:32+0000\n"
-"PO-Revision-Date: 2020-02-11 09:32:37.127086\n"
+"POT-Creation-Date: 2020-03-17 13:44+0000\n"
+"PO-Revision-Date: 2020-03-17 13:44:31.373679\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -7151,28 +7151,6 @@ msgid "Day certificates will become available for passing verified learners."
 msgstr ""
 "Däý çértïfïçätés wïll ßéçömé äväïläßlé för pässïng vérïfïéd léärnérs. Ⱡ'σяєм"
 " ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
-
-#: lms/djangoapps/courseware/date_summary.py
-#, python-brace-format
-msgid ""
-"If you have earned a certificate, you will be able to access it "
-"{time_remaining_string} from now. You will also be able to view your "
-"certificates on your {learner_profile_link}."
-msgstr ""
-"Ìf ýöü hävé éärnéd ä çértïfïçäté, ýöü wïll ßé äßlé tö äççéss ït "
-"{time_remaining_string} fröm nöw. Ýöü wïll älsö ßé äßlé tö vïéw ýöür "
-"çértïfïçätés ön ýöür {learner_profile_link}. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
-"¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт "
-"∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση "
-"υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє "
-"∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα"
-" ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι"
-" σƒƒι¢ια ∂єѕєяυηт мσłłιт αηιм ι∂ єѕт łαв#"
-
-#: lms/djangoapps/courseware/date_summary.py
-#: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
-msgid "Learner Profile"
-msgstr "Léärnér Pröfïlé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
 
 #: lms/djangoapps/courseware/date_summary.py
 msgid "We are working on generating course certificates."
@@ -24875,6 +24853,10 @@ msgstr ""
 #: themes/edx.org/lms/templates/dashboard.html
 msgid "Explore New Courses"
 msgstr "Éxplöré Néw Çöürsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
+
+#: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
+msgid "Learner Profile"
+msgstr "Léärnér Pröfïlé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
 
 #: openedx/features/learner_profile/templates/learner_profile/learner_profile.html
 msgid "View My Records"
