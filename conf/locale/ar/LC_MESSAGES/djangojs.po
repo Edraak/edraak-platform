@@ -52,14 +52,15 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
+# dima darwish <ddarwish@qrf.org>, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-02 07:45+0000\n"
+"POT-Creation-Date: 2020-03-17 13:36+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
-"Last-Translator: Omar Aldabbas <oaldabbas@qrf.org>, 2019\n"
+"Last-Translator: dima darwish <ddarwish@qrf.org>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -6880,6 +6881,7 @@ msgstr "هل أنت متأكّد من رغبتك في حذف {email} من فري
 
 #: cms/static/js/factories/manage_users.js
 #: cms/static/js/factories/manage_users_lib.js
+#: common/static/common/templates/discussion/post-user-display.underscore
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Staff"
 msgstr "الطاقم"
@@ -7868,12 +7870,9 @@ msgid "post anonymously to classmates"
 msgstr "انشر أمام الزملاء من دون الكشف عن الهوية "
 
 #: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Community TA)"
-msgstr "(مجموعة مساعدي التدريس المتطوِّعين)"
-
-#: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Staff)"
-msgstr "(الطاقم)"
+#: common/static/common/templates/discussion/thread-list-item.underscore
+msgid "Community TA"
+msgstr "مساعد تدريس متطوّع"
 
 #: common/static/common/templates/discussion/profile-thread.underscore
 #: common/static/common/templates/discussion/thread.underscore
@@ -7935,10 +7934,6 @@ msgstr "مُثَبَّت"
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Following"
 msgstr "تحت المتابعة"
-
-#: common/static/common/templates/discussion/thread-list-item.underscore
-msgid "Community TA"
-msgstr "مساعد تدريس متطوّع"
 
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "{unread_comments_count} new"
@@ -11379,7 +11374,7 @@ msgstr "أنواع الامتحان"
 
 #: cms/templates/js/timed-examination-preference-editor.underscore
 msgid "Timed"
-msgstr "موقوت"
+msgstr "محدد بوقت"
 
 #: cms/templates/js/timed-examination-preference-editor.underscore
 msgid ""

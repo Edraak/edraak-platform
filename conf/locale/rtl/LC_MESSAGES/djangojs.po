@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-11 09:32+0000\n"
-"PO-Revision-Date: 2020-02-11 09:32:37.632453\n"
+"POT-Creation-Date: 2020-03-17 13:43+0000\n"
+"PO-Revision-Date: 2020-03-17 13:44:32.070900\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -6748,6 +6748,7 @@ msgstr ""
 
 #: cms/static/js/factories/manage_users.js
 #: cms/static/js/factories/manage_users_lib.js
+#: common/static/common/templates/discussion/post-user-display.underscore
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Staff"
 msgstr "سفشبب"
@@ -7730,12 +7731,9 @@ msgid "post anonymously to classmates"
 msgstr "حخسف شرخرغوخعسمغ فخ ذمشسسوشفثس"
 
 #: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Community TA)"
-msgstr "(ذخووعرهفغ فش)"
-
-#: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Staff)"
-msgstr "(سفشبب)"
+#: common/static/common/templates/discussion/thread-list-item.underscore
+msgid "Community TA"
+msgstr "ذخووعرهفغ فش"
 
 #: common/static/common/templates/discussion/profile-thread.underscore
 #: common/static/common/templates/discussion/thread.underscore
@@ -7797,10 +7795,6 @@ msgstr "حهررثي"
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Following"
 msgstr "بخممخصهرل"
-
-#: common/static/common/templates/discussion/thread-list-item.underscore
-msgid "Community TA"
-msgstr "ذخووعرهفغ فش"
 
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "{unread_comments_count} new"

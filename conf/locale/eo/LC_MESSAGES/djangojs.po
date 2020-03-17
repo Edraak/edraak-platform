@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-11 09:32+0000\n"
-"PO-Revision-Date: 2020-02-11 09:32:37.632453\n"
+"POT-Creation-Date: 2020-03-17 13:43+0000\n"
+"PO-Revision-Date: 2020-03-17 13:44:32.070900\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -7520,6 +7520,7 @@ msgstr ""
 
 #: cms/static/js/factories/manage_users.js
 #: cms/static/js/factories/manage_users_lib.js
+#: common/static/common/templates/discussion/post-user-display.underscore
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Staff"
 msgstr "Stäff Ⱡ'σяєм ιρѕ#"
@@ -8642,12 +8643,9 @@ msgid "post anonymously to classmates"
 msgstr "pöst änönýmöüslý tö çlässmätés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢т#"
 
 #: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Community TA)"
-msgstr "(Çömmünïtý TÀ) Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
-
-#: common/static/common/templates/discussion/post-user-display.underscore
-msgid "(Staff)"
-msgstr "(Stäff) Ⱡ'σяєм ιρѕυм #"
+#: common/static/common/templates/discussion/thread-list-item.underscore
+msgid "Community TA"
+msgstr "Çömmünïtý TÀ Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
 
 #: common/static/common/templates/discussion/profile-thread.underscore
 #: common/static/common/templates/discussion/thread.underscore
@@ -8709,10 +8707,6 @@ msgstr "Pïnnéd Ⱡ'σяєм ιρѕυ#"
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Following"
 msgstr "Föllöwïng Ⱡ'σяєм ιρѕυм ∂σł#"
-
-#: common/static/common/templates/discussion/thread-list-item.underscore
-msgid "Community TA"
-msgstr "Çömmünïtý TÀ Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
 
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "{unread_comments_count} new"
