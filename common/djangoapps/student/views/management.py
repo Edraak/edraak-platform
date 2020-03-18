@@ -20,7 +20,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.auth.views import password_reset_confirm
 from django.contrib.sites.models import Site
-from django.core import mail
 from django.urls import reverse
 from django.core.validators import ValidationError, validate_email
 from django.db import transaction
@@ -55,8 +54,6 @@ import openedx.core.djangoapps.external_auth.views
 import third_party_auth
 import track.views
 from course_modes.models import CourseMode
-from edx_ace import ace
-from edx_ace.recipient import Recipient
 from edxmako.shortcuts import render_to_response, render_to_string, marketing_link
 from entitlements.models import CourseEntitlement
 from openedx.core.djangoapps import monitoring_utils
@@ -90,7 +87,7 @@ from student.helpers import (
     generate_activation_email_context,
     get_next_url_for_login_page
 )
-from student.message_types import AccountActivation, EmailChange, EmailChangeConfirmation, RecoveryEmailCreate
+from student.message_types import AccountActivation, EmailChange, EmailChangeConfirmation
 from student.models import (
     CourseEnrollment,
     PasswordHistory,
