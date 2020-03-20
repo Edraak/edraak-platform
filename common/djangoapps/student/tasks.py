@@ -37,11 +37,9 @@ def send_activation_email(self, msg_string, from_address=None):
 
     site = Site.objects.get_current()
     user = User.objects.get(username=msg.recipient.username)
-
     with emulate_http_request(site=site, user=user):
         try:
             ace.send(msg)
-
             # Log that the Activation Email has been sent to user without an exception
             log.info("Activation Email has been sent to User {user_email}".format(
                 user_email=dest_addr
