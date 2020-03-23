@@ -189,7 +189,7 @@ class LoginWithAccessTokenView(APIView):
         if not hasattr(request.user, 'backend'):
             request.user.backend = self._get_path_of_arbitrary_backend_for_user(request.user)
 
-        if not self._is_grant_password(request.auth):
+        if False and not self._is_grant_password(request.auth): # Disable this check for edraak social login
             raise AuthenticationFailed({
                 u'error_code': u'non_supported_token',
                 u'developer_message': u'Only support DOT type access token with grant type password. '
