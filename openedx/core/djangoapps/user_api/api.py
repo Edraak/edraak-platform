@@ -188,6 +188,7 @@ class RegistrationFormFactory(object):
         "goals",
         "honor_code",
         "terms_of_service",
+        "marketing_consent",
         "profession",
         "specialty",
     ]
@@ -899,6 +900,28 @@ class RegistrationFormFactory(object):
             error_messages={
                 "required": error_msg
             },
+        )
+
+    def _add_marketing_consent_field(self, form_desc, required=False):
+        """Add a marketing email consent field to a form description.
+        Arguments:
+            form_desc: A form description
+        Keyword Arguments:
+            required (bool): Whether this field is required; defaults to True
+        """
+
+        label = Text(_(
+            u"I agree to receiving emails from Edraak team about product updates, recommended courses for me, and news"
+        ))
+
+        field_type = 'checkbox'
+
+        form_desc.add_field(
+            "marketing_consent",
+            label=label,
+            field_type=field_type,
+            default=False,
+            required=required
         )
 
     def _apply_third_party_auth_overrides(self, request, form_desc):
