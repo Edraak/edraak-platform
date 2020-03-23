@@ -2583,6 +2583,7 @@ REGISTRATION_EXTRA_FIELDS = {
     'terms_of_service': 'hidden',
     'city': 'hidden',
     'country': 'hidden',
+    'marketing_consent': 'optional'
 }
 
 REGISTRATION_FIELD_ORDER = [
@@ -2603,6 +2604,7 @@ REGISTRATION_FIELD_ORDER = [
     "title",
     "mailing_address",
     "goals",
+    "marketing_consent",
     "honor_code",
     "terms_of_service",
 ]
