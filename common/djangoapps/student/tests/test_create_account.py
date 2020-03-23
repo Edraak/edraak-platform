@@ -30,6 +30,7 @@ from student.views import REGISTRATION_AFFILIATE_ID, REGISTRATION_UTM_CREATED_AT
     create_account, skip_activation_email
 from student.tests.factories import UserFactory
 from third_party_auth.tests import factories as third_party_auth_factory
+from edraak_marketing_email.models import UnsubscribedUser
 
 TEST_CS_URL = 'https://comments.service.test:123/'
 
@@ -787,6 +788,30 @@ class TestCreateAccountValidation(TestCase):
         # True
         params["terms_of_service"] = "tRUe"
         self.assert_success(params)
+
+    def test_marketing_consent(self):
+        params = dict(self.minimal_params)
+
+        params["marketing_consent"] = "true"
+        self.assert_success(params)
+        user1 = User.objects.get(email=params['email'])
+        self.assertTrue(user1)
+
+        with self.assertRaises(UnsubscribedUser.DoesNotExist):
+            UnsubscribedUser.objects.get(user=user1)
+
+        params["username"] = "another_test_username"
+        params["email"] = "another_test_email@example.com"
+        params["marketing_consent"] = "false"
+
+        self.assert_success(params)
+
+        user2 = User.objects.get(email=params['email'])
+        self.assertTrue(user2)
+
+        user_unsubscribed = UnsubscribedUser.objects.filter(user=user2).exists()
+
+        self.assertTrue(user_unsubscribed)
 
     @ddt.data(
         ("level_of_education", 1, "A level of education is required"),
