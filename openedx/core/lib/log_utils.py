@@ -3,6 +3,8 @@ Helper functions for logging.
 """
 import logging
 
+from django.utils.encoding import force_text
+
 log = logging.getLogger(__name__)
 
 
@@ -30,7 +32,7 @@ def audit_log(name, **kwargs):
     """
     # Joins sorted keyword argument keys and values with an "=", wraps each value
     # in quotes, and separates each pair with a comma and a space.
-    payload = u', '.join(['{k}="{v}"'.format(k=k, v=v) for k, v in sorted(kwargs.items())])
+    payload = u', '.join([u'{k}="{v}"'.format(k=k, v=force_text(v, errors='replace')) for k, v in sorted(kwargs.items())])
     message = u'{name}: {payload}'.format(name=name, payload=payload)
 
     log.info(message)
