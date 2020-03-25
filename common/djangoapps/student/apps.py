@@ -23,3 +23,7 @@ class StudentConfig(AppConfig):
         from django.contrib.auth.models import User
         from .signals.receivers import on_user_updated
         pre_save.connect(on_user_updated, sender=User)
+
+        from ratelimitbackend.backends import RateLimitMixin
+        RateLimitMixin.requests = 10000  # Edraak hack: Disable ratelimit
+        RateLimitMixin.ratelimit_rate = '10000/m'  # Edraak hack: Disable ratelimit
