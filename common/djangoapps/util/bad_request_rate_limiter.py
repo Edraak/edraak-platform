@@ -2,10 +2,15 @@
 A utility class which wraps the RateLimitMixin 3rd party class to do bad request counting
 which can be used for rate limiting
 """
-from edraak_ratelimit.backends import EdraakRateLimitMixin
+from ratelimitbackend.backends import RateLimitMixin
+from django.conf import settings
+
+if settings.FEATURES.get('EDRAAK_RATELIMIT_APP', False):
+    from edraak_ratelimit.backends import EdraakRateLimitMixin
+    RateLimitMixin = EdraakRateLimitMixin
 
 
-class BadRequestRateLimiter(EdraakRateLimitMixin):
+class BadRequestRateLimiter(RateLimitMixin):
     """
     Use the 3rd party RateLimitMixin to help do rate limiting on the Password Reset flows
     """
