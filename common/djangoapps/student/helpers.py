@@ -16,6 +16,7 @@ from django.contrib.auth import load_backend
 from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from django.utils import http
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
 from oauth2_provider.models import AccessToken as dot_access_token
 from oauth2_provider.models import RefreshToken as dot_refresh_token
@@ -341,7 +342,11 @@ def get_next_url_for_progs_login_page(request, initial_mode):
     auth_url = get_progs_url(initial_mode)
 
     if params:
-        redirect_to = '{}?{}'.format(auth_url, urllib.urlencode(params))
+        encoded_params = [
+            (key, force_text(value).encode('utf-8'))
+            for key, value in params
+        ]
+        redirect_to = '{}?{}'.format(auth_url, urllib.urlencode(encoded_params))
     else:
         redirect_to = auth_url
 
