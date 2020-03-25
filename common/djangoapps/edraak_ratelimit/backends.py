@@ -19,7 +19,7 @@ class EdraakRateLimitMixin(RateLimitMixin):
 
     # Edraak (ratelimit): We're overriding the values to avoid patching ratelimit pip package itself.
     minutes = 5
-    requests = 10000  # Make the limit a little bit more permissive
+    requests = 1000  # Make the limit a little bit more permissive
 
     def db_log_failed_attempt(self, request, username=None):
         """
