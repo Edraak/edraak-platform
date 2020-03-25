@@ -49,7 +49,7 @@ class SettingsTest(TestCase):
         self.assertEquals(EdraakRateLimitModelBackend.minutes, 5,
                           msg='Keep the same edX tests, and avoid over-querying the cache')
 
-        self.assertEquals(EdraakRateLimitModelBackend.requests, 1000,  # Edraak hack: make it 1000 to make sure the feature actually works.
+        self.assertEquals(EdraakRateLimitModelBackend.requests, 100,
                           msg='Increase the requests limit per 5 minutes, to avoid locking university students')
 
 
