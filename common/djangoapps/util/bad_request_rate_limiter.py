@@ -22,7 +22,7 @@ class BadRequestRateLimiter(RateLimitMixin):
         counts = self.get_counters(request)
         is_exceeded = sum(counts.values()) >= self.requests
 
-        if is_exceeded:
+        if is_exceeded and settings.FEATURES.get('EDRAAK_RATELIMIT_APP', False):
             self.db_log_failed_attempt(request)
 
         return is_exceeded
