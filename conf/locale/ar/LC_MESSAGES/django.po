@@ -39,8 +39,8 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
-# leena <labualnil@qrf.org>, 2020
 # Ali Hasan <ahasan@qrf.org>, 2020
+# leena <labualnil@qrf.org>, 2020
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -18043,7 +18043,7 @@ msgstr "رشِّح المواضيع"
 
 #: lms/templates/discussion/_filter_dropdown.html
 msgid "All Discussions"
-msgstr "كافّة المانقشات"
+msgstr "كافّة المناقشات"
 
 #: lms/templates/discussion/_filter_dropdown.html
 msgid "Posts I'm Following"
