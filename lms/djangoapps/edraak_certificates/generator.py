@@ -109,8 +109,8 @@ class EdraakCertificate(object):
             course, preview_mode)
         self.cert = self._get_user_certificate(
             user, course, preview_mode=preview_mode)
-
-        self.course_name = self.certificate_data.get('course_title')
+        course_title_from_cert = self.certificate_data.get('course_title')
+        self.course_name = course_title_from_cert if course_title_from_cert else course.display_name
         self.course_desc = course_desc
         self.organizations = organization_api.get_course_organizations(
             course_id=self.course_id)
