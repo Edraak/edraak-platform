@@ -1747,9 +1747,7 @@ class RegistrationCodeRedemptionCourseEnrollment(SharedModuleStoreTestCase):
         cache.clear()
         url = reverse('register_code_redemption', args=['asdasd'])
         self.login_user()
-
-        # Edraak (ratelimit): Improve edX tests to accept Edraak customizations
-        for i in xrange(100):  # pylint: disable=unused-variable
+        for i in xrange(30):  # pylint: disable=unused-variable
             response = self.client.post(url)
             self.assertEquals(response.status_code, 404)
 
@@ -1773,9 +1771,7 @@ class RegistrationCodeRedemptionCourseEnrollment(SharedModuleStoreTestCase):
         cache.clear()
         url = reverse('register_code_redemption', args=['asdasd'])
         self.login_user()
-
-        # Edraak (ratelimit): Improve edX tests to accept Edraak customizations
-        for i in xrange(100):  # pylint: disable=unused-variable
+        for i in xrange(30):  # pylint: disable=unused-variable
             response = self.client.get(url)
             self.assertEquals(response.status_code, 404)
 

@@ -147,8 +147,7 @@ class UpdateExampleCertificateViewTest(CacheIsolationTestCase):
 
         # Exceed the rate limit for invalid requests
         # (simulate a DDOS with invalid keys)
-        # Edraak (ratelimit): Improve edX tests to accept Edraak customizations
-        for _ in range(120):
+        for _ in range(100):
             response = self.client.post(self.url, data=payload)
             if response.status_code == 403:
                 break
