@@ -313,6 +313,9 @@ SECRET_KEY = '85920908f28904ed733fe576320db18cabd7b6cd'
 
 ################ Edraak Apps ###############
 
+# Disable rate limit override in tests
+EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE = None
+
 # Keep in sync with {cms,lms}/envs/{test,aws}.py
 INSTALLED_APPS += ('edraak_ratelimit',)
 # Unlike the production apps, the AUTHENTICATION_BACKENDS is only enabled on per-test-case basis to avoid
