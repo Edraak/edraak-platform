@@ -2400,6 +2400,10 @@ ENTITLEMENT_EXPIRED_ALERT_PERIOD = 90
 ################ Edraak Apps ###############
 PROGS_URLS = {}
 
+# Override default rate limit value in Student Configuration (StudentConfig)
+# This value must be set to (None) when (EDRAAK_RATELIMIT_APP) feature is defined
+EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE = 10000
+
 ############################# SOCIAL MEDIA SHARING #############################
 # Social Media Sharing on Student Dashboard
 SOCIAL_SHARING_SETTINGS = {

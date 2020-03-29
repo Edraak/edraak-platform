@@ -103,8 +103,7 @@ class ResetPasswordTests(EventTestMixin, CacheIsolationTestCase):
         """
         cache.clear()
 
-        # Edraak (ratelimit): Improve edX tests to accept Edraak customizations
-        for i in xrange(100):
+        for i in xrange(30):
             good_req = self.request_factory.post('/password_reset/', {
                 'email': 'thisdoesnotexist{0}@foo.com'.format(i)
             })

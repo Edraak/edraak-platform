@@ -4,6 +4,7 @@ Configuration for the ``student`` Django application.
 from __future__ import absolute_import
 
 from django.apps import AppConfig
+from django.conf import settings
 from django.contrib.auth.signals import user_logged_in
 from django.db.models.signals import pre_save
 
@@ -24,6 +25,11 @@ class StudentConfig(AppConfig):
         from .signals.receivers import on_user_updated
         pre_save.connect(on_user_updated, sender=User)
 
-        from ratelimitbackend.backends import RateLimitMixin
-        RateLimitMixin.requests = 10000  # Edraak hack: Disable ratelimit
-        RateLimitMixin.ratelimit_rate = '10000/m'  # Edraak hack: Disable ratelimit
+        rate_limit_override = settings.EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE
+        if rate_limit_override:
+            if settings.FEATURES.get('EDRAAK_RATELIMIT_APP'):
+                raise ValueError('Cannot activate (EDRAAK_RATELIMIT_APP) and override default limit at the same time!')
+
+            from ratelimitbackend.backends import RateLimitMixin
+            RateLimitMixin.requests = rate_limit_override
+            RateLimitMixin.ratelimit_rate = '{rate_limit_override}/m'.format(rate_limit_override=rate_limit_override)

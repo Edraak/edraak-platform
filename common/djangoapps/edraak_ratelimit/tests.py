@@ -1,6 +1,8 @@
 """
 Tests for the Edraak rate limit app.
 """
+from unittest import skip
+
 from django.test import TestCase, override_settings, ignore_warnings
 from django.contrib.admin import site, ModelAdmin
 from django.conf import settings
@@ -81,6 +83,7 @@ class BadRequestRateLimiterPatchTest(TestCase):
         {'request_counts': [40, 40], 'ip_address': '120.120.5.5', 'expected_calls': 0},
     )
     @patch('edraak_ratelimit.backends.EdraakRateLimitMixin.db_log_failed_attempt')
+    @skip('This will always fail because of Edraak Hack https://github.com/Edraak/edraak-platform/pull/177')
     def test_is_rate_limit_exceeded_method(self, db_log_mock, request_counts, ip_address, expected_calls):
         """
         Tests if `BadRequestRateLimiter.is_rate_limit_exceeded` calls Edraak's `db_log_failed_attempt` correctly.

@@ -576,6 +576,9 @@ FEATURES['ENABLE_FINANCIAL_ASSISTANCE_FORM'] = True
 
 ################ Edraak Apps ###############
 
+# Disable rate limit override in tests
+EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE = None
+
 # Keep in sync with {cms,lms}/envs/{test,aws}.py
 INSTALLED_APPS += ('edraak_ratelimit',)
 # Unlike the production apps, the AUTHENTICATION_BACKENDS is only enabled on per-test-case basis to avoid
