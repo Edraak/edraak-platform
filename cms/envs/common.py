@@ -1178,6 +1178,10 @@ COURSES_WITH_UNSAFE_CODE = []
 ################ Edraak Apps ###############
 PROGS_URLS = {}
 
+# Override default rate limit value in Student Configuration (StudentConfig)
+# This value must be set to (None) when (EDRAAK_RATELIMIT_APP) feature is defined
+EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE = 10000
+
 FEATURES['ENABLE_EDRAAK_LOGISTRATION'] = False  # Disabled in tests by default
 
 ############################## EVENT TRACKING #################################
