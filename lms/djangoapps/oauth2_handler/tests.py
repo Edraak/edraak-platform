@@ -1,5 +1,6 @@
 # pylint: disable=missing-docstring
 import mock
+from unittest import skip
 from django.core.cache import cache
 from django.test.utils import override_settings
 # Will also run default tests for IDTokens and UserInfo
@@ -138,12 +139,22 @@ class IDTokenTest(BaseTestMixin, IDTokenTestCase):
         _scopes, claims = self.get_id_token_values('openid profile permissions')
         self.assertTrue(claims['administrator'])
 
+    @skip('Edraak-specific: Temporarily removing the RatelimitMixin mixin to avoid Ratelimit-related issues.')
     def test_rate_limit_token(self):
         with mock.patch('openedx.core.djangoapps.oauth_dispatch.views.AccessTokenView.ratelimit_rate', '1/m'):
             response = self.get_access_token_response('openid profile permissions')
             self.assertEqual(response.status_code, 200)
             response = self.get_access_token_response('openid profile permissions')
             self.assertEqual(response.status_code, 403)
+
+    def test_no_ratelimit(self):
+        """
+        Edraak-specific: Temporarily removing the RatelimitMixin mixin to avoid Ratelimit-related issues.
+        """
+        # Inline imports to make it easier to clean the test later.
+        from ratelimit.mixins import RatelimitMixin
+        from openedx.core.djangoapps.oauth_dispatch.views import AccessTokenView
+        assert not issubclass(AccessTokenView, RatelimitMixin)
 
 
 class UserInfoTest(BaseTestMixin, UserInfoTestCase):
