@@ -802,7 +802,9 @@ class TestCreateAccountValidation(TestCase):
 
         params["username"] = "another_test_username"
         params["email"] = "another_test_email@example.com"
-        params["marketing_consent"] = "false"
+
+        if "marketing_consent" in params:
+            del params["marketing_consent"]
 
         self.assert_success(params)
 
@@ -810,7 +812,6 @@ class TestCreateAccountValidation(TestCase):
         self.assertTrue(user2)
 
         user_unsubscribed = UnsubscribedUser.objects.filter(user=user2).exists()
-
         self.assertTrue(user_unsubscribed)
 
     @ddt.data(
