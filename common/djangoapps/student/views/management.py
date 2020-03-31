@@ -845,8 +845,8 @@ def create_account_with_params(request, params):
     if new_user is not None:
         AUDIT_LOG.info(u"Login success on new account creation - {0}".format(new_user.username))
 
-    subscribe_to_marketing_emails = params.get('marketing_consent', False)
-    if not subscribe_to_marketing_emails:
+    marketing_consent = params.get('marketing_consent', False)
+    if not marketing_consent:
         unsubscribe_from_marketing_emails(new_user)
 
     return new_user
