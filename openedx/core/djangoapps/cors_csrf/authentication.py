@@ -9,6 +9,8 @@ from .helpers import is_cross_domain_request_allowed, skip_cross_domain_referer_
 
 
 class SessionAuthenticationCrossDomainCsrf(SessionAuthenticationAllowInactiveUser):
+    # TODO: Edraak-specific:
+    #   At Edraak we want to allow inactive users full access
     """
     Session authentication that skips the referer check over secure connections.
 
