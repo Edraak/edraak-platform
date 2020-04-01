@@ -87,7 +87,8 @@ class _DispatchingView(View):
             return request.POST.get('client_id')
 
 
-class AccessTokenView(RatelimitMixin, _DispatchingView):
+# TODO: Edraak-specific: Temporarily removing the RatelimitMixin mixin to avoid Ratelimit-related issues.
+class AccessTokenView(_DispatchingView):
     """
     Handle access token requests.
     """
