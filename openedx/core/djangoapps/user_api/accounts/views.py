@@ -22,7 +22,6 @@ from enterprise.models import EnterpriseCourseEnrollment, EnterpriseCustomerUser
 from integrated_channels.degreed.models import DegreedLearnerDataTransmissionAudit
 from integrated_channels.sap_success_factors.models import SapSuccessFactorsLearnerDataTransmissionAudit
 from rest_framework import permissions, status
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -409,7 +408,7 @@ class DeactivateLogoutView(APIView):
     -  Log the user out
     - Create a row in the retirement table for that user
     """
-    authentication_classes = (SessionAuthentication, JwtAuthentication, )
+    authentication_classes = (SessionAuthenticationAllowInactiveUser, JwtAuthentication, )
     permission_classes = (permissions.IsAuthenticated, )
 
     def post(self, request):
