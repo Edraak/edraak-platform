@@ -27,7 +27,6 @@ from .utils import generate_certificate
 from .utils import is_student_pass, is_certificate_allowed
 from courseware.access import has_access
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -56,9 +55,14 @@ def issue(request, course_id):
         # If the course is certifiable and the user has passed it.
         if is_certificate_allowed(student, course) and \
                 is_student_pass(student, course_id):
+
+            forced_grade = None
+            if has_access(student, 'staff', course):
+                forced_grade = "Pass"
+
             # generate the certificate
             generate_user_certificates(student, course.id,
-                                       course=course)
+                                       course=course, forced_grade=forced_grade)
             template = 'edraak_certificates/issue.html'
 
     elif certificate_status == CertificateStatuses.downloadable:
