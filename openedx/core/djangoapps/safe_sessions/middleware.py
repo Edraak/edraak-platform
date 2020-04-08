@@ -142,6 +142,9 @@ class SafeCookieData(object):
         safe_cookie_string.
         """
         try:
+            # TODO: Remove this hack on Juniper when the LMS is on Python 3
+            safe_cookie_string = safe_cookie_string.strip('"')  # Hack to make it work with Python 3 on Progs/Mktg
+
             raw_cookie_components = safe_cookie_string.split(cls.SEPARATOR)
             safe_cookie_data = SafeCookieData(*raw_cookie_components)
         except TypeError:
@@ -425,6 +428,8 @@ class SafeSessionMiddleware(SessionMiddleware):
         )
 
         # Update the cookie's value with the safe_cookie_data.
+        # Edraak: When encoded to the actual session header Python 2 SimpleCookie adds an extra `"`
+        #         around the `safe_cookie_data`. We hacked it in Progs and Marketing to solve the issue.
         cookies[settings.SESSION_COOKIE_NAME] = unicode(safe_cookie_data)
 
 
