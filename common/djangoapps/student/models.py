@@ -2344,6 +2344,28 @@ def get_user_by_username_or_email(username_or_email):
     return user
 
 
+def get_user_by_username(username):
+    """
+    Return a User object by looking up a user against a query.
+
+    Edraak: This is a copy of `get_user_by_username_or_email` used to fix
+            an error in our use case because we allow username to look
+            like an email.
+
+    Raises:
+        User.DoesNotExist if no user object can be found, the user was
+        retired, or the user is in the process of being retired.
+
+        MultipleObjectsReturned if more than one user has same username.
+    """
+    # there should be one user with either username or email equal to username_or_email
+    user = User.objects.get(username=username)
+    UserRetirementRequest = apps.get_model('user_api', 'UserRetirementRequest')
+    if UserRetirementRequest.has_user_requested_retirement(user):
+        raise User.DoesNotExist
+    return user
+
+
 def get_user(email):
     user = User.objects.get(email=email)
     u_prof = UserProfile.objects.get(user=user)

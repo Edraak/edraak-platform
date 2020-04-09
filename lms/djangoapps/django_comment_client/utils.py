@@ -23,7 +23,7 @@ from django_comment_common.utils import get_course_discussion_settings
 from openedx.core.djangoapps.content.course_structures.models import CourseStructure
 from openedx.core.djangoapps.course_groups.cohorts import get_cohort_id, get_cohort_names, is_course_cohorted
 from openedx.core.djangoapps.request_cache.middleware import request_cached
-from student.models import get_user_by_username_or_email
+from student.models import get_user_by_username
 from student.roles import GlobalStaff
 from xmodule.modulestore.django import modulestore
 from xmodule.partitions.partitions import ENROLLMENT_TRACK_PARTITION_ID
@@ -593,7 +593,10 @@ def get_user_group_ids(course_id, content, user=None):
     if course_id is not None:
         if content.get('username'):
             try:
-                content_user = get_user_by_username_or_email(content.get('username'))
+                # Edraak: We're using `get_user_by_username` instead of
+                #         `get_user_by_username_or_email` used to fix an error in our
+                #         use case because we allow a username to look like an email.
+                content_user = get_user_by_username(content.get('username'))
                 content_user_group_id = get_group_id_for_user_from_cache(content_user, course_id)
             except User.DoesNotExist:
                 content_user_group_id = None
