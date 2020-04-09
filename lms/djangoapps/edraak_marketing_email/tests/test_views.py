@@ -21,12 +21,13 @@ class TestUnsubscribeUserAPIView(APITestCase):
         user = UserFactory()
 
         data = {
-            'username': user.username
+            'email': user.email,
+            'event': 'unsubscribe'
         }
         resp = self.client.post(self.url, data, format='json')
 
         # Expect that the request gets through successfully,
-        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UnsubscribedUser.objects.count(), 1)
 
     def test_already_unsubscribed_user(self, *args):  # pylint: disable=unused-argument
@@ -34,12 +35,13 @@ class TestUnsubscribeUserAPIView(APITestCase):
         unsubscribe_from_marketing_emails(user)
 
         data = {
-            'username': user.username
+            'email': user.email,
+            'event': 'unsubscribe'
         }
         resp = self.client.post(self.url, data, format='json')
 
         # Expect that the request gets through successfully,
-        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UnsubscribedUser.objects.count(), 1)
 
 
@@ -55,12 +57,12 @@ class TestSubscribeUserAPIView(APITestCase):
         user = UserFactory()
 
         data = {
-            'username': user.username
+            'email': user.email
         }
         resp = self.client.post(self.url, data, format='json')
 
         # Expect that the request gets through successfully,
-        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UnsubscribedUser.objects.count(), 0)
 
     def test_already_subscribed_user(self, *args):  # pylint: disable=unused-argument
@@ -68,10 +70,10 @@ class TestSubscribeUserAPIView(APITestCase):
         subscribe_to_marketing_emails(user)
 
         data = {
-            'username': user.username
+            'email': user.email
         }
         resp = self.client.post(self.url, data, format='json')
 
         # Expect that the request gets through successfully,
-        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UnsubscribedUser.objects.count(), 0)
