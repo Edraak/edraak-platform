@@ -70,6 +70,7 @@ from track import contexts
 from util.milestones_helpers import is_entrance_exams_enabled
 from util.model_utils import emit_field_changed_events, get_changed_fields_dict
 from util.query import use_read_replica_if_available
+from edraak_marketing_email.models import UnsubscribedUser
 
 log = logging.getLogger(__name__)
 AUDIT_LOG = logging.getLogger("audit")
@@ -774,6 +775,17 @@ class Registration(models.Model):
                 }
             ]
             analytics.identify(*identity_args)
+
+        if hasattr(settings, "EDRAAK_SENDINBLUE_API_KEY") and settings.EDRAAK_SENDINBLUE_API_KEY:
+            from edraak_sendinblue.api_client import create_contact
+            blacklisted = not UnsubscribedUser.is_user_subscribed(user=self.user)
+
+            create_contact(
+                name=self.user.profile.name,
+                email=self.user.email,
+                blacklisted=blacklisted,
+                username=self.user.username
+            )
 
 
 class PendingNameChange(DeletableByUserValue, models.Model):

@@ -17,11 +17,16 @@ class UnsubscribeUserAPIView(APIView):
     permission_classes = []
 
     def post(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        user = get_object_or_404(User, username=username)
+        email = request.data.get('email')
+        event = request.data.get('event')
 
-        unsubscribe_from_marketing_emails(user)
-        return Response(data={}, status=status.HTTP_200_OK)
+        if event == 'unsubscribe':
+            user = get_object_or_404(User, email=email)
+            unsubscribe_from_marketing_emails(user)
+
+            return Response(data={}, status=status.HTTP_201_CREATED)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class SubscribeUserAPIView(APIView):
@@ -31,9 +36,10 @@ class SubscribeUserAPIView(APIView):
     authentication_classes = []
     permission_classes = []
 
+
     def post(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        user = get_object_or_404(User, username=username)
+        email = request.data.get('email')
+        user = get_object_or_404(User, email=email)
 
         subscribe_to_marketing_emails(user)
-        return Response(data={}, status=status.HTTP_200_OK)
+        return Response(data={}, status=status.HTTP_201_CREATED)

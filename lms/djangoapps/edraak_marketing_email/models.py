@@ -13,3 +13,10 @@ class UnsubscribedUser(models.Model):
         app_label = "edraak_marketing_email"
 
     user = models.OneToOneField(get_user_model(), db_index=True, on_delete=models.CASCADE)
+
+    @classmethod
+    def is_user_subscribed(cls, user):
+        if cls.objects.filter(user=user).exists():
+            return False
+
+        return True
