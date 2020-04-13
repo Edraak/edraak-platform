@@ -2,12 +2,48 @@
 
 from .devstack import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
-# Docker does not support the syslog socket at /dev/log. Rely on the console.
-LOGGING['handlers']['local'] = LOGGING['handlers']['tracking'] = {
-    'class': 'logging.NullHandler',
-}
 
-LOGGING['loggers']['tracking']['handlers'] = ['console']
+def skip_static_requests(record):
+
+    if record.msg.startswith('GET /static/'):
+        return False
+    return True
+
+
+LOGGING = {
+    'loggers': {
+        '': {
+            'level': 'DEBUG',
+            'propagate': False,
+            'handlers': ['console']},
+        'tracking': {
+            'level': 'ERROR',
+            'propagate': False,
+            'handlers': ['console']},
+        'django.request': {
+            'level': 'DEBUG',
+            'propagate': True,
+            'handlers': ['console']},
+        'requests.packages.urllib3': {
+            'level': 'DEBUG',
+            'handlers': ['console']}},
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'filters': ['skip_static_requests'],
+            'class': 'logging.StreamHandler',
+        'level': 'INFO'},
+    },
+'version': 1,
+    'filters': {
+        # use Django's built in CallbackFilter to point to your filter
+        'skip_static_requests': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': skip_static_requests
+        }
+    },
+
+}
 
 # LMS_BASE = 'edx.devstack.lms:18000'
 # CMS_BASE = 'edx.devstack.studio:18010'

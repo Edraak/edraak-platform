@@ -65,8 +65,10 @@ from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import signing
+from django.core.signing import TimestampSigner, b64_encode, JSONSerializer, b64_decode
 from django.http import HttpResponse
 from django.utils.crypto import get_random_string
+from django.utils.encoding import force_bytes
 from six import text_type
 
 from openedx.core.lib.mobile_utils import is_request_from_mobile_app
@@ -170,7 +172,17 @@ class SafeCookieData(object):
         with a usage-specific key derived from key_salt.
         """
         data_to_sign = self._compute_digest(user_id)
-        self.signature = signing.dumps(data_to_sign, salt=self.key_salt)
+
+        def dumps(obj, salt):
+            """
+            Copy of django.core.signing.dumps
+            To add sep="#"
+            """
+            data = JSONSerializer().dumps(obj)
+            base64d = b64_encode(data)
+            return TimestampSigner(None, salt=salt, sep='#').sign(base64d)
+
+        self.signature = dumps(data_to_sign, salt=self.key_salt)
 
     def verify(self, user_id):
         """
@@ -178,8 +190,16 @@ class SafeCookieData(object):
         Successful verification implies this cookie data is fresh
         (not expired) and bound to the given user.
         """
+        def loads(s, salt, max_age=None):
+            """
+            Copy of django.core.signing.loads
+            To add sep="#"
+            """
+            base64d = force_bytes(TimestampSigner(None, salt=salt, sep='#').unsign(s, max_age=max_age))
+            data = b64_decode(base64d)
+            return JSONSerializer().loads(data)
         try:
-            unsigned_data = signing.loads(self.signature, salt=self.key_salt, max_age=settings.SESSION_COOKIE_AGE)
+            unsigned_data = loads(self.signature, salt=self.key_salt, max_age=settings.SESSION_COOKIE_AGE)
             if unsigned_data == self._compute_digest(user_id):
                 return True
             log.error("SafeCookieData '%r' is not bound to user '%s'.", unicode(self), user_id)
