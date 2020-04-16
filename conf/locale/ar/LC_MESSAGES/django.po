@@ -13,6 +13,7 @@
 # Ali Hasan <ahasan@qrf.org>, 2020
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2020
 # Shadi Naif <shadinaif@gmail.com>, 2020
+# Salah Alomari <salomari@qrf.org>, 2020
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -26,6 +27,7 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
+# Salah Alomari <salomari@qrf.org>, 2020
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -41,6 +43,7 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2020
 # leena <labualnil@qrf.org>, 2020
+# Salah Alomari <salomari@qrf.org>, 2020
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -72,7 +75,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-02 10:54+0000\n"
+"POT-Creation-Date: 2020-04-12 14:59+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -358,7 +361,7 @@ msgstr "تهانينا! أنت الآن مسجَّل في المساق {course_n
 
 #: common/djangoapps/course_modes/views.py
 msgid "Enrollment is closed"
-msgstr "انقضى موعِد التسجيل"
+msgstr "انقضى موعِد الانضمام"
 
 #: common/djangoapps/course_modes/views.py
 msgid "Enrollment mode not supported"
@@ -403,8 +406,8 @@ msgid ""
 "That e-mail address doesn't have an associated user account. Are you sure "
 "you've registered?"
 msgstr ""
-"هذا البريد الإلكتروني غير مسجّل لدينا. هل أنت متأكد من أنّك قد سجّلت بهذا "
-"البريد الإلكترونيّ؟"
+"هذا البريد الإلكتروني غير مسجّل لدينا. هل أنت متأكد من أنّك قد أنشأت حسابك "
+"باستخدام هذا البريد الإلكترونيّ؟"
 
 #: common/djangoapps/student/forms.py
 msgid ""
@@ -910,7 +913,7 @@ msgstr "تعذَّر التسجيل"
 
 #: common/djangoapps/student/views/management.py
 msgid "You are not enrolled in this course"
-msgstr "أنت غير مسجَّل في هذا المساق "
+msgstr "أنت غير ملتحق بهذا المساق "
 
 #: common/djangoapps/student/views/management.py
 msgid "Your certificate prevents you from unenrolling from this course"
@@ -2822,7 +2825,7 @@ msgstr "الكُتلة التي تُشير إلى صفحة الويكي لهذ �
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Date that enrollment for this class is opened"
-msgstr "التاريخ الذي يُفتح فيه التسجيل لها الصف"
+msgstr "التاريخ الذي يُفتح فيه الانضمام لهذا الصف"
 
 #: common/lib/xmodule/xmodule/course_module.py
 msgid "Date that enrollment for this class is closed"
@@ -6588,7 +6591,7 @@ msgstr "تسجيل الدخول"
 #: openedx/core/lib/xblock_builtin/xblock_discussion/xblock_discussion/__init__.py
 #: openedx/features/course_experience/views/course_home_messages.py
 msgid "register"
-msgstr "تسجيل"
+msgstr "أنشئ حساب"
 
 #: lms/djangoapps/courseware/views/views.py
 msgid "Your enrollment: Audit track"
@@ -6658,7 +6661,7 @@ msgid ""
 "                             {enroll_link_start}Enroll now{enroll_link_end}."
 msgstr ""
 " يجب ان تقوم بالتسجيل في المساق للاطلاع على محتوى المساق\n"
-" {enroll_link_start}سجل الان {enroll_link_end}."
+" {enroll_link_start}انضم الان{enroll_link_end}."
 
 #: lms/djangoapps/courseware/views/views.py
 #: openedx/features/course_experience/views/course_home_messages.py
@@ -8270,7 +8273,7 @@ msgstr "سنة الميلاد"
 
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
 msgid "Enrollment Date"
-msgstr "تاريخ التسجيل "
+msgstr "تاريخ الانضمام "
 
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
 msgid "Currently Enrolled"
@@ -11655,7 +11658,7 @@ msgstr "مفتاح المساق المقيَّد."
 
 #: openedx/core/djangoapps/embargo/models.py
 msgid "The message to show when a user is blocked from enrollment."
-msgstr "الرسالة الواجب عرضها عندما يُمنَع المستخدم من التسجيل."
+msgstr "الرسالة الواجب عرضها عندما يُمنَع المستخدم من الانضمام للساق."
 
 #: openedx/core/djangoapps/embargo/models.py
 msgid "The message to show when a user is blocked from accessing a course."
@@ -12241,7 +12244,8 @@ msgstr "username@domain.com"
 #: openedx/core/djangoapps/user_api/api.py
 #, python-brace-format
 msgid "The email address you used to register with {platform_name}"
-msgstr "عنوان البريد الإلكتروني الذي استخدمته للتسجيل في {platform_name}"
+msgstr ""
+"عنوان البريد الإلكتروني الذي استخدمته لإنشاء حسابك على {platform_name}"
 
 #. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 #. Translators: This label appears above a field on the login form
@@ -13175,7 +13179,7 @@ msgstr "لم يحدَّد أيُّ دور."
 #: cms/djangoapps/contentstore/views/user.py
 #, python-brace-format
 msgid "User {email} has registered but has not yet activated his/her account."
-msgstr "لقد سجَّل المستخدم {email} ولكنه لم يفعِّل حسابه بعد."
+msgstr "لقد أنشأ المستخدم {email} حسابه ولكنه لم يفعِّله بعد."
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Invalid `role` specified."
@@ -13960,7 +13964,7 @@ msgstr "يوجد حساب موجود بالفعل بعنوان البريد ال
 
 #: lms/templates/enroll_staff.html
 msgid "You should Register before trying to access the Unit"
-msgstr "عليك التسجيل في المنصة قبل أن تستطيع مشاهدة الوحدة."
+msgstr "عليك إنشاء حساب في المنصة قبل أن تستطيع مشاهدة الوحدة."
 
 #: lms/templates/enroll_staff.html lms/templates/courseware/course_about.html
 msgctxt "self"
@@ -14725,7 +14729,7 @@ msgstr "أوافق على {link_start}ميثاق الشرف{link_end} "
 #: themes/edx.org/lms/templates/header/navbar-not-authenticated.html
 #: themes/stanford-style/lms/templates/register-form.html
 msgid "Register"
-msgstr "تسجيل"
+msgstr "أنشئ حساب"
 
 #: lms/templates/register-form.html lms/templates/signup_modal.html
 #: themes/stanford-style/lms/templates/register-form.html
@@ -14765,7 +14769,7 @@ msgstr "المساعدة في التسجيل"
 #: lms/templates/register-sidebar.html
 #: themes/stanford-style/lms/templates/register-sidebar.html
 msgid "Already registered?"
-msgstr "هل أنت مسجَّل مسبقًا؟"
+msgstr "هل لديك حساب؟"
 
 #: lms/templates/register-sidebar.html
 #: themes/stanford-style/lms/templates/register-sidebar.html
@@ -14784,10 +14788,10 @@ msgid ""
 "future free courses. Not ready to take a course just yet? Registering puts "
 "you on our mailing list - we will update you as courses are added."
 msgstr ""
-"يمنحك التسجيل في {platform_name} صلاحية الوصول إلى جميع مساقاتنا المجّانية "
-"الحالية والمستقبلية. ألم تستعدّ بعد للتسجيل في أحد المساقات؟ يضعك التسجيل في"
-" {platform_name}على قائمة مراسلاتنا، بحيث سنبقيك على اطّلاع على المساقات "
-"التي تُضاف."
+"يمنحك حسابك في {platform_name} صلاحية الوصول إلى جميع مساقاتنا المجّانية "
+"الحالية والمستقبلية. ألم تستعدّ بعد للتسجيل في أحد المساقات؟ يضعك الحساب في "
+"{platform_name}على قائمة مراسلاتنا، بحيث سنبقيك على اطّلاع على المساقات التي"
+" تُضاف."
 
 #: lms/templates/register-sidebar.html
 #: themes/stanford-style/lms/templates/register-sidebar.html
@@ -14828,7 +14832,7 @@ msgstr ""
 
 #: lms/templates/register.html
 msgid "Register for {platform_name}"
-msgstr "التسجيل في {platform_name} "
+msgstr "أنشئ حساباً في {platform_name} "
 
 #: lms/templates/register.html
 msgid "Create My {platform_name} Account"
@@ -18466,7 +18470,7 @@ msgstr "(1) أنشئ حسابًا على موقع {site_name}"
 #: lms/templates/emails/business_order_confirmation_email.txt
 msgid ""
 "(2) Once registered, copy the redeem URL and paste it in your web browser."
-msgstr "(2) بعد التسجيل، انسخ رابط الاسترداد وألصقه في متصفّحك."
+msgstr "(2) بعد انشاء الحساب، انسخ رابط الاسترداد وألصقه في متصفّحك."
 
 #: lms/templates/emails/business_order_confirmation_email.txt
 msgid ""
@@ -21461,7 +21465,7 @@ msgstr "يرجى الانتظار"
 
 #: lms/templates/student_account/login_and_register.html
 msgid "Sign in or Register"
-msgstr "ادخُل أو سجِّل"
+msgstr "ادخُل أو أنشئ حساب"
 
 #: lms/templates/support/certificates.html lms/templates/support/index.html
 msgid "Student Support"
@@ -22145,7 +22149,7 @@ msgstr ""
 
 #: themes/stanford-style/lms/templates/register-sidebar.html
 msgid "Need help in registering with {platform_name}?"
-msgstr "هل تحتاج إلى المساعدة على التسجيل في {platform_name}؟"
+msgstr "هل تحتاج إلى المساعدة لإنشاء حسابك في {platform_name}؟"
 
 #: themes/stanford-style/lms/templates/register-sidebar.html
 msgid ""

@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-02 11:44+0000\n"
-"PO-Revision-Date: 2020-04-02 11:44:24.070211\n"
+"POT-Creation-Date: 2020-04-16 08:21+0000\n"
+"PO-Revision-Date: 2020-04-16 08:21:05.995272\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -11056,6 +11056,12 @@ msgstr ""
 msgid ""
 "I agree to the {platform_name} "
 "{tos_link_start}{terms_of_service}{tos_link_end}"
+msgstr ""
+
+#: openedx/core/djangoapps/user_api/api.py
+msgid ""
+"I agree to receiving emails from Edraak team about product updates, "
+"recommended courses for me, and news"
 msgstr ""
 
 #: openedx/core/djangoapps/user_api/config/waffle.py
