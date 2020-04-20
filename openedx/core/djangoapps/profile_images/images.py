@@ -76,7 +76,8 @@ def remove_profile_images(profile_image_names):
     """
     storage = get_profile_image_storage()
     for name in profile_image_names.values():
-        storage.delete(name)
+        if storage.exists(name):
+            storage.delete(name)
 
 
 def validate_uploaded_image(uploaded_file):
