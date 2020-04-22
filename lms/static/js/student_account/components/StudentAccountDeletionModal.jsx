@@ -31,7 +31,7 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
     this.props.onClose();
 
     removeLoggedInCookies();
-    window.location.href = 'https://www.edx.org';
+    window.location.href = 'https://www.edraak.org';
   }
 
   deleteAccount() {
@@ -96,7 +96,7 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
     const loseAccessText = StringUtils.interpolate(
       gettext('You may also lose access to verified certificates and other program credentials like MicroMasters certificates. If you want to make a copy of these for your records before proceeding with deletion, follow the instructions for {htmlStart}printing or downloading a certificate{htmlEnd}.'),
       {
-        htmlStart: '<a href="https://edx.readthedocs.io/projects/edx-guide-for-students/en/latest/SFD_certificates.html#printing-a-certificate" target="_blank">',
+        htmlStart: '<a href="https://help.edraak.org" target="_blank">',
         htmlEnd: '</a>',
       },
     );
@@ -137,8 +137,8 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
                       <Icon id="delete-confirmation-body-warning-icon" className={['fa', 'fa-exclamation-triangle']} />
                     </div>
                     <div className="alert-content">
-                      <h3 className="alert-title">{ gettext('You have selected “Delete my account.” Deletion of your account and personal data is permanent and cannot be undone. EdX will not be able to recover your account or the data that is deleted.') }</h3>
-                      <p>{ gettext('If you proceed, you will be unable to use this account to take courses on the edX app, edx.org, or any other site hosted by edX. This includes access to edx.org from your employer’s or university’s system and access to private sites offered by MIT Open Learning, Wharton Executive Education, and Harvard Medical School.') }</p>
+                      <h3 className="alert-title">{ gettext('You have selected “Delete my account.” Deletion of your account and personal data is permanent and cannot be undone. Edraak will not be able to recover your account or the data that is deleted.') }</h3>
+                      <p>{ gettext('If you proceed, you will be unable to use this account to take courses on the Edraak app, edraak.org, or any other site hosted by Edraak.') }</p>
                       <p dangerouslySetInnerHTML={{ __html: loseAccessText }} />
                     </div>
                   </div>
