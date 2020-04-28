@@ -21,6 +21,8 @@ import third_party_auth
 from edx_ace import ace
 from edx_ace.recipient import Recipient
 from edxmako.shortcuts import render_to_response
+
+from student.models import is_email_retired, get_retired_email_by_email
 from lms.djangoapps.commerce.models import CommerceConfiguration
 from lms.djangoapps.commerce.utils import EcommerceService
 from openedx.core.djangoapps.ace_common.template_context import get_base_template_context
@@ -223,6 +225,8 @@ def password_change_request_handler(request):
     if email:
         try:
             request_password_change(email, request.is_secure())
+            if is_email_retired(email):
+                email = get_retired_email_by_email(email)
             user = user if user.is_authenticated else User.objects.get(email=email)
             destroy_oauth_tokens(user)
         except UserNotFound:
