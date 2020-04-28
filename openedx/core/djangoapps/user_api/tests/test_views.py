@@ -1872,6 +1872,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
             "country": "required",
             "honor_code": "required",
             "confirm_email": "required",
+            "marketing_consent": "optional"
         },
         REGISTRATION_FIELD_ORDER=[
             "name",
@@ -1894,6 +1895,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
             "goals",
             "honor_code",
             "terms_of_service",
+            "marketing_consent",
             "specialty",
             "profession",
         ],
@@ -1920,6 +1922,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
             "mailing_address",
             "goals",
             "honor_code",
+            "marketing_consent"
         ])
 
     @override_settings(

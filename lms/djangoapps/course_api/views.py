@@ -264,6 +264,7 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
     # We should use 0 after upgrading to 1.1+:
     #   - https://github.com/elastic/elasticsearch/commit/8b0a863d427b4ebcbcfb1dcd69c996c52e7ae05e
     results_size_infinity = 10000
+
     def get_serializer_context(self):
         context = super(CourseListView, self).get_serializer_context()
 
@@ -285,7 +286,6 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
                 org=form.cleaned_data['org'],
                 filter_=form.cleaned_data['filter_'],
             )
-
 
         db_courses = list_courses(
             self.request,

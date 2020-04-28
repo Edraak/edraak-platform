@@ -95,7 +95,11 @@ class TrueCheckbox(widgets.CheckboxInput):
     """
     def value_from_datadict(self, data, files, name):
         value = data.get(name, '')
-        return value.lower() == 'true'
+
+        if value is True or value.lower() == 'true':
+            return True
+
+        return False
 
 
 class TrueField(forms.BooleanField):
