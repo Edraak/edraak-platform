@@ -617,9 +617,7 @@ CODE_JAIL = {
 DEBUG = False
 SESSION_COOKIE_SECURE = False
 SESSION_SAVE_EVERY_REQUEST = False
-
-# Edraak: Use the Django 1.6+ default session serializer
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 
 # Site info
