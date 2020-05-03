@@ -10,10 +10,10 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # leena <labualnil@qrf.org>, 2020
-# Ali Hasan <ahasan@qrf.org>, 2020
-# Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2020
-# Shadi Naif <shadinaif@gmail.com>, 2020
 # Salah Alomari <salomari@qrf.org>, 2020
+# Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2020
+# Ali Hasan <ahasan@qrf.org>, 2020
+# Shadi Naif <shadinaif@gmail.com>, 2020
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -75,7 +75,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-12 14:59+0000\n"
+"POT-Creation-Date: 2020-04-28 17:45+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -400,6 +400,18 @@ msgstr "الطالب"
 #: common/djangoapps/student/admin.py
 msgid "User profile"
 msgstr "ملف المستخدِم"
+
+#: common/djangoapps/student/admin.py
+msgid "Personal info"
+msgstr "المعلومات الشخصية"
+
+#: common/djangoapps/student/admin.py wiki/forms.py
+msgid "Permissions"
+msgstr "الصلاحيات"
+
+#: common/djangoapps/student/admin.py
+msgid "Important dates"
+msgstr "تواريخ مهمّة"
 
 #: common/djangoapps/student/forms.py
 msgid ""
@@ -994,6 +1006,13 @@ msgstr ""
 "{html_start}تمّت العميلة بنجاح! لقد تمّ تفعيل حسابك بنجاح.{html_end}ستتلقى "
 "من الآن وصاعدًا تحديثات وتنبيهات حول المساق الذي التحقت به، وذلك عبر البريد "
 "الإلكتروني. قم بتسجيل دخولك للمتابعة."
+
+#: common/djangoapps/student/views/management.py
+#, python-brace-format
+msgid ""
+"{html_start}Welcome back, your account delete request have been "
+"cancelled.{html_end}"
+msgstr "{html_start} مرحبًا بك مرة أخرى ، تم إلغاء طلب حذف حسابك. {html_end}"
 
 #: common/djangoapps/student/views/management.py
 msgid "Password reset unsuccessful"
@@ -12379,6 +12398,14 @@ msgid ""
 msgstr ""
 "أوافق على {platform_name} {tos_link_start}{terms_of_service}{tos_link_end}"
 
+#: openedx/core/djangoapps/user_api/api.py
+msgid ""
+"I agree to receiving emails from Edraak team about product updates, "
+"recommended courses for me, and news"
+msgstr ""
+"أوافق على استلام رسائل من فريق إدراك بخصوص تحديثات البرامج، والمساقات "
+"المقترحة، والأخبار الجديدة"
+
 #: openedx/core/djangoapps/user_api/config/waffle.py
 msgid "System maintenance in progress. Please try again later."
 msgstr "يجري عمل صيانة للنظام، الرجاء المحاولة لاحقاً."
@@ -12441,36 +12468,55 @@ msgstr "مرحباً%(full_name)s"
 msgid ""
 "We received a deletion request for your account on %(platform_name)s. We're "
 "sorry to see you go!"
-msgstr "لقد تلقينا طلب حذف حسابك على %(platform_name)s نأسف لمغادرتك منصتنا."
+msgstr ""
+"لقد تلقينا طلب حذف حسابك على منصة %(platform_name)s نأسف لمغادرتك منصتنا."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 msgid ""
-"Your account will be deleted shortly. Account deletion, including removal "
-"from email lists, may take a few weeks to fully process through our system. "
-"If you want to opt-out of emails before then, please unsubscribe from the "
-"footer of any email."
+"Your account will be deleted permanently in 3 weeks. Account deletion, "
+"including removal from email lists, may take a few weeks to fully process "
+"through our system. If you want to opt-out of emails before then, please "
+"unsubscribe from the footer of any email."
 msgstr ""
-"سيتم حذف حسابك في أقرب وقت. قد يستغرق حذف الحساب - بما في ذلك الحذف من قوائم"
-" البريد الإلكتروني - بضعة أسابيع لإزالته كلياً من نظامنا. إذا كنت ترغب "
-"بإلغاء الاشتراك في رسائل البريد الإلكتروني بشكل أسرع، الرجاء إلغاء الاشتراك "
-"من تذييل أي بريد إلكتروني."
+"سيتم حذف حسابك نهائياً خلال ثلاثة أسابيع .\n"
+"يرجى الملاحظة: حذف حسابك وبياناتك الشخصية دائم ولا يمكن التراجع عنه. لن تتمكن منصة إدراك من استعادة حسابك أو البيانات التي تم حذفها."
+
+#: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
+#, python-format
+msgid ""
+"If you'd like to recover your account go ahead and <a "
+"href=\"%(reset_password_link)s\">reset your password</a>, that'll cancel the"
+" account deletion request."
+msgstr ""
+"في حال كنت ترغب باسترجاع حسابك يرجى الضغط على الرابط وتقديم <a "
+"href=\"%(reset_password_link)s\">طلب تغيير كلمة السر</a>"
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 #, python-format
 msgid ""
-"This is an informational email only. If you did not initiate this request, "
-"please contact %(contact_email)s."
+"If you did not initiate this request, please contact %(contact_email)s."
 msgstr ""
-"هذا بريد إلكتروني إعلامي فقط. إذا لم تقم بإرسال هذا الطلب ، فيرجى الاتصال "
-"بنا%(contact_email)s"
+"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات إدراك أو edraak.org أو أي موقع آخر تستضيفه إدراك.\n"
+"قد تفقد أيضًا الوصول إلى الشهادات الموثّقة وبيانات اعتماد البرنامج الأخرى مثل شهادات التخصصات\n"
+"إذا لم تقم بإرسال هذا الطلب ، فيرجى الاتصال بنا %(contact_email)s.\n"
+" "
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 #, python-format
 msgid "Best, %(platform_name)s"
 msgstr "نتمنى لك كل خير،%(platform_name)s"
+
+#: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
+#, python-format
+msgid ""
+"If you'd like to recover your account go ahead and reset your password "
+"(%(reset_password_link)s), that'll cancel the account deletion request."
+msgstr ""
+"في حال كنت ترغب باسترجاع حسابك يرجى الضغط على الرابط ادناه وتقديم طلب تغيير كلمة السر:\n"
+"%(reset_password_link)s"
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/subject.txt
 msgid "Your Account Has Been Queued For Deletion"
@@ -25868,10 +25914,6 @@ msgstr "اقفِل المقال"
 #: wiki/forms.py
 msgid "Deny all users access to edit this article."
 msgstr "امنع جميع المستخدمين إمكانية الوصول لتعديل هذا المقال."
-
-#: wiki/forms.py
-msgid "Permissions"
-msgstr "الصلاحيات"
 
 #: wiki/forms.py
 msgid "Owner"

@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-16 08:20+0000\n"
-"PO-Revision-Date: 2020-04-16 08:21:06.293770\n"
+"POT-Creation-Date: 2020-05-03 02:34+0000\n"
+"PO-Revision-Date: 2020-05-03 02:34:24.633176\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -3279,19 +3279,16 @@ msgstr ""
 #: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
 "Please note: Deletion of your account and personal data is permanent and "
-"cannot be undone. EdX will not be able to recover your account or the data "
-"that is deleted."
+"cannot be undone. Edraak will not be able to recover your account or the "
+"data that is deleted."
 msgstr ""
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
-"Once your account is deleted, you cannot use it to take courses on the edX "
-"app, edx.org, or any other site hosted by edX. This includes access to "
-"edx.org from your employer’s or university’s system and access to private "
-"sites offered by MIT Open Learning, Wharton Executive Education, and Harvard"
-" Medical School."
+"Once your account is deleted, you cannot use it to take courses on the "
+"Edraak app, edraak.org, or any other site hosted by Edraak."
 msgstr ""
 
 #: common/static/bundles/StudentAccountDeletion.js
@@ -3338,7 +3335,7 @@ msgstr ""
 #: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "You have selected “Delete my account.” Deletion of your account and personal"
-" data is permanent and cannot be undone. EdX will not be able to recover "
+" data is permanent and cannot be undone. Edraak will not be able to recover "
 "your account or the data that is deleted."
 msgstr ""
 
@@ -3347,10 +3344,7 @@ msgstr ""
 #: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "If you proceed, you will be unable to use this account to take courses on "
-"the edX app, edx.org, or any other site hosted by edX. This includes access "
-"to edx.org from your employer’s or university’s system and access to private"
-" sites offered by MIT Open Learning, Wharton Executive Education, and "
-"Harvard Medical School."
+"the Edraak app, edraak.org, or any other site hosted by Edraak."
 msgstr ""
 
 #: common/static/bundles/StudentAccountDeletion.js

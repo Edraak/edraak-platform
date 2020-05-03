@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-16 08:21+0000\n"
-"PO-Revision-Date: 2020-04-16 08:21:05.995272\n"
+"POT-Creation-Date: 2020-05-03 02:34+0000\n"
+"PO-Revision-Date: 2020-05-03 02:34:24.155316\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -346,6 +346,18 @@ msgstr ""
 
 #: common/djangoapps/student/admin.py
 msgid "User profile"
+msgstr ""
+
+#: common/djangoapps/student/admin.py
+msgid "Personal info"
+msgstr ""
+
+#: common/djangoapps/student/admin.py wiki/forms.py
+msgid "Permissions"
+msgstr ""
+
+#: common/djangoapps/student/admin.py
+msgid "Important dates"
 msgstr ""
 
 #: common/djangoapps/student/forms.py
@@ -897,6 +909,13 @@ msgid ""
 "{html_start}Success! You have activated your account.{html_end}You will now "
 "receive email updates and alerts from us related to the courses you are "
 "enrolled in. Sign In to continue."
+msgstr ""
+
+#: common/djangoapps/student/views/management.py
+#, python-brace-format
+msgid ""
+"{html_start}Welcome back, your account delete request have been "
+"cancelled.{html_end}"
 msgstr ""
 
 #: common/djangoapps/student/views/management.py
@@ -11128,24 +11147,38 @@ msgstr ""
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 msgid ""
-"Your account will be deleted shortly. Account deletion, including removal "
-"from email lists, may take a few weeks to fully process through our system. "
-"If you want to opt-out of emails before then, please unsubscribe from the "
-"footer of any email."
+"Your account will be deleted permanently in 3 weeks. Account deletion, "
+"including removal from email lists, may take a few weeks to fully process "
+"through our system. If you want to opt-out of emails before then, please "
+"unsubscribe from the footer of any email."
+msgstr ""
+
+#: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
+#, python-format
+msgid ""
+"If you'd like to recover your account go ahead and <a "
+"href=\"%(reset_password_link)s\">reset your password</a>, that'll cancel the"
+" account deletion request."
 msgstr ""
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 #, python-format
 msgid ""
-"This is an informational email only. If you did not initiate this request, "
-"please contact %(contact_email)s."
+"If you did not initiate this request, please contact %(contact_email)s."
 msgstr ""
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 #, python-format
 msgid "Best, %(platform_name)s"
+msgstr ""
+
+#: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
+#, python-format
+msgid ""
+"If you'd like to recover your account go ahead and reset your password "
+"(%(reset_password_link)s), that'll cancel the account deletion request."
 msgstr ""
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/subject.txt
@@ -23173,10 +23206,6 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Deny all users access to edit this article."
-msgstr ""
-
-#: wiki/forms.py
-msgid "Permissions"
 msgstr ""
 
 #: wiki/forms.py

@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-16 08:21+0000\n"
-"PO-Revision-Date: 2020-04-16 08:21:05.995272\n"
+"POT-Creation-Date: 2020-05-03 02:34+0000\n"
+"PO-Revision-Date: 2020-05-03 02:34:24.155316\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -363,6 +363,18 @@ msgstr "سفعيثرف"
 #: common/djangoapps/student/admin.py
 msgid "User profile"
 msgstr "عسثق حقخبهمث"
+
+#: common/djangoapps/student/admin.py
+msgid "Personal info"
+msgstr "حثقسخرشم هربخ"
+
+#: common/djangoapps/student/admin.py wiki/forms.py
+msgid "Permissions"
+msgstr "حثقوهسسهخرس"
+
+#: common/djangoapps/student/admin.py
+msgid "Important dates"
+msgstr "هوحخقفشرف يشفثس"
 
 #: common/djangoapps/student/forms.py
 msgid ""
@@ -960,6 +972,15 @@ msgstr ""
 "{html_start}سعذذثسس! غخع اشدث شذفهدشفثي غخعق شذذخعرف.{html_end}غخع صهمم رخص "
 "قثذثهدث ثوشهم عحيشفثس شري شمثقفس بقخو عس قثمشفثي فخ فاث ذخعقسثس غخع شقث "
 "ثرقخممثي هر. سهلر هر فخ ذخرفهرعث."
+
+#: common/djangoapps/student/views/management.py
+#, python-brace-format
+msgid ""
+"{html_start}Welcome back, your account delete request have been "
+"cancelled.{html_end}"
+msgstr ""
+"{html_start}صثمذخوث زشذن, غخعق شذذخعرف يثمثفث قثضعثسف اشدث زثثر "
+"ذشرذثممثي.{html_end}"
 
 #: common/djangoapps/student/views/management.py
 msgid "Password reset unsuccessful"
@@ -12362,31 +12383,49 @@ msgstr ""
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 msgid ""
-"Your account will be deleted shortly. Account deletion, including removal "
-"from email lists, may take a few weeks to fully process through our system. "
-"If you want to opt-out of emails before then, please unsubscribe from the "
-"footer of any email."
+"Your account will be deleted permanently in 3 weeks. Account deletion, "
+"including removal from email lists, may take a few weeks to fully process "
+"through our system. If you want to opt-out of emails before then, please "
+"unsubscribe from the footer of any email."
 msgstr ""
-"غخعق شذذخعرف صهمم زث يثمثفثي ساخقفمغ. شذذخعرف يثمثفهخر, هرذمعيهرل قثوخدشم "
-"بقخو ثوشهم مهسفس, وشغ فشنث ش بثص صثثنس فخ بعممغ حقخذثسس فاقخعلا خعق سغسفثو. "
-"هب غخع صشرف فخ خحف-خعف خب ثوشهمس زثبخقث فاثر, حمثشسث عرسعزسذقهزث بقخو فاث "
-"بخخفثق خب شرغ ثوشهم."
+"غخعق شذذخعرف صهمم زث يثمثفثي حثقوشرثرفمغ هر 3 صثثنس. شذذخعرف يثمثفهخر, "
+"هرذمعيهرل قثوخدشم بقخو ثوشهم مهسفس, وشغ فشنث ش بثص صثثنس فخ بعممغ حقخذثسس "
+"فاقخعلا خعق سغسفثو. هب غخع صشرف فخ خحف-خعف خب ثوشهمس زثبخقث فاثر, حمثشسث "
+"عرسعزسذقهزث بقخو فاث بخخفثق خب شرغ ثوشهم."
+
+#: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
+#, python-format
+msgid ""
+"If you'd like to recover your account go ahead and <a "
+"href=\"%(reset_password_link)s\">reset your password</a>, that'll cancel the"
+" account deletion request."
+msgstr ""
+"هب غخع'ي مهنث فخ قثذخدثق غخعق شذذخعرف لخ شاثشي شري <a "
+"href=\"%(reset_password_link)s\">قثسثف غخعق حشسسصخقي</a>, فاشف'مم ذشرذثم فاث"
+" شذذخعرف يثمثفهخر قثضعثسف."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 #, python-format
 msgid ""
-"This is an informational email only. If you did not initiate this request, "
-"please contact %(contact_email)s."
+"If you did not initiate this request, please contact %(contact_email)s."
 msgstr ""
-"فاهس هس شر هربخقوشفهخرشم ثوشهم خرمغ. هب غخع يهي رخف هرهفهشفث فاهس قثضعثسف, "
-"حمثشسث ذخرفشذف %(contact_email)s."
+"هب غخع يهي رخف هرهفهشفث فاهس قثضعثسف, حمثشسث ذخرفشذف %(contact_email)s."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.html
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
 #, python-format
 msgid "Best, %(platform_name)s"
 msgstr "زثسف, %(platform_name)s"
+
+#: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/body.txt
+#, python-format
+msgid ""
+"If you'd like to recover your account go ahead and reset your password "
+"(%(reset_password_link)s), that'll cancel the account deletion request."
+msgstr ""
+"هب غخع'ي مهنث فخ قثذخدثق غخعق شذذخعرف لخ شاثشي شري قثسثف غخعق حشسسصخقي "
+"(%(reset_password_link)s), فاشف'مم ذشرذثم فاث شذذخعرف يثمثفهخر قثضعثسف."
 
 #: openedx/core/djangoapps/user_api/templates/user_api/edx_ace/deletionnotificationmessage/email/subject.txt
 msgid "Your Account Has Been Queued For Deletion"
@@ -25954,10 +25993,6 @@ msgstr "مخذن شقفهذمث"
 #: wiki/forms.py
 msgid "Deny all users access to edit this article."
 msgstr "يثرغ شمم عسثقس شذذثسس فخ ثيهف فاهس شقفهذمث."
-
-#: wiki/forms.py
-msgid "Permissions"
-msgstr "حثقوهسسهخرس"
 
 #: wiki/forms.py
 msgid "Owner"
