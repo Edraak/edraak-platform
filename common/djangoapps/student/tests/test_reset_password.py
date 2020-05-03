@@ -23,7 +23,7 @@ from provider.oauth2 import models as dop_models
 
 from openedx.core.djangoapps.oauth_dispatch.tests import factories as dot_factories
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
-from openedx.core.djangoapps.user_api.models import UserRetirementRequest
+from openedx.core.djangoapps.user_api.models import RetirementState, UserRetirementStatus
 from openedx.core.djangoapps.user_api.config.waffle import PREVENT_AUTH_USER_WRITES, SYSTEM_MAINTENANCE_MSG, waffle
 from openedx.core.djangolib.testing.utils import CacheIsolationTestCase
 from student.tests.factories import UserFactory
@@ -317,26 +317,47 @@ class ResetPasswordTests(EventTestMixin, CacheIsolationTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertFalse(User.objects.get(pk=self.user.pk).is_active)
 
-    def test_password_reset_retired_user_fail(self):
+    ############### Edraak Specific ################
+    # Test refactored to test and pass Edraak's Retirement criteria
+    @ddt.data(
+        ('PENDING', True, 0),  # this will test Edraak's Retirement
+        ('SOMETHING-ELSE', False, 1)  # this will perform original test
+    )
+    @ddt.unpack
+    def test_password_reset_retired_user_fail(self, initial_status, active_after_reset, records_after_reset):
         """
         Tests that if a retired user attempts to reset their password, it fails.
         """
         self.assertFalse(self.user.is_active)
 
         # Retire the user.
-        UserRetirementRequest.create_retirement_request(self.user)
+        RetirementState.objects.create(
+            state_name=initial_status,
+            state_execution_order=1,
+            is_dead_end_state=False,
+            required=False
+        )
+        UserRetirementStatus.create_retirement(self.user)
+        self.assertEqual(UserRetirementStatus.objects.all().count(), 1)
 
         url = reverse(
             'password_reset_confirm',
             kwargs={'uidb36': self.uidb36, 'token': self.token}
         )
         reset_req = self.request_factory.get(url)
-        resp = password_reset_confirm_wrapper(reset_req, self.uidb36, self.token)
+
+        # Patch MessageMiddleware as it is not supported within test units
+        with patch('django.contrib.messages.info'):
+            resp = password_reset_confirm_wrapper(reset_req, self.uidb36, self.token)
+
+        # Verifiy Retirement Status
+        self.assertEqual(UserRetirementStatus.objects.all().count(), records_after_reset)
 
         # Verify the response status code is: 200 with password reset fail and also verify that
         # the user is not marked as active.
         self.assertEqual(resp.status_code, 200)
-        self.assertFalse(User.objects.get(pk=self.user.pk).is_active)
+        self.assertEqual(User.objects.get(pk=self.user.pk).is_active, active_after_reset)
+    ############### End of Edraak Specific ################
 
     def test_password_reset_prevent_auth_user_writes(self):
         with waffle().override(PREVENT_AUTH_USER_WRITES, True):

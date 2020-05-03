@@ -69,7 +69,7 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.djangoapps.theming import helpers as theming_helpers
 from openedx.core.djangoapps.user_api import accounts as accounts_settings
 from openedx.core.djangoapps.user_api.accounts.utils import generate_password
-from openedx.core.djangoapps.user_api.models import UserRetirementRequest
+from openedx.core.djangoapps.user_api.models import UserRetirementRequest, UserRetirementStatus
 from openedx.core.djangoapps.user_api.preferences import api as preferences_api
 from openedx.core.djangoapps.user_api.config.waffle import PREVENT_AUTH_USER_WRITES, SYSTEM_MAINTENANCE_MSG, waffle
 from openedx.core.djangolib.markup import HTML, Text
@@ -1191,17 +1191,36 @@ def password_reset_confirm_wrapper(request, uidb36=None, token=None):
         )
 
     if UserRetirementRequest.has_user_requested_retirement(user):
-        # Refuse to reset the password of any user that has requested retirement.
-        context = {
-            'validlink': True,
-            'form': None,
-            'title': _('Password reset unsuccessful'),
-            'err_msg': _('Error in resetting your password.'),
-        }
-        context.update(platform_name)
-        return TemplateResponse(
-            request, 'registration/password_reset_confirm.html', context
-        )
+        retirement_status = UserRetirementStatus.objects.select_related('current_state').get(user=user)
+        # Check if the user has started the retirement process -or- not.
+        if retirement_status.current_state.state_name == 'PENDING':
+            # Load the user record using the retired email address -and- change the email address back.
+            retirement_status.user.email = retirement_status.original_email
+            retirement_status.user.name = retirement_status.original_name
+            retirement_status.user.save()
+            retirement_status.delete()
+            messages.info(
+                request,
+                HTML(_('{html_start}Welcome back, your account delete request have been cancelled.{html_end}')).format(
+                    html_start=HTML(''),
+                    html_end=HTML(''),
+                ),
+                extra_tags='account-activation aa-icon',
+            )
+
+            logging.info("Successfully cancelled retirement request for user id .".format(user.id))
+        else:
+            # Refuse to reset the password of any user that has requested retirement.
+            context = {
+                'validlink': True,
+                'form': None,
+                'title': _('Password reset unsuccessful'),
+                'err_msg': _('Error in resetting your password.'),
+            }
+            context.update(platform_name)
+            return TemplateResponse(
+                request, 'registration/password_reset_confirm.html', context
+            )
 
     if waffle().is_enabled(PREVENT_AUTH_USER_WRITES):
         context = {

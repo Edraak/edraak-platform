@@ -4,12 +4,15 @@ An API for retrieving user account information.
 For additional information and historical context, see:
 https://openedx.atlassian.net/wiki/display/TNL/User+API
 """
+import urlparse
+
 import datetime
 import logging
 from functools import wraps
 
 import pytz
 from consent.models import DataSharingConsent
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, logout
 from django.contrib.sites.models import Site
 from django.core.cache import cache
@@ -446,6 +449,9 @@ class DeactivateLogoutView(APIView):
                     site = Site.objects.get_current()
                     notification_context = get_base_template_context(site)
                     notification_context.update({'full_name': request.user.profile.name})
+                    notification_context.update({'reset_password_link': urlparse.urljoin(
+                                settings.PROGS_URLS.get("ROOT"),
+                                settings.PROGS_URLS.get("PROG_RESET_PASSWORD", "reset_password"))})
                     notification = DeletionNotificationMessage().personalize(
                         recipient=Recipient(username='', email_address=user_email),
                         language=request.user.profile.language,

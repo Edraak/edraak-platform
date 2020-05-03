@@ -19,11 +19,14 @@ from django.utils.translation import ugettext_lazy as _
 
 from edx_ace import ace
 from edx_ace.recipient import Recipient
+
+from student.models import is_email_retired
 from openedx.core.djangoapps.ace_common.template_context import get_base_template_context
 from openedx.core.djangoapps.lang_pref import LANGUAGE_KEY
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.theming.helpers import get_current_site
 from openedx.core.djangoapps.user_api import accounts as accounts_settings
+from openedx.core.djangoapps.user_api.models import UserRetirementStatus
 from openedx.core.djangoapps.user_api.preferences.api import get_user_preference
 from student.message_types import PasswordReset
 from student.models import CourseEnrollmentAllowed, email_exists_or_retired
@@ -47,11 +50,34 @@ class PasswordResetFormNoActive(PasswordResetForm):
         email = self.cleaned_data["email"]
         #The line below contains the only change, removing is_active=True
         self.users_cache = User.objects.filter(email__iexact=email)
+
+        ########### Edraak Specific #############
+        # Allow retired users to get reset my password email
+        retirement_status = None
+        if is_email_retired(email):
+            retirement_status = UserRetirementStatus.objects.filter(
+                original_email=email,
+                current_state__state_name='PENDING').first()
+
+            if retirement_status:
+                retirement_status.user.email = retirement_status.original_email
+                retirement_status.user.username = retirement_status.original_username
+                retirement_status.user.name = retirement_status.original_name
+                self.users_cache = [retirement_status.user]
+        
         if not len(self.users_cache):
             raise forms.ValidationError(self.error_messages['unknown'])
-        if any((user.password.startswith(UNUSABLE_PASSWORD_PREFIX))
+        if (retirement_status is None) and any((user.password.startswith(UNUSABLE_PASSWORD_PREFIX))
                for user in self.users_cache):
             raise forms.ValidationError(self.error_messages['unusable'])
+
+        # if not len(self.users_cache):
+        #     raise forms.ValidationError(self.error_messages['unknown'])
+        # if any((user.password.startswith(UNUSABLE_PASSWORD_PREFIX))
+        #        for user in self.users_cache):
+        #     raise forms.ValidationError(self.error_messages['unusable'])
+        ########### End of Edraak Specific ##########
+
         return email
 
     def save(self,  # pylint: disable=arguments-differ
