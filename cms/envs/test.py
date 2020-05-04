@@ -336,6 +336,8 @@ COUNTRIES_FIRST = []  # Turned off here to pass edx tests
 
 EDRAAK_PROGRAMS_API_TIMEOUT = 4
 
+EDRAAK_MARKETING_API_TIMEOUT = 4
+
 ######### custom courses #########
 INSTALLED_APPS.append('openedx.core.djangoapps.ccxcon.apps.CCXConnectorConfig')
 FEATURES['CUSTOM_COURSES_EDX'] = True
