@@ -94,6 +94,10 @@ course_sections = blocks.get('children')
                 if subsection.get('due') is None:
                     # examples: Homework, Lab, etc.
                     data_string = subsection.get('format')
+                    if data_string == 'Entrance Exam':
+                        # Edraak: Fix a bug with the hard-coded Entrance Exam translation.
+                        # TODO: Refactor this hack upstream by making the "Entrance Exam" customizable by the course author like other exams including "Homework" or "Lab" from within the grading section.
+                        data_string = _('Entrance Exam')
                 else:
                     if 'special_exam_info' in subsection:
                         data_string = _('due {date}')
