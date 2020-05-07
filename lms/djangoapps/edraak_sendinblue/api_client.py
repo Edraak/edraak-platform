@@ -28,9 +28,9 @@ def create_contact(username, email, name, blacklisted):
 
         try:
             response = api_instance.create_contact(contact)
-            log.info('SendInBlue contact created for user {username}, response text {text}'.format(username=username, text=response))
+            log.info('SendInBlue contact created with response text {text}'.format(text=response))
         except ApiException as e:
-            log.exception("Exception when calling SendInBlue ContactsApi->create_contact: %s\n" % e)
+            log.exception("Exception when calling SendInBlue for email ({}) ContactsApi->create_contact: {}\n".format(email, e))
 
 
 # TODO: update contact attributes upon completion of profile
