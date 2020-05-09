@@ -527,6 +527,9 @@ INSTALLED_APPS += ('edraak_specializations',)
 
 PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
+# API Calls Timeout
+EDRAAK_PROGRAMS_API_TIMEOUT = ENV_TOKENS.get('EDRAAK_PROGRAMS_API_TIMEOUT', 3)
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})
