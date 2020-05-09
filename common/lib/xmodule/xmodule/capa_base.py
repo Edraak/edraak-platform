@@ -794,7 +794,6 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
 
             # Build the notification message based on the notification type and translate it.
             ungettext = self.runtime.service(self, "i18n").ungettext
-            gettext = self.runtime.service(self, "i18n").gettext
             if answer_notification_type == 'incorrect':
                 if progress is not None:
                     answer_notification_message = ungettext(
@@ -803,7 +802,7 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
                         progress.frac()[1]
                     ).format(progress=str(progress))
                 else:
-                    answer_notification_message = gettext('Incorrect')
+                    answer_notification_message = _('Incorrect')
             elif answer_notification_type == 'correct':
                 if progress is not None:
                     answer_notification_message = ungettext(
@@ -812,7 +811,7 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
                         progress.frac()[1]
                     ).format(progress=str(progress))
                 else:
-                    answer_notification_message = gettext('Correct')
+                    answer_notification_message = _('Correct')
             elif answer_notification_type == 'partially-correct':
                 if progress is not None:
                     answer_notification_message = ungettext(
@@ -821,9 +820,9 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
                         progress.frac()[1]
                     ).format(progress=str(progress))
                 else:
-                    answer_notification_message = gettext('Partially Correct')
+                    answer_notification_message = _('Partially Correct')
             elif answer_notification_type == 'submitted':
-                answer_notification_message = gettext("Answer submitted.")
+                answer_notification_message = _("Answer submitted.")
 
         return answer_notification_type, answer_notification_message
 
