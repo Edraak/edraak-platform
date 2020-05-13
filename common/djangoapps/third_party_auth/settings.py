@@ -44,16 +44,21 @@ def apply_settings(django_settings):
     # Inject our customized auth pipeline. All auth backends must work with
     # this pipeline.
     django_settings.SOCIAL_AUTH_PIPELINE = [
+        'edraak_social.forus.pipeline.save_redirect_param',
         'third_party_auth.pipeline.parse_query_params',
         'social_core.pipeline.social_auth.social_details',
         'social_core.pipeline.social_auth.social_uid',
         'social_core.pipeline.social_auth.auth_allowed',
         'social_core.pipeline.social_auth.social_user',
         'third_party_auth.pipeline.associate_by_email_if_login_api',
+        'edraak_social.forus.pipeline.associate_account_by_email',
+        'edraak_social.forus.pipeline.create_user_account',
         'social_core.pipeline.user.get_username',
         'third_party_auth.pipeline.set_pipeline_timeout',
         'third_party_auth.pipeline.ensure_user_information',
         'social_core.pipeline.user.create_user',
+        'edraak_social.forus.pipeline.get_account_details',
+        'edraak_social.forus.pipeline.create_student_profile',
         'social_core.pipeline.social_auth.associate_user',
         'social_core.pipeline.social_auth.load_extra_data',
         'social_core.pipeline.user.user_details',

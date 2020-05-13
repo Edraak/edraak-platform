@@ -735,6 +735,7 @@ if FEATURES.get('ENABLE_THIRD_PARTY_AUTH'):
         'social_core.backends.google.GoogleOAuth2',
         'social_core.backends.linkedin.LinkedinOAuth2',
         'edraak_social.backends.facebook.EdraakFacebookOAuth2',
+        'edraak_social.backends.forus.ForUsOAuth2',
         'social_core.backends.azuread.AzureADOAuth2',
         'third_party_auth.saml.SAMLAuthBackend',
         'third_party_auth.lti.LTIAuthBackend',
@@ -1173,3 +1174,6 @@ plugin_settings.add_plugins(__name__, plugin_constants.ProjectType.LMS, plugin_c
 ########################## Derive Any Derived Settings  #######################
 
 derive_settings(__name__)
+
+# the hosts that the platform is safe to redirect to
+ALLOWED_REDIRECT_HOSTS = ENV_TOKENS.get("SAFE_REDIRECT_HOSTS", [])
