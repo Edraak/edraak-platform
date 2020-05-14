@@ -1134,7 +1134,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
                 u"name": u"username",
                 u"type": u"text",
                 u"required": True,
-                u"label": u"Public Username",
+                u"label": u"Username",
                 u"instructions": u"The name that will identify you in your courses. "
                                  u"It cannot be changed later.",
                 u"restrictions": {
@@ -1337,7 +1337,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
                     u"defaultValue": expected_username,
                     u"type": u"text",
                     u"required": True,
-                    u"label": u"Public Username",
+                    u"label": u"Username",
                     u"instructions": u"The name that will identify you in your courses. "
                                      u"It cannot be changed later.",
                     u"restrictions": {
