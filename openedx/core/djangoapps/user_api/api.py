@@ -390,7 +390,8 @@ class RegistrationFormFactory(object):
         """
         # Translators: This label appears above a field on the registration form
         # meant to hold the user's public username.
-        username_label = _(u"Public Username")
+        # Edraak: Change text
+        username_label = _(u"Username")
 
         username_instructions = _(
             # Translators: These instructions appear on the registration form, immediately

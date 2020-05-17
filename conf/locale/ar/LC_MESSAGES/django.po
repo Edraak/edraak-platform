@@ -75,7 +75,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-28 17:45+0000\n"
+"POT-Creation-Date: 2020-05-14 07:40+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -1649,10 +1649,10 @@ msgid "Your password must contain at least {num} character."
 msgid_plural "Your password must contain at least {num} characters."
 msgstr[0] "يجب عليك ادخال {num} حرف على الأقل لكلمة السر"
 msgstr[1] "يجب عليك ادخال {num} حرف على الأقل لكلمة السر"
-msgstr[2] "يجب عليك ادخال {num} حرف على الأقل لكلمة السر"
-msgstr[3] "يجب عليك ادخال {num} حرف على الأقل لكلمة السر"
-msgstr[4] "يجب عليك ادخال {num} حرف على الأقل لكلمة السر"
-msgstr[5] "يجب عليك ادخال {num}  حرف على الأقل لكلمة السر"
+msgstr[2] "يكلمة السر يجب أن تتكون من {num} حرفان على الأقل."
+msgstr[3] "كلمة السر يجب أن تتكون من {num} أحرف على الأقل."
+msgstr[4] "كلمة السر يجب أن تتكون من {num} حرف على الأقل."
+msgstr[5] "كلمة السر يجب أن تتكون من {num} حرف على الأقل."
 
 #: common/djangoapps/util/password_policy_validators.py
 #, python-brace-format
@@ -1663,17 +1663,17 @@ msgid_plural ""
 "Your password must contain at least {num} characters, including "
 "{requirements}."
 msgstr[0] ""
-"يجب عليك ادخال {num} حرف على الأقل لكلمة السربالاضافة ل {requirements}."
+"يجب عليك ادخال {num} حرف على الأقل لكلمة السر بالاضافة ل {requirements}."
 msgstr[1] ""
-"يجب عليك ادخال {num} حرف على الأقل لكلمة السربالاضافة ل {requirements}."
+"يجب عليك ادخال {num} حرف على الأقل لكلمة السر بالاضافة ل {requirements}."
 msgstr[2] ""
-"يجب عليك ادخال {num} حرف على الأقل لكلمة السربالاضافة ل {requirements}."
+"يجب عليك ادخال {num} حرفان على الأقل لكلمة السر بالاضافة ل {requirements}."
 msgstr[3] ""
-"يجب عليك ادخال {num} حرف على الأقل لكلمة السربالاضافة ل {requirements}."
+"يجب عليك ادخال {num} أحرف على الأقل لكلمة السر بالاضافة ل {requirements}."
 msgstr[4] ""
-"يجب عليك ادخال {num} حرف على الأقل لكلمة السربالاضافة ل {requirements}."
+"يجب عليك ادخال {num} حرف على الأقل لكلمة السر بالاضافة ل {requirements}."
 msgstr[5] ""
-"يجب عليك ادخال {num} حرف على الأقل لكلمة السربالاضافة ل  {requirements}."
+"يجب عليك ادخال {num} حرف على الأقل لكلمة السر بالاضافة ل {requirements}."
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "Invalid password."
@@ -6146,11 +6146,16 @@ msgstr ""
 msgid "More about {fullname}'s accomplishment"
 msgstr "المزيد من التفاصيل عن إنجازات {fullname}"
 
+#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
+#. Translators: This label appears above a field on the registration form
+#. meant to hold the user's public username.
+#. Edraak: Change text
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 #: lms/djangoapps/instructor/views/api.py
 #: lms/djangoapps/instructor/views/tools.py
 #: lms/djangoapps/instructor_task/tasks_helper/enrollments.py
 #: openedx/core/djangoapps/schedules/admin.py
+#: openedx/core/djangoapps/user_api/api.py
 #: lms/templates/staff_problem_info.html
 #: lms/templates/api_admin/catalogs/search.html
 #: lms/templates/ccx/enrollment.html
@@ -12289,7 +12294,7 @@ msgstr "تذكُّر بياناتي"
 #. below a field meant to hold the user's email address.
 #: openedx/core/djangoapps/user_api/api.py
 msgid "This is what you will use to login."
-msgstr "هذا ما ستستخدمه لتسجيل الدخول"
+msgstr "يستخدم لعملية تسجيل الدخول"
 
 #. Translators: This label appears above a field on the registration form
 #. meant to confirm the user's email address.
@@ -12303,17 +12308,6 @@ msgstr "تأكيد البريد الإلكتروني"
 #: openedx/core/djangoapps/user_api/api.py
 msgid "This name will be used on any certificates that you earn."
 msgstr "سيستخدم هذا الاسم في أيّ شهادة تحصل عليها."
-
-#. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
-#. Translators: This label appears above a field on the registration form
-#. meant to hold the user's public username.
-#: openedx/core/djangoapps/user_api/api.py cms/templates/register.html
-#: lms/templates/register-form.html lms/templates/register-shib.html
-#: lms/templates/signup_modal.html
-#: themes/stanford-style/lms/templates/register-form.html
-#: themes/stanford-style/lms/templates/register-shib.html
-msgid "Public Username"
-msgstr "اسم المستخدم العام"
 
 #. Translators: These instructions appear on the registration form,
 #. immediately
@@ -13608,6 +13602,13 @@ msgstr "هل نسيت كلمة المرور؟"
 #: themes/stanford-style/lms/templates/register-form.html
 msgid "example: Jane Doe"
 msgstr "مثال: أحمد شوقي"
+
+#: cms/templates/register.html lms/templates/register-form.html
+#: lms/templates/register-shib.html lms/templates/signup_modal.html
+#: themes/stanford-style/lms/templates/register-form.html
+#: themes/stanford-style/lms/templates/register-shib.html
+msgid "Public Username"
+msgstr "اسم المستخدم العلنيّ"
 
 #. Translators: This is the placeholder text for a field that asks the user to
 #. pick a username
