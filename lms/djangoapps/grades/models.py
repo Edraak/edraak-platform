@@ -201,6 +201,14 @@ class VisibleBlocks(models.Model):
         for the block records' course with the new VisibleBlocks.
         Returns the newly created visible blocks.
         """
+        # TODO: Edraak: Report to edX and provide a more suitable solution in `_initialize_cache`.
+        #       For now we're hacking it to fix IntegrityError. See OU-426
+        brl_hashes = [brl.hash_value for brl in block_record_lists]
+        existing_hashes = set(
+            visible_block.hashed
+            for visible_block in VisibleBlocks.objects.filter(hashed__in=brl_hashes)
+        )
+
         created = cls.objects.bulk_create([
             VisibleBlocks(
                 blocks_json=brl.json_value,
@@ -208,6 +216,7 @@ class VisibleBlocks(models.Model):
                 course_id=course_key,
             )
             for brl in block_record_lists
+            if brl.hash_value not in existing_hashes
         ])
         cls._update_cache(user_id, course_key, created)
         return created
@@ -231,7 +240,8 @@ class VisibleBlocks(models.Model):
         block record objects.
         """
         grades_with_blocks = PersistentSubsectionGrade.objects.select_related('visible_blocks').filter(
-            user_id=user_id,
+            user_id=user_id,  # TODO: Edraak: Remove the `user_id` filter to fix OU-426. Check with edX.
+                              #       See `VisibleBlocks.bulk_create` for the related hack.
             course_id=course_key,
         )
         prefetched = {grade.visible_blocks.hashed: grade.visible_blocks for grade in grades_with_blocks}
