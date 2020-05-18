@@ -1,3 +1,4 @@
+import urllib
 from social_core.pipeline.social_auth import associate_by_email
 from social_core.pipeline.user import create_user
 
@@ -9,7 +10,7 @@ from .utils import forus_authentication_only
 @forus_authentication_only
 def save_redirect_param(strategy, *args, **kwargs):
     strategy.request.session['next'] = \
-        strategy.request.GET.get('next', '').replace(' ', '+')
+        strategy.request.GET.get('next', '')
 
 
 @forus_authentication_only

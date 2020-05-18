@@ -1,3 +1,4 @@
+import urllib
 from social_core.backends.oauth import BaseOAuth2
 
 
@@ -37,9 +38,11 @@ class ForUsOAuth2(BaseOAuth2):
         redirect_uri = super(ForUsOAuth2, self).get_redirect_uri(state)
         next_param = self.data.get('next')
         if next_param:
-            redirect_uri += ('&' if '?' in redirect_uri else '?') + \
-                   '{0}={1}'.format(
-                       'next',
-                       next_param.replace(' ', '+')
-                   )
+            params = {'next': next_param}
+            encoded_params = urllib.urlencode(next_param)
+            redirect_uri = '{url}{sep}{params}'.format(
+                url=redirect_uri,
+                sep=('&' if '?' in redirect_uri else '?'),
+                params=encoded_params,
+            )
         return redirect_uri
