@@ -13,7 +13,7 @@ If true, it:
 from openedx.features.enterprise_support.api import insert_enterprise_pipeline_elements
 
 _FIELDS_STORED_IN_SESSION = ['auth_entry', 'next']
-# _MIDDLEWARE_CLASSES = ['third_party_auth.middleware.ExceptionMiddleware']
+_MIDDLEWARE_CLASSES = []
 _SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/dashboard'
 _SOCIAL_AUTH_AZUREAD_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
     'msafed': 0
