@@ -1177,4 +1177,4 @@ derive_settings(__name__)
 
 # the hosts that the platform is safe to redirect to
 ALLOWED_REDIRECT_HOSTS = ENV_TOKENS.get(
-        "SAFE_REDIRECT_HOSTS", tuple())
+        "SAFE_REDIRECT_HOSTS", [])
