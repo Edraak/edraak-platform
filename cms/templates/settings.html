@@ -1,5 +1,6 @@
 <%page expression_filter="h"/>
 <%inherit file="base.html" />
+<%! from django.conf import settings %>
 <%def name="online_help_token()"><% return "schedule" %></%def>
 <%block name="title">${_("Schedule & Details Settings")}</%block>
 <%block name="bodyclass">is-signedin course schedule view-settings feature-upload</%block>
@@ -293,7 +294,9 @@ CMS.URL.UPLOAD_ASSET = '${upload_asset_url | n, js_escaped_string}'
           </ol>
         </div>
 
-        % if about_page_editable:
+        % if about_page_editable or settings.FEATURES.get('EDRAAK_ENABLE_COURSE_LANGUAGE_CHANGES'):
+        ## Edraak-specific: This section is hidden by default when Marketing Site is enabled
+        ##                  However, we're enabling it to customize the bulk email translations.
         <div class="group-settings course_details">
           <header>
             <h2 class="title-2">${_('Course Details')}</h2>

@@ -247,6 +247,10 @@ LANGUAGE_COOKIE = ENV_TOKENS.get('LANGUAGE_COOKIE', LANGUAGE_COOKIE)
 USE_I18N = ENV_TOKENS.get('USE_I18N', USE_I18N)
 ALL_LANGUAGES = ENV_TOKENS.get('ALL_LANGUAGES', ALL_LANGUAGES)
 
+# Edraak-specific: Ignoring the default DEFAULT_COURSE_LANGUAGE from common.py but allowing customization from configs
+#                  just in case we'd like to customize to something other than Arabic.
+DEFAULT_COURSE_LANGUAGE = ENV_TOKENS.get('DEFAULT_COURSE_LANGUAGE', LANGUAGE_CODE)
+
 ENV_FEATURES = ENV_TOKENS.get('FEATURES', {})
 for feature, value in ENV_FEATURES.items():
     FEATURES[feature] = value
