@@ -94,8 +94,15 @@ def check_status(request, course_id):
 @login_required
 def download(request, course_id):
     user = request.user
+    # Extracts CourseLocator Object from course ID.
+    course_key = locator.CourseLocator.from_string(course_id)
+    # Extract the CourseOverview object of the course.
+    course = modulestore().get_course(course_key)
 
-    if is_student_pass(user, course_id):
+    certificate_status = \
+        certificate_status_for_student(user, course.id)['status']
+
+    if certificate_status == CertificateStatuses.downloadable or is_student_pass(user, course_id):
         pdf_file = generate_certificate(request, course_id)
         file_size = os.path.getsize(pdf_file.name)
         wrapper = FileWrapper(pdf_file)
