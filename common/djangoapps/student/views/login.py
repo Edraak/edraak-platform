@@ -531,7 +531,7 @@ def login_user(request):
                 _enforce_password_policy_compliance(request, post_data, possibly_authenticated_user)
 
         if possibly_authenticated_user is None or not possibly_authenticated_user.is_active:
-            _handle_failed_authentication(email_user)
+            _handle_failed_authentication(possibly_authenticated_user)
 
         _handle_successful_authentication_and_login(possibly_authenticated_user, request, post_data)
         if parent_user:
