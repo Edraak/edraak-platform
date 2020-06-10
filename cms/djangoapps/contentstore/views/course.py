@@ -1310,6 +1310,13 @@ def advanced_settings_handler(request, course_key_string):
                 return JsonResponse(CourseMetadata.fetch(course_module))
             else:
                 try:
+                    # Check if the specialization slug is about to be removed (un-linked)
+                    new_specialization_slug = ''
+                    if request.json:
+                        if request.json.get('specialization_slug'):
+                            new_specialization_slug = request.json['specialization_slug'].get('value', '')
+                    remove_specialization_slug = course_module.specialization_slug and new_specialization_slug == ''
+
                     # validate data formats and update the course module.
                     # Note: don't update mongo yet, but wait until after any tabs are changed
                     is_valid, errors, updated_data = CourseMetadata.validate_and_update_from_json(
@@ -1374,6 +1381,14 @@ def advanced_settings_handler(request, course_key_string):
                                     'name_ar': spec_json.get('name_ar')
                                 }
                             )
+                        elif remove_specialization_slug:
+                            try:
+                                to_delete = CourseSpecializationInfo.objects.get(course_id=course_key)
+                            except CourseSpecializationInfo.DoesNotExist:
+                                # Link has been removed already
+                                pass
+                            else:
+                                to_delete.delete()
 
                         return JsonResponse(updated_data)
                     else:
