@@ -1080,7 +1080,12 @@ def settings_handler(request, course_key_string):
                 'sidebar_html_enabled': sidebar_html_enabled,
                 'upload_asset_url': upload_asset_url,
                 'course_handler_url': reverse_course_url('course_handler', course_key),
-                'language_options': settings.ALL_LANGUAGES,
+                'language_options': (
+                    # Edraak-specific: Show just the enabled languages for Edraak Course Managers ease of use.
+                    settings.LANGUAGES
+                    if settings.FEATURES.get('EDRAAK_ENABLE_COURSE_LANGUAGE_CHANGES')
+                    else settings.ALL_LANGUAGES
+                ),
                 'credit_eligibility_enabled': credit_eligibility_enabled,
                 'is_credit_course': False,
                 'show_min_grade_warning': False,
