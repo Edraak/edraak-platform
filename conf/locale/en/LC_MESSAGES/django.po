@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-14 07:42+0000\n"
-"PO-Revision-Date: 2020-05-14 07:42:59.651410\n"
+"POT-Creation-Date: 2020-06-24 12:18+0000\n"
+"PO-Revision-Date: 2020-06-24 12:18:33.589531\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -64,8 +64,14 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
+#. #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
+#. TODO: Refactor this hack upstream by making the "Entrance Exam"
+#. customizable
+#. by the course author like other exams including "Homework" or "Lab" from
+#. within the grading section.
 #: cms/djangoapps/contentstore/views/entrance_exam.py
 #: lms/djangoapps/courseware/tabs.py cms/templates/settings.html
+#: openedx/features/course_experience/templates/course_experience/course-outline-fragment.html
 msgid "Entrance Exam"
 msgstr ""
 

@@ -37,13 +37,14 @@
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
-# Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2020
 # leena <labualnil@qrf.org>, 2020
 # Salah Alomari <salomari@qrf.org>, 2020
+# Shadi Naif <shadinaif@gmail.com>, 2020
+# Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2020
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -58,6 +59,7 @@
 # Omar Al-Ithawi <i@omardo.com>, 2019
 # Ali Hasan <ahasan@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
+# Shadi Naif <shadinaif@gmail.com>, 2020
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -75,7 +77,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-14 07:40+0000\n"
+"POT-Creation-Date: 2020-06-24 12:03+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -107,8 +109,14 @@ msgstr "المسألة "
 msgid "Advanced"
 msgstr "متقدِّم "
 
+#. #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
+#. TODO: Refactor this hack upstream by making the "Entrance Exam"
+#. customizable
+#. by the course author like other exams including "Homework" or "Lab" from
+#. within the grading section.
 #: cms/djangoapps/contentstore/views/entrance_exam.py
 #: lms/djangoapps/courseware/tabs.py cms/templates/settings.html
+#: openedx/features/course_experience/templates/course_experience/course-outline-fragment.html
 msgid "Entrance Exam"
 msgstr "امتحان القبول"
 
@@ -13524,7 +13532,7 @@ msgstr "رقم المساق "
 #: cms/templates/course_outline.html
 #: openedx/features/course_experience/templates/course_experience/course-home-fragment.html
 msgid "Course Outline"
-msgstr "الخطة الدراسيّة"
+msgstr "مخطّط المساق"
 
 #: cms/templates/html_error.html lms/templates/module-error.html
 msgid "Error:"
@@ -25697,7 +25705,7 @@ msgstr "تصفّح المساق"
 
 #: cms/templates/widgets/header.html
 msgid "Outline"
-msgstr "الخطة الدراسية"
+msgstr "مخطط المساق"
 
 #: cms/templates/widgets/header.html
 msgid "Import"
