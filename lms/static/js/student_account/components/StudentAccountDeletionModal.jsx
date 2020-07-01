@@ -2,7 +2,7 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, Icon, InputText, StatusAlert } from '@edx/paragon/static';
+import { Button, Modal, Icon, InputText, StatusAlert, CheckBox, CheckBoxGroup } from '@edx/paragon/static';
 import StringUtils from 'edx-ui-toolkit/js/utils/string-utils';
 
 import { deactivate } from '../AccountsClient';
@@ -16,6 +16,8 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
     this.handlePasswordInputChange = this.handlePasswordInputChange.bind(this);
     this.passwordFieldValidation = this.passwordFieldValidation.bind(this);
     this.handleConfirmationModalClose = this.handleConfirmationModalClose.bind(this);
+    this.handleDataDeleteCheckChange = this.handleDataDeleteCheckChange.bind(this);
+
     this.state = {
       password: '',
       passwordSubmitted: false,
@@ -24,6 +26,7 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
       validationErrorDetails: '',
       accountQueuedForDeletion: false,
       responseError: false,
+      supportDataDeleteCheck: false,
     };
   }
 
@@ -69,6 +72,10 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
     this.setState({ password: value });
   }
 
+  handleDataDeleteCheckChange() {
+    this.setState({ supportDataDeleteCheck: !this.state.supportDataDeleteCheck });
+  }
+
   passwordFieldValidation(value) {
     let feedback = { passwordValid: true };
 
@@ -91,6 +98,7 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
       responseError,
       validationErrorDetails,
       validationMessage,
+      supportDataDeleteCheck
     } = this.state;
     const { onClose } = this.props;
     const loseAccessText = StringUtils.interpolate(
@@ -146,6 +154,22 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
                 dismissible={false}
                 open
               />
+              <StatusAlert
+                dialog={(
+                  <div className="modal-alert">
+                    <div className="icon-wrapper">
+                      <Icon id="delete-confirmation-body-warning-icon" className={['fa', 'fa-exclamation-triangle']} />
+                    </div>
+                    <div className="alert-content">
+                      <h3 className="alert-title">{ gettext('Did you open any support cases with Edraak Support Team?') }</h3>
+                      <p>{ gettext('If so, please make sure that you send an email to info@edraak.org with the subject "Deleting my account" to request deletion of your support data (tickets, personal information, and any communication that occurred)') }</p>
+                    </div>
+                  </div>
+                )}
+                dismissible={false}
+                open
+              />
+              <CheckBoxGroup><CheckBox onChange={this.handleDataDeleteCheckChange} checked={this.state.checked} /><p>{ gettext('I confirm that either I don\'t have any data on Edraak Support, or that I sent an email to info@edraak.org to delete my support data') }</p></CheckBoxGroup>
               <p className="next-steps">{ gettext('If you still wish to continue and delete your account, please enter your account password:') }</p>
               <InputText
                 name="confirm-password"
@@ -166,7 +190,7 @@ class StudentAccountDeletionConfirmationModal extends React.Component {
             <Button
               label={gettext('Yes, Delete')}
               onClick={this.deleteAccount}
-              disabled={password.length === 0 || passwordSubmitted}
+              disabled={!supportDataDeleteCheck && (password.length === 0 || passwordSubmitted)}
             />,
           ]}
         />
