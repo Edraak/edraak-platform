@@ -1,6 +1,7 @@
 """
 URLs for the student support app.
 """
+from django.conf import settings
 from django.conf.urls import url
 
 from lms.djangoapps.support.views.contact_us import ContactUsView
@@ -22,13 +23,17 @@ urlpatterns = [
     url(r'^course_entitlement/?$', COURSE_ENTITLEMENTS_VIEW, name="course_entitlement"),
     url(r'^contact_us/?$', ContactUsView.as_view(), name="contact_us"),
     url(
-        r'^enrollment/(?P<username_or_email>[\w.@+-]+)?$',
+        r'^enrollment/(?P<username_or_email>{username_or_email})?$'.format(
+            username_or_email=settings.USERNAME_REGEX_PARTIAL
+        ),
         EnrollmentSupportListView.as_view(),
         name="enrollment_list"
     ),
     url(r'^manage_user/?$', ManageUserSupportView.as_view(), name="manage_user"),
     url(
-        r'^manage_user/(?P<username_or_email>[\w.@+-]+)?$',
+        r'^manage_user/(?P<username_or_email>{username_or_email})?$'.format(
+            username_or_email=settings.USERNAME_REGEX_PARTIAL
+        ),
         ManageUserDetailView.as_view(),
         name="manage_user_detail"
     ),

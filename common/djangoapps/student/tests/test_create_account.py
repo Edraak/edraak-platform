@@ -4,6 +4,7 @@ import json
 import unittest
 from datetime import datetime
 from importlib import import_module
+from unittest import skip
 
 import ddt
 import mock
@@ -938,6 +939,7 @@ class TestUnicodeUsername(TestCase):
 
         self.assertTrue(User.objects.get(email=self.url_params['email']))
 
+    @skip('Edraak - Allow Special Characters in User Names (JIRA: OU-429)')
     @mock.patch.dict(settings.FEATURES, {'ENABLE_UNICODE_USERNAME': True})
     def test_special_chars_with_feature_enabled(self):
         """
