@@ -37,8 +37,7 @@ class EdxRateLimitedAllowAllUsersModelBackend(RateLimitMixin, UserModelBackend):
 
     See: https://openedx.atlassian.net/browse/TNL-4516
     """
-    pass
-
+    no_username = True
 
 class EdxOAuth2Validator(OAuth2Validator):
     """
