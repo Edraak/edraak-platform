@@ -87,7 +87,6 @@ django-mysql==2.3.0
 django-oauth-toolkit==0.12.0
 django-object-actions==0.10.0  # via edx-enterprise
 django-pyfs==2.0
-django-ratelimit-backend==1.1.1
 django-ratelimit==1.1.0
 django-require==1.0.11
 django-rest-swagger==2.2.0
@@ -252,3 +251,6 @@ google-cloud-storage==1.26.0
 
 # For SendinBlue
 -e git+https://github.com/Edraak/APIv3-python-library.git@v6.1.0#egg=sib_api_v3_sdk
+
+# ratelimiter
+-e git+https://github.com/Edraak/django-ratelimit-backend.git@fix/UnicodeEncodeError#egg=django-ratelimit-backend==fix/UnicodeEncodeError
