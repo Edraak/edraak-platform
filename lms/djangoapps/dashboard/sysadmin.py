@@ -127,7 +127,7 @@ class Users(SysadminDashboardView):
             if euser is None:
                 continue
             try:
-                testuser = authenticate(username=euser.username, password=epass)
+                testuser = authenticate(email=euser.email, password=epass)
             except (TypeError, PermissionDenied, AttributeError) as err:
                 # Translators: This message means that the user could not be authenticated (that is, we could
                 # not log them in for some reason - maybe they don't have permission, or their password was wrong)

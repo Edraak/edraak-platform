@@ -37,15 +37,8 @@ class AuthenticateTestCase(TestCase):
         )
         self.validator = EdxOAuth2Validator()
 
-    def test_authenticate_with_username(self):
-        user = self.validator._authenticate(username='darkhelmet', password='12345')
-        self.assertEqual(
-            self.user,
-            user
-        )
-
     def test_authenticate_with_email(self):
-        user = self.validator._authenticate(username='darkhelmet@spaceball_one.org', password='12345')
+        user = self.validator._authenticate(email='darkhelmet@spaceball_one.org', password='12345')
         self.assertEqual(
             self.user,
             user

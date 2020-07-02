@@ -37,8 +37,7 @@ class EdxRateLimitedAllowAllUsersModelBackend(RateLimitMixin, UserModelBackend):
 
     See: https://openedx.atlassian.net/browse/TNL-4516
     """
-    pass
-
+    username_key = 'email'
 
 class EdxOAuth2Validator(OAuth2Validator):
     """
@@ -65,7 +64,7 @@ class EdxOAuth2Validator(OAuth2Validator):
         by username or email
         """
 
-        authenticated_user = authenticate(username=username, password=password)
+        authenticated_user = authenticate(email=username, password=password)
         if authenticated_user is None:
             UserModel = get_user_model()  # pylint: disable=invalid-name
             try:
@@ -73,7 +72,7 @@ class EdxOAuth2Validator(OAuth2Validator):
             except UserModel.DoesNotExist:
                 authenticated_user = None
             else:
-                authenticated_user = authenticate(username=email_user.username, password=password)
+                authenticated_user = authenticate(email=email_user.email, password=password, )
         return authenticated_user
 
     def save_bearer_token(self, token, request, *args, **kwargs):

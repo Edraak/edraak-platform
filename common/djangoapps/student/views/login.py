@@ -268,10 +268,10 @@ def _authenticate_first_party(request, post_data, unauthenticated_user):
     # If the user doesn't exist, we want to set the username to an invalid username so that authentication is guaranteed
     # to fail and we can take advantage of the ratelimited backend
     username = unauthenticated_user.username if unauthenticated_user else ""
-
+    email = unauthenticated_user.email
     try:
         return authenticate(
-            username=username,
+            email=email,
             password=post_data.get('password', None),
             request=request)
 
@@ -419,7 +419,7 @@ def verify_user_password(request):
     """
     try:
         _check_excessive_login_attempts(request.user)
-        user = authenticate(username=request.user.username, password=request.POST['password'], request=request)
+        user = authenticate(email=request.user.email, password=request.POST['password'], request=request)
         if user:
             if LoginFailures.is_feature_enabled():
                 LoginFailures.clear_lockout_counter(user)

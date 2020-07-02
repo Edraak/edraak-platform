@@ -295,7 +295,7 @@ class EdraakRateLimitModelBackendTest(TestCase):
 
             with self.assertRaises(RateLimitException):
                 mock_request = FakeRequest(ip_address='240.1.3.4')
-                backend.authenticate(username='user1', password='dummy', request=mock_request)
+                backend.authenticate(email='email@edraak.org', password='dummy', request=mock_request)
 
             db_log_failed_attempt.assert_called_once_with(mock_request, 'user1')
 
@@ -311,7 +311,7 @@ class EdraakRateLimitModelBackendTest(TestCase):
             backend = EdraakRateLimitModelBackend()
 
             mock_request = FakeRequest(ip_address='240.1.3.4')
-            authenticated_user = backend.authenticate(username='user1', password='dummy', request=mock_request)
+            authenticated_user = backend.authenticate(email='email@edraak.org', password='dummy', request=mock_request)
 
             self.assertIs(expected_user, authenticated_user, 'Should authenticate the user')
 

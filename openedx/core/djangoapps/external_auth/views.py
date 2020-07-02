@@ -214,7 +214,7 @@ def _external_login_or_signup(request,
         else:
             AUDIT_LOG.info(u'Linked user "{0}" logged in via SSL certificate'.format(user.email))
     else:
-        user = authenticate(username=uname, password=eamap.internal_password, request=request)
+        user = authenticate(email=uname, password=eamap.internal_password, request=request)
 
     if user is None:
         # we want to log the failure, but don't want to log the password attempted:
@@ -866,7 +866,7 @@ def provider_login(request):
         username = user.username
         password = request.POST.get('password', None)
         try:
-            user = authenticate(username=username, password=password, request=request)
+            user = authenticate(email=user.email, password=password, request=request)
         except RateLimitException:
             AUDIT_LOG.warning(u'OpenID - Too many failed login attempts.')
             return HttpResponseRedirect(openid_request_url)
