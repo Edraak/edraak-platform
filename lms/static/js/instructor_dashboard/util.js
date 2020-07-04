@@ -357,15 +357,17 @@
                     ths, arguments
                 );
             };
-            this.$running_tasks_section = findAndAssert(this.$section, '.running-tasks-section');
-            this.$table_running_tasks = findAndAssert(this.$section, '.running-tasks-table');
-            this.$no_tasks_message = findAndAssert(this.$section, '.no-pending-tasks-message');
-            if (this.$table_running_tasks.length) {
-                TASK_LIST_POLL_INTERVAL = 20000;
-                this.reload_running_tasks_list();
-                this.task_poller = new IntervalManager(TASK_LIST_POLL_INTERVAL, function() {
-                    return ths.reload_running_tasks_list();
-                });
+            if (this.$section.find('.running-tasks-container').length) {
+                this.$running_tasks_section = findAndAssert(this.$section, '.running-tasks-section');
+                this.$table_running_tasks = findAndAssert(this.$section, '.running-tasks-table');
+                this.$no_tasks_message = findAndAssert(this.$section, '.no-pending-tasks-message');
+                if (this.$table_running_tasks.length) {
+                    TASK_LIST_POLL_INTERVAL = 20000;
+                    this.reload_running_tasks_list();
+                    this.task_poller = new IntervalManager(TASK_LIST_POLL_INTERVAL, function () {
+                        return ths.reload_running_tasks_list();
+                    });
+                }
             }
         }
 
