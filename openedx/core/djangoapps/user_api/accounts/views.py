@@ -115,6 +115,56 @@ def request_requires_username(function):
     return wrapper
 
 
+def deactivate_user(user):
+    """
+    Deactivate and retire the given user
+    """
+    user_model = get_user_model()
+    try:
+        with transaction.atomic():
+            UserRetirementStatus.create_retirement(user)
+            # Unlink LMS social auth accounts
+            UserSocialAuth.objects.filter(user_id=user.id).delete()
+            # Change LMS password & email
+            user_email = user.email
+            user.email = get_retired_email_by_email(user.email)
+            user.save()
+            _set_unusable_password(user)
+            # TODO: Unlink social accounts & change password on each IDA.
+            # Remove the activation keys sent by email to the user for account activation.
+            Registration.objects.filter(user=user).delete()
+            # Add user to retirement queue.
+            # Delete OAuth tokens associated with the user.
+            retire_dop_oauth2_models(user)
+            retire_dot_oauth2_models(user)
+            try:
+                # Send notification email to user
+                site = Site.objects.get_current()
+                notification_context = get_base_template_context(site)
+                notification_context.update({'full_name': user.profile.name})
+                notification_context.update({'reset_password_link': urlparse.urljoin(
+                            settings.PROGS_URLS.get("ROOT"),
+                            settings.PROGS_URLS.get("PROG_RESET_PASSWORD", "reset_password"))})
+                notification = DeletionNotificationMessage().personalize(
+                    recipient=Recipient(username='', email_address=user_email),
+                    language=user.profile.language,
+                    user_context=notification_context,
+                )
+                ace.send(notification)
+            except Exception as exc:
+                log.exception('Error sending out deletion notification email')
+                raise
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except KeyError:
+        return Response(u'Username not specified.', status=status.HTTP_404_NOT_FOUND)
+    except user_model.DoesNotExist:
+        return Response(
+            u'The user "{}" does not exist.'.format(user.username), status=status.HTTP_404_NOT_FOUND
+        )
+    except Exception as exc:  # pylint: disable=broad-except
+        return Response(text_type(exc), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class AccountViewSet(ViewSet):
     """
         **Use Cases**
@@ -421,58 +471,18 @@ class DeactivateLogoutView(APIView):
         Marks the user as having no password set for deactivation purposes,
         and logs the user out.
         """
-        user_model = get_user_model()
         try:
             # Get the username from the request and check that it exists
             verify_user_password_response = self._verify_user_password(request)
             if verify_user_password_response.status_code != status.HTTP_204_NO_CONTENT:
                 return verify_user_password_response
-            with transaction.atomic():
-                UserRetirementStatus.create_retirement(request.user)
-                # Unlink LMS social auth accounts
-                UserSocialAuth.objects.filter(user_id=request.user.id).delete()
-                # Change LMS password & email
-                user_email = request.user.email
-                request.user.email = get_retired_email_by_email(request.user.email)
-                request.user.save()
-                _set_unusable_password(request.user)
-                # TODO: Unlink social accounts & change password on each IDA.
-                # Remove the activation keys sent by email to the user for account activation.
-                Registration.objects.filter(user=request.user).delete()
-                # Add user to retirement queue.
-                # Delete OAuth tokens associated with the user.
-                retire_dop_oauth2_models(request.user)
-                retire_dot_oauth2_models(request.user)
 
-                try:
-                    # Send notification email to user
-                    site = Site.objects.get_current()
-                    notification_context = get_base_template_context(site)
-                    notification_context.update({'full_name': request.user.profile.name})
-                    notification_context.update({'reset_password_link': urlparse.urljoin(
-                                settings.PROGS_URLS.get("ROOT"),
-                                settings.PROGS_URLS.get("PROG_RESET_PASSWORD", "reset_password"))})
-                    notification = DeletionNotificationMessage().personalize(
-                        recipient=Recipient(username='', email_address=user_email),
-                        language=request.user.profile.language,
-                        user_context=notification_context,
-                    )
-                    ace.send(notification)
-                except Exception as exc:
-                    log.exception('Error sending out deletion notification email')
-                    raise
-
-                # Log the user out.
+            if deactivate_user(request.user).status_code == status.HTTP_204_NO_CONTENT:
                 logout(request)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except KeyError:
-            return Response(u'Username not specified.', status=status.HTTP_404_NOT_FOUND)
-        except user_model.DoesNotExist:
-            return Response(
-                u'The user "{}" does not exist.'.format(request.user.username), status=status.HTTP_404_NOT_FOUND
-            )
         except Exception as exc:  # pylint: disable=broad-except
             return Response(text_type(exc), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def _verify_user_password(self, request):
         """
@@ -513,6 +523,39 @@ class DeactivateLogoutView(APIView):
             LoginFailures.increment_lockout_counter(user)
 
         raise AuthFailedError(_('Email or password is incorrect.'))
+
+
+class DeactivateBySuperuserView(APIView):
+    """
+    Edraak Specific: Allow staff user to deactivate any other user
+    """
+    authentication_classes = (JwtAuthentication,)
+    permission_classes = (permissions.IsAuthenticated, CanRetireUser,)
+
+    def post(self, request):
+        """
+        POST /api/user/v1/accounts/deactivate/
+
+        Used by an admin to marks a user as having no password set for deactivation purposes,
+        and logs the user out.
+        """
+        try:
+            username = request.POST['username']
+
+            if username == settings.RETIREMENT_SERVICE_WORKER_USERNAME:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+
+            user = User.objects.get(username=username)
+            if user.is_superuser or user.is_staff:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+
+            deactivate_user(user)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        except Exception as exc:  # pylint: disable=broad-except
+            return Response(text_type(exc), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 def _set_unusable_password(user):

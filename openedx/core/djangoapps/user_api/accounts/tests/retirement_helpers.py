@@ -16,6 +16,7 @@ from openedx.core.djangoapps.user_api.models import (
 from student.models import (
     get_retired_username_by_username,
     get_retired_email_by_email,
+    Registration,
 )
 from student.tests.factories import UserFactory
 
@@ -156,6 +157,27 @@ class RetirementTestCase(TestCase):
 
     def _get_dead_end_states(self):
         return [state for state in RetirementState.objects.filter(is_dead_end_state=True)]
+
+
+class RetirementTestUserMixin(object):
+    """
+    Create a test user for retirement
+    """
+    def setUp(self):
+        self.test_password = 'password'
+        self.test_user = UserFactory(password=self.test_password)
+        UserSocialAuth.objects.create(
+            user=self.test_user,
+            provider='some_provider_name',
+            uid='xyz@gmail.com'
+        )
+        UserSocialAuth.objects.create(
+            user=self.test_user,
+            provider='some_other_provider_name',
+            uid='xyz@gmail.com'
+        )
+
+        Registration().register(self.test_user)
 
 
 def fake_completed_retirement(user):
