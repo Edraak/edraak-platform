@@ -13,6 +13,7 @@ from .accounts.views import (
     AccountRetirementStatusView,
     AccountRetirementView,
     AccountViewSet,
+    DeactivateBySuperuserView,
     DeactivateLogoutView,
     LMSAccountRetirementView
 )
@@ -98,6 +99,11 @@ urlpatterns = [
         r'^v1/accounts/deactivate_logout/$',
         DeactivateLogoutView.as_view(),
         name='deactivate_logout'
+    ),
+    url(
+        r'^v1/accounts/deactivate/$',
+        DeactivateBySuperuserView.as_view(),
+        name='deactivate'
     ),
     url(
         r'^v1/accounts/{}/verification_status/$'.format(settings.USERNAME_PATTERN),

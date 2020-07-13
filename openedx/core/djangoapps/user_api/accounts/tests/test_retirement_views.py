@@ -5,6 +5,7 @@ Test cases to cover account retirement views
 from __future__ import print_function
 
 import datetime
+import importlib
 import json
 import unittest
 
@@ -17,7 +18,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core import mail
 from django.core.cache import cache
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 from django.test import TestCase
 from enterprise.models import (
     EnterpriseCustomer,
@@ -29,7 +30,7 @@ from integrated_channels.sap_success_factors.models import (
     SapSuccessFactorsLearnerDataTransmissionAudit
 )
 from opaque_keys.edx.keys import CourseKey
-from rest_framework import status
+from rest_framework import status, permissions
 from six import iteritems, text_type
 from social_django.models import UserSocialAuth
 from wiki.models import ArticleRevision, Article
@@ -72,14 +73,17 @@ from student.tests.factories import (
     CourseEnrollmentAllowedFactory,
     PendingEmailChangeFactory,
     PermissionFactory,
+    AdminFactory,
     SuperuserFactory,
     UserFactory
 )
 
+from ..permissions import CanRetireUser
 from ..views import AccountRetirementView, USER_PROFILE_PII
 from ...tests.factories import UserOrgTagFactory
 from .retirement_helpers import (  # pylint: disable=unused-import
     RetirementTestCase,
+    RetirementTestUserMixin,
     fake_completed_retirement,
     create_retirement_status,
     setup_retirement_states
@@ -95,6 +99,15 @@ def build_jwt_headers(user):
         'HTTP_AUTHORIZATION': 'JWT ' + token
     }
     return headers
+
+
+def get_view_class_from_url(url):
+    """
+    Get the class view that will be resolved from a URL
+    """
+    view_func = resolve(url).func
+    module = importlib.import_module(view_func.__module__)
+    return getattr(module, view_func.__name__)
 
 
 @unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Account APIs are only supported in LMS')
@@ -170,26 +183,12 @@ class TestAccountDeactivation(TestCase):
 
 
 @unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Account APIs are only supported in LMS')
-class TestDeactivateLogout(RetirementTestCase):
+class TestDeactivateLogout(RetirementTestUserMixin, RetirementTestCase):
     """
     Tests the account deactivation/logout endpoint.
     """
     def setUp(self):
         super(TestDeactivateLogout, self).setUp()
-        self.test_password = 'password'
-        self.test_user = UserFactory(password=self.test_password)
-        UserSocialAuth.objects.create(
-            user=self.test_user,
-            provider='some_provider_name',
-            uid='xyz@gmail.com'
-        )
-        UserSocialAuth.objects.create(
-            user=self.test_user,
-            provider='some_other_provider_name',
-            uid='xyz@gmail.com'
-        )
-
-        Registration().register(self.test_user)
 
         self.url = reverse('deactivate_logout')
 
@@ -246,6 +245,89 @@ class TestDeactivateLogout(RetirementTestCase):
         headers = build_jwt_headers(self.test_user)
         response = self.client.post(self.url, self.build_post(self.test_password), **headers)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+@ddt.ddt
+@unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Account APIs are only supported in LMS')
+class TestDeactivateBySuperuser(RetirementTestUserMixin, RetirementTestCase):
+    """
+    Tests the account deactivation/logout endpoint used by Edraak admin.
+    """
+    def setUp(self):
+        super(TestDeactivateBySuperuser, self).setUp()
+        self.test_superuser_password = 'superuser_password'
+        self.test_superuser = SuperuserFactory(password=self.test_superuser_password)
+
+        self.url = reverse('deactivate')
+
+    def _post(self, user, password, arguments):
+        """
+        Helper to post request using specific user login
+        """
+        self.client.login(username=user.username, password=password)
+        headers = build_jwt_headers(user)
+        return self.client.post(self.url, arguments, **headers)
+
+    def test_deactivate_user(self):
+        """
+        Verify that calling the API will deactivate the user as expected. And don't double test the logic that is
+        already tested in TestDeactivateLogout
+        """
+        response = self._post(
+            user=self.test_superuser,
+            password=self.test_superuser_password,
+            arguments={'username': self.test_user.username}
+        )
+        # Verifying response
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        # Verifying email sent (which indicates that everything went fine before that)
+        self.assertIn(self.test_user.email, mail.outbox[0].to)
+
+    def test_user_not_found(self):
+        """
+        Verify that a clear error will be returned if the provided username does not exist
+        """
+        response = self._post(
+            user=self.test_superuser,
+            password=self.test_superuser_password,
+            arguments={'username': 'wrong'}
+        )
+        # Verifying response
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    @ddt.data(SuperuserFactory, AdminFactory)
+    def test_cannot_deactivate_superusers_or_staff(self, factory_class):
+        """
+        Verify that superusers cannot be deactivated
+        """
+        response = self._post(
+            user=self.test_superuser,
+            password=self.test_superuser_password,
+            arguments={'username': factory_class().username}
+        )
+        # Verifying response
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_cannot_deactivate_retirement_worker(self):
+        """
+        Verify that superusers cannot be deactivated
+        """
+        with self.settings(RETIREMENT_SERVICE_WORKER_USERNAME=self.test_user.username):
+            response = self._post(
+                user=self.test_superuser,
+                password=self.test_superuser_password,
+                arguments={'username': self.test_user.username}
+            )
+        # Verifying response
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_permissions(self):
+        """
+        The view needs at least authentication and CanRetireUser
+        """
+        view_class = get_view_class_from_url(self.url)
+        self.assertIn(permissions.IsAuthenticated, view_class.permission_classes)
+        self.assertIn(CanRetireUser, view_class.permission_classes)
 
 
 @unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Account APIs are only supported in LMS')
