@@ -104,6 +104,6 @@
 # Third Party XBlocks
 
 -e git+https://github.com/mitodl/edx-sga.git@6b2f7aa2a18206023c8407e2c46f86d4b4c3ac96#egg=edx-sga==0.8.0
--e git+https://github.com/open-craft/xblock-poll@add89e14558c30f3c8dc7431e5cd6536fff6d941#egg=xblock-poll==1.5.1
+-e git+https://github.com/open-craft/xblock-poll@34e1e19eacb37f7914c5c6e85657b2826cc3460f#egg=xblock-poll==1.9.9
 
 -e git+https://github.com/edx-solutions/xblock-drag-and-drop-v2@15e4f12#egg=xblock-drag-and-drop-v2==2.2.7  # i18n updates
