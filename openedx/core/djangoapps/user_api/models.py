@@ -264,15 +264,13 @@ class UserRetirementStatus(TimeStampedModel):
         Confirm that the data passed in is properly formatted
         """
         required_keys = ('username', 'new_state', 'response')
-        optional_keys = ('force', )
-        known_keys = required_keys + optional_keys
 
         for required_key in required_keys:
             if required_key not in data:
                 raise RetirementStateError('RetirementStatus: Required key {} missing from update'.format(required_key))
 
         for key in data:
-            if key not in known_keys:
+            if key not in required_keys:
                 raise RetirementStateError('RetirementStatus: Unknown key {} in update'.format(key))
 
     @classmethod
@@ -312,10 +310,7 @@ class UserRetirementStatus(TimeStampedModel):
         or throw a RetirementStateError with a useful error message
         """
         self._validate_update_data(update)
-
-        force = update.get('force', False)
-        if not force:
-            self._validate_state_update(update['new_state'])
+        self._validate_state_update(update['new_state'])
 
         old_state = self.current_state
         self.current_state = RetirementState.objects.get(state_name=update['new_state'])
@@ -335,22 +330,7 @@ class UserRetirementStatus(TimeStampedModel):
         Can raise UserRetirementStatus.DoesNotExist or RetirementStateError, otherwise should
         return a UserRetirementStatus
         """
-        # During a narrow window learners were able to re-use a username that had been retired if
-        # they altered the capitalization of one or more characters. Therefore we can have more
-        # than one row returned here (due to our MySQL collation being case-insensitive), and need
-        # to disambiguate them in Python, which will respect case in the comparison.
-        retirements = cls.objects.filter(original_username=username)
-
-        retirement = None
-        for r in retirements:
-            if r.original_username == username:
-                retirement = r
-                break
-
-        if retirement is None:
-            raise UserRetirementStatus.DoesNotExist('{} does not have an exact match in UserRetirementStatus. '
-                                                    '{} similar rows found.'.format(username, len(retirements)))
-
+        retirement = cls.objects.get(original_username=username)
         state = retirement.current_state
 
         if state.required or state.state_name.endswith('_COMPLETE'):

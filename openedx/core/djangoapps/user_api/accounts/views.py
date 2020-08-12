@@ -577,18 +577,17 @@ class AccountRetirementPartnerReportView(ViewSet):
     parser_classes = (JSONParser,)
     serializer_class = UserRetirementStatusSerializer
 
-    @staticmethod
-    def _get_orgs_for_user(user):
+    def _get_orgs_for_user(self, user):
         """
         Returns a set of orgs that the user has enrollments with
         """
         orgs = set()
         for enrollment in user.courseenrollment_set.all():
-            org = enrollment.course_id.org
+            org = enrollment.course.org
 
             # Org can concievably be blank or this bogus default value
             if org and org != 'outdated_entry':
-                orgs.add(org)
+                orgs.add(enrollment.course.org)
         return orgs
 
     def retirement_partner_report(self, request):  # pylint: disable=unused-argument
@@ -670,23 +669,9 @@ class AccountRetirementPartnerReportView(ViewSet):
             original_username__in=usernames
         )
 
-        # Need to de-dupe usernames that differ only by case to find the exact right match
-        retirement_statuses_clean = [rs for rs in retirement_statuses if rs.original_username in usernames]
-
-        # During a narrow window learners were able to re-use a username that had been retired if
-        # they altered the capitalization of one or more characters. Therefore we can have more
-        # than one row returned here (due to our MySQL collation being case-insensitive), and need
-        # to disambiguate them in Python, which will respect case in the comparison.
-        if len(usernames) != len(retirement_statuses_clean):
+        if len(usernames) != len(retirement_statuses):
             return Response(
-                '{} original_usernames given, {} found!\n'
-                'Given usernames:\n{}\n'
-                'Found UserRetirementReportingStatuses:\n{}'.format(
-                    len(usernames),
-                    len(retirement_statuses_clean),
-                    usernames,
-                    ', '.join([rs.original_username for rs in retirement_statuses_clean])
-                ),
+                '{} original_usernames given, only {} found!'.format(len(usernames), len(retirement_statuses)),
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -745,49 +730,6 @@ class AccountRetirementStatusView(ViewSet):
         except RetirementStateError as exc:
             return Response(text_type(exc), status=status.HTTP_400_BAD_REQUEST)
 
-    def retirements_by_status_and_date(self, request):
-        """
-        GET /api/user/v1/accounts/retirements_by_status_and_date/
-        ?start_date=2018-09-05&end_date=2018-09-07&state=COMPLETE
-
-        Returns a list of UserRetirementStatusSerializer serialized
-        RetirementStatus rows in the given state that were created in the
-        retirement queue between the dates given. Date range is inclusive,
-        so to get one day you would set both dates to that day.
-        """
-        try:
-            start_date = datetime.datetime.strptime(request.GET['start_date'], '%Y-%m-%d')
-            end_date = datetime.datetime.strptime(request.GET['end_date'], '%Y-%m-%d')
-            now = datetime.datetime.now()
-            if start_date > now or end_date > now or start_date > end_date:
-                raise RetirementStateError('Dates must be today or earlier, and start must be earlier than end.')
-
-            # Add a day to make sure we get all the way to 23:59:59.999, this is compared "lt" in the query
-            # not "lte".
-            end_date += datetime.timedelta(days=1)
-            state = request.GET['state']
-
-            state_obj = RetirementState.objects.get(state_name=state)
-
-            retirements = UserRetirementStatus.objects.select_related(
-                'user', 'current_state', 'last_state'
-            ).filter(
-                current_state=state_obj, created__lt=end_date, created__gte=start_date
-            ).order_by(
-                'id'
-            )
-            serializer = UserRetirementStatusSerializer(retirements, many=True)
-            return Response(serializer.data)
-        # This should only occur on the datetime conversion of the start / end dates.
-        except ValueError as exc:
-            return Response('Invalid start or end date: {}'.format(text_type(exc)), status=status.HTTP_400_BAD_REQUEST)
-        except KeyError as exc:
-            return Response('Missing required parameter: {}'.format(text_type(exc)), status=status.HTTP_400_BAD_REQUEST)
-        except RetirementState.DoesNotExist:
-            return Response('Unknown retirement state.', status=status.HTTP_400_BAD_REQUEST)
-        except RetirementStateError as exc:
-            return Response(text_type(exc), status=status.HTTP_400_BAD_REQUEST)
-
     def retrieve(self, request, username):  # pylint: disable=unused-argument
         """
         GET /api/user/v1/accounts/{username}/retirement_status/
@@ -825,24 +767,7 @@ class AccountRetirementStatusView(ViewSet):
         """
         try:
             username = request.data['username']
-            retirements = UserRetirementStatus.objects.filter(original_username=username)
-
-            # During a narrow window learners were able to re-use a username that had been retired if
-            # they altered the capitalization of one or more characters. Therefore we can have more
-            # than one row returned here (due to our MySQL collation being case-insensitive), and need
-            # to disambiguate them in Python, which will respect case in the comparison.
-            retirement = None
-            if len(retirements) < 1:
-                raise UserRetirementStatus.DoesNotExist()
-            elif len(retirements) >= 1:
-                for r in retirements:
-                    if r.original_username == username:
-                        retirement = r
-                        break
-                # UserRetirementStatus was found, but it was the wrong case.
-                if retirement is None:
-                    raise UserRetirementStatus.DoesNotExist()
-
+            retirement = UserRetirementStatus.objects.get(original_username=username)
             retirement.update_state(request.data)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except UserRetirementStatus.DoesNotExist:
@@ -884,9 +809,9 @@ class LMSAccountRetirementView(ViewSet):
             course_enrollments = CourseEnrollment.objects.filter(user=retirement.user)
             ManualEnrollmentAudit.retire_manual_enrollments(course_enrollments, retirement.retired_email)
 
-            CreditRequest.retire_user(retirement)
+            CreditRequest.retire_user(retirement.original_username, retirement.retired_username)
             ApiAccessRequest.retire_user(retirement.user)
-            CreditRequirementStatus.retire_user(retirement)
+            CreditRequirementStatus.retire_user(retirement.user.username)
 
             # This signal allows code in higher points of LMS to retire the user as necessary
             USER_RETIRE_LMS_MISC.send(sender=self.__class__, user=retirement.user)

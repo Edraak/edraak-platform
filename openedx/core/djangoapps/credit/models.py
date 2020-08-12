@@ -510,20 +510,27 @@ class CreditRequirementStatus(TimeStampedModel):
             return
 
     @classmethod
-    def retire_user(cls, retirement):
+    def retire_user(cls, username_to_retire):
         """
         Retire a user by anonymizing
 
         Args:
-            retirement: UserRetirementStatus of the user being retired
+            username_to_retire(str): Username of the user
         """
-        requirement_statuses = cls.objects.filter(
-            username=retirement.original_username
-        ).update(
-            username=retirement.retired_username,
-            reason={},
-        )
-        return requirement_statuses > 0
+        requirement_statuses = cls.objects.filter(username=username_to_retire)
+        retirement_username = get_retired_username_by_username(username_to_retire)
+        if requirement_statuses.exists():
+            requirement_statuses.update(
+                username=retirement_username,
+                reason={}
+            )
+            return True
+        else:
+            log.info(
+                u'Can not retire requirement statuses for user "%s" because the user could not be found',
+                username_to_retire
+            )
+            return False
 
 
 def default_deadline_for_credit_eligibility():  # pylint: disable=invalid-name
@@ -675,16 +682,16 @@ class CreditRequest(TimeStampedModel):
         get_latest_by = 'created'
 
     @classmethod
-    def retire_user(cls, retirement):
+    def retire_user(cls, original_username, retired_username):
         """
         Obfuscates CreditRecord instances associated with `original_username`.
         Empties the records' `parameters` field and replaces username with its
         anonymized value, `retired_username`.
         """
         num_updated_credit_requests = cls.objects.filter(
-            username=retirement.original_username
+            username=original_username
         ).update(
-            username=retirement.retired_username,
+            username=retired_username,
             parameters={},
         )
         return num_updated_credit_requests > 0
