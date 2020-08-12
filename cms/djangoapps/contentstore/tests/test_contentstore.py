@@ -695,8 +695,7 @@ class MiscCourseTests(ContentStoreTestCase):
         # page response HTML
         self.check_components_on_page(
             ADVANCED_COMPONENT_TYPES,
-            ['Word cloud', 'Annotation', 'Text Annotation', 'Video Annotation', 'Image Annotation',
-             'split_test'],
+            ['Word cloud', 'Annotation', 'split_test'],
         )
 
     @ddt.data('/Fake/asset/displayname', '\\Fake\\asset\\displayname')
@@ -1477,7 +1476,7 @@ class ContentStoreTest(ContentStoreTestCase):
         resp = self.client.get_html('/home/')
         self.assertContains(
             resp,
-            '<h1 class="page-header">Studio Home</h1>',
+            u'<h1 class="page-header">{} Home</h1>'.format(settings.STUDIO_SHORT_NAME),
             status_code=200,
             html=True
         )
@@ -1954,7 +1953,8 @@ class RerunCourseTest(ContentStoreTestCase):
         source_course = CourseFactory.create()
         destination_course_key = self.post_rerun_request(source_course.id)
         self.verify_rerun_course(source_course.id, destination_course_key, self.destination_course_data['display_name'])
-        videos = list(get_videos_for_course(text_type(destination_course_key)))
+        videos, __ = get_videos_for_course(text_type(destination_course_key))
+        videos = list(videos)
         self.assertEqual(0, len(videos))
         self.assertInCourseListing(destination_course_key)
 
@@ -1990,8 +1990,10 @@ class RerunCourseTest(ContentStoreTestCase):
         self.verify_rerun_course(source_course.id, destination_course_key, self.destination_course_data['display_name'])
 
         # Verify that the VAL copies videos to the rerun
-        source_videos = list(get_videos_for_course(text_type(source_course.id)))
-        target_videos = list(get_videos_for_course(text_type(destination_course_key)))
+        videos, __ = get_videos_for_course(text_type(source_course.id))
+        source_videos = list(videos)
+        videos, __ = get_videos_for_course(text_type(destination_course_key))
+        target_videos = list(videos)
         self.assertEqual(1, len(source_videos))
         self.assertEqual(source_videos, target_videos)
 
@@ -2198,7 +2200,7 @@ class EntryPageTestCase(TestCase):
 
     def test_logout(self):
         # Logout redirects.
-        self._test_page("/logout", 302)
+        self._test_page("/logout", 200)
 
     @override_switch(
         '{}.{}'.format(waffle.WAFFLE_NAMESPACE, waffle.ENABLE_ACCESSIBILITY_POLICY_PAGE),

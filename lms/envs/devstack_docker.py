@@ -14,6 +14,7 @@ LOGGING['loggers']['tracking']['handlers'] = ['console']
 # SITE_NAME = LMS_BASE
 # LMS_ROOT_URL = 'http://{}'.format(LMS_BASE)
 # LMS_INTERNAL_ROOT_URL = LMS_ROOT_URL
+LOGIN_REDIRECT_WHITELIST = [CMS_BASE]
 
 ECOMMERCE_PUBLIC_URL_ROOT = 'http://localhost:18130'
 ECOMMERCE_API_URL = 'http://edx.devstack.ecommerce:18130/api/v2'
@@ -27,18 +28,8 @@ CREDENTIALS_PUBLIC_SERVICE_URL = 'http://localhost:18150'
 
 OAUTH_OIDC_ISSUER = '{}/oauth2'.format(LMS_ROOT_URL)
 
-DEFAULT_JWT_ISSUER = {
-    'ISSUER': OAUTH_OIDC_ISSUER,
-    'SECRET_KEY': 'lms-secret',
-    'AUDIENCE': 'lms-key',
-}
 JWT_AUTH.update({
-    'JWT_ISSUER': DEFAULT_JWT_ISSUER['ISSUER'],
-    'JWT_AUDIENCE': DEFAULT_JWT_ISSUER['AUDIENCE'],
-    'JWT_ISSUERS': [
-        DEFAULT_JWT_ISSUER,
-        RESTRICTED_APPLICATION_JWT_ISSUER,
-    ],
+    'JWT_ISSUER': OAUTH_OIDC_ISSUER,
 })
 
 FEATURES.update({
@@ -49,6 +40,7 @@ FEATURES.update({
     'ENABLE_DISCUSSION_SERVICE': True,
     'SHOW_HEADER_LANGUAGE_SELECTOR': True,
     'ENABLE_ENTERPRISE_INTEGRATION': False,
+    'ENABLE_COMBINED_LOGIN_REGISTRATION': True,
 })
 
 if not FEATURES.get('ENABLE_EDRAAK_LOGISTRATION'):
@@ -85,3 +77,7 @@ if not FEATURES.get('ENABLE_EDRAAK_LOGISTRATION'):
 CREDENTIALS_SERVICE_USERNAME = 'credentials_worker'
 
 COURSE_CATALOG_API_URL = 'http://edx.devstack.discovery:18381/api/v1/'
+
+# Uncomment the lines below if you'd like to see SQL statements in your devstack LMS log.
+# LOGGING['handlers']['console']['level'] = 'DEBUG'
+# LOGGING['loggers']['django.db.backends'] = {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False}

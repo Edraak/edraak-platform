@@ -620,6 +620,7 @@
 
     .role {
       margin: 20px 0;
+
       select {
         margin-left: 15px;
       }
@@ -648,6 +649,7 @@
 
   .batch-enrollment-ccx{
     @extend .batch-enrollment;
+
     float: left;
     width: 100%;
 
@@ -829,6 +831,7 @@
 
   .member-lists-management-ccx {
     @extend .member-lists-management;
+
     float: left;
     width: 100%;
   }
@@ -1502,6 +1505,54 @@
       }
     }
   }
+
+  .block-browser {
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .title {
+        margin: 0 0.5em;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0.25em 0;
+
+        .block-name {
+          flex-grow: 1;
+          margin-right: 0.5em;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .problem-browser {
+    .block-browser {
+      position: absolute;
+      background: white;
+      padding: 5px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      z-index: 2;
+    }
+
+    input {
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 0;
+    }
+  }
 }
 
 // view - metrics
@@ -1571,7 +1622,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background-color: rgba(255, 255, 255, .75);
+      background-color: rgba(255, 255, 255, 0.75);
 
       .metrics-overlay-content-wrapper {
         position: relative;
@@ -2212,7 +2263,7 @@ input[name="subject"] {
         }
 
         .field {
-          margin: 0 0 20px 0;
+          margin: 0 0 20px;
         }
 
         .field.required label {

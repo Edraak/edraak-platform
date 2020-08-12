@@ -3,7 +3,7 @@ Functionality for generating grade reports.
 """
 import logging
 import re
-from collections import OrderedDict
+from collections import defaultdict, OrderedDict
 from datetime import datetime
 from itertools import chain, izip, izip_longest
 from time import time
@@ -23,13 +23,14 @@ from instructor_analytics.basic import list_problem_responses
 from instructor_analytics.csvs import format_dictlist
 from lms.djangoapps.certificates.models import CertificateWhitelist, GeneratedCertificate, certificate_info_for_user
 from lms.djangoapps.grades.context import grading_context, grading_context_for_course
-from lms.djangoapps.grades.models import PersistentCourseGrade
+from lms.djangoapps.grades.models import PersistentCourseGrade, PersistentSubsectionGrade
 from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
 from lms.djangoapps.teams.models import CourseTeamMembership
 from lms.djangoapps.verify_student.services import IDVerificationService
 from openedx.core.djangoapps.content.block_structure.api import get_course_in_cache
 from openedx.core.djangoapps.course_groups.cohorts import bulk_cache_cohorts, get_cohort, is_course_cohorted
 from openedx.core.djangoapps.user_api.course_tag.api import BulkCourseTags
+from openedx.core.djangoapps.waffle_utils import WaffleSwitchNamespace
 from student.models import CourseEnrollment
 from student.roles import BulkRoleCache
 from xmodule.modulestore.django import modulestore
@@ -41,6 +42,10 @@ from edraak_university.models import UniversityID
 
 from .runner import TaskProgress
 from .utils import upload_csv_to_report_store
+
+WAFFLE_NAMESPACE = 'instructor_task'
+WAFFLE_SWITCHES = WaffleSwitchNamespace(name=WAFFLE_NAMESPACE)
+OPTIMIZE_GET_LEARNERS_FOR_COURSE = 'optimize_get_learners_for_course'
 
 TASK_LOG = logging.getLogger('edx.celery.task')
 
@@ -178,9 +183,7 @@ class _TeamBulkContext(object):
 class _EnrollmentBulkContext(object):
     def __init__(self, context, users):
         CourseEnrollment.bulk_fetch_enrollment_states(users, context.course_id)
-        self.verified_users = [
-            verified.user.id for verified in IDVerificationService.get_verified_users(users)
-        ]
+        self.verified_users = set(IDVerificationService.get_verified_user_ids(users))
 
 
 class _CourseGradeBulkContext(object):
@@ -191,6 +194,7 @@ class _CourseGradeBulkContext(object):
         bulk_cache_cohorts(context.course_id, users)
         BulkRoleCache.prefetch(users)
         PersistentCourseGrade.prefetch(context.course_id, users)
+        PersistentSubsectionGrade.prefetch(context.course_id, users)
         BulkCourseTags.prefetch(context.course_id, users)
 
 
@@ -304,9 +308,50 @@ class CourseGradeReport(object):
             args = [iter(iterable)] * chunk_size
             return izip_longest(*args, fillvalue=fillvalue)
 
-        users = CourseEnrollment.objects.users_enrolled_in(context.course_id, include_inactive=True)
-        users = users.select_related('profile')
-        return grouper(users)
+        def users_for_course(course_id):
+            """
+            Get all the enrolled users in a course.
+
+            This method fetches & loads the enrolled user objects at once which may cause
+            out-of-memory errors in large courses. This method will be removed when
+            `OPTIMIZE_GET_LEARNERS_FOR_COURSE` waffle flag is removed.
+            """
+            users = CourseEnrollment.objects.users_enrolled_in(course_id, include_inactive=True)
+            users = users.select_related('profile')
+            return grouper(users)
+
+        def users_for_course_v2(course_id):
+            """
+            Get all the enrolled users in a course chunk by chunk.
+
+            This generator method fetches & loads the enrolled user objects on demand which in chunk
+            size defined. This method is a workaround to avoid out-of-memory errors.
+            """
+            filter_kwargs = {
+                'courseenrollment__course_id': course_id,
+            }
+
+            user_ids_list = get_user_model().objects.filter(**filter_kwargs).values_list('id', flat=True).order_by('id')
+            user_chunks = grouper(user_ids_list)
+            for user_ids in user_chunks:
+                user_ids = [user_id for user_id in user_ids if user_id is not None]
+                min_id = min(user_ids)
+                max_id = max(user_ids)
+                users = get_user_model().objects.filter(
+                    id__gte=min_id,
+                    id__lte=max_id,
+                    **filter_kwargs
+                ).select_related('profile')
+                yield users
+
+        task_log_message = u'{}, Task type: {}'.format(context.task_info_string, context.action_name)
+        if WAFFLE_SWITCHES.is_enabled(OPTIMIZE_GET_LEARNERS_FOR_COURSE):
+            TASK_LOG.info(u'%s, Creating Course Grade with optimization', task_log_message)
+            return users_for_course_v2(context.course_id)
+
+        TASK_LOG.info(u'%s, Creating Course Grade without optimization', task_log_message)
+        batch_users = users_for_course(context.course_id)
+        return batch_users
 
     def _user_grades(self, course_grade, context):
         """
@@ -597,15 +642,15 @@ class ProblemResponses(object):
             Tuple[str, List[str], UsageKey]: tuple of a block's display name, path, and
                 usage key
         """
-        display_name = course_blocks.get_xblock_field(root, 'display_name')
+        name = course_blocks.get_xblock_field(root, 'display_name') or root.category
         if path is None:
-            path = [display_name]
+            path = [name]
 
-        yield display_name, path, root
+        yield name, path, root
 
         for block in course_blocks.get_children(root):
-            display_name = course_blocks.get_xblock_field(block, 'display_name')
-            for result in cls._build_problem_list(course_blocks, block, path + [display_name]):
+            name = course_blocks.get_xblock_field(block, 'display_name') or block.category
+            for result in cls._build_problem_list(course_blocks, block, path + [name]):
                 yield result
 
     @classmethod
@@ -622,8 +667,9 @@ class ProblemResponses(object):
                 block and it child blocks.
 
         Returns:
-              List[Dict]: Returns a list of dictionaries containing the student
-                data which will be included in the final csv.
+              Tuple[List[Dict], List[str]]: Returns a list of dictionaries
+                containing the student data which will be included in the
+                final csv, and the features/keys to include in that CSV.
         """
         usage_key = UsageKey.from_string(usage_key_str).map_into_course(course_key)
         user = get_user_model().objects.get(pk=user_id)
@@ -635,6 +681,8 @@ class ProblemResponses(object):
         store = modulestore()
         user_state_client = DjangoXBlockUserStateClient()
 
+        student_data_keys = set()
+
         with store.bulk_operations(course_key):
             for title, path, block_key in cls._build_problem_list(course_blocks, usage_key):
                 # Chapter and sequential blocks are filtered out since they include state
@@ -643,35 +691,57 @@ class ProblemResponses(object):
                     continue
 
                 block = store.get_item(block_key)
+                generated_report_data = defaultdict(list)
 
                 # Blocks can implement the generate_report_data method to provide their own
                 # human-readable formatting for user state.
                 if hasattr(block, 'generate_report_data'):
                     try:
                         user_state_iterator = user_state_client.iter_all_for_block(block_key)
-                        responses = [
-                            {'username': username, 'state': state}
-                            for username, state in
-                            block.generate_report_data(user_state_iterator, max_count)
-                        ]
+                        for username, state in block.generate_report_data(user_state_iterator, max_count):
+                            generated_report_data[username].append(state)
                     except NotImplementedError:
-                        responses = list_problem_responses(course_key, block_key, max_count)
-                else:
-                    responses = list_problem_responses(course_key, block_key, max_count)
+                        pass
 
-                student_data += responses
-                for response in responses:
+                responses = []
+
+                for response in list_problem_responses(course_key, block_key, max_count):
                     response['title'] = title
                     # A human-readable location for the current block
                     response['location'] = ' > '.join(path)
                     # A machine-friendly location for the current block
                     response['block_key'] = str(block_key)
+                    # A block that has a single state per user can contain multiple responses
+                    # within the same state.
+                    user_states = generated_report_data.get(response['username'], [])
+                    if user_states:
+                        # For each response in the block, copy over the basic data like the
+                        # title, location, block_key and state, and add in the responses
+                        for user_state in user_states:
+                            user_response = response.copy()
+                            user_response.update(user_state)
+                            student_data_keys = student_data_keys.union(user_state.keys())
+                            responses.append(user_response)
+                    else:
+                        responses.append(response)
+
+                student_data += responses
+
                 if max_count is not None:
                     max_count -= len(responses)
                     if max_count <= 0:
                         break
 
-        return student_data
+        # Keep the keys in a useful order, starting with username, title and location,
+        # then the columns returned by the xblock report generator in sorted order and
+        # finally end with the more machine friendly block_key and state.
+        student_data_keys_list = (
+            ['username', 'title', 'location'] +
+            sorted(student_data_keys) +
+            ['block_key', 'state']
+        )
+
+        return student_data, student_data_keys_list
 
     @classmethod
     def generate(cls, _xmodule_instance_args, _entry_id, course_id, task_input, action_name):
@@ -688,14 +758,17 @@ class ProblemResponses(object):
         problem_location = task_input.get('problem_location')
 
         # Compute result table and format it
-        student_data = cls._build_student_data(
+        student_data, student_data_keys = cls._build_student_data(
             user_id=task_input.get('user_id'),
             course_key=course_id,
             usage_key_str=problem_location
         )
 
-        features = ['username', 'title', 'location', 'block_key', 'state']
-        header, rows = format_dictlist(student_data, features)
+        for data in student_data:
+            for key in student_data_keys:
+                data.setdefault(key, '')
+
+        header, rows = format_dictlist(student_data, student_data_keys)
 
         task_progress.attempted = task_progress.succeeded = len(rows)
         task_progress.skipped = task_progress.total - task_progress.attempted

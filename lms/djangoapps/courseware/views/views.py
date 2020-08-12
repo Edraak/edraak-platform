@@ -7,14 +7,13 @@ import urllib
 from collections import OrderedDict, namedtuple
 from datetime import datetime
 
-import analytics
 import bleach
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import PermissionDenied
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Q, prefetch_related_objects
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import redirect
 from django.template.context_processors import csrf
@@ -24,10 +23,11 @@ from django.utils.http import urlquote_plus
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_control
+from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.generic import View
-from eventtracking import tracker
+from edx_django_utils.monitoring import set_custom_metrics_for_course_key
 from markupsafe import escape
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey, UsageKey
@@ -66,6 +66,7 @@ from lms.djangoapps.ccx.custom_exception import CCXLocatorValidationException
 from lms.djangoapps.certificates import api as certs_api
 from lms.djangoapps.certificates.models import CertificateStatuses
 from lms.djangoapps.commerce.utils import EcommerceService
+from lms.djangoapps.courseware.courses import allow_public_access
 from lms.djangoapps.courseware.exceptions import CourseAccessRedirect, Redirect
 from lms.djangoapps.experiments.utils import get_experiment_user_metadata_context
 from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
@@ -81,26 +82,33 @@ from openedx.core.djangoapps.credit.api import (
     is_user_eligible_for_credit
 )
 from openedx.core.djangoapps.models.course_details import CourseDetails
-from openedx.core.djangoapps.monitoring_utils import set_custom_metrics_for_course_key
 from openedx.core.djangoapps.plugin_api.views import EdxFragmentView
 from openedx.core.djangoapps.programs.utils import ProgramMarketingDataExtender
 from openedx.core.djangoapps.self_paced.models import SelfPacedConfiguration
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangoapps.util.user_messages import PageLevelMessages
 from openedx.core.djangolib.markup import HTML, Text
-from openedx.features.course_experience import UNIFIED_COURSE_TAB_FLAG, course_home_url_name
+from openedx.features.course_duration_limits.access import generate_course_expired_fragment
+from openedx.features.course_experience import (
+    UNIFIED_COURSE_TAB_FLAG,
+    COURSE_ENABLE_UNENROLLED_ACCESS_FLAG,
+    course_home_url_name,
+)
 from openedx.features.course_experience.course_tools import CourseToolsPluginManager
 from openedx.features.course_experience.views.course_dates import CourseDatesFragmentView
 from openedx.features.course_experience.waffle import ENABLE_COURSE_ABOUT_SIDEBAR_HTML
 from openedx.features.course_experience.waffle import waffle as course_experience_waffle
 from openedx.features.enterprise_support.api import data_sharing_consent_required
+from openedx.features.journals.api import get_journals_context
 from shoppingcart.utils import is_shopping_cart_enabled
 from student.models import CourseEnrollment, UserTestGroup
+from track import segment
 from util.cache import cache, cache_if_anonymous
 from util.db import outer_atomic
 from util.milestones_helpers import get_prerequisite_courses_display
 from util.views import _record_feedback_in_zendesk, ensure_valid_course_key, ensure_valid_usage_key
 from web_fragments.fragment import Fragment
+from xmodule.course_module import COURSE_VISIBILITY_PUBLIC, COURSE_VISIBILITY_PUBLIC_OUTLINE
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError, NoPathToItem
 from xmodule.tabs import CourseTabList
@@ -129,6 +137,19 @@ AUDIT_PASSING_CERT_DATA = CertData(
     download_url=None,
     cert_web_view_url=None
 )
+
+HONOR_PASSING_CERT_DATA = CertData(
+    CertificateStatuses.honor_passing,
+    _('Your enrollment: Honor track'),
+    _('You are enrolled in the honor track for this course. The honor track does not include a certificate.'),
+    download_url=None,
+    cert_web_view_url=None
+)
+
+INELIGIBLE_PASSING_CERT_DATA = {
+    CourseMode.AUDIT: AUDIT_PASSING_CERT_DATA,
+    CourseMode.HONOR: HONOR_PASSING_CERT_DATA
+}
 
 GENERATING_CERT_DATA = CertData(
     CertificateStatuses.generating,
@@ -191,13 +212,13 @@ def user_groups(user):
     cache_expiration = 60 * 60  # one hour
 
     # Kill caching on dev machines -- we switch groups a lot
-    group_names = cache.get(key)  # pylint: disable=no-member
+    group_names = cache.get(key)
     if settings.DEBUG:
         group_names = None
 
     if group_names is None:
         group_names = [u.name for u in UserTestGroup.objects.filter(users=user)]
-        cache.set(key, group_names, cache_expiration)  # pylint: disable=no-member
+        cache.set(key, group_names, cache_expiration)
 
     return group_names
 
@@ -227,7 +248,8 @@ def courses(request):
         {
             'courses': courses_list,
             'course_discovery_meanings': course_discovery_meanings,
-            'programs_list': programs_list
+            'programs_list': programs_list,
+            'journal_info': get_journals_context(request),  # TODO: Course Listing Plugin required
         }
     )
 
@@ -455,7 +477,7 @@ class StaticCourseTabView(EdxFragmentView):
             raise Http404
 
         # Show warnings if the user has limited access
-        CourseTabView.register_user_access_warning_messages(request, course_key)
+        CourseTabView.register_user_access_warning_messages(request, course)
 
         return super(StaticCourseTabView, self).get(request, course=course, tab=tab, **kwargs)
 
@@ -503,7 +525,7 @@ class CourseTabView(EdxFragmentView):
 
                 # Show warnings if the user has limited access
                 # Must come after masquerading on creation of page context
-                self.register_user_access_warning_messages(request, course_key)
+                self.register_user_access_warning_messages(request, course)
 
                 set_custom_metrics_for_course_key(course_key)
                 return super(CourseTabView, self).get(request, course=course, page_context=page_context, **kwargs)
@@ -521,11 +543,13 @@ class CourseTabView(EdxFragmentView):
         return url_to_enroll
 
     @staticmethod
-    def register_user_access_warning_messages(request, course_key):
+    def register_user_access_warning_messages(request, course):
         """
         Register messages to be shown to the user if they have limited access.
         """
-        if request.user.is_anonymous:
+        allow_anonymous = allow_public_access(course, [COURSE_VISIBILITY_PUBLIC])
+
+        if request.user.is_anonymous and not allow_anonymous:
             PageLevelMessages.register_warning_message(
                 request,
                 Text(_("To see course content, {sign_in_link} or {register_link}.")).format(
@@ -540,10 +564,10 @@ class CourseTabView(EdxFragmentView):
                 )
             )
         else:
-            if not CourseEnrollment.is_enrolled(request.user, course_key):
+            if not CourseEnrollment.is_enrolled(request.user, course.id) and not allow_anonymous:
                 # Only show enroll button if course is open for enrollment.
-                if course_open_for_self_enrollment(course_key):
-                    enroll_message = _('You must be enrolled in the course to see course content. \
+                if course_open_for_self_enrollment(course.id):
+                    enroll_message = _(u'You must be enrolled in the course to see course content. \
                             {enroll_link_start}Enroll now{enroll_link_end}.')
                     PageLevelMessages.register_warning_message(
                         request,
@@ -575,7 +599,7 @@ class CourseTabView(EdxFragmentView):
             request.path,
             getattr(user, 'real_user', user),
             user,
-            text_type(course.id),
+            None if course is None else text_type(course.id),
         )
         try:
             return render_to_response(
@@ -611,11 +635,6 @@ class CourseTabView(EdxFragmentView):
         else:
             masquerade = None
 
-        if course and not check_course_open_for_learner(request.user, course):
-            # Disable student view button if user is staff and
-            # course is not yet visible to students.
-            supports_preview_menu = False
-
         context = {
             'course': course,
             'tab': tab,
@@ -627,6 +646,10 @@ class CourseTabView(EdxFragmentView):
             'uses_pattern_library': not uses_bootstrap,
             'disable_courseware_js': True,
         }
+        # Avoid Multiple Mathjax loading on the 'user_profile'
+        if 'profile_page_context' in kwargs:
+            context['load_mathjax'] = kwargs['profile_page_context'].get('load_mathjax', True)
+
         context.update(
             get_experiment_user_metadata_context(
                 course,
@@ -759,15 +782,15 @@ def course_about(request, course_id):
     if not can_self_enroll_in_course(course_key):
         return redirect(reverse('dashboard'))
 
+    # If user needs to be redirected to course home then redirect
+    if _course_home_redirect_enabled():
+        return redirect(reverse(course_home_url_name(course_key), args=[text_type(course_key)]))
+
     with modulestore().bulk_operations(course_key):
         permission = get_permission_for_course_about()
         course = get_course_with_access(request.user, permission, course_key)
         course_details = CourseDetails.populate(course)
         modes = CourseMode.modes_for_course_dict(course_key)
-
-        if configuration_helpers.get_value('ENABLE_MKTG_SITE', settings.FEATURES.get('ENABLE_MKTG_SITE', False)):
-            return redirect(reverse(course_home_url_name(course.id), args=[text_type(course.id)]))
-
         registered = registered_for_course(course, request.user)
 
         staff_access = bool(has_access(request.user, 'staff', course))
@@ -846,6 +869,8 @@ def course_about(request, course_id):
 
         sidebar_html_enabled = course_experience_waffle().is_enabled(ENABLE_COURSE_ABOUT_SIDEBAR_HTML)
 
+        allow_anonymous = allow_public_access(course, [COURSE_VISIBILITY_PUBLIC, COURSE_VISIBILITY_PUBLIC_OUTLINE])
+
         # This local import is due to the circularity of lms and openedx references.
         # This may be resolved by using stevedore to allow web fragments to be used
         # as plugins, and to avoid the direct import.
@@ -884,6 +909,7 @@ def course_about(request, course_id):
             'course_image_urls': overview.image_urls,
             'reviews_fragment_view': reviews_fragment_view,
             'sidebar_html_enabled': sidebar_html_enabled,
+            'allow_anonymous': allow_anonymous,
         }
 
         return render_to_response('courseware/course_about.html', context)
@@ -972,7 +998,7 @@ def _progress(request, course_key, student_id):
 
     # The pre-fetching of groups is done to make auth checks not require an
     # additional DB lookup (this kills the Progress page in particular).
-    student = User.objects.prefetch_related("groups").get(id=student.id)
+    prefetch_related_objects([student], 'groups')
     if request.user.id != student.id:
         # refetch the course as the assumed student
         course = get_course_with_access(student, 'load', course_key, check_if_enrolled=True)
@@ -987,6 +1013,8 @@ def _progress(request, course_key, student_id):
     # checking certificate generation configuration
     enrollment_mode, _ = CourseEnrollment.enrollment_mode_for_user(student, course_key)
 
+    course_expiration_fragment = generate_course_expired_fragment(student, course)
+
     context = {
         'course': course,
         'courseware_summary': courseware_summary,
@@ -997,8 +1025,10 @@ def _progress(request, course_key, student_id):
         'supports_preview_menu': True,
         'student': student,
         'credit_course_requirements': _credit_course_requirements(course_key, student),
-        'certificate_data': _get_cert_data(student, course, enrollment_mode, course_grade),
+        'course_expiration_fragment': course_expiration_fragment,
     }
+    if certs_api.get_active_web_certificate(course):
+        context['certificate_data'] = _get_cert_data(student, course, enrollment_mode, course_grade)
     context.update(
         get_experiment_user_metadata_context(
             course,
@@ -1021,7 +1051,7 @@ def _downloadable_certificate_message(course, cert_downloadable_status):
                     course_id=course.id, uuid=cert_downloadable_status['uuid']
                 )
             )
-        elif not cert_downloadable_status['download_url']:
+        else:
             return GENERATING_CERT_DATA
 
     return _downloadable_cert_data(download_url=cert_downloadable_status['download_url'])
@@ -1064,7 +1094,7 @@ def _get_cert_data(student, course, enrollment_mode, course_grade=None):
         returns dict if course certificate is available else None.
     """
     if not CourseMode.is_eligible_for_certificate(enrollment_mode):
-        return AUDIT_PASSING_CERT_DATA
+        return INELIGIBLE_PASSING_CERT_DATA.get(enrollment_mode)
 
     certificates_enabled_for_course = certs_api.cert_generation_enabled(course.id)
     if course_grade is None:
@@ -1136,6 +1166,21 @@ def _credit_course_requirements(course_key, student):
         'eligibility_status': eligibility_status,
         'requirements': requirement_statuses,
     }
+
+
+def _course_home_redirect_enabled():
+    """
+    Return True value if user needs to be redirected to course home based on value of
+    `ENABLE_MKTG_SITE` and `ENABLE_COURSE_HOME_REDIRECT feature` flags
+
+    Returns: boolean True or False
+    """
+    if configuration_helpers.get_value(
+            'ENABLE_MKTG_SITE', settings.FEATURES.get('ENABLE_MKTG_SITE', False)
+    ) and configuration_helpers.get_value(
+        'ENABLE_COURSE_HOME_REDIRECT', settings.FEATURES.get('ENABLE_COURSE_HOME_REDIRECT', True)
+    ):
+        return True
 
 
 @login_required
@@ -1417,7 +1462,7 @@ def generate_user_cert(request, course_id):
         return HttpResponse()
 
 
-def _track_successful_certificate_generation(user_id, course_id):  # pylint: disable=invalid-name
+def _track_successful_certificate_generation(user_id, course_id):
     """
     Track a successful certificate generation event.
 
@@ -1428,28 +1473,16 @@ def _track_successful_certificate_generation(user_id, course_id):  # pylint: dis
         None
 
     """
-    if settings.LMS_SEGMENT_KEY:
-        event_name = 'edx.bi.user.certificate.generate'
-        tracking_context = tracker.get_tracker().resolve_context()
-
-        analytics.track(
-            user_id,
-            event_name,
-            {
-                'category': 'certificates',
-                'label': text_type(course_id)
-            },
-            context={
-                'ip': tracking_context.get('ip'),
-                'Google Analytics': {
-                    'clientId': tracking_context.get('client_id')
-                }
-            }
-        )
+    event_name = 'edx.bi.user.certificate.generate'
+    segment.track(user_id, event_name, {
+        'category': 'certificates',
+        'label': text_type(course_id)
+    })
 
 
 @require_http_methods(["GET", "POST"])
 @ensure_valid_usage_key
+@xframe_options_exempt
 def render_xblock(request, usage_key_string, check_if_enrolled=True):
     """
     Returns an HttpResponse with HTML content for the xBlock with the given usage_key.
@@ -1621,7 +1654,7 @@ def financial_assistance_form(request):
     enrolled_courses = get_financial_aid_courses(user)
     incomes = ['Less than $5,000', '$5,000 - $10,000', '$10,000 - $15,000', '$15,000 - $20,000', '$20,000 - $25,000']
     annual_incomes = [
-        {'name': _(income), 'value': income} for income in incomes  # pylint: disable=translation-of-non-string
+        {'name': _(income), 'value': income} for income in incomes
     ]
     return render_to_response('financial-assistance/apply.html', {
         'header_text': FINANCIAL_ASSISTANCE_HEADER,

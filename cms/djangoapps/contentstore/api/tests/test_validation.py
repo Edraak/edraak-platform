@@ -14,7 +14,7 @@ from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory
 
 class CourseValidationViewTest(SharedModuleStoreTestCase, APITestCase):
     """
-    Test importing courses via a RESTful API (POST method only)
+    Test course validation view via a RESTful API
     """
     MODULESTORE = TEST_DATA_SPLIT_MODULESTORE
 
@@ -33,6 +33,9 @@ class CourseValidationViewTest(SharedModuleStoreTestCase, APITestCase):
 
     @classmethod
     def initialize_course(cls, course):
+        """
+        Sets up test course structure.
+        """
         course.start = datetime.now()
         course.self_paced = True
         cls.store.update_item(course, cls.staff.id)
@@ -77,11 +80,12 @@ class CourseValidationViewTest(SharedModuleStoreTestCase, APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         expected_data = {
             'assignments': {
-                'num_with_dates_before_end': 0,
-                'num_with_dates': 0,
-                'total_visible': 1,
-                'num_with_dates_after_start': 0,
                 'total_number': 1,
+                'total_visible': 1,
+                'assignments_with_dates_before_start': [],
+                'assignments_with_dates_after_end': [],
+                'assignments_with_ora_dates_after_end': [],
+                'assignments_with_ora_dates_before_start': [],
             },
             'dates': {
                 'has_start_date': True,
@@ -91,10 +95,12 @@ class CourseValidationViewTest(SharedModuleStoreTestCase, APITestCase):
                 'has_update': True,
             },
             'certificates': {
+                'is_enabled': True,
                 'is_activated': False,
                 'has_certificate': False,
             },
             'grades': {
+                'has_grading_policy': False,
                 'sum_of_weights': 1.0,
             },
             'is_self_paced': True,

@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 DEFAULT_DATA_API = 'enrollment.data'
 
 
-def get_enrollments(user_id):
+def get_enrollments(user_id, include_inactive=False):
     """Retrieves all the courses a user is enrolled in.
 
     Takes a user and retrieves all relative enrollments. Includes information regarding how the user is enrolled
@@ -26,6 +26,7 @@ def get_enrollments(user_id):
 
     Args:
         user_id (str): The username of the user we want to retrieve course enrollment information for.
+        include_inactive (bool): Determines whether inactive enrollments will be included
 
     Returns:
         A list of enrollment information for the given user.
@@ -92,7 +93,7 @@ def get_enrollments(user_id):
         ]
 
     """
-    return _data_api().get_course_enrollments(user_id)
+    return _data_api().get_course_enrollments(user_id, include_inactive)
 
 
 def get_enrollment(user_id, course_id):
@@ -463,6 +464,15 @@ def unenroll_user_from_all_courses(user_id):
     :return: The IDs of all of the organizations from which the learner was unenrolled.
     """
     return _data_api().unenroll_user_from_all_courses(user_id)
+
+
+def get_user_roles(user_id):
+    """
+    Returns a list of all roles that this user has.
+    :param user_id: The id of the selected user.
+    :return: All roles for all courses that this user has.
+    """
+    return _data_api().get_user_roles(user_id)
 
 
 def _data_api():

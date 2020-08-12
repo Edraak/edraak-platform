@@ -29,6 +29,7 @@ omit =
     openedx/features/*/migrations/*
 
 concurrency=multiprocessing
+parallel = true
 
 [report]
 ignore_errors = True
@@ -48,6 +49,4 @@ output = reports/coverage.xml
 jenkins_source =
     /home/jenkins/workspace/$JOB_NAME
     /home/jenkins/workspace/$SUBSET_JOB
-
-devstack_source =
     /edx/app/edxapp/edx-platform

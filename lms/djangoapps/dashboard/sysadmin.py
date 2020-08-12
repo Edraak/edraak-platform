@@ -357,6 +357,8 @@ class Courses(SysadminDashboardView):
             info = [output_json['commit'],
                     output_json['date'],
                     output_json['author'], ]
+        except OSError as error:
+            log.warning(text_type(u"Error fetching git data: %s - %s"), text_type(cdir), text_type(error))
         except (ValueError, subprocess.CalledProcessError):
             pass
 
@@ -623,16 +625,10 @@ class GitLogs(TemplateView):
                 raise Http404
             cilset = CourseImportLog.objects.order_by('-created')
         else:
-            try:
-                course = get_course_by_id(course_id)
-            except Exception:
-                log.info('Cannot find course %s', course_id)
-                raise Http404
-
             # Allow only course team, instructors, and staff
             if not (request.user.is_staff or
-                    CourseInstructorRole(course.id).has_user(request.user) or
-                    CourseStaffRole(course.id).has_user(request.user)):
+                    CourseInstructorRole(course_id).has_user(request.user) or
+                    CourseStaffRole(course_id).has_user(request.user)):
                 raise Http404
             log.debug('course_id=%s', course_id)
             cilset = CourseImportLog.objects.filter(

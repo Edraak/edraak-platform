@@ -1,3 +1,4 @@
+from __future__ import print_function
 import codecs
 import unittest
 from fractions import Fraction
@@ -12,7 +13,7 @@ LOCAL_DEBUG = None
 def log(msg, output_type=None):
     """Logging function for tests"""
     if LOCAL_DEBUG:
-        print msg
+        print(msg)
         if output_type == 'html':
             f.write(msg + '\n<br>\n')
 
@@ -296,10 +297,17 @@ class Test_Render_Equations(unittest.TestCase):
         log(out + ' ------- ' + correct, 'html')
         self.assertEqual(out, correct)
 
-    def test_render_simple_brackets(self):
+    def test_render_simple_round_brackets(self):
         test_string = "(Ar)"
         out = render_to_html(test_string)
         correct = u'<span class="math">(Ar)</span>'
+        log(out + ' ------- ' + correct, 'html')
+        self.assertEqual(out, correct)
+
+    def test_render_simple_square_brackets(self):
+        test_string = "[Ar]"
+        out = render_to_html(test_string)
+        correct = u'<span class="math">[Ar]</span>'
         log(out + ' ------- ' + correct, 'html')
         self.assertEqual(out, correct)
 
@@ -320,7 +328,24 @@ class Test_Render_Equations(unittest.TestCase):
     def test_render_eq3(self):
         test_string = "H^+ + OH^- <= H2O"   # unsupported arrow
         out = render_to_html(test_string)
-        correct = u'<span class="math"><span class="inline-error inline">H^+ + OH^- <= H2O</span></span>'
+        correct = u'<span class="math"><span class="inline-error inline">H^+ + OH^- &lt;= H2O</span></span>'
+        log(out + ' ------- ' + correct, 'html')
+        self.assertEqual(out, correct)
+
+    def test_render_eq4(self):
+        test_string = "[H^+] + OH^- <-> (H2O)"  # with brackets
+        out = render_to_html(test_string)
+        correct = u'<span class="math">[H<sup>+</sup>]+OH<sup>-</sup>\u2194(H<sub>2</sub>O)</span>'
+        log(out + ' ------- ' + correct, 'html')
+        self.assertEqual(out, correct)
+
+    def test_escaping(self):
+        """
+        Tests that invalid input is escaped.
+        """
+        test_string = "<script>f()</script>"
+        out = render_to_html(test_string)
+        correct = u'<span class="math"><span class="inline-error inline">&lt;script&gt;f()&lt;/script&gt;</span></span>'
         log(out + ' ------- ' + correct, 'html')
         self.assertEqual(out, correct)
 

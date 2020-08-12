@@ -29,17 +29,20 @@ from student.models import (
     EnrollmentClosedError,
     NonExistentCourseError
 )
+from student.roles import RoleCache
 
 log = logging.getLogger(__name__)
 
 
-def get_course_enrollments(user_id):
+def get_course_enrollments(user_id, include_inactive=False):
     """Retrieve a list representing all aggregated data for a user's course enrollments.
 
     Construct a representation of all course enrollment data for a specific user.
 
     Args:
         user_id (str): The name of the user to retrieve course enrollment information for.
+        include_inactive (bool): Determines whether inactive enrollments will be included
+
 
     Returns:
         A serializable list of dictionaries of all aggregated enrollment data for a user.
@@ -47,8 +50,10 @@ def get_course_enrollments(user_id):
     """
     qset = CourseEnrollment.objects.filter(
         user__username=user_id,
-        is_active=True
     ).order_by('created')
+
+    if not include_inactive:
+        qset = qset.filter(is_active=True)
 
     # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
     enrollments = EdraakCourseEnrollmentSerializer(
@@ -350,3 +355,16 @@ def get_course_enrollment_info(course_id, include_expired=False):
         raise CourseNotFoundError(msg)
     else:
         return CourseSerializer(course, include_expired=include_expired).data
+
+
+def get_user_roles(user_id):
+    """
+    Returns a list of all roles that this user has.
+    :param user_id: The id of the selected user.
+    :return: All roles for all courses that this user has.
+    """
+    user = _get_user(user_id)
+    if not hasattr(user, '_roles'):
+        user._roles = RoleCache(user)
+    role_cache = user._roles
+    return role_cache._roles

@@ -3,8 +3,9 @@ Test the partitions and partitions service
 
 """
 
-from unittest import TestCase
-from mock import Mock
+from datetime import datetime
+from django.test import TestCase
+from mock import Mock, patch
 
 from opaque_keys.edx.locator import CourseLocator
 from stevedore.extension import Extension, ExtensionManager
@@ -15,6 +16,7 @@ from xmodule.partitions.partitions import (
 from xmodule.partitions.partitions_service import (
     PartitionService, get_all_partitions_for_course, FEATURES
 )
+from openedx.features.content_type_gating.models import ContentTypeGatingConfig
 
 
 class TestGroup(TestCase):
@@ -434,6 +436,12 @@ class PartitionServiceBaseClass(PartitionTestCase):
 
     def setUp(self):
         super(PartitionServiceBaseClass, self).setUp()
+
+        ContentTypeGatingConfig.objects.create(
+            enabled=True,
+            enabled_as_of=datetime(2018, 1, 1),
+            studio_override_enabled=True
+        )
         self.course = Mock(id=CourseLocator('org_0', 'course_0', 'run_0'))
         self.partition_service = self._create_service("ma")
 
@@ -468,12 +476,12 @@ class TestPartitionService(PartitionServiceBaseClass):
 
         # get a group assigned to the user
         group1_id = self.partition_service.get_user_group_id_for_partition(self.user, user_partition_id)
-        self.assertEqual(group1_id, groups[0].id)
+        assert group1_id == groups[0].id
 
         # switch to the second group and verify that it is returned for the user
         self.user_partition.scheme.current_group = groups[1]
         group2_id = self.partition_service.get_user_group_id_for_partition(self.user, user_partition_id)
-        self.assertEqual(group2_id, groups[1].id)
+        assert group2_id == groups[1].id
 
     def test_caching(self):
         username = "psvc_cache_user"

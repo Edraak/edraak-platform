@@ -1,10 +1,9 @@
+# -*- coding: utf-8 -*-
 """
 Test the Studio help links.
 """
 
 from unittest import skip
-
-from nose.plugins.attrib import attr
 
 from common.test.acceptance.fixtures.course import XBlockFixtureDesc
 from common.test.acceptance.pages.common.auto_auth import AutoAuthPage
@@ -35,6 +34,15 @@ from common.test.acceptance.tests.helpers import (
     url_for_help
 )
 from common.test.acceptance.tests.studio.base_studio_test import ContainerBase, StudioCourseTest, StudioLibraryTest
+from openedx.core.lib.tests import attr
+from openedx.core.release import skip_unless_master
+
+# @skip_unless_master is used throughout this file because on named release
+# branches, most work happens leading up to the first release on the branch, and
+# that is before the docs have been published.  Tests that check readthedocs for
+# the right doc page will fail during this time, and it's just a big
+# distraction.  Also, if we bork the docs, it's not the end of the world, and we
+# can fix it easily, so this is a good tradeoff.
 
 
 def _get_expected_documentation_url(path):
@@ -45,6 +53,7 @@ def _get_expected_documentation_url(path):
 
 
 @attr(shard=20)
+@skip_unless_master         # See note at the top of the file.
 class StudioHelpTest(StudioCourseTest):
     """Tests for Studio help."""
 
@@ -85,68 +94,7 @@ class StudioHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
-class SignInHelpTest(AcceptanceTest):
-    """
-    Tests help links on 'Sign In' page
-    """
-    def setUp(self):
-        super(SignInHelpTest, self).setUp()
-        self.index_page = IndexPage(self.browser)
-        self.index_page.visit()
-
-    def test_sign_in_nav_help(self):
-        """
-        Scenario: Help link in navigation bar is working on 'Sign In' page.
-        Given that I am on the 'Sign In" page.
-        And I want help about the sign in
-        And I click the 'Help' in the navigation bar
-        Then Help link should open.
-        And help url should be correct
-        """
-        sign_in_page = self.index_page.click_sign_in()
-        expected_url = _get_expected_documentation_url('/index.html')
-
-        # Assert that help link is correct.
-        assert_nav_help_link(
-            test=self,
-            page=sign_in_page,
-            href=expected_url,
-            signed_in=False
-        )
-
-
-@attr(shard=20)
-class SignUpHelpTest(AcceptanceTest):
-    """
-    Tests help links on 'Sign Up' page.
-    """
-    def setUp(self):
-        super(SignUpHelpTest, self).setUp()
-        self.index_page = IndexPage(self.browser)
-        self.index_page.visit()
-
-    def test_sign_up_nav_help(self):
-        """
-        Scenario: Help link in navigation bar is working on 'Sign Up' page.
-        Given that I am on the 'Sign Up" page.
-        And I want help about the sign up
-        And I click the 'Help' in the navigation bar
-        Then Help link should open.
-        And help url should be correct
-        """
-        sign_up_page = self.index_page.click_sign_up()
-        expected_url = _get_expected_documentation_url('/index.html')
-
-        # Assert that help link is correct.
-        assert_nav_help_link(
-            test=self,
-            page=sign_up_page,
-            href=expected_url,
-            signed_in=False
-        )
-
-
-@attr(shard=20)
+@skip_unless_master
 class HomeHelpTest(StudioCourseTest):
     """
     Tests help links on 'Home'(Courses tab) page.
@@ -190,12 +138,13 @@ class HomeHelpTest(StudioCourseTest):
             test=self,
             page=self.home_page,
             href=expected_url,
-            help_text='Getting Started with Your Platform Studio',
+            help_text=u'Getting Started with Your Platform 𝓢𝓽𝓾𝓭𝓲𝓸',
             as_list_item=True
         )
 
 
 @attr(shard=20)
+@skip_unless_master
 class NewCourseHelpTest(AcceptanceTest):
     """
     Test help links while creating a new course.
@@ -243,12 +192,13 @@ class NewCourseHelpTest(AcceptanceTest):
             test=self,
             page=self.dashboard_page,
             href=expected_url,
-            help_text='Getting Started with Your Platform Studio',
+            help_text=u'Getting Started with Your Platform 𝓢𝓽𝓾𝓭𝓲𝓸',
             as_list_item=True
         )
 
 
 @attr(shard=20)
+@skip_unless_master
 class NewLibraryHelpTest(AcceptanceTest):
     """
     Test help links while creating a new library
@@ -296,12 +246,13 @@ class NewLibraryHelpTest(AcceptanceTest):
             test=self,
             page=self.dashboard_page,
             href=expected_url,
-            help_text='Getting Started with Your Platform Studio',
+            help_text=u'Getting Started with Your Platform 𝓢𝓽𝓾𝓭𝓲𝓸',
             as_list_item=True
         )
 
 
 @attr(shard=20)
+@skip_unless_master
 class LibraryTabHelpTest(AcceptanceTest):
     """
     Test help links on the library tab present at dashboard.
@@ -335,6 +286,7 @@ class LibraryTabHelpTest(AcceptanceTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class LibraryHelpTest(StudioLibraryTest):
     """
     Test help links on a Library page.
@@ -343,47 +295,6 @@ class LibraryHelpTest(StudioLibraryTest):
         super(LibraryHelpTest, self).setUp()
         self.library_page = LibraryPage(self.browser, self.library_key)
         self.library_user_page = LibraryUsersPage(self.browser, self.library_key)
-
-    def test_library_content_nav_help(self):
-        """
-        Scenario: Help link in navigation bar is working on content
-        library page(click a library on the Library list page).
-        Given that I am on the content library page(click a library on the Library list page).
-        And I want help about the process
-        And I click the 'Help' in the navigation bar
-        Then Help link should open.
-        And help url should be correct
-        """
-        self.library_page.visit()
-        expected_url = _get_expected_documentation_url('/course_components/libraries.html')
-
-        # Assert that help link is correct.
-        assert_nav_help_link(
-            test=self,
-            page=self.library_page,
-            href=expected_url
-        )
-
-    def test_library_content_side_bar_help(self):
-        """
-        Scenario: Help link in sidebar links is working on
-        content library page(click a library on the Library list page).
-        Given that I am on the content library page(click a library on the Library list page).
-        And I want help about the process
-        And I click the 'Learn more about content libraries' in the sidebar links
-        Then Help link should open.
-        And help url should be correct
-        """
-        self.library_page.visit()
-        expected_url = _get_expected_documentation_url('/course_components/libraries.html')
-
-        # Assert that help link is correct.
-        assert_side_bar_help_link(
-            test=self,
-            page=self.library_page,
-            href=expected_url,
-            help_text='Learn more about content libraries'
-        )
 
     def test_library_user_access_setting_nav_help(self):
         """
@@ -409,6 +320,7 @@ class LibraryHelpTest(StudioLibraryTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class LibraryImportHelpTest(StudioLibraryTest):
     """
     Test help links on a Library import and export pages.
@@ -457,6 +369,7 @@ class LibraryImportHelpTest(StudioLibraryTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class LibraryExportHelpTest(StudioLibraryTest):
     """
     Test help links on a Library export pages.
@@ -505,6 +418,7 @@ class LibraryExportHelpTest(StudioLibraryTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class CourseOutlineHelpTest(StudioCourseTest):
     """
     Tests help links on course outline page.
@@ -560,6 +474,7 @@ class CourseOutlineHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class CourseUpdateHelpTest(StudioCourseTest):
     """
     Test help links on Course Update page
@@ -594,6 +509,7 @@ class CourseUpdateHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class AssetIndexHelpTest(StudioCourseTest):
     """
     Test help links on Course 'Files & Uploads' page
@@ -628,6 +544,7 @@ class AssetIndexHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class CoursePagesHelpTest(StudioCourseTest):
     """
     Test help links on Course 'Pages' page
@@ -662,6 +579,7 @@ class CoursePagesHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class UploadTextbookHelpTest(StudioCourseTest):
     """
     Test help links on Course 'Textbooks' page
@@ -715,6 +633,7 @@ class UploadTextbookHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class StudioUnitHelpTest(ContainerBase):
     """
     Tests help links on Unit page.
@@ -764,6 +683,7 @@ class StudioUnitHelpTest(ContainerBase):
 
 
 @attr(shard=20)
+@skip_unless_master
 class SettingsHelpTest(StudioCourseTest):
     """
     Tests help links on Schedule and Details Settings page
@@ -800,6 +720,7 @@ class SettingsHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class GradingPageHelpTest(StudioCourseTest):
     """
     Tests help links on Grading page
@@ -836,6 +757,7 @@ class GradingPageHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class CourseTeamSettingsHelpTest(StudioCourseTest):
     """
     Tests help links on Course Team settings page
@@ -872,6 +794,7 @@ class CourseTeamSettingsHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class CourseGroupConfigurationHelpTest(StudioCourseTest):
     """
     Tests help links on course Group Configurations settings page
@@ -929,6 +852,7 @@ class CourseGroupConfigurationHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class AdvancedSettingHelpTest(StudioCourseTest):
     """
     Tests help links on course Advanced Settings page.
@@ -965,6 +889,7 @@ class AdvancedSettingHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class CertificatePageHelpTest(StudioCourseTest):
     """
     Tests help links on course Certificate settings page.
@@ -1020,6 +945,7 @@ class CertificatePageHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class GroupExperimentConfigurationHelpTest(ContainerBase):
     """
     Tests help links on course Group Configurations settings page
@@ -1073,6 +999,7 @@ class GroupExperimentConfigurationHelpTest(ContainerBase):
 
 
 @attr(shard=20)
+@skip_unless_master
 class ToolsImportHelpTest(StudioCourseTest):
     """
     Tests help links on tools import pages.
@@ -1128,6 +1055,7 @@ class ToolsImportHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master
 class ToolsExportHelpTest(StudioCourseTest):
     """
     Tests help links on tools export pages.
@@ -1183,6 +1111,7 @@ class ToolsExportHelpTest(StudioCourseTest):
 
 
 @attr(shard=20)
+@skip_unless_master         # See note at the top of the file.
 class StudioWelcomeHelpTest(AcceptanceTest):
     """
     Tests help link on 'Welcome' page ( User not logged in)

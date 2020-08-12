@@ -8,7 +8,6 @@ from uuid import uuid4
 
 import ddt
 from dateutil.parser import parse
-from nose.plugins.attrib import attr
 from selenium.common.exceptions import TimeoutException
 
 from common.test.acceptance.fixtures import LMS_BASE_URL
@@ -29,6 +28,7 @@ from common.test.acceptance.pages.lms.teams import (
     TeamsPage
 )
 from common.test.acceptance.tests.helpers import EventsTestMixin, UniqueCourseTest, get_modal_alert
+from openedx.core.lib.tests import attr
 
 TOPICS_PER_PAGE = 12
 
@@ -921,7 +921,6 @@ class TeamFormActions(TeamsTabBase):
 
     def verify_and_navigate_to_edit_team_page(self):
         """Navigates to the edit team page and verifies."""
-        # pylint: disable=no-member
         self.assertEqual(self.team_page.team_name, self.team['name'])
         self.assertTrue(self.team_page.edit_team_button_present)
 
@@ -942,7 +941,6 @@ class TeamFormActions(TeamsTabBase):
 
     def verify_team_info(self, name, description, location, language):
         """Verify the team information on team page."""
-        # pylint: disable=no-member
         self.assertEqual(self.team_page.team_name, name)
         self.assertEqual(self.team_page.team_description, description)
         self.assertEqual(self.team_page.team_location, location)

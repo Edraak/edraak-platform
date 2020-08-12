@@ -5,7 +5,6 @@
   from django.urls import reverse
   from django.utils.translation import ugettext as _
   from openedx.core.djangoapps.lang_pref.api import header_language_selector_is_enabled, released_languages
-  from cms.djangoapps.contentstore.config.waffle_utils import should_show_checklists_page
 %>
 <div class="wrapper-header wrapper" id="view-top">
   <header class="primary" role="banner">
@@ -127,11 +126,9 @@
                     <a href="${reverse('export_git', kwargs=dict(course_key_string=unicode(course_key)))}">${_("Export to Git")}</a>
                   </li>
                   % endif
-                  % if should_show_checklists_page(request.user):
                   <li class="nav-item nav-course-tools-checklists">
                     <a href="${checklists_url}">${_("Checklists")}</a>
                   </li>
-                  %endif
                 </ul>
               </div>
             </div>
@@ -232,6 +229,9 @@
       </nav>
 
     % else:
+      <%
+        register_url = settings.LMS_ROOT_URL + '/register'
+      %>
       <nav class="nav-not-signedin nav-pitch" aria-label="${_('Account')}">
         <h2 class="sr-only">${_("Account Navigation")}</h2>
         <ol>
@@ -240,11 +240,11 @@
           </li>
           % if static.get_value('ALLOW_PUBLIC_ACCOUNT_CREATION', settings.FEATURES.get('ALLOW_PUBLIC_ACCOUNT_CREATION')):
               <li class="nav-item nav-not-signedin-signup">
-                <a class="action action-signup" href="${reverse('signup')}">${_("Sign Up")}</a>
+                <a class="action action-signup" href="${register_url}?next=${current_url}">${_("Sign Up")}</a>
               </li>
           % endif
           <li class="nav-item nav-not-signedin-signin">
-            <a class="action action-signin" href="${reverse('login')}">${_("Sign In")}</a>
+            <a class="action action-signin" href="${settings.FRONTEND_LOGIN_URL}?next=${current_url}">${_("Sign In")}</a>
           </li>
         </ol>
       </nav>

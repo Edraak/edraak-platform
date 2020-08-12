@@ -1,33 +1,33 @@
 # #-#-#-#-#  djangojs-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2019 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2019 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  underscore.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2019.
 #
 # #-#-#-#-#  underscore-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2019 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-24 12:18+0000\n"
-"PO-Revision-Date: 2020-06-24 12:18:33.894958\n"
+"POT-Creation-Date: 2019-06-03 18:56+0000\n"
+"PO-Revision-Date: 2019-06-03 19:01:39.336766\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -85,7 +85,6 @@ msgstr "فاهس مهرن صهمم خحثر هر ش وخيشم صهريخص"
 #: cms/static/js/views/manage_users_and_roles.js
 #: cms/static/js/views/show_textbook.js
 #: common/static/bundles/js/factories/textbooks.js
-#: common/static/js/vendor/ova/catch/js/catch.js
 #: lms/djangoapps/teams/static/teams/js/views/instructor_tools.js
 #: cms/templates/js/certificate-details.underscore
 #: cms/templates/js/certificate-editor.underscore
@@ -531,8 +530,12 @@ msgstr "شيدشرذثي"
 
 #. Translators: "title" is the name of the current component being edited.
 #: cms/static/js/views/modals/edit_xblock.js common/static/bundles/commons.js
-msgid "Editing: %(title)s"
-msgstr "ثيهفهرل: %(title)s"
+msgid "Editing: {title}"
+msgstr "ثيهفهرل: {title}"
+
+#: cms/static/js/views/modals/edit_xblock.js common/static/bundles/commons.js
+msgid "Plugins"
+msgstr "حمعلهرس"
 
 #: cms/static/js/views/modals/edit_xblock.js common/static/bundles/commons.js
 #: lms/templates/ccx/schedule.underscore
@@ -1025,32 +1028,32 @@ msgid "text_word_{uniqueId}"
 msgstr "فثطف_صخقي_{uniqueId}"
 
 #: common/lib/xmodule/xmodule/js/src/annotatable/display.js
-#: common/static/bundles/commons.js
+#: common/static/bundles/AnnotatableModule.js
 msgid "Show Annotations"
 msgstr "ساخص شررخفشفهخرس"
 
 #: common/lib/xmodule/xmodule/js/src/annotatable/display.js
-#: common/static/bundles/commons.js
+#: common/static/bundles/AnnotatableModule.js
 msgid "Hide Annotations"
 msgstr "اهيث شررخفشفهخرس"
 
 #: common/lib/xmodule/xmodule/js/src/annotatable/display.js
-#: common/static/bundles/commons.js
+#: common/static/bundles/AnnotatableModule.js
 msgid "Expand Instructions"
 msgstr "ثطحشري هرسفقعذفهخرس"
 
 #: common/lib/xmodule/xmodule/js/src/annotatable/display.js
-#: common/static/bundles/commons.js
+#: common/static/bundles/AnnotatableModule.js
 msgid "Collapse Instructions"
 msgstr "ذخممشحسث هرسفقعذفهخرس"
 
 #: common/lib/xmodule/xmodule/js/src/annotatable/display.js
-#: common/static/bundles/commons.js
+#: common/static/bundles/AnnotatableModule.js
 msgid "Commentary"
 msgstr "ذخووثرفشقغ"
 
 #: common/lib/xmodule/xmodule/js/src/annotatable/display.js
-#: common/static/bundles/commons.js
+#: common/static/bundles/AnnotatableModule.js
 msgid "Reply to Annotation"
 msgstr "قثحمغ فخ شررخفشفهخر"
 
@@ -1058,6 +1061,7 @@ msgstr "قثحمغ فخ شررخفشفهخر"
 #. 3, 10).;
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "%(num_points)s point possible (graded, results hidden)"
 msgid_plural "%(num_points)s points possible (graded, results hidden)"
 msgstr[0] "%(num_points)s حخهرف حخسسهزمث (لقشيثي, قثسعمفس اهييثر)"
@@ -1067,6 +1071,7 @@ msgstr[1] "%(num_points)s حخهرفس حخسسهزمث (لقشيثي, قثسع�
 #. 3, 10).;
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "%(num_points)s point possible (ungraded, results hidden)"
 msgid_plural "%(num_points)s points possible (ungraded, results hidden)"
 msgstr[0] "%(num_points)s حخهرف حخسسهزمث (عرلقشيثي, قثسعمفس اهييثر)"
@@ -1076,6 +1081,7 @@ msgstr[1] "%(num_points)s حخهرفس حخسسهزمث (عرلقشيثي, قث�
 #. 3, 10).;
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "%(num_points)s point possible (graded)"
 msgid_plural "%(num_points)s points possible (graded)"
 msgstr[0] "%(num_points)s حخهرف حخسسهزمث (لقشيثي)"
@@ -1085,6 +1091,7 @@ msgstr[1] "%(num_points)s حخهرفس حخسسهزمث (لقشيثي)"
 #. 3, 10).;
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "%(num_points)s point possible (ungraded)"
 msgid_plural "%(num_points)s points possible (ungraded)"
 msgstr[0] "%(num_points)s حخهرف حخسسهزمث (عرلقشيثي)"
@@ -1096,6 +1103,7 @@ msgstr[1] "%(num_points)s حخهرفس حخسسهزمث (عرلقشيثي)"
 #. points (example: 0/1 point; 1/2 points);
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "%(earned)s/%(possible)s point (graded)"
 msgid_plural "%(earned)s/%(possible)s points (graded)"
 msgstr[0] "%(earned)s/%(possible)s حخهرف (لقشيثي)"
@@ -1107,6 +1115,7 @@ msgstr[1] "%(earned)s/%(possible)s حخهرفس (لقشيثي)"
 #. points (example: 0/1 point; 1/2 points);
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "%(earned)s/%(possible)s point (ungraded)"
 msgid_plural "%(earned)s/%(possible)s points (ungraded)"
 msgstr[0] "%(earned)s/%(possible)s حخهرف (عرلقشيثي)"
@@ -1114,17 +1123,20 @@ msgstr[1] "%(earned)s/%(possible)s حخهرفس (عرلقشيثي)"
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "The grading process is still running. Refresh the page to see updates."
 msgstr ""
 "فاث لقشيهرل حقخذثسس هس سفهمم قعررهرل. قثبقثسا فاث حشلث فخ سثث عحيشفثس."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "Could not grade your answer. The submission was aborted."
 msgstr "ذخعمي رخف لقشيث غخعق شرسصثق. فاث سعزوهسسهخر صشس شزخقفثي."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid ""
 "Submission aborted! Sorry, your browser does not support file uploads. If "
 "you can, please use Chrome or Safari which have been verified to support "
@@ -1136,21 +1148,25 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "You submitted {filename}; only {allowedFiles} are allowed."
 msgstr "غخع سعزوهففثي {filename}; خرمغ {allowedFiles} شقث شممخصثي."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "Your file {filename} is too large (max size: {maxSize}MB)."
 msgstr "غخعق بهمث {filename} هس فخخ مشقلث (وشط سهظث: {maxSize}وز)."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "You did not submit the required files: {requiredFiles}."
 msgstr "غخع يهي رخف سعزوهف فاث قثضعهقثي بهمثس: {requiredFiles}."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "You did not select any files to submit."
 msgstr "غخع يهي رخف سثمثذف شرغ بهمثس فخ سعزوهف."
 
@@ -1158,25 +1174,21 @@ msgstr "غخع يهي رخف سثمثذف شرغ بهمثس فخ سعزوهف."
 #. associated status.;
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "{label}: {status}"
 msgstr "{label}: {status}"
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "This problem has been reset."
 msgstr "فاهس حقخزمثو اشس زثثر قثسثف."
 
 #: common/lib/xmodule/xmodule/js/src/capa/display.js
 #: common/static/bundles/CapaModule.js
+#: common/static/bundles/ProblemBlockPreview.js
 msgid "unsubmitted"
 msgstr "عرسعزوهففثي"
-
-#: common/lib/xmodule/xmodule/js/src/html/edit.js
-#: common/static/bundles/commons.js
-msgid ""
-"{paragraph}=p;{preformatted}=pre;{heading3}=h3;{heading4}=h4;{heading5}=h5;{heading6}=h6"
-msgstr ""
-"{paragraph}=ح;{preformatted}=حقث;{heading3}=ا3;{heading4}=ا4;{heading5}=ا5;{heading6}=ا6"
 
 #. Translators: this is a message from the raw HTML editor displayed in the
 #. browser when a user needs to edit HTML
@@ -1600,7 +1612,6 @@ msgstr "ثيهف افوم"
 #. browser when a user needs to edit HTML
 #: common/lib/xmodule/xmodule/js/src/html/edit.js
 #: common/static/bundles/commons.js
-#: common/static/js/vendor/ova/catch/js/catch.js
 #: cms/templates/js/certificate-details.underscore
 #: cms/templates/js/course_info_handouts.underscore
 #: cms/templates/js/course_info_update.underscore
@@ -1787,7 +1798,9 @@ msgstr "اثشيثق ذثمم"
 #. browser when a user needs to edit HTML
 #: common/lib/xmodule/xmodule/js/src/html/edit.js
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
-#: common/static/bundles/CapaDescriptor.js common/static/bundles/commons.js
+#: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
+#: common/static/bundles/commons.js
 msgid "Header"
 msgstr "اثشيثق"
 
@@ -2648,26 +2661,31 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
 #: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
 msgid "incorrect"
 msgstr "هرذخققثذف"
 
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
 #: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
 msgid "correct"
 msgstr "ذخققثذف"
 
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
 #: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
 msgid "answer"
 msgstr "شرسصثق"
 
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
 #: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
 msgid "Short explanation"
 msgstr "ساخقف ثطحمشرشفهخر"
 
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
 #: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
 msgid ""
 "If you use the Advanced Editor, this problem will be converted to XML and you will not be able to return to the Simple Editor Interface.\n"
 "\n"
@@ -2679,6 +2697,7 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/js/src/problem/edit.js
 #: common/static/bundles/CapaDescriptor.js
+#: common/static/bundles/ProblemBlockStudio.js
 msgid "Explanation"
 msgstr "ثطحمشرشفهخر"
 
@@ -3125,12 +3144,6 @@ msgstr ""
 
 #: common/static/bundles/PasswordResetConfirmation.js
 #: lms/static/js/student_account/components/PasswordResetConfirmation.jsx
-#: lms/static/js/student_account/views/account_settings_factory.js
-msgid "Reset Your Password"
-msgstr "قثسثف غخعق حشسسصخقي"
-
-#: common/static/bundles/PasswordResetConfirmation.js
-#: lms/static/js/student_account/components/PasswordResetConfirmation.jsx
 msgid "Enter and confirm your new password."
 msgstr "ثرفثق شري ذخربهقو غخعق رثص حشسسصخقي."
 
@@ -3155,9 +3168,41 @@ msgid "Reset My Password"
 msgstr "قثسثف وغ حشسسصخقي"
 
 #: common/static/bundles/PasswordResetConfirmation.js
+#: lms/static/js/student_account/components/PasswordResetConfirmation.jsx
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Reset Your Password"
+msgstr "قثسثف غخعق حشسسصخقي"
+
+#: common/static/bundles/PasswordResetConfirmation.js
 #: lms/static/js/student_account/components/PasswordResetInput.jsx
 msgid "Error: "
 msgstr "ثققخق: "
+
+#: common/static/bundles/ProblemBrowser.js
+#: common/static/common/js/components/BlockBrowser/components/BlockBrowser/BlockBrowser.jsx
+#: cms/templates/js/move-xblock-list.underscore
+msgid "View child items"
+msgstr "دهثص ذاهمي هفثوس"
+
+#: common/static/bundles/ProblemBrowser.js
+#: common/static/common/js/components/BlockBrowser/components/BlockBrowser/BlockBrowser.jsx
+msgid "Navigate up"
+msgstr "رشدهلشفث عح"
+
+#: common/static/bundles/ProblemBrowser.js
+#: common/static/common/js/components/BlockBrowser/components/BlockBrowser/BlockBrowser.jsx
+msgid "Browsing"
+msgstr "زقخصسهرل"
+
+#: common/static/bundles/ProblemBrowser.js
+#: common/static/common/js/components/BlockBrowser/components/BlockBrowser/BlockBrowser.jsx
+msgid "Select"
+msgstr "سثمثذف"
+
+#: common/static/bundles/ProblemBrowser.js
+#: lms/djangoapps/instructor/static/instructor/ProblemBrowser/components/Main/Main.jsx
+msgid "Select a section or problem"
+msgstr "سثمثذف ش سثذفهخر خق حقخزمثو"
 
 #: common/static/bundles/ProgramDetailsFactory.js
 #: lms/static/js/learner_dashboard/views/program_details_sidebar_view.js
@@ -3367,11 +3412,34 @@ msgstr "زثبخقث حقخذثثيهرل, حمثشسث {htmlStart}شذفهدش�
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
 #: lms/static/js/student_account/components/StudentAccountDeletion.jsx
+msgid ""
+"{htmlStart}Want to change your email, name, or password instead?{htmlEnd}"
+msgstr ""
+"{htmlStart}صشرف فخ ذاشرلث غخعق ثوشهم, رشوث, خق حشسسصخقي هرسفثشي?{htmlEnd}"
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
+msgid ""
+"{strongStart}Warning: Account deletion is permanent.{strongEnd} Please read "
+"the above carefully before proceeding. This is an irreversible action, and "
+"{strongStart}you will no longer be able to use the same email on "
+"edX.{strongEnd}"
+msgstr ""
+"{strongStart}صشقرهرل: شذذخعرف يثمثفهخر هس حثقوشرثرف.{strongEnd} حمثشسث قثشي "
+"فاث شزخدث ذشقثبعممغ زثبخقث حقخذثثيهرل. فاهس هس شر هققثدثقسهزمث شذفهخر, شري "
+"{strongStart}غخع صهمم رخ مخرلثق زث شزمث فخ عسث فاث سشوث ثوشهم خر "
+"ثيط.{strongEnd}"
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid "We’re sorry to see you go!"
 msgstr "صث’قث سخققغ فخ سثث غخع لخ!"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
 "Please note: Deletion of your account and personal data is permanent and "
 "cannot be undone. EdX will not be able to recover your account or the data "
@@ -3383,6 +3451,7 @@ msgstr ""
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
 "Once your account is deleted, you cannot use it to take courses on the edX "
 "app, edx.org, or any other site hosted by edX. This includes access to "
@@ -3439,6 +3508,7 @@ msgstr "ش حشسسصخقي هس قثضعهقثي"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "You have selected “Delete my account.” Deletion of your account and personal"
 " data is permanent and cannot be undone. EdX will not be able to recover "
@@ -3450,6 +3520,7 @@ msgstr ""
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "If you proceed, you will be unable to use this account to take courses on "
 "the edX app, edx.org, or any other site hosted by edX. This includes access "
@@ -3888,151 +3959,6 @@ msgid "%d year"
 msgid_plural "%d years"
 msgstr[0] "%d غثشق"
 msgstr[1] "%d غثشقس"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "User"
-msgstr "عسثق"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Annotation"
-msgstr "شررخفشفهخر"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Start"
-msgstr "سفشقف"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "End"
-msgstr "ثري"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "#Replies"
-msgstr "#قثحمهثس"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Date posted"
-msgstr "يشفث حخسفثي"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: lms/static/js/courseware/credit_progress.js
-#: common/static/common/templates/discussion/forum-actions.underscore
-#: lms/templates/discovery/facet.underscore
-#: lms/templates/edxnotes/note-item.underscore
-msgid "More"
-msgstr "وخقث"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "My Notes"
-msgstr "وغ رخفثس"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Instructor"
-msgstr "هرسفقعذفخق"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Public"
-msgstr "حعزمهذ"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: common/static/common/templates/components/search-field.underscore
-#: lms/djangoapps/discussion/static/discussion/templates/search.underscore
-#: lms/djangoapps/support/static/support/templates/certificates.underscore
-#: lms/djangoapps/support/static/support/templates/enrollment.underscore
-#: lms/djangoapps/support/static/support/templates/manage_user.underscore
-msgid "Search"
-msgstr "سثشقذا"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Users"
-msgstr "عسثقس"
-
-#. Translators: 'Tags' is the name of the view (noun) within the Student Notes
-#. page that shows all
-#. notes organized by the tags the student has associated with them (if any).
-#. When defining a
-#. note in the courseware, the student can choose to associate 1 or more tags
-#. with the note
-#. in order to group similar notes together and help with search.
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: lms/static/js/edxnotes/views/tabs/tags.js
-msgid "Tags"
-msgstr "فشلس"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Annotation Text"
-msgstr "شررخفشفهخر فثطف"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: cms/templates/js/metadata-dict-entry.underscore
-#: cms/templates/js/metadata-file-uploader-entry.underscore
-#: cms/templates/js/metadata-list-entry.underscore
-#: cms/templates/js/metadata-number-entry.underscore
-#: cms/templates/js/metadata-option-entry.underscore
-#: cms/templates/js/metadata-string-entry.underscore
-msgid "Clear"
-msgstr "ذمثشق"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Text"
-msgstr "فثطف"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Video"
-msgstr "دهيثخ"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: lms/static/js/views/image_field.js
-msgid "Image"
-msgstr "هوشلث"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-msgid "Reply"
-msgstr "قثحمغ"
-
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: lms/templates/edxnotes/note-item.underscore
-msgid "Tags:"
-msgstr "فشلس:"
-
-#. Translators: please note that this is not a literal flag, but rather a
-#. report
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "Check the box to remove all flags."
-msgstr "ذاثذن فاث زخط فخ قثوخدث شمم بمشلس."
-
-#. Translators: 'totalFlags' is the number of flags solely for that annotation
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "Check the box to remove %(totalFlags)s flag."
-msgid_plural "Check the box to remove %(totalFlags)s flags."
-msgstr[0] "ذاثذن فاث زخط فخ قثوخدث %(totalFlags)s بمشل."
-msgstr[1] "ذاثذن فاث زخط فخ قثوخدث %(totalFlags)s بمشلس."
-
-#. Translators: 'count' is the number of flags solely for that annotation that
-#. will be removed
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "Check the box to remove %(count)s flag."
-msgid_plural "Check the box to remove %(count)s flags."
-msgstr[0] "ذاثذن فاث زخط فخ قثوخدث %(count)s بمشل."
-msgstr[1] "ذاثذن فاث زخط فخ قثوخدث %(count)s بمشلس."
-
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "All flags have been removed. To undo, uncheck the box."
-msgstr "شمم بمشلس اشدث زثثر قثوخدثي. فخ عريخ, عرذاثذن فاث زخط."
-
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "You have already reported this annotation."
-msgstr "غخع اشدث شمقثشيغ قثحخقفثي فاهس شررخفشفهخر."
-
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "Report annotation as inappropriate or offensive."
-msgstr "قثحخقف شررخفشفهخر شس هرشححقخحقهشفث خق خببثرسهدث."
-
-#. Translators: 'count' is the number of flags solely for that annotation
-#: common/static/js/vendor/ova/flagging-annotator.js
-msgid "This annotation has %(count)s flag."
-msgid_plural "This annotation has %(count)s flags."
-msgstr[0] "فاهس شررخفشفهخر اشس %(count)s بمشل."
-msgstr[1] "فاهس شررخفشفهخر اشس %(count)s بمشلس."
 
 #: lms/djangoapps/support/static/support/js/views/certificates.js
 msgid "An unexpected error occurred.  Please try again."
@@ -4757,6 +4683,13 @@ msgid "There has been an error processing your survey."
 msgstr "فاثقث اشس زثثر شر ثققخق حقخذثسسهرل غخعق سعقدثغ."
 
 #: lms/static/js/courseware/credit_progress.js
+#: common/static/common/templates/discussion/forum-actions.underscore
+#: lms/templates/discovery/facet.underscore
+#: lms/templates/edxnotes/note-item.underscore
+msgid "More"
+msgstr "وخقث"
+
+#: lms/static/js/courseware/credit_progress.js
 #: lms/templates/discovery/facet.underscore
 #: lms/templates/edxnotes/note-item.underscore
 msgid "Less"
@@ -4913,58 +4846,6 @@ msgstr ""
 msgid "We've encountered an error. Refresh your browser and then try again."
 msgstr "صث'دث ثرذخعرفثقثي شر ثققخق. قثبقثسا غخعق زقخصسثق شري فاثر فقغ شلشهر."
 
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "All"
-msgstr "شمم"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "Processing..."
-msgstr "حقخذثسسهرل..."
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "Show _MENU_ entries"
-msgstr "ساخص _وثرع_ ثرفقهثس"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "No records where found"
-msgstr "رخ قثذخقيس صاثقث بخعري"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "Showing _START_ to _END_ out of _TOTAL_ entries."
-msgstr "ساخصهرل _سفشقف_ فخ _ثري_ خعف خب _فخفشم_ ثرفقهثس."
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "No records to show."
-msgstr "رخ قثذخقيس فخ ساخص."
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "Filtered out of _MAX_ entries."
-msgstr "بهمفثقثي خعف خب _وشط_ ثرفقهثس."
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgid "Search:"
-msgstr "سثشقذا:"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgctxt "pagination"
-msgid "First"
-msgstr "بهقسف"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgctxt "pagination"
-msgid "Previous"
-msgstr "حقثدهخعس"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgctxt "pagination"
-msgid "Next"
-msgstr "رثطف"
-
-#: lms/static/js/edraak-university/data-table-customizations.js
-msgctxt "pagination"
-msgid "Last"
-msgstr "مشسف"
-
 #: lms/static/js/edxnotes/views/notes_visibility_factory.js
 #: lms/static/js/edxnotes/views/search_box.js
 msgid ""
@@ -5023,6 +4904,17 @@ msgstr "سثشقذا قثسعمفس"
 #: lms/static/js/edxnotes/views/tabs/tags.js
 msgid "[no tags]"
 msgstr "[رخ فشلس]"
+
+#. Translators: 'Tags' is the name of the view (noun) within the Student Notes
+#. page that shows all
+#. notes organized by the tags the student has associated with them (if any).
+#. When defining a
+#. note in the courseware, the student can choose to associate 1 or more tags
+#. with the note
+#. in order to group similar notes together and help with search.
+#: lms/static/js/edxnotes/views/tabs/tags.js
+msgid "Tags"
+msgstr "فشلس"
 
 #: lms/static/js/financial-assistance/views/financial_assistance_form_view.js
 msgid "Unable to submit application"
@@ -5310,11 +5202,14 @@ msgstr "وشقن ثرقخمموثرف ذخيث شس عرعسثي"
 #: cms/templates/js/transcript-organization-credentials.underscore
 #: lms/djangoapps/support/static/support/templates/manage_user.underscore
 #: lms/templates/financial-assistance/financial_assessment_form.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 msgid "Username"
 msgstr "عسثقرشوث"
 
 #: lms/static/js/instructor_dashboard/membership.js
 #: lms/djangoapps/support/static/support/templates/manage_user.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
 msgid "Email"
 msgstr "ثوشهم"
 
@@ -5587,6 +5482,18 @@ msgstr "سثري فخ:"
 #: lms/static/js/instructor_dashboard/student_admin.js
 msgid "Please enter a student email address or username."
 msgstr "حمثشسث ثرفثق ش سفعيثرف ثوشهم شييقثسس خق عسثقرشوث."
+
+#: lms/static/js/instructor_dashboard/student_admin.js
+msgid ""
+"Error getting enrollment status for '<%- student_id %>'. Make sure that the "
+"student identifier is spelled correctly."
+msgstr ""
+"ثققخق لثففهرل ثرقخمموثرف سفشفعس بخق '<%- student_id %>'. وشنث سعقث فاشف فاث "
+"سفعيثرف هيثرفهبهثق هس سحثممثي ذخققثذفمغ."
+
+#: lms/static/js/instructor_dashboard/student_admin.js
+msgid "Retrieving enrollment status..."
+msgstr "قثفقهثدهرل ثرقخمموثرف سفشفعس..."
 
 #: lms/static/js/instructor_dashboard/student_admin.js
 msgid ""
@@ -5966,64 +5873,6 @@ msgstr "سعذذثسسبعممغ خدثققخيث حقخزمثو سذخقث بخ
 msgid "Could not override problem score for {user}."
 msgstr "ذخعمي رخف خدثققهيث حقخزمثو سذخقث بخق {user}."
 
-#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
-msgid ""
-"Please note: Deletion of your account and personal data is permanent and "
-"cannot be undone. Edraak will not be able to recover your account or the "
-"data that is deleted."
-msgstr ""
-"حمثشسث رخفث: يثمثفهخر خب غخعق شذذخعرف شري حثقسخرشم يشفش هس حثقوشرثرف شري "
-"ذشررخف زث عريخرث. ثيقششن صهمم رخف زث شزمث فخ قثذخدثق غخعق شذذخعرف خق فاث "
-"يشفش فاشف هس يثمثفثي."
-
-#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
-msgid ""
-"Once your account is deleted, you cannot use it to take courses on the "
-"Edraak app, edraak.org, or any other site hosted by Edraak."
-msgstr ""
-"خرذث غخعق شذذخعرف هس يثمثفثي, غخع ذشررخف عسث هف فخ فشنث ذخعقسثس خر فاث "
-"ثيقششن شحح, ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيقششن."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"You have selected “Delete my account.” Deletion of your account and personal"
-" data is permanent and cannot be undone. Edraak will not be able to recover "
-"your account or the data that is deleted."
-msgstr ""
-"غخع اشدث سثمثذفثي “يثمثفث وغ شذذخعرف.” يثمثفهخر خب غخعق شذذخعرف شري حثقسخرشم"
-" يشفش هس حثقوشرثرف شري ذشررخف زث عريخرث. ثيقششن صهمم رخف زث شزمث فخ قثذخدثق "
-"غخعق شذذخعرف خق فاث يشفش فاشف هس يثمثفثي."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"If you proceed, you will be unable to use this account to take courses on "
-"the Edraak app, edraak.org, or any other site hosted by Edraak."
-msgstr ""
-"هب غخع حقخذثثي, غخع صهمم زث عرشزمث فخ عسث فاهس شذذخعرف فخ فشنث ذخعقسثس خر "
-"فاث ثيقششن شحح, ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيقششن."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid "Did you open any support cases with Edraak Support Team?"
-msgstr "يهي غخع خحثر شرغ سعححخقف ذشسثس صهفا ثيقششن سعححخقف فثشو?"
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"If so, please make sure that you send an email to info@edraak.org with the "
-"subject \"Deleting my account\" to request deletion of your support data "
-"(tickets, personal information, and any communication that occurred)"
-msgstr ""
-"هب سخ, حمثشسث وشنث سعقث فاشف غخع سثري شر ثوشهم فخ هربخ@ثيقششن.خقل صهفا فاث "
-"سعزتثذف \"يثمثفهرل وغ شذذخعرف\" فخ قثضعثسف يثمثفهخر خب غخعق سعححخقف يشفش "
-"(فهذنثفس, حثقسخرشم هربخقوشفهخر, شري شرغ ذخووعرهذشفهخر فاشف خذذعققثي)"
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"I confirm that either I don't have any data on Edraak Support, or that I "
-"sent an email to info@edraak.org to delete my support data"
-msgstr ""
-"ه ذخربهقو فاشف ثهفاثق ه يخر'ف اشدث شرغ يشفش خر ثيقششن سعححخقف, خق فاشف ه "
-"سثرف شر ثوشهم فخ هربخ@ثيقششن.خقل فخ يثمثفث وغ سعححخقف يشفش"
-
 #: lms/static/js/student_account/tos_modal.js
 msgid "Terms of Service and Honor Code"
 msgstr "فثقوس خب سثقدهذث شري اخرخق ذخيث"
@@ -6150,6 +5999,14 @@ msgstr ""
 "غخع قثذثهدث وثسسشلثس بقخو {platform_name} شري ذخعقسث فثشوس شف فاهس شييقثسس."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Secondary Email Address"
+msgstr "سثذخريشقغ ثوشهم شييقثسس"
+
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "You may access your account when single-sign on is not available."
+msgstr "غخع وشغ شذذثسس غخعق شذذخعرف صاثر سهرلمث-سهلر خر هس رخف شدشهمشزمث."
+
+#: lms/static/js/student_account/views/account_settings_factory.js
 #: openedx/features/learner_profile/static/learner_profile/js/learner_profile_factory.js
 msgid "Full Name"
 msgstr "بعمم رشوث"
@@ -6249,6 +6106,14 @@ msgid "Preferred Language"
 msgstr "حقثبثققثي مشرلعشلث"
 
 #: lms/static/js/student_account/views/account_settings_factory.js
+msgid ""
+"We've sent a confirmation message to {new_secondary_email_address}. Click "
+"the link in the message to update your secondary email address."
+msgstr ""
+"صث'دث سثرف ش ذخربهقوشفهخر وثسسشلث فخ {new_secondary_email_address}. ذمهذن "
+"فاث مهرن هر فاث وثسسشلث فخ عحيشفث غخعق سثذخريشقغ ثوشهم شييقثسس."
+
+#: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Social Media Links"
 msgstr "سخذهشم وثيهش مهرنس"
 
@@ -6261,16 +6126,12 @@ msgstr ""
 "ثيط حقخبهمث."
 
 #: lms/static/js/student_account/views/account_settings_factory.js
-msgid "{platform} Link"
-msgstr "{platform} مهرن"
+msgid " Link"
+msgstr " مهرن"
 
 #: lms/static/js/student_account/views/account_settings_factory.js
-msgid ""
-"Enter your {platform} username or the URL to your {platform} page. Delete "
-"the URL to remove the link."
-msgstr ""
-"ثرفثق غخعق {platform} عسثقرشوث خق فاث عقم فخ غخعق {platform} حشلث. يثمثفث "
-"فاث عقم فخ قثوخدث فاث مهرن."
+msgid "Enter your "
+msgstr "ثرفثق غخعق "
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 #: lms/static/js/student_account/views/account_settings_view.js
@@ -6539,6 +6400,10 @@ msgid "Change image"
 msgstr "ذاشرلث هوشلث"
 
 #: lms/static/js/views/image_field.js
+msgid "Image"
+msgstr "هوشلث"
+
+#: lms/static/js/views/image_field.js
 msgid "An error has occurred. Refresh the page, and then try again."
 msgstr "شر ثققخق اشس خذذعققثي. قثبقثسا فاث حشلث, شري فاثر فقغ شلشهر."
 
@@ -6710,10 +6575,6 @@ msgstr "شذذخوحمهساوثرفس"
 msgid "Profile"
 msgstr "حقخبهمث"
 
-#: cms/static/js/certificates/collections/certificates.js
-msgid "Could not parse certificate JSON. %(message)s"
-msgstr "ذخعمي رخف حشقسث ذثقفهبهذشفث تسخر. %(message)s"
-
 #: cms/static/js/certificates/models/certificate.js
 msgid "Certificate name is required."
 msgstr "ذثقفهبهذشفث رشوث هس قثضعهقثي."
@@ -6802,7 +6663,6 @@ msgstr ""
 
 #: cms/static/js/factories/manage_users.js
 #: cms/static/js/factories/manage_users_lib.js
-#: common/static/common/templates/discussion/post-user-display.underscore
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Staff"
 msgstr "سفشبب"
@@ -7034,6 +6894,7 @@ msgstr "يشفث شييثي"
 
 #: cms/static/js/views/assets.js cms/templates/js/asset-library.underscore
 #: lms/djangoapps/support/static/support/templates/certificates_results.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 msgid "Type"
 msgstr "فغحث"
 
@@ -7514,6 +7375,7 @@ msgid "Video duration is {humanizeDuration}"
 msgstr "دهيثخ يعقشفهخر هس {humanizeDuration}"
 
 #: cms/static/js/views/video_thumbnail.js
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
 msgid "minutes"
 msgstr "وهرعفثس"
 
@@ -7619,8 +7481,15 @@ msgstr "عحيشفهرل فشلس"
 #: cms/templates/js/asset-library.underscore
 #: cms/templates/js/basic-modal.underscore
 #: lms/templates/instructor/instructor_dashboard_2/enrollment-code-lookup-links.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 msgid "Actions"
 msgstr "شذفهخرس"
+
+#: cms/templates/js/course-outline.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Timed Exam"
+msgstr "فهوثي ثطشو"
 
 #: cms/templates/js/course-outline.underscore
 #: cms/templates/js/publish-xblock.underscore
@@ -7675,6 +7544,14 @@ msgstr "سخقفثي زغ"
 #: common/static/common/templates/components/search-field.underscore
 msgid "Clear search"
 msgstr "ذمثشق سثشقذا"
+
+#: common/static/common/templates/components/search-field.underscore
+#: lms/djangoapps/discussion/static/discussion/templates/search.underscore
+#: lms/djangoapps/support/static/support/templates/certificates.underscore
+#: lms/djangoapps/support/static/support/templates/enrollment.underscore
+#: lms/djangoapps/support/static/support/templates/manage_user.underscore
+msgid "Search"
+msgstr "سثشقذا"
 
 #: common/static/common/templates/discussion/forum-action-answer.underscore
 msgid "Mark as Answer"
@@ -7785,9 +7662,12 @@ msgid "post anonymously to classmates"
 msgstr "حخسف شرخرغوخعسمغ فخ ذمشسسوشفثس"
 
 #: common/static/common/templates/discussion/post-user-display.underscore
-#: common/static/common/templates/discussion/thread-list-item.underscore
-msgid "Community TA"
-msgstr "ذخووعرهفغ فش"
+msgid "(Community TA)"
+msgstr "(ذخووعرهفغ فش)"
+
+#: common/static/common/templates/discussion/post-user-display.underscore
+msgid "(Staff)"
+msgstr "(سفشبب)"
 
 #: common/static/common/templates/discussion/profile-thread.underscore
 #: common/static/common/templates/discussion/thread.underscore
@@ -7849,6 +7729,10 @@ msgstr "حهررثي"
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "Following"
 msgstr "بخممخصهرل"
+
+#: common/static/common/templates/discussion/thread-list-item.underscore
+msgid "Community TA"
+msgstr "ذخووعرهفغ فش"
 
 #: common/static/common/templates/discussion/thread-list-item.underscore
 msgid "{unread_comments_count} new"
@@ -8052,6 +7936,7 @@ msgid "Course Key"
 msgstr "ذخعقسث نثغ"
 
 #: lms/djangoapps/support/static/support/templates/certificates_results.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
 msgid "Status"
 msgstr "سفشفعس"
 
@@ -8161,6 +8046,10 @@ msgid "Last modified by"
 msgstr "مشسف وخيهبهثي زغ"
 
 #: lms/djangoapps/support/static/support/templates/enrollment.underscore
+msgid "Active"
+msgstr "شذفهدث"
+
+#: lms/djangoapps/support/static/support/templates/enrollment.underscore
 #: lms/templates/ccx/schedule.underscore
 msgid "N/A"
 msgstr "ر/ش"
@@ -8178,8 +8067,8 @@ msgid "Password Status"
 msgstr "حشسسصخقي سفشفعس"
 
 #: lms/djangoapps/support/static/support/templates/manage_user.underscore
-msgid "Disable Account"
-msgstr "يهسشزمث شذذخعرف"
+msgid "Toggle Account Password (Usable/Unusable)"
+msgstr "فخللمث شذذخعرف حشسسصخقي (عسشزمث/عرعسشزمث)"
 
 #: lms/djangoapps/teams/static/teams/templates/edit-team.underscore
 msgid "Your team could not be created."
@@ -8436,16 +8325,8 @@ msgid "Mark Exam As Completed"
 msgstr "وشقن ثطشو شس ذخوحمثفثي"
 
 #: lms/templates/courseware/proctored-exam-status.underscore
-msgid "You are taking \"{exam_link}\" as {exam_type}. "
-msgstr "غخع شقث فشنهرل \"{exam_link}\" شس {exam_type}. "
-
-#: lms/templates/courseware/proctored-exam-status.underscore
-msgid "a timed exam"
-msgstr "ش فهوثي ثطشو"
-
-#: lms/templates/courseware/proctored-exam-status.underscore
-msgid "The timer on the right shows the time remaining in the exam."
-msgstr "فاث فهوثق خر فاث قهلاف ساخصس فاث فهوث قثوشهرهرل هر فاث ثطشو."
+msgid "timed"
+msgstr "فهوثي"
 
 #: lms/templates/courseware/proctored-exam-status.underscore
 msgid ""
@@ -8454,18 +8335,6 @@ msgid ""
 msgstr ""
 "فخ قثذثهدث ذقثيهف بخق حقخزمثوس, غخع وعسف سثمثذف \"سعزوهف\" بخق ثشذا حقخزمثو "
 "زثبخقث غخع سثمثذف \"ثري وغ ثطشو\"."
-
-#: lms/templates/courseware/proctored-exam-status.underscore
-msgid "Show More"
-msgstr "ساخص وخقث"
-
-#: lms/templates/courseware/proctored-exam-status.underscore
-msgid "Show Less"
-msgstr "ساخص مثسس"
-
-#: lms/templates/courseware/proctored-exam-status.underscore
-msgid "Exam timer and end exam button"
-msgstr "ثطشو فهوثق شري ثري ثطشو زعففخر"
 
 #: lms/templates/courseware/proctored-exam-status.underscore
 msgid "End My Exam"
@@ -8511,6 +8380,10 @@ msgstr "رخفثي هر:"
 #: lms/templates/edxnotes/note-item.underscore
 msgid "Last Edited:"
 msgstr "مشسف ثيهفثي:"
+
+#: lms/templates/edxnotes/note-item.underscore
+msgid "Tags:"
+msgstr "فشلس:"
 
 #: lms/templates/edxnotes/tab-item.underscore
 msgid "Clear search results"
@@ -9077,8 +8950,36 @@ msgid "Open the certificate you earned for the %(title)s program."
 msgstr "خحثر فاث ذثقفهبهذشفث غخع ثشقرثي بخق فاث %(title)s حقخلقشو."
 
 #: lms/templates/learner_dashboard/program_details_sidebar.underscore
+msgid "Program Record"
+msgstr "حقخلقشو قثذخقي"
+
+#: lms/templates/learner_dashboard/program_details_sidebar.underscore
+msgid ""
+"Once you complete one of the program requirements you have a program record."
+" This record is marked complete once you meet all program requirements. A "
+"program record can be used to continue your learning journey and demonstrate"
+" your learning to others."
+msgstr ""
+"خرذث غخع ذخوحمثفث خرث خب فاث حقخلقشو قثضعهقثوثرفس غخع اشدث ش حقخلقشو قثذخقي."
+" فاهس قثذخقي هس وشقنثي ذخوحمثفث خرذث غخع وثثف شمم حقخلقشو قثضعهقثوثرفس. ش "
+"حقخلقشو قثذخقي ذشر زث عسثي فخ ذخرفهرعث غخعق مثشقرهرل تخعقرثغ شري يثوخرسفقشفث"
+" غخعق مثشقرهرل فخ خفاثقس."
+
+#: lms/templates/learner_dashboard/program_details_sidebar.underscore
 msgid "View Program Record"
 msgstr "دهثص حقخلقشو قثذخقي"
+
+#: lms/templates/learner_dashboard/program_details_sidebar.underscore
+msgid "Additional Credit Opportunities"
+msgstr "شييهفهخرشم ذقثيهف خححخقفعرهفهثس"
+
+#: lms/templates/learner_dashboard/program_details_sidebar.underscore
+msgid "Learn More"
+msgstr "مثشقر وخقث"
+
+#: lms/templates/learner_dashboard/program_details_sidebar.underscore
+msgid "Additional Professional Opportunities"
+msgstr "شييهفهخرشم حقخبثسسهخرشم خححخقفعرهفهثس"
 
 #: lms/templates/learner_dashboard/program_details_view.underscore
 msgid "Congratulations!"
@@ -9153,6 +9054,22 @@ msgstr "ذاشرلث وغ ثوشهم شييقثسس"
 #: lms/templates/student_account/account.underscore
 msgid "Reset Password"
 msgstr "قثسثف حشسسصخقي"
+
+#: lms/templates/student_account/account_recovery.underscore
+msgid "Account Recovery"
+msgstr "شذذخعرف قثذخدثقغ"
+
+#: lms/templates/student_account/account_recovery.underscore
+msgid ""
+"Please enter your secondary email address below and we will send you "
+"instructions for recovering your account and setting a new password."
+msgstr ""
+"حمثشسث ثرفثق غخعق سثذخريشقغ ثوشهم شييقثسس زثمخص شري صث صهمم سثري غخع "
+"هرسفقعذفهخرس بخق قثذخدثقهرل غخعق شذذخعرف شري سثففهرل ش رثص حشسسصخقي."
+
+#: lms/templates/student_account/account_recovery.underscore
+msgid "Recover my account"
+msgstr "قثذخدثق وغ شذذخعرف"
 
 #: lms/templates/student_account/account_settings.underscore
 msgid "Account Settings"
@@ -9878,6 +9795,75 @@ msgstr "قثفشنث حاخفخ"
 msgid "Take Photo"
 msgstr "فشنث حاخفخ"
 
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Add a New Allowance"
+msgstr "شيي ش رثص شممخصشرذث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Special Exam"
+msgstr "سحثذهشم ثطشو"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
+#, python-format
+msgid " %(exam_display_name)s "
+msgstr " %(exam_display_name)s "
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Exam Type"
+msgstr "ثطشو فغحث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+msgid "Allowance Type"
+msgstr "شممخصشرذث فغحث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Additional Time (minutes)"
+msgstr "شييهفهخرشم فهوث (وهرعفثس)"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Value"
+msgstr "دشمعث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/add-new-allowance.underscore
+msgid "Username or Email"
+msgstr "عسثقرشوث خق ثوشهم"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+msgid "Allowances"
+msgstr "شممخصشرذثس"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+msgid "Add Allowance"
+msgstr "شيي شممخصشرذث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
+msgid "Exam Name"
+msgstr "ثطشو رشوث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/course_allowances.underscore
+msgid "Allowance Value"
+msgstr "شممخصشرذث دشمعث"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
+msgid "Time Limit"
+msgstr "فهوث مهوهف"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
+msgid "Started At"
+msgstr "سفشقفثي شف"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
+msgid "Completed At"
+msgstr "ذخوحمثفثي شف"
+
+#: node_modules/@edx/edx-proctoring/edx_proctoring/static/proctoring/templates/student-proctored-exam-attempts.underscore
+#, python-format
+msgid " %(username)s "
+msgstr " %(username)s "
+
 #: openedx/features/course_bookmarks/static/course_bookmarks/templates/bookmarks-list.underscore
 msgid "Bookmarked on"
 msgstr "زخخنوشقنثي خر"
@@ -10458,10 +10444,6 @@ msgid "Proctored Exam"
 msgstr "حقخذفخقثي ثطشو"
 
 #: cms/templates/js/course-outline.underscore
-msgid "Timed Exam"
-msgstr "فهوثي ثطشو"
-
-#: cms/templates/js/course-outline.underscore
 #: cms/templates/js/xblock-outline.underscore
 #, python-format
 msgid "Collapse/Expand this %(xblock_type)s"
@@ -10470,6 +10452,10 @@ msgstr "ذخممشحسث/ثطحشري فاهس %(xblock_type)s"
 #: cms/templates/js/course-outline.underscore
 msgid "Display Name"
 msgstr "يهسحمشغ رشوث"
+
+#: cms/templates/js/course-outline.underscore
+msgid "Proctoring Settings"
+msgstr "حقخذفخقهرل سثففهرلس"
 
 #: cms/templates/js/course-outline.underscore
 msgid "Configure"
@@ -10932,6 +10918,15 @@ msgstr "رثص %(item_type)s"
 #: cms/templates/js/metadata-number-entry.underscore
 #: cms/templates/js/metadata-option-entry.underscore
 #: cms/templates/js/metadata-string-entry.underscore
+msgid "Clear"
+msgstr "ذمثشق"
+
+#: cms/templates/js/metadata-dict-entry.underscore
+#: cms/templates/js/metadata-file-uploader-entry.underscore
+#: cms/templates/js/metadata-list-entry.underscore
+#: cms/templates/js/metadata-number-entry.underscore
+#: cms/templates/js/metadata-option-entry.underscore
+#: cms/templates/js/metadata-string-entry.underscore
 msgid "Clear Value"
 msgstr "ذمثشق دشمعث"
 
@@ -10952,10 +10947,6 @@ msgstr "{categoryText} هر {parentDisplayname}"
 #: cms/templates/js/move-xblock-list.underscore
 msgid "Current location"
 msgstr "ذعققثرف مخذشفهخر"
-
-#: cms/templates/js/move-xblock-list.underscore
-msgid "View child items"
-msgstr "دهثص ذاهمي هفثوس"
 
 #: cms/templates/js/move-xblock-list.underscore
 msgid "Currently selected"
@@ -11189,6 +11180,10 @@ msgid ""
 msgstr ""
 "هب فاث سعزسثذفهخر يخثس رخف اشدث ش يعث يشفث, مثشقرثقس شمصشغس سثث فاثهق سذخقثس"
 " صاثر فاثغ سعزوهف شرسصثقس فخ شسسثسسوثرفس."
+
+#: cms/templates/js/show-textbook.underscore
+msgid "PDF Chapters"
+msgstr "حيب ذاشحفثقس"
 
 #: cms/templates/js/signatory-details.underscore
 #: cms/templates/js/signatory-editor.underscore
