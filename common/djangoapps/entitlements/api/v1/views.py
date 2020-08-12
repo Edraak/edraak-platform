@@ -10,7 +10,7 @@ from edx_rest_framework_extensions.paginators import DefaultPagination
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
 from rest_framework import permissions, status, viewsets
-from openedx.core.lib.api.authentication import SessionAuthenticationAllowInactiveUser
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 
 from course_modes.models import CourseMode
@@ -307,7 +307,7 @@ class EntitlementEnrollmentViewSet(viewsets.GenericViewSet):
         - Unenroll
         - Switch Enrollment
     """
-    authentication_classes = (JwtAuthentication, SessionAuthenticationAllowInactiveUser,)
+    authentication_classes = (JwtAuthentication, SessionAuthentication,)
     # TODO: ARCH-91
     # This view is excluded from Swagger doc generation because it
     # does not specify a serializer class.

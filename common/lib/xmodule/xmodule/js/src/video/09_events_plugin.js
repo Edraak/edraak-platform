@@ -101,8 +101,8 @@
             onSpeedChange: function(event, newSpeed, oldSpeed) {
                 this.log('speed_change_video', {
                     current_time: this.getCurrentTime(),
-                    old_speed: this.state.speedToString(oldSpeed),
-                    new_speed: this.state.speedToString(newSpeed)
+                    old_speed: oldSpeed,
+                    new_speed: newSpeed
                 });
             },
 

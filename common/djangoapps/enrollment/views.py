@@ -50,11 +50,8 @@ REQUIRED_ATTRIBUTES = {
 }
 
 
-class EnrollmentCrossDomainSessionAuth(SessionAuthenticationCrossDomainCsrf):
+class EnrollmentCrossDomainSessionAuth(SessionAuthenticationAllowInactiveUser, SessionAuthenticationCrossDomainCsrf):
     """Session authentication that allows inactive users and cross-domain requests. """
-    # TODO: Edraak-specific:
-    #   We're change the base class of 'SessionAuthenticationCrossDomainCsrf to 'SessionAuthenticationAllowInactiveUser'
-    #   thus importing SessionAuthenticationAllowInactiveUser here won't be needed and can cause MRO errors
     pass
 
 

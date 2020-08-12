@@ -29,7 +29,7 @@ FAKE_SETTINGS = {
 
 @patch.dict(settings.VERIFY_STUDENT, FAKE_SETTINGS)
 @ddt.ddt
-class TestIDVerificationService(ModuleStoreTestCase, MockS3Mixin):
+class TestIDVerificationService(MockS3Mixin, ModuleStoreTestCase):
     """
     Tests for IDVerificationService.
     """

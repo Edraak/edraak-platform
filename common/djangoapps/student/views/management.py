@@ -19,7 +19,7 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.auth.views import password_reset_confirm
-from django.contrib.sites.models import Site
+from django.core import mail
 from django.urls import reverse
 from django.core.validators import ValidationError, validate_email
 from django.db import transaction
@@ -34,9 +34,7 @@ from django.utils.http import base36_to_int, urlsafe_base64_encode
 from django.utils.translation import get_language, ungettext
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-from django.views.decorators.http import require_GET, require_POST, require_http_methods
-from edx_ace import ace
-from edx_ace.recipient import Recipient
+from django.views.decorators.http import require_GET, require_POST
 from eventtracking import tracker
 from ipware.ip import get_ip
 # Note that this lives in LMS, so this dependency should be refactored.
@@ -54,13 +52,12 @@ import openedx.core.djangoapps.external_auth.views
 import third_party_auth
 import track.views
 from course_modes.models import CourseMode
-from edxmako.shortcuts import render_to_response, render_to_string, marketing_link
+from edxmako.shortcuts import render_to_response, render_to_string
 from entitlements.models import CourseEntitlement
 from openedx.core.djangoapps import monitoring_utils
 from openedx.core.djangoapps.catalog.utils import (
     get_programs_with_type,
 )
-from openedx.core.djangoapps.ace_common.template_context import get_base_template_context
 from openedx.core.djangoapps.embargo import api as embargo_api
 from openedx.core.djangoapps.external_auth.login_and_register import register as external_auth_register
 from openedx.core.djangoapps.lang_pref import LANGUAGE_KEY
@@ -87,7 +84,6 @@ from student.helpers import (
     generate_activation_email_context,
     get_next_url_for_login_page
 )
-from student.message_types import AccountActivation, EmailChange, EmailChangeConfirmation
 from student.models import (
     CourseEnrollment,
     PasswordHistory,
@@ -142,8 +138,8 @@ def csrf_token(context):
     token = context.get('csrf_token', '')
     if token == 'NOTPROVIDED':
         return ''
-    return (HTML(u'<div style="display:none"><input type="hidden"'
-                 ' name="csrfmiddlewaretoken" value="{}" /></div>').format(Text(token)))
+    return (u'<div style="display:none"><input type="hidden"'
+            ' name="csrfmiddlewaretoken" value="{}" /></div>'.format(token))
 
 
 # NOTE: This view is not linked to directly--it is called from
@@ -254,40 +250,6 @@ def register_user(request, extra_context=None):
     return render_to_response('register.html', context)
 
 
-def compose_activation_email(root_url, user, user_registration=None, route_enabled=False, profile_name=''):
-    """
-    Construct all the required params for the activation email
-    through celery task
-    """
-    if user_registration is None:
-        user_registration = Registration.objects.get(user=user)
-
-    message_context = generate_activation_email_context(user, user_registration)
-    message_context.update({
-        'confirm_activation_link': '{root_url}/activate/{activation_key}'.format(
-            root_url=root_url,
-            activation_key=message_context['key']
-        ),
-        'route_enabled': route_enabled,
-        'routed_user': user.username,
-        'routed_user_email': user.email,
-        'routed_profile_name': profile_name,
-    })
-
-    if route_enabled:
-        dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
-    else:
-        dest_addr = user.email
-
-    msg = AccountActivation().personalize(
-        recipient=Recipient(user.username, dest_addr),
-        language=preferences_api.get_user_preference(user, LANGUAGE_KEY),
-        user_context=message_context,
-    )
-
-    return msg
-
-
 def compose_and_send_activation_email(user, profile, user_registration=None):
     """
     Construct all the required params and send the activation email
@@ -298,12 +260,21 @@ def compose_and_send_activation_email(user, profile, user_registration=None):
         profile: profile object of the current logged-in user
         user_registration: registration of the current logged-in user
     """
-    route_enabled = settings.FEATURES.get('REROUTE_ACTIVATION_EMAIL')
-
-    root_url = configuration_helpers.get_value('LMS_ROOT_URL', settings.LMS_ROOT_URL)
-    msg = compose_activation_email(root_url, user, user_registration, route_enabled, profile.name)
-
-    send_activation_email.delay(str(msg))
+    dest_addr = user.email
+    if user_registration is None:
+        user_registration = Registration.objects.get(user=user)
+    context = generate_activation_email_context(user, user_registration)
+    subject = render_to_string('emails/activation_email_subject.txt', context)
+    # Email subject *must not* contain newlines
+    subject = ''.join(subject.splitlines())
+    message_for_activation = render_to_string('emails/activation_email.txt', context)
+    from_address = configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
+    from_address = configuration_helpers.get_value('ACTIVATION_EMAIL_FROM_ADDRESS', from_address)
+    if settings.FEATURES.get('REROUTE_ACTIVATION_EMAIL'):
+        dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
+        message_for_activation = ("Activation for %s (%s): %s\n" % (user, user.email, profile.name) +
+                                  '-' * 80 + '\n\n' + message_for_activation)
+    send_activation_email.delay(subject, message_for_activation, from_address, dest_addr)
 
 
 @login_required
@@ -1027,9 +998,7 @@ def activate_account(request, key):
                 '{html_start}Your account could not be activated{html_end}'
                 'Something went wrong, please <a href="{support_url}">contact support</a> to resolve this issue.'
             )).format(
-                support_url=configuration_helpers.get_value(
-                    'ACTIVATION_EMAIL_SUPPORT_LINK', settings.ACTIVATION_EMAIL_SUPPORT_LINK
-                ) or settings.SUPPORT_SITE_LINK,
+                support_url=configuration_helpers.get_value('SUPPORT_SITE_LINK', settings.SUPPORT_SITE_LINK),
                 html_start=HTML('<p class="message-title">'),
                 html_end=HTML('</p>'),
             ),
@@ -1334,32 +1303,24 @@ def do_email_change_request(user, new_email, activation_key=None):
     pec.activation_key = activation_key
     pec.save()
 
-    use_https = theming_helpers.get_current_request().is_secure()
-
-    site = Site.objects.get_current()
-    message_context = get_base_template_context(site)
-    message_context.update({
+    context = {
+        'key': pec.activation_key,
         'old_email': user.email,
-        'new_email': pec.new_email,
-        'confirm_link': '{protocol}://{site}{link}'.format(
-            protocol='https' if use_https else 'http',
-            site=configuration_helpers.get_value('SITE_NAME', settings.SITE_NAME),
-            link=reverse('confirm_email_change', kwargs={
-                'key': pec.activation_key,
-            }),
-        ),
-    })
+        'new_email': pec.new_email
+    }
 
-    msg = EmailChange().personalize(
-        recipient=Recipient(user.username, pec.new_email),
-        language=preferences_api.get_user_preference(user, LANGUAGE_KEY),
-        user_context=message_context,
+    subject = render_to_string('emails/email_change_subject.txt', context)
+    subject = ''.join(subject.splitlines())
+
+    message = render_to_string('emails/email_change.txt', context)
+
+    from_address = configuration_helpers.get_value(
+        'email_from_address',
+        settings.DEFAULT_FROM_EMAIL
     )
-
     try:
-        ace.send(msg)
+        mail.send_mail(subject, message, from_address, [pec.new_email])
     except Exception:
-        from_address = configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
         log.error(u'Unable to send email activation link to user from "%s"', from_address, exc_info=True)
         raise ValueError(_('Unable to send email activation link. Please try again later.'))
 
@@ -1370,8 +1331,8 @@ def do_email_change_request(user, new_email, activation_key=None):
         SETTING_CHANGE_INITIATED,
         {
             "setting": "email",
-            "old": message_context['old_email'],
-            "new": message_context['new_email'],
+            "old": context['old_email'],
+            "new": context['new_email'],
             "user_id": user.id,
         }
     )
@@ -1405,31 +1366,9 @@ def confirm_email_change(request, key):  # pylint: disable=unused-argument
             transaction.set_rollback(True)
             return response
 
-        use_https = request.is_secure()
-        if settings.FEATURES['ENABLE_MKTG_SITE']:
-            contact_link = marketing_link('CONTACT')
-        else:
-            contact_link = '{protocol}://{site}{link}'.format(
-                protocol='https' if use_https else 'http',
-                site=configuration_helpers.get_value('SITE_NAME', settings.SITE_NAME),
-                link=reverse('contact'),
-            )
-
-        site = Site.objects.get_current()
-        message_context = get_base_template_context(site)
-        message_context.update({
-            'old_email': user.email,
-            'new_email': pec.new_email,
-            'contact_link': contact_link,
-            'from_address': configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL),
-        })
-
-        msg = EmailChangeConfirmation().personalize(
-            recipient=Recipient(user.username, user.email),
-            language=preferences_api.get_user_preference(user, LANGUAGE_KEY),
-            user_context=message_context,
-        )
-
+        subject = render_to_string('emails/email_change_subject.txt', address_context)
+        subject = ''.join(subject.splitlines())
+        message = render_to_string('emails/confirm_email_change.txt', address_context)
         u_prof = UserProfile.objects.get(user=user)
         meta = u_prof.get_meta()
         if 'old_emails' not in meta:
@@ -1439,7 +1378,11 @@ def confirm_email_change(request, key):  # pylint: disable=unused-argument
         u_prof.save()
         # Send it to the old email...
         try:
-            ace.send(msg)
+            user.email_user(
+                subject,
+                message,
+                configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
+            )
         except Exception:    # pylint: disable=broad-except
             log.warning('Unable to send confirmation email to old address', exc_info=True)
             response = render_to_response("email_change_failed.html", {'email': user.email})
@@ -1450,9 +1393,12 @@ def confirm_email_change(request, key):  # pylint: disable=unused-argument
         user.save()
         pec.delete()
         # And send it to the new email...
-        msg.recipient = Recipient(user.username, pec.new_email)
         try:
-            ace.send(msg)
+            user.email_user(
+                subject,
+                message,
+                configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
+            )
         except Exception:  # pylint: disable=broad-except
             log.warning('Unable to send confirmation email to new address', exc_info=True)
             response = render_to_response("email_change_failed.html", {'email': pec.new_email})

@@ -588,8 +588,6 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
         pipeline.analytics.track = mock.MagicMock()
         request.user = self.create_user_models_for_existing_account(
             strategy, 'user@example.com', 'password', self.get_username(), skip_social_auth=True)
-        partial_pipeline_token = strategy.session_get('partial_pipeline_token')
-        partial_data = strategy.storage.partial.load(partial_pipeline_token)
 
         # Instrument the pipeline to get to the dashboard with the full
         # expected state.
@@ -610,14 +608,24 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
 
         # We should be redirected back to the complete page, setting
         # the "logged in" cookie for the marketing site.
-        self.assert_logged_in_cookie_redirect(self.do_complete(strategy, request, partial_pipeline_token, partial_data))
+        self.assert_logged_in_cookie_redirect(actions.do_complete(
+            request.backend, social_views._do_login, request.user, None,  # pylint: disable=protected-access
+            redirect_field_name=auth.REDIRECT_FIELD_NAME, request=request
+        ))
 
         # Set the cookie and try again
         self.set_logged_in_cookies(request)
 
         # Fire off the auth pipeline to link.
         self.assert_redirect_to_dashboard_looks_correct(
-            self.do_complete(strategy, request, partial_pipeline_token, partial_data)
+            actions.do_complete(
+                request.backend,
+                social_views._do_login,  # pylint: disable=protected-access
+                request.user,
+                None,
+                redirect_field_name=auth.REDIRECT_FIELD_NAME,
+                request=request
+            )
         )
 
         # Now we expect to be in the linked state, with a backend entry.
@@ -732,9 +740,6 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
         request, strategy = self.get_request_and_strategy(
             auth_entry=pipeline.AUTH_ENTRY_LOGIN, redirect_uri='social:complete')
         strategy.request.backend.auth_complete = mock.MagicMock(return_value=self.fake_auth_complete(strategy))
-        partial_pipeline_token = strategy.session_get('partial_pipeline_token')
-        partial_data = strategy.storage.partial.load(partial_pipeline_token)
-        
         pipeline.analytics.track = mock.MagicMock()
         user = self.create_user_models_for_existing_account(
             strategy, 'user@example.com', 'password', self.get_username())
@@ -778,8 +783,7 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
         self.set_logged_in_cookies(request)
 
         self.assert_redirect_to_dashboard_looks_correct(
-            self.do_complete(strategy, request, partial_pipeline_token, partial_data, user)
-        )
+            actions.do_complete(request.backend, social_views._do_login, user=user, request=request))
         self.assert_account_settings_context_looks_correct(account_settings_context(request))
 
     def test_signin_fails_if_account_not_active(self):
@@ -824,8 +828,6 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
         request, strategy = self.get_request_and_strategy(
             auth_entry=pipeline.AUTH_ENTRY_REGISTER, redirect_uri='social:complete')
         strategy.request.backend.auth_complete = mock.MagicMock(return_value=self.fake_auth_complete(strategy))
-        partial_pipeline_token = strategy.session_get('partial_pipeline_token')
-        partial_data = strategy.storage.partial.load(partial_pipeline_token)
 
         # Begin! Grab the registration page and check the login control on it.
         self.assert_register_response_before_pipeline_looks_correct(self.client.get('/register'))
@@ -879,13 +881,15 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
 
         # We should be redirected back to the complete page, setting
         # the "logged in" cookie for the marketing site.
-        self.assert_logged_in_cookie_redirect(self.do_complete(strategy, request, partial_pipeline_token, partial_data))
+        self.assert_logged_in_cookie_redirect(actions.do_complete(
+            request.backend, social_views._do_login, request.user, None,  # pylint: disable=protected-access
+            redirect_field_name=auth.REDIRECT_FIELD_NAME, request=request
+        ))
 
         # Set the cookie and try again
         self.set_logged_in_cookies(request)
         self.assert_redirect_to_dashboard_looks_correct(
-            self.do_complete(strategy, request, partial_pipeline_token, partial_data, created_user)
-        )
+            actions.do_complete(strategy.request.backend, social_views._do_login, user=created_user, request=request))
         # Now the user has been redirected to the dashboard. Their third party account should now be linked.
         self.assert_social_auth_exists_for_user(created_user, strategy)
         self.assert_account_settings_context_looks_correct(account_settings_context(request), linked=True)
@@ -942,19 +946,6 @@ class IntegrationTest(testutil.TestCase, test.TestCase):
         _, strategy = self.get_request_and_strategy(auth_entry=None, redirect_uri='social:complete')
         response = self.fake_auth_complete(strategy)
         self.assertEqual(response.url, reverse('signin_user'))
-
-    def do_complete(self, strategy, request, partial_pipeline_token, partial_data, user=None):
-        """
-        Makes sure that strategy store includes the partial data object before
-        calling actions.do_complete
-        """
-        strategy.storage.partial.store(partial_data)
-        if not user:
-            user = request.user
-        return actions.do_complete(
-            request.backend, social_views._do_login, user, None,  # pylint: disable=protected-access
-            redirect_field_name=auth.REDIRECT_FIELD_NAME, request=request, partial_token=partial_pipeline_token
-        )
 
 
 # pylint: disable=abstract-method

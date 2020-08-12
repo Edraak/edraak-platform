@@ -7,7 +7,6 @@ from nose.tools import raises
 
 from django_comment_common.models import FORUM_ROLE_MODERATOR, Role
 from lms.djangoapps.instructor.access import allow_access, list_with_level, revoke_access, update_forum_role
-from openedx.core.djangoapps.ace_common.tests.mixins import EmailTemplateTagMixin
 from student.roles import CourseBetaTesterRole, CourseCcxCoachRole, CourseStaffRole
 from student.tests.factories import UserFactory
 from xmodule.modulestore.tests.django_utils import SharedModuleStoreTestCase
@@ -41,7 +40,7 @@ class TestInstructorAccessList(SharedModuleStoreTestCase):
 
 
 @attr(shard=1)
-class TestInstructorAccessAllow(EmailTemplateTagMixin, SharedModuleStoreTestCase):
+class TestInstructorAccessAllow(SharedModuleStoreTestCase):
     """ Test access allow. """
     @classmethod
     def setUpClass(cls):

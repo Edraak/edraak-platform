@@ -279,7 +279,7 @@ class TestCreateAccount(SiteMixin, TestCase):
         request.user = AnonymousUser()
 
         with mock.patch('edxmako.request_context.get_current_request', return_value=request):
-            with mock.patch('edx_ace.ace.send') as mock_send_mail:
+            with mock.patch('django.core.mail.send_mail') as mock_send_mail:
                 create_account(request)
 
         # check that send_mail is called
@@ -466,7 +466,6 @@ class TestCreateAccount(SiteMixin, TestCase):
             response = self.client.get(self.url)
             assert response.status_code == 403
 
-    @override_settings(SITE_ID=99)
     def test_created_on_site_user_attribute_set(self):
         profile = self.create_account_and_fetch_profile(host=self.site.domain)
         self.assertEqual(UserAttribute.get_user_attribute(profile.user, 'created_on_site'), self.site.domain)

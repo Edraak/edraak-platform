@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_noop
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey, UsageKey
 from rest_framework import permissions, status
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -21,9 +22,6 @@ from rest_framework_oauth.authentication import OAuth2Authentication
 import eventtracking
 from openedx.core.djangoapps.bookmarks.api import BookmarksLimitReachedError
 from edx_rest_framework_extensions.paginators import DefaultPagination
-from openedx.core.lib.api.authentication import (
-    SessionAuthenticationAllowInactiveUser
-)
 from openedx.core.lib.api.permissions import IsUserInUrl
 from openedx.core.lib.url_utils import unquote_slashes
 from xmodule.modulestore.exceptions import ItemNotFoundError
@@ -157,7 +155,7 @@ class BookmarksListView(ListCreateAPIView, BookmarksViewMixin):
             * created: ISO 8601 String. The timestamp of bookmark's creation.
 
     """
-    authentication_classes = (OAuth2Authentication, SessionAuthenticationAllowInactiveUser)
+    authentication_classes = (OAuth2Authentication, SessionAuthentication)
     pagination_class = BookmarksPagination
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = BookmarkSerializer
@@ -301,7 +299,7 @@ class BookmarksDetailView(APIView, BookmarksViewMixin):
         to a requesting user's bookmark a 404 is returned. 404 will also be returned
         if the bookmark does not exist.
     """
-    authentication_classes = (OAuth2Authentication, SessionAuthenticationAllowInactiveUser)
+    authentication_classes = (OAuth2Authentication, SessionAuthentication)
     permission_classes = (permissions.IsAuthenticated, IsUserInUrl)
 
     serializer_class = BookmarkSerializer

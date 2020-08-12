@@ -3,14 +3,12 @@ Django Rest Framework Authentication classes for cross-domain end-points.
 """
 import django
 from django.middleware.csrf import CsrfViewMiddleware
-from openedx.core.lib.api.authentication import SessionAuthenticationAllowInactiveUser
+from rest_framework import authentication
 
 from .helpers import is_cross_domain_request_allowed, skip_cross_domain_referer_check
 
 
-class SessionAuthenticationCrossDomainCsrf(SessionAuthenticationAllowInactiveUser):
-    # TODO: Edraak-specific:
-    #   At Edraak we want to allow inactive users full access
+class SessionAuthenticationCrossDomainCsrf(authentication.SessionAuthentication):
     """
     Session authentication that skips the referer check over secure connections.
 

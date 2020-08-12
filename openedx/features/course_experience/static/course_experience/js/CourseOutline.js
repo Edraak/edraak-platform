@@ -78,17 +78,16 @@ export class CourseOutline {  // eslint-disable-line import/prefer-default-expor
     toggleAllButton.addEventListener('click', (event) => {
       const toggleAllExpanded = toggleAllButton.getAttribute('aria-expanded') === 'true';
       let sectionAction;
-      /* globals gettext */
       if (toggleAllExpanded) {
         toggleAllButton.setAttribute('aria-expanded', 'false');
         sectionAction = collapseSection;
         toggleAllSpan.classList.add(extraPaddingClass);
-        toggleAllSpan.innerText = gettext('Expand All');
+        toggleAllSpan.innerText = 'Expand All';
       } else {
         toggleAllButton.setAttribute('aria-expanded', 'true');
         sectionAction = expandSection;
         toggleAllSpan.classList.remove(extraPaddingClass);
-        toggleAllSpan.innerText = gettext('Collapse All');
+        toggleAllSpan.innerText = 'Collapse All';
       }
       const sections = Array.prototype.slice.call(document.querySelectorAll('.accordion-trigger'));
       sections.forEach((sectionToggleButton) => {

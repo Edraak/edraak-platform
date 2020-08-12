@@ -245,9 +245,10 @@ pyjwt==1.6.3
 pylint-celery==0.3        # via edx-lint
 pylint-django==0.7.2      # via edx-lint
 pylint-plugin-utils==0.3  # via pylint-celery, pylint-django
-pylint==1.7.6             # via edx-lint, pylint-celery, pylint-django
-pymongo==3.9.0
-pynliner==0.8.0
+pylint==1.7.1             # via edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
+pymongo==2.9.1
+pynliner==0.5.2
+pyopenssl==18.0.0         # via scrapy, service-identity
 pyparsing==2.2.0
 pyquery==1.4.0
 pysqlite==2.8.3
@@ -294,7 +295,7 @@ singledispatch==3.4.0.3
 six==1.11.0
 slumber==0.7.1
 social-auth-app-django==3.1.0
-social-auth-core==3.2.0
+social-auth-core[openidconnect]==3.0.0
 sorl-thumbnail==12.3
 sortedcontainers==0.9.2
 splinter==0.8.0
