@@ -38,7 +38,6 @@ git+https://github.com/edx/RecommenderXBlock.git@1.4.0#egg=recommender-xblock==1
 git+https://github.com/edx-solutions/xblock-drag-and-drop-v2@15e4f12#egg=xblock-drag-and-drop-v2==2.2.7  # i18n updates
 -e git+https://github.com/edx-solutions/xblock-google-drive.git@138e6fa0bf3a2013e904a085b9fed77dab7f3f21#egg=xblock-google-drive
 git+https://github.com/open-craft/xblock-poll@34e1e19eacb37f7914c5c6e85657b2826cc3460f#egg=xblock-poll==1.9.9
-git+https://github.com/edx/xblock-utils.git@v1.1.1#egg=xblock-utils==1.1.1
 -e common/lib/xmodule
 amqp==1.4.9
 analytics-python==1.2.9
@@ -298,7 +297,7 @@ singledispatch==3.4.0.3
 six==1.11.0
 slumber==0.7.1
 social-auth-app-django==3.1.0
-social-auth-core[openidconnect]==3.0.0
+social-auth-core==3.2.0
 sorl-thumbnail==12.3
 sortedcontainers==0.9.2
 soupsieve==1.7.1

@@ -15,6 +15,7 @@ from django.db import transaction
 from django.dispatch import Signal
 from django.utils.translation import get_language
 from django.utils.translation import ugettext as _
+from edraak_marketing_email.helpers import unsubscribe_from_marketing_emails
 # Note that this lives in LMS, so this dependency should be refactored.
 from notification_prefs.views import enable_notifications
 from pytz import UTC
@@ -209,6 +210,10 @@ def create_account_with_params(request, params):
     # and is not yet an active user.
     if new_user is not None:
         AUDIT_LOG.info(u"Login success on new account creation - {0}".format(new_user.username))
+
+    marketing_consent = params.get('marketing_consent', False)
+    if not marketing_consent:
+        unsubscribe_from_marketing_emails(new_user)
 
     return new_user
 
