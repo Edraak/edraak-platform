@@ -19,7 +19,6 @@ from enrollment.errors import (
 from enrollment.serializers import CourseSerializer
 from enrollment.serializers import EdraakCourseEnrollmentSerializer
 from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
-from openedx.core.djangoapps.request_cache import get_request_or_stub
 from openedx.core.lib.exceptions import CourseNotFoundError
 from student.models import (
     AlreadyEnrolledError,
@@ -29,6 +28,7 @@ from student.models import (
     EnrollmentClosedError,
     NonExistentCourseError
 )
+from openedx.core.lib.request_utils import get_request_or_stub
 from student.roles import RoleCache
 
 log = logging.getLogger(__name__)

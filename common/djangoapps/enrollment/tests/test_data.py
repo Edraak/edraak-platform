@@ -21,8 +21,8 @@ from enrollment.errors import (
     UserNotFoundError
 )
 from enrollment.serializers import EdraakCourseEnrollmentSerializer
-from openedx.core.djangoapps.request_cache import get_request_or_stub
 from openedx.core.lib.exceptions import CourseNotFoundError
+from openedx.core.lib.request_utils import get_request_or_stub
 from student.models import AlreadyEnrolledError, CourseEnrollment, CourseFullError, EnrollmentClosedError
 from student.tests.factories import UserFactory, CourseAccessRoleFactory
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
