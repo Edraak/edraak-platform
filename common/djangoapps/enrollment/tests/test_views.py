@@ -4,6 +4,7 @@ Tests for user enrollment.
 import datetime
 import itertools
 import json
+import six
 import unittest
 
 import ddt
@@ -1391,3 +1392,137 @@ class UnenrollmentTest(EnrollmentTestMixin, ModuleStoreTestCase):
         url = reverse('unenrollment')
         headers = self.build_jwt_headers(submitting_user)
         return self.client.post(url, json.dumps(data), content_type='application/json', **headers)
+
+
+@ddt.ddt
+@unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+class EdraakCourseListViewTest(ModuleStoreTestCase):
+    """
+    Edraak specific tests
+    """
+    def setUp(self):
+        super(EdraakCourseListViewTest, self).setUp()
+
+        self.enrollments_data = [
+            {
+                'course_id': 'course_01',
+                'is_completed': True,
+                'is_certificate_allowed': True,
+                'is_certificate_available': True
+            },
+            {
+                'course_id': 'course_02',
+                'is_completed': True,
+                'is_certificate_allowed': False,
+                'is_certificate_available': False
+            },
+            {
+                'course_id': 'course_03',
+                'is_completed': False,
+                'is_certificate_allowed': True,
+                'is_certificate_available': False
+            },
+            {
+                'course_id': 'course_04',
+                'is_completed': False,
+                'is_certificate_allowed': False,
+                'is_certificate_available': False
+            },
+            {
+                'course_id': 'course_05',
+                'is_completed': False,
+                'is_certificate_allowed': False,
+                'is_certificate_available': False
+            },
+        ]
+
+        self.user = UserFactory.create(
+            username='normal_user',
+            email='normal_user@example.com',
+            password='normal_user_password',
+        )
+        self.client.login(username='normal_user', password='normal_user_password')
+
+    @ddt.data(
+        ('is_completed', 2),
+        ('is_certificate_allowed', 2),
+        ('is_certificate_available', 1),
+    )
+    @ddt.unpack
+    def test_edraak_course_list_api_with_parameter(self, parameter, true_count):
+        """
+        Verify that (edraak_course_list) API is applying filters correctly
+        """
+        with patch('enrollment.views.get_course_enrollments') as mock_get_course_enrollments:
+            mock_get_course_enrollments.return_value = self.enrollments_data
+            self._test_edraak_course_list_response(
+                parameter_name=parameter,
+                parameter_value=True,
+                true_count=true_count
+            )
+            self._test_edraak_course_list_response(
+                parameter_name=parameter,
+                parameter_value=False,
+                true_count=true_count
+            )
+
+    @ddt.data(
+        'is_completed',
+        'is_certificate_allowed',
+        'is_certificate_available',
+    )
+    def test_edraak_course_list_api_with_wrong_parameter_value(self, parameter):
+        """
+        Verify that (edraak_course_list) API will return 400 response with error message when a wrong value
+        is used for any of the parameters
+        """
+        with patch('enrollment.views.get_course_enrollments', return_value=self.enrollments_data):
+            data = self._test_response(
+                data={parameter: 'not_true_or_false'},
+                expected_status_code=status.HTTP_400_BAD_REQUEST
+            )
+            self.assertEqual(data['message'], 'Wrong value for parameter ({parm})'.format(parm=parameter))
+
+    def test_error_in_fetching_enrollments(self):
+        """
+        Verify that the view processes (CourseEnrollmentError) exception nicely
+        """
+        with patch('enrollment.views.get_course_enrollments', side_effect=CourseEnrollmentError(msg='any message')):
+            data = self._test_response(
+                data=None,
+                expected_status_code=status.HTTP_400_BAD_REQUEST
+            )
+            self.assertEqual(
+                data['message'],
+                'An error occurred while retrieving enrollments for user \'{username}\''.format(
+                    username=self.user.username
+                )
+            )
+
+    def _test_edraak_course_list_response(self, parameter_name, parameter_value, true_count):
+        """
+        Helper for test_edraak_course_list_api_with_parameter
+        """
+        data = self._test_response(
+            data={parameter_name: parameter_value},
+            expected_status_code=status.HTTP_200_OK
+        )
+        expected_count = true_count if parameter_value else len(self.enrollments_data) - true_count
+        self.assertEqual(len(data), expected_count)
+
+        for enrollment in data:
+            self.assertEqual(enrollment[parameter_name], parameter_value)
+
+    def _test_response(self, data, expected_status_code):
+        """
+        Helper to get a response, test it's status code
+        returns json data from response contents
+        """
+        response = self.client.get(
+            path=reverse('edraak_course_list'),
+            data=data,
+            content_type="application/json"
+        )
+        self.assertEqual(response.status_code, expected_status_code)
+
+        return json.loads(response.content)

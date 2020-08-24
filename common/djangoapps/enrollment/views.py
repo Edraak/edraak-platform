@@ -4,13 +4,15 @@ consist primarily of authentication, request validation, and serialization.
 
 """
 import logging
+import six
 
 from course_modes.models import CourseMode
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.utils.decorators import method_decorator
 from edx_rest_framework_extensions.authentication import JwtAuthentication
 from enrollment import api
+from enrollment.data import get_course_enrollments
 from enrollment.errors import CourseEnrollmentError, CourseEnrollmentExistsError, CourseModeNotFoundError
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
@@ -21,6 +23,7 @@ from openedx.core.djangoapps.embargo import api as embargo_api
 from openedx.core.djangoapps.user_api.accounts.permissions import CanRetireUser
 from openedx.core.djangoapps.user_api.models import UserRetirementStatus
 from openedx.core.djangoapps.user_api.preferences.api import update_email_opt_in
+from openedx.core.djangoapps.util.forms import to_bool
 from openedx.core.lib.api.authentication import (
     OAuth2AuthenticationAllowInactiveUser,
     SessionAuthenticationAllowInactiveUser
@@ -783,3 +786,83 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
                     actual_activation=current_enrollment['is_active'] if current_enrollment else None,
                     user_id=user.id
                 )
+
+
+@can_disable_rate_limit
+class EdraakCourseListView(APIView, ApiKeyPermissionMixIn):
+    """
+    """
+    authentication_classes = (JwtAuthentication, OAuth2AuthenticationAllowInactiveUser,
+                              EnrollmentCrossDomainSessionAuth,)
+    permission_classes = ApiKeyHeaderPermissionIsAuthenticated,
+    throttle_classes = EnrollmentUserThrottle,
+    http_method_names = ['get']
+
+    # - Since the course about page on the marketing site uses this API to auto-enroll users,
+    # we need to support cross-domain CSRF.
+    @method_decorator(ensure_csrf_cookie_cross_domain)
+    def get(self, request):
+        """
+        GET for endpoint api/enrollment/v1/edraak_course_list
+        Accepts the following optional parameter:
+            is_certificate_allowed
+            is_certificate_available
+            is_completed
+
+        The API will use get_course_enrollments and filter-out records that do no match the criteria given in
+        optional parameters list.
+
+        Example: api/enrollment/v1/edraak_course_list?is_completed=true
+            get all enrollments for current user, where courses are completed, regardless of certificate status
+        """
+        try:
+            enrollment_data = get_course_enrollments(
+                request.user.username
+            )
+        except CourseEnrollmentError:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={
+                    "message": (
+                        u"An error occurred while retrieving enrollments for user '{username}'"
+                    ).format(username=request.user.username)
+                }
+            )
+
+        filters = {}
+        try:
+            for parameter_name in ('is_certificate_allowed', 'is_certificate_available', 'is_completed',):
+                self._add_filter(filters=filters, request=request, parameter_name=parameter_name)
+        except ValueError as error:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"message": six.text_type(error)}
+            )
+
+        final_data = [enrollment for enrollment in enrollment_data if self._is_enrollment_match(filters, enrollment)]
+
+        return Response(final_data)
+
+    def _add_filter(self, filters, request, parameter_name):
+        parameter_value = self._get_boolean(request=request, param=parameter_name)
+        if parameter_value is not None:
+            filters[parameter_name] = parameter_value
+
+    @staticmethod
+    def _is_enrollment_match(filters, enrollment_to_test):
+        for filter_name, filter_value in filters.items():
+            if filter_value != enrollment_to_test[filter_name]:
+                return False
+        return True
+
+    @staticmethod
+    def _get_boolean(request, param):
+        """
+        Get a parameter value as boolean. Returns (None) if the parameter was not passed to the request
+        """
+        try:
+            boolean_value = to_bool(request.query_params.get(param, None))
+        except ValidationError:
+            raise ValueError('Wrong value for parameter ({param})'.format(param=param))
+
+        return boolean_value

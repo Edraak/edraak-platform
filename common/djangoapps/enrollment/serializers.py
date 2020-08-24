@@ -111,6 +111,8 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
     is_certificate_allowed = serializers.SerializerMethodField()
     specialization_slug = serializers.SerializerMethodField()
     subscribed_to_emails = serializers.SerializerMethodField()
+    is_completed = serializers.SerializerMethodField()
+    is_certificate_available = serializers.SerializerMethodField()
 
     def _get_user(self):
         request = self.context.get('request')
@@ -147,6 +149,44 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
 
         return not Optout.objects.filter(user=user, course_id=obj.course_id).exists()
 
+    def get_is_completed(self, obj):
+        # Keep this import local to hide LMS related stuff from pytest when testing CMS
+        from lms.djangoapps.grades.models import PersistentCourseGrade
+
+        user = self._get_user()
+        completed = False
+        if user:
+            try:
+                grade = PersistentCourseGrade.objects.get(
+                    user_id=user.id,
+                    course_id=obj.course_id,
+                )
+            except PersistentCourseGrade.DoesNotExist:
+                pass
+            else:
+                if grade.percent_grade >= obj.course_overview.lowest_passing_grade:
+                    completed = True
+        return completed
+
+    def get_is_certificate_available(self, obj):
+        # Keep this import local to hide LMS related stuff from pytest when testing CMS
+        from lms.djangoapps.certificates.models import CertificateStatuses, GeneratedCertificate
+
+        user = self._get_user()
+        available = False
+        if user:
+            try:
+                _ = GeneratedCertificate.objects.get(
+                    user_id=user.id,
+                    course_id=obj.course_id,
+                    status__in=[CertificateStatuses.downloadable, CertificateStatuses.error],
+                )
+            except GeneratedCertificate.DoesNotExist:
+                pass
+            else:
+                available = True
+        return available
+
     class Meta(object):
         model = CourseEnrollment
         fields = (
@@ -158,6 +198,8 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
             'is_certificate_allowed',
             'specialization_slug',
             'user',
-            'subscribed_to_emails'
+            'subscribed_to_emails',
+            'is_completed',
+            'is_certificate_available',
         )
         lookup_field = 'username'
