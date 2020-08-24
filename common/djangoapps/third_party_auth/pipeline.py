@@ -199,6 +199,11 @@ def get(request):
     """Gets the running pipeline's data from the passed request."""
     strategy = social_django.utils.load_strategy(request)
     token = strategy.session_get('partial_pipeline_token')
+
+    if not token:
+        strategy.session_set('partial_pipeline_token', strategy.session_get('partial_pipeline_token_'))
+        token = strategy.session_get('partial_pipeline_token')
+
     partial_object = strategy.partial_load(token)
     pipeline_data = None
     if partial_object:
@@ -542,6 +547,10 @@ def ensure_user_information(strategy, auth_entry, backend=None, user=None, socia
         current_provider = provider.Registry.get_from_pipeline({'backend': current_partial.backend, 'kwargs': kwargs})
         return (current_provider and
                 (current_provider.skip_email_verification or current_provider.send_to_registration_first))
+
+    if current_partial:
+        strategy.session_set('partial_pipeline_token_', current_partial.token)
+        strategy.storage.partial.store(current_partial)
 
     if not user:
         if user_exists(details or {}):
