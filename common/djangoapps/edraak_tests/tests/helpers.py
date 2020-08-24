@@ -13,7 +13,6 @@ class ModuleStoreLoggedInTestCase(ModuleStoreTestCase):
     """
     A base test class to provide helpers to create user (staff or not staff) and log him in.
     """
-
     LOGIN_STAFF = True
     ENROLL_USER = False
 
@@ -35,7 +34,6 @@ class ModuleStoreLoggedInTestCase(ModuleStoreTestCase):
         """
         Overrides the non-staff user method.
         """
-
         password = 'foo'
 
         user = UserFactory.create(
@@ -43,7 +41,6 @@ class ModuleStoreLoggedInTestCase(ModuleStoreTestCase):
             is_staff=False,
             is_active=True,
         )
-
         user.save()
 
         return user, password
@@ -54,18 +51,20 @@ class ModuleStoreLoggedInTestCase(ModuleStoreTestCase):
 
         This method is to created to enable overriding for customization from children classes.
         """
-
         return CourseFactory.create()
 
     def login_user(self, user, password):
         """
         Login and enroll user.
         """
-
         if settings.ROOT_URLCONF == 'cms.urls':
             self.client.post(reverse('login_post'), {'email': user.email, 'password': password})
             dashboard_res = self.client.get(reverse('home'))
-            self.assertContains(dashboard_res, 'Studio Home', msg_prefix='The user should be logged in')
+            self.assertContains(
+                dashboard_res,
+                u'<h1 class="page-header">{} Home</h1>'.format(settings.STUDIO_SHORT_NAME),
+                msg_prefix='The user should be logged in'
+            )
         else:
             self.client.post(reverse('login'), {'email': user.email, 'password': password})
             dashboard_res = self.client.get(reverse('dashboard'))
