@@ -32,7 +32,8 @@ from openedx.features.enterprise_support.utils import (
     handle_enterprise_cookies_for_logistration,
     update_logistration_context_for_enterprise,
 )
-from student.helpers import get_next_url_for_login_page
+from student.edraak_helpers import edraak_update_origin
+from student.helpers import get_next_url_for_login_page, get_next_url_for_progs_login_page
 import third_party_auth
 from third_party_auth import pipeline
 from third_party_auth.decorators import xframe_allow_whitelisted
@@ -62,6 +63,10 @@ def login_and_registration_form(request, initial_mode="login"):
     #  since Django's SessionAuthentication middleware auto-updates session cookies but not
     #  the other login-related cookies. See ARCH-282.
     if request.user.is_authenticated and are_logged_in_cookies_set(request):
+        return redirect(redirect_to)
+
+    if settings.FEATURES.get("ENABLE_EDRAAK_LOGISTRATION", False) and settings.PROGS_URLS:
+        redirect_to = get_next_url_for_progs_login_page(request, initial_mode)
         return redirect(redirect_to)
 
     # Retrieve the form descriptions from the user API
@@ -156,6 +161,9 @@ def login_and_registration_form(request, initial_mode="login"):
 
     enterprise_customer = enterprise_customer_for_request(request)
     update_logistration_context_for_enterprise(request, context, enterprise_customer)
+
+    # Edraak: add (origin) option to the context if applicable
+    edraak_update_origin(request, context)  # Warning: This modifies `context['data']['origin']`
 
     response = render_to_response('student_account/login_and_register.html', context)
     handle_enterprise_cookies_for_logistration(request, response, context)
