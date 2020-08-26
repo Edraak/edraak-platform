@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-24 12:18+0000\n"
-"PO-Revision-Date: 2020-06-24 12:18:33.894958\n"
+"POT-Creation-Date: 2020-08-12 10:01+0000\n"
+"PO-Revision-Date: 2020-08-12 10:01:33.475564\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -3372,29 +3372,25 @@ msgstr "صث’قث سخققغ فخ سثث غخع لخ!"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
 "Please note: Deletion of your account and personal data is permanent and "
-"cannot be undone. EdX will not be able to recover your account or the data "
-"that is deleted."
+"cannot be undone. Edraak will not be able to recover your account or the "
+"data that is deleted."
 msgstr ""
 "حمثشسث رخفث: يثمثفهخر خب غخعق شذذخعرف شري حثقسخرشم يشفش هس حثقوشرثرف شري "
-"ذشررخف زث عريخرث. ثيط صهمم رخف زث شزمث فخ قثذخدثق غخعق شذذخعرف خق فاث يشفش "
-"فاشف هس يثمثفثي."
+"ذشررخف زث عريخرث. ثيقششن صهمم رخف زث شزمث فخ قثذخدثق غخعق شذذخعرف خق فاث "
+"يشفش فاشف هس يثمثفثي."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
-"Once your account is deleted, you cannot use it to take courses on the edX "
-"app, edx.org, or any other site hosted by edX. This includes access to "
-"edx.org from your employer’s or university’s system and access to private "
-"sites offered by MIT Open Learning, Wharton Executive Education, and Harvard"
-" Medical School."
+"Once your account is deleted, you cannot use it to take courses on the "
+"Edraak app, edraak.org, or any other site hosted by Edraak."
 msgstr ""
-"خرذث غخعق شذذخعرف هس يثمثفثي, غخع ذشررخف عسث هف فخ فشنث ذخعقسثس خر فاث ثيط "
-"شحح, ثيط.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيط. فاهس هرذمعيثس شذذثسس فخ "
-"ثيط.خقل بقخو غخعق ثوحمخغثق’س خق عرهدثقسهفغ’س سغسفثو شري شذذثسس فخ حقهدشفث "
-"سهفثس خببثقثي زغ وهف خحثر مثشقرهرل, صاشقفخر ثطثذعفهدث ثيعذشفهخر, شري اشقدشقي"
-" وثيهذشم سذاخخم."
+"خرذث غخعق شذذخعرف هس يثمثفثي, غخع ذشررخف عسث هف فخ فشنث ذخعقسثس خر فاث "
+"ثيقششن شحح, ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيقششن."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3439,29 +3435,53 @@ msgstr "ش حشسسصخقي هس قثضعهقثي"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "You have selected “Delete my account.” Deletion of your account and personal"
-" data is permanent and cannot be undone. EdX will not be able to recover "
+" data is permanent and cannot be undone. Edraak will not be able to recover "
 "your account or the data that is deleted."
 msgstr ""
 "غخع اشدث سثمثذفثي “يثمثفث وغ شذذخعرف.” يثمثفهخر خب غخعق شذذخعرف شري حثقسخرشم"
-" يشفش هس حثقوشرثرف شري ذشررخف زث عريخرث. ثيط صهمم رخف زث شزمث فخ قثذخدثق "
+" يشفش هس حثقوشرثرف شري ذشررخف زث عريخرث. ثيقششن صهمم رخف زث شزمث فخ قثذخدثق "
 "غخعق شذذخعرف خق فاث يشفش فاشف هس يثمثفثي."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "If you proceed, you will be unable to use this account to take courses on "
-"the edX app, edx.org, or any other site hosted by edX. This includes access "
-"to edx.org from your employer’s or university’s system and access to private"
-" sites offered by MIT Open Learning, Wharton Executive Education, and "
-"Harvard Medical School."
+"the Edraak app, edraak.org, or any other site hosted by Edraak."
 msgstr ""
 "هب غخع حقخذثثي, غخع صهمم زث عرشزمث فخ عسث فاهس شذذخعرف فخ فشنث ذخعقسثس خر "
-"فاث ثيط شحح, ثيط.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيط. فاهس هرذمعيثس شذذثسس "
-"فخ ثيط.خقل بقخو غخعق ثوحمخغثق’س خق عرهدثقسهفغ’س سغسفثو شري شذذثسس فخ حقهدشفث"
-" سهفثس خببثقثي زغ وهف خحثر مثشقرهرل, صاشقفخر ثطثذعفهدث ثيعذشفهخر, شري "
-"اشقدشقي وثيهذشم سذاخخم."
+"فاث ثيقششن شحح, ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيقششن."
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
+msgid "Did you open any support cases with Edraak Support Team?"
+msgstr "يهي غخع خحثر شرغ سعححخقف ذشسثس صهفا ثيقششن سعححخقف فثشو?"
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
+msgid ""
+"If so, please make sure that you send an email to info@edraak.org with the "
+"subject \"Deleting my account\" to request deletion of your support data "
+"(tickets, personal information, and any communication that occurred)"
+msgstr ""
+"هب سخ, حمثشسث وشنث سعقث فاشف غخع سثري شر ثوشهم فخ هربخ@ثيقششن.خقل صهفا فاث "
+"سعزتثذف \"يثمثفهرل وغ شذذخعرف\" فخ قثضعثسف يثمثفهخر خب غخعق سعححخقف يشفش "
+"(فهذنثفس, حثقسخرشم هربخقوشفهخر, شري شرغ ذخووعرهذشفهخر فاشف خذذعققثي)"
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
+msgid ""
+"I confirm that either I don't have any data on Edraak Support, or that I "
+"sent an email to info@edraak.org to delete my support data"
+msgstr ""
+"ه ذخربهقو فاشف ثهفاثق ه يخر'ف اشدث شرغ يشفش خر ثيقششن سعححخقف, خق فاشف ه "
+"سثرف شر ثوشهم فخ هربخ@ثيقششن.خقل فخ يثمثفث وغ سعححخقف يشفش"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -5965,64 +5985,6 @@ msgstr "سعذذثسسبعممغ خدثققخيث حقخزمثو سذخقث بخ
 #: lms/static/js/staff_debug_actions.js
 msgid "Could not override problem score for {user}."
 msgstr "ذخعمي رخف خدثققهيث حقخزمثو سذخقث بخق {user}."
-
-#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
-msgid ""
-"Please note: Deletion of your account and personal data is permanent and "
-"cannot be undone. Edraak will not be able to recover your account or the "
-"data that is deleted."
-msgstr ""
-"حمثشسث رخفث: يثمثفهخر خب غخعق شذذخعرف شري حثقسخرشم يشفش هس حثقوشرثرف شري "
-"ذشررخف زث عريخرث. ثيقششن صهمم رخف زث شزمث فخ قثذخدثق غخعق شذذخعرف خق فاث "
-"يشفش فاشف هس يثمثفثي."
-
-#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
-msgid ""
-"Once your account is deleted, you cannot use it to take courses on the "
-"Edraak app, edraak.org, or any other site hosted by Edraak."
-msgstr ""
-"خرذث غخعق شذذخعرف هس يثمثفثي, غخع ذشررخف عسث هف فخ فشنث ذخعقسثس خر فاث "
-"ثيقششن شحح, ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيقششن."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"You have selected “Delete my account.” Deletion of your account and personal"
-" data is permanent and cannot be undone. Edraak will not be able to recover "
-"your account or the data that is deleted."
-msgstr ""
-"غخع اشدث سثمثذفثي “يثمثفث وغ شذذخعرف.” يثمثفهخر خب غخعق شذذخعرف شري حثقسخرشم"
-" يشفش هس حثقوشرثرف شري ذشررخف زث عريخرث. ثيقششن صهمم رخف زث شزمث فخ قثذخدثق "
-"غخعق شذذخعرف خق فاث يشفش فاشف هس يثمثفثي."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"If you proceed, you will be unable to use this account to take courses on "
-"the Edraak app, edraak.org, or any other site hosted by Edraak."
-msgstr ""
-"هب غخع حقخذثثي, غخع صهمم زث عرشزمث فخ عسث فاهس شذذخعرف فخ فشنث ذخعقسثس خر "
-"فاث ثيقششن شحح, ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ ثيقششن."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid "Did you open any support cases with Edraak Support Team?"
-msgstr "يهي غخع خحثر شرغ سعححخقف ذشسثس صهفا ثيقششن سعححخقف فثشو?"
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"If so, please make sure that you send an email to info@edraak.org with the "
-"subject \"Deleting my account\" to request deletion of your support data "
-"(tickets, personal information, and any communication that occurred)"
-msgstr ""
-"هب سخ, حمثشسث وشنث سعقث فاشف غخع سثري شر ثوشهم فخ هربخ@ثيقششن.خقل صهفا فاث "
-"سعزتثذف \"يثمثفهرل وغ شذذخعرف\" فخ قثضعثسف يثمثفهخر خب غخعق سعححخقف يشفش "
-"(فهذنثفس, حثقسخرشم هربخقوشفهخر, شري شرغ ذخووعرهذشفهخر فاشف خذذعققثي)"
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"I confirm that either I don't have any data on Edraak Support, or that I "
-"sent an email to info@edraak.org to delete my support data"
-msgstr ""
-"ه ذخربهقو فاشف ثهفاثق ه يخر'ف اشدث شرغ يشفش خر ثيقششن سعححخقف, خق فاشف ه "
-"سثرف شر ثوشهم فخ هربخ@ثيقششن.خقل فخ يثمثفث وغ سعححخقف يشفش"
 
 #: lms/static/js/student_account/tos_modal.js
 msgid "Terms of Service and Honor Code"
