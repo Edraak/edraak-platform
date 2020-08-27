@@ -9,7 +9,7 @@ from django.conf import settings
 from openedx.core.djangoapps.course_groups.models import CourseUserGroup
 
 from edxmako.shortcuts import marketing_link
-from openedx.core.djangoapps.course_groups.cohorts import add_user_to_cohort, get_cohort_id
+from openedx.core.djangoapps.course_groups.cohorts import add_user_to_cohort, get_cohort_id, get_cohort_by_id
 from openedx.core.djangoapps.user_api.accounts.api import update_account_settings
 
 from django.utils.decorators import method_decorator
@@ -58,7 +58,7 @@ class UniversityIDView(ContextMixin, generic.FormView):
         if self.is_staff():
             return redirect('edraak_university:id_staff', course_id=course.id)
 
-        CourseTabView.register_user_access_warning_messages(self.request, self.get_course_key())
+        CourseTabView.register_user_access_warning_messages(self.request, course)
 
         return super(UniversityIDView, self).get(*args, **kwargs)
 
@@ -293,7 +293,7 @@ class UniversityIDUpdateView(ContextMixin, generic.UpdateView):
         instance.save()
 
         try:
-            add_user_to_cohort(instance.cohort, instance.user.email)
+            add_user_to_cohort(get_cohort_by_id(self.get_course_key(), instance.cohort), instance.user.email)
         except ValueError:
             pass
 
