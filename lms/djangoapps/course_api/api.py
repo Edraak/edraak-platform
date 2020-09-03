@@ -55,7 +55,7 @@ def course_detail(request, username, course_key):
     )
 
 
-def list_courses(request, username, org=None, filter_=None):
+def list_courses(request, username, org=None, filter_=None, exclude_ended=None):
     """
     Return a list of available courses.
 
@@ -84,4 +84,4 @@ def list_courses(request, username, org=None, filter_=None):
         List of `CourseOverview` objects representing the collection of courses.
     """
     user = get_effective_user(request.user, username)
-    return get_courses(user, org=org, filter_=filter_)
+    return get_courses(user, org=org, filter_=filter_, exclude_ended=exclude_ended)

@@ -164,7 +164,7 @@ class CourseListViewTestCaseMultipleCourses(CourseApiTestViewMixin, ModuleStoreT
         self.assertNotEqual(alternate_course.org, self.course.org)
 
         # No filtering.
-        unfiltered_response = self.verify_response(params={'username': self.staff_user.username})
+        unfiltered_response = self.verify_response(params={'username': self.staff_user.username, 'include_ended': True})
         for org in [self.course.org, alternate_course.org]:
             self.assertTrue(
                 any(course['org'] == org for course in unfiltered_response.data['results'])  # pylint: disable=no-member
@@ -188,7 +188,7 @@ class CourseListViewTestCaseMultipleCourses(CourseApiTestViewMixin, ModuleStoreT
             (dict(mobile=False), [self.course]),
         ]
         for filter_, expected_courses in test_cases:
-            params = {'username': self.staff_user.username}
+            params = {'username': self.staff_user.username, 'include_ended': True}
             if filter_:
                 params.update(filter_)
             response = self.verify_response(params=params)
@@ -335,7 +335,7 @@ class CourseListSearchViewTest(CourseApiTestViewMixin, ModuleStoreTestCase, Sear
         """
         Test without search, should list all the courses.
         """
-        res = self.verify_response()
+        res = self.verify_response(params={'include_ended': True})
         self.assertIn('results', res.data)
         self.assertNotEqual(res.data['results'], [])
         self.assertEqual(res.data['pagination']['count'], 3)  # Should list all of the 3 courses
@@ -344,7 +344,7 @@ class CourseListSearchViewTest(CourseApiTestViewMixin, ModuleStoreTestCase, Sear
         """
         Test with search, should only the course that matches the search term.
         """
-        res = self.verify_response(params={'search_term': 'unique search term'})
+        res = self.verify_response(params={'search_term': 'unique search term', 'include_ended': True})
         self.assertIn('results', res.data)
         self.assertNotEqual(res.data['results'], [])
         self.assertEqual(res.data['pagination']['count'], 1)  # Should list a single course
