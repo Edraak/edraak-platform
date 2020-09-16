@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:32.979094\n"
+"POT-Creation-Date: 2020-09-16 09:06+0000\n"
+"PO-Revision-Date: 2020-09-16 09:06:05.047169\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -5978,21 +5978,6 @@ msgstr ""
 "Töp nüm_töp_wörds wörds för wörd çlöüd. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
 "¢σηѕє¢тєтυя#"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#, python-format
-msgid ""
-"This is a routed Account Activation email for %(routed_user)s "
-"(%(routed_user_email)s): %(routed_profile_name)s"
-msgstr ""
-"Thïs ïs ä röütéd Àççöünt Àçtïvätïön émäïl för %(routed_user)s "
-"(%(routed_user_email)s): %(routed_profile_name)s Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
-"αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Account Activation"
-msgstr "Àççöünt Àçtïvätïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -6009,30 +5994,21 @@ msgstr ""
 "¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
 "¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт#"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Activate Your Account"
-msgstr "Àçtïväté Ýöür Àççöünt Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid "Enjoy learning with %(platform_name)s."
 msgstr ""
 "Énjöý léärnïng wïth %(platform_name)s. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
-"If you need help, please use our web form at <a "
-"href=\"%(support_url)s\">%(support_url)s</a> or email <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>."
+"If you need help, please use our web form at %(support_url)s or email "
+"%(support_email)s."
 msgstr ""
-"Ìf ýöü nééd hélp, pléäsé üsé öür wéß förm ät <a "
-"href=\"%(support_url)s\">%(support_url)s</a> ör émäïl <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>. Ⱡ'σяєм ιρѕυм ∂σłσя "
-"ѕιт αмєт, ¢σηѕє¢тєтυ#"
+"Ìf ýöü nééd hélp, pléäsé üsé öür wéß förm ät %(support_url)s ör émäïl "
+"%(support_email)s. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -6044,21 +6020,12 @@ msgstr ""
 "ättémptéd tö çréäté än äççöünt ön %(platform_name)s üsïng thïs émäïl "
 "äddréss. Ⱡ'σя#"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
-msgid ""
-"If you need help, please use our web form at %(support_url)s or email "
-"%(support_email)s."
-msgstr ""
-"Ìf ýöü nééd hélp, pléäsé üsé öür wéß förm ät %(support_url)s ör émäïl "
-"%(support_email)s. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
 #: common/templates/student/edx_ace/accountactivation/email/subject.txt
 #, python-format
-msgid "Action Required: Activate your %(platform_name)s account"
+msgid "Action Required %(name)s: Activate your %(platform_name)s account"
 msgstr ""
-"Àçtïön Réqüïréd: Àçtïväté ýöür %(platform_name)s äççöünt Ⱡ'σяєм ιρѕυм ∂σłσя "
-"ѕιт αмєт, ¢σηѕє¢тєтυя #"
+"Àçtïön Réqüïréd %(name)s: Àçtïväté ýöür %(platform_name)s äççöünt Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
 msgid "Email Change"
@@ -15769,6 +15736,56 @@ msgid "Your {platform_name} account email has been updated"
 msgstr ""
 "Ýöür {platform_name} äççöünt émäïl häs ßéén üpdätéd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
 "αмєт, ¢σηѕє¢тєтυя#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Hello"
+msgstr "Héllö Ⱡ'σяєм ιρѕ#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "The last step to start the learning journey at Edraak"
+msgstr ""
+"Thé läst stép tö stärt thé léärnïng jöürnéý ät Édrääk Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт"
+" αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"By clicking on the following button you will finish the registration process"
+" on Edraak"
+msgstr ""
+"Bý çlïçkïng ön thé föllöwïng ßüttön ýöü wïll fïnïsh thé régïsträtïön pröçéss"
+" ön Édrääk Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Activate your account now"
+msgstr "Àçtïväté ýöür äççöünt nöw Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Or copy and paste the activation link to your browser"
+msgstr ""
+"Ör çöpý änd pästé thé äçtïvätïön lïnk tö ýöür ßröwsér Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт"
+" αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"Note: If you haven't made this request, you don't need to do anything, and "
+"you will not receive any further messages from us"
+msgstr ""
+"Nöté: Ìf ýöü hävén't mädé thïs réqüést, ýöü dön't nééd tö dö änýthïng, änd "
+"ýöü wïll nöt réçéïvé äný fürthér méssägés fröm üs Ⱡ'σяєм ι#"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"This mail is automated, please do not reply to this email, and if you need "
+"any help, you can contact us in the 'help center' on Edraak platform"
+msgstr ""
+"Thïs mäïl ïs äütömätéd, pléäsé dö nöt réplý tö thïs émäïl, änd ïf ýöü nééd "
+"äný hélp, ýöü çän çöntäçt üs ïn thé 'hélp çéntér' ön Édrääk plätförm Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя "
+"ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ "
+"ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ "
+"¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє "
+"¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт "
+"ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυηт мσłłιт αηιм ι∂ єѕ#"
 
 #: lms/djangoapps/discussion/templates/discussion/discussion_board_fragment.html
 msgid "Add a Post"

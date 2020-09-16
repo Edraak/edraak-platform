@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:32.979094\n"
+"POT-Creation-Date: 2020-09-16 09:06+0000\n"
+"PO-Revision-Date: 2020-09-16 09:06:05.047169\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -5148,20 +5148,6 @@ msgstr "شمم حخسسهزمث صخقيس بقخو شمم مثشقرثقس."
 msgid "Top num_top_words words for word cloud."
 msgstr "فخح رعو_فخح_صخقيس صخقيس بخق صخقي ذمخعي."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#, python-format
-msgid ""
-"This is a routed Account Activation email for %(routed_user)s "
-"(%(routed_user_email)s): %(routed_profile_name)s"
-msgstr ""
-"فاهس هس ش قخعفثي شذذخعرف شذفهدشفهخر ثوشهم بخق %(routed_user)s "
-"(%(routed_user_email)s): %(routed_profile_name)s"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Account Activation"
-msgstr "شذذخعرف شذفهدشفهخر"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -5173,28 +5159,20 @@ msgstr ""
 "ثرلشلهرل, اهلا-ضعشمهفغ %(platform_name)s ذخعقسثس. رخفث فاشف غخع صهمم رخف زث "
 "شزمث فخ مخل زشذن هرفخ غخعق شذذخعرف عرفهم غخع اشدث شذفهدشفثي هف."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Activate Your Account"
-msgstr "شذفهدشفث غخعق شذذخعرف"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid "Enjoy learning with %(platform_name)s."
 msgstr "ثرتخغ مثشقرهرل صهفا %(platform_name)s."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
-"If you need help, please use our web form at <a "
-"href=\"%(support_url)s\">%(support_url)s</a> or email <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>."
+"If you need help, please use our web form at %(support_url)s or email "
+"%(support_email)s."
 msgstr ""
-"هب غخع رثثي اثمح, حمثشسث عسث خعق صثز بخقو شف <a "
-"href=\"%(support_url)s\">%(support_url)s</a> خق ثوشهم <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>."
+"هب غخع رثثي اثمح, حمثشسث عسث خعق صثز بخقو شف %(support_url)s خق ثوشهم "
+"%(support_email)s."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -5206,19 +5184,10 @@ msgstr ""
 "شففثوحفثي فخ ذقثشفث شر شذذخعرف خر %(platform_name)s عسهرل فاهس ثوشهم "
 "شييقثسس."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
-msgid ""
-"If you need help, please use our web form at %(support_url)s or email "
-"%(support_email)s."
-msgstr ""
-"هب غخع رثثي اثمح, حمثشسث عسث خعق صثز بخقو شف %(support_url)s خق ثوشهم "
-"%(support_email)s."
-
 #: common/templates/student/edx_ace/accountactivation/email/subject.txt
 #, python-format
-msgid "Action Required: Activate your %(platform_name)s account"
-msgstr "شذفهخر قثضعهقثي: شذفهدشفث غخعق %(platform_name)s شذذخعرف"
+msgid "Action Required %(name)s: Activate your %(platform_name)s account"
+msgstr "شذفهخر قثضعهقثي %(name)s: شذفهدشفث غخعق %(platform_name)s شذذخعرف"
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
 msgid "Email Change"
@@ -13734,6 +13703,46 @@ msgstr ""
 #: common/templates/emails/sync_learner_profile_data_email_change_subject.txt
 msgid "Your {platform_name} account email has been updated"
 msgstr "غخعق {platform_name} شذذخعرف ثوشهم اشس زثثر عحيشفثي"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Hello"
+msgstr "اثممخ"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "The last step to start the learning journey at Edraak"
+msgstr "فاث مشسف سفثح فخ سفشقف فاث مثشقرهرل تخعقرثغ شف ثيقششن"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"By clicking on the following button you will finish the registration process"
+" on Edraak"
+msgstr ""
+"زغ ذمهذنهرل خر فاث بخممخصهرل زعففخر غخع صهمم بهرهسا فاث قثلهسفقشفهخر حقخذثسس"
+" خر ثيقششن"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Activate your account now"
+msgstr "شذفهدشفث غخعق شذذخعرف رخص"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Or copy and paste the activation link to your browser"
+msgstr "خق ذخحغ شري حشسفث فاث شذفهدشفهخر مهرن فخ غخعق زقخصسثق"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"Note: If you haven't made this request, you don't need to do anything, and "
+"you will not receive any further messages from us"
+msgstr ""
+"رخفث: هب غخع اشدثر'ف وشيث فاهس قثضعثسف, غخع يخر'ف رثثي فخ يخ شرغفاهرل, شري "
+"غخع صهمم رخف قثذثهدث شرغ بعقفاثق وثسسشلثس بقخو عس"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"This mail is automated, please do not reply to this email, and if you need "
+"any help, you can contact us in the 'help center' on Edraak platform"
+msgstr ""
+"فاهس وشهم هس شعفخوشفثي, حمثشسث يخ رخف قثحمغ فخ فاهس ثوشهم, شري هب غخع رثثي "
+"شرغ اثمح, غخع ذشر ذخرفشذف عس هر فاث 'اثمح ذثرفثق' خر ثيقششن حمشفبخقو"
 
 #: lms/djangoapps/discussion/templates/discussion/discussion_board_fragment.html
 msgid "Add a Post"

@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:32.979094\n"
+"POT-Creation-Date: 2020-09-16 09:06+0000\n"
+"PO-Revision-Date: 2020-09-16 09:06:05.047169\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -4615,18 +4615,6 @@ msgstr ""
 msgid "Top num_top_words words for word cloud."
 msgstr ""
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#, python-format
-msgid ""
-"This is a routed Account Activation email for %(routed_user)s "
-"(%(routed_user_email)s): %(routed_profile_name)s"
-msgstr ""
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Account Activation"
-msgstr ""
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -4635,31 +4623,9 @@ msgid ""
 "able to log back into your account until you have activated it."
 msgstr ""
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Activate Your Account"
-msgstr ""
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid "Enjoy learning with %(platform_name)s."
-msgstr ""
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#, python-format
-msgid ""
-"If you need help, please use our web form at <a "
-"href=\"%(support_url)s\">%(support_url)s</a> or email <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>."
-msgstr ""
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
-msgid ""
-"This email message was automatically sent by %(lms_url)s because someone "
-"attempted to create an account on %(platform_name)s using this email "
-"address."
 msgstr ""
 
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
@@ -4669,9 +4635,17 @@ msgid ""
 "%(support_email)s."
 msgstr ""
 
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
+#, python-format
+msgid ""
+"This email message was automatically sent by %(lms_url)s because someone "
+"attempted to create an account on %(platform_name)s using this email "
+"address."
+msgstr ""
+
 #: common/templates/student/edx_ace/accountactivation/email/subject.txt
 #, python-format
-msgid "Action Required: Activate your %(platform_name)s account"
+msgid "Action Required %(name)s: Activate your %(platform_name)s account"
 msgstr ""
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
@@ -12408,6 +12382,40 @@ msgstr ""
 
 #: common/templates/emails/sync_learner_profile_data_email_change_subject.txt
 msgid "Your {platform_name} account email has been updated"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Hello"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "The last step to start the learning journey at Edraak"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"By clicking on the following button you will finish the registration process"
+" on Edraak"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Activate your account now"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Or copy and paste the activation link to your browser"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"Note: If you haven't made this request, you don't need to do anything, and "
+"you will not receive any further messages from us"
+msgstr ""
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"This mail is automated, please do not reply to this email, and if you need "
+"any help, you can contact us in the 'help center' on Edraak platform"
 msgstr ""
 
 #: lms/djangoapps/discussion/templates/discussion/discussion_board_fragment.html

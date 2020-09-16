@@ -12,8 +12,8 @@
 # leena <labualnil@qrf.org>, 2020
 # Salah Alomari <salomari@qrf.org>, 2020
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2020
-# Ali Hasan <ahasan@qrf.org>, 2020
 # Shadi Naif <shadinaif@gmail.com>, 2020
+# Ali Hasan <ahasan@qrf.org>, 2020
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -40,11 +40,11 @@
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # Omar Al-Ithawi <i@omardo.com>, 2019
-# Ali Hasan <ahasan@qrf.org>, 2020
 # leena <labualnil@qrf.org>, 2020
 # Salah Alomari <salomari@qrf.org>, 2020
 # Shadi Naif <shadinaif@gmail.com>, 2020
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2020
+# Ali Hasan <ahasan@qrf.org>, 2020
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
@@ -77,7 +77,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-24 12:03+0000\n"
+"POT-Creation-Date: 2020-09-16 08:55+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -5280,20 +5280,6 @@ msgstr "جميع الكلمات الممكنة من جميع الطلاب."
 msgid "Top num_top_words words for word cloud."
 msgstr "أفضل num_top_words كلمات بالنسبة لسحابة الكلمات."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#, python-format
-msgid ""
-"This is a routed Account Activation email for %(routed_user)s "
-"(%(routed_user_email)s): %(routed_profile_name)s"
-msgstr ""
-"هذه رسالة تفعيل حساب موجهة إلى %(routed_user)s (%(routed_user_email)s) "
-"%(routed_profile_name)s"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Account Activation"
-msgstr "تفعيل حساب"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -5305,28 +5291,20 @@ msgstr ""
 "العديد من المساقات الرائعة وعالية الجودة على %(platform_name)s . ننوّه إلى "
 "عدم إمكانية إعادة تسجيل الدخول إلى حسابك حتى تقوم بتفعيله."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Activate Your Account"
-msgstr "فعِّل حسابك"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid "Enjoy learning with %(platform_name)s."
 msgstr "احظَ بمتعة التعليم مع %(platform_name)s"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
-"If you need help, please use our web form at <a "
-"href=\"%(support_url)s\">%(support_url)s</a> or email <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>."
+"If you need help, please use our web form at %(support_url)s or email "
+"%(support_email)s."
 msgstr ""
-"إن كنت تحتاج للمساعدة، يرجى الاستعانة بالاستمارة عبر الويب على <a "
-"href=\"%(support_url)s\">%(support_url)s</a>  أو البريد الإلكتروني <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>"
+"إن كنت تحتاج للمساعدة، يرجى الاستعانة بالاستمارة عبر الويب على "
+"%(support_url)s أو البريد الإلكتروني %(support_email)s"
 
-#: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
@@ -5338,19 +5316,10 @@ msgstr ""
 "%(lms_url)s، حيث قد حاول أحدهم إنشاء حساب عبر %(platform_name)s باستخدام هذا"
 " البريد الإلكتروني."
 
-#: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
-msgid ""
-"If you need help, please use our web form at %(support_url)s or email "
-"%(support_email)s."
-msgstr ""
-"إن كنت تحتاج للمساعدة، يرجى الاستعانة بالاستمارة عبر الويب على "
-"%(support_url)s أو البريد الإلكتروني %(support_email)s"
-
 #: common/templates/student/edx_ace/accountactivation/email/subject.txt
 #, python-format
-msgid "Action Required: Activate your %(platform_name)s account"
-msgstr "الإجراء المطلوب: تفعيل حسابك لدى %(platform_name)s"
+msgid "Action Required %(name)s: Activate your %(platform_name)s account"
+msgstr "الإجراء المطلوب %(name)s: تفعيل حسابك لدى %(platform_name)s"
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
 msgid "Email Change"
@@ -13816,6 +13785,44 @@ msgstr ""
 #: common/templates/emails/sync_learner_profile_data_email_change_subject.txt
 msgid "Your {platform_name} account email has been updated"
 msgstr "تم تحديث البريد الإلكتروني الخاص بحسابك على منصة {platform_name}"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Hello"
+msgstr "مرحباً"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "The last step to start the learning journey at Edraak"
+msgstr "الخطوة الأخيرة لبدء رحلتك التعليمية على إدراك"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"By clicking on the following button you will finish the registration process"
+" on Edraak"
+msgstr "بالنقر على زر التفعيل تكون قد أتممت عملية إنشاء حسابك على منصة إدراك"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Activate your account now"
+msgstr "فعّل حسابك الآن"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Or copy and paste the activation link to your browser"
+msgstr "أو انسخ والصق رابط التنشيط في متصفحك"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"Note: If you haven't made this request, you don't need to do anything, and "
+"you will not receive any further messages from us"
+msgstr ""
+"ملاحظة: إذا لم تكن قد تقدّمت بهذا الطلب، فلا تحتاج إلى فعل أي شيء، ولن تتلقى"
+" منا أي رسائل أخرى."
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"This mail is automated, please do not reply to this email, and if you need "
+"any help, you can contact us in the 'help center' on Edraak platform"
+msgstr ""
+"هذه رسالة آلية، يرجى عدم الرد على هذه الرسالة. لمزيد من الاستفسارات "
+"والملاحظات قم بمراجعة \"مركز المساعدة\" عبر منصة إدراك."
 
 #: lms/djangoapps/discussion/templates/discussion/discussion_board_fragment.html
 msgid "Add a Post"
