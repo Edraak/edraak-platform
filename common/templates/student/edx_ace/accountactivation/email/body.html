@@ -1,57 +1,63 @@
-{% extends 'ace_common/edx_ace/common/base_body.html' %}
+<!DOCTYPE html>
 
-{% load i18n %}
-{% load static %}
-{% block content %}
-<table width="100%" align="left" border="0" cellpadding="0" cellspacing="0" role="presentation">
-{% if route_enabled %}
-    <tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}This is a routed Account Activation email for {{ routed_user }} ({{ routed_user_email }}): {{ routed_profile_name }}{% endblocktrans %}
-                <br />
-            </p>
-        </td>
-    </tr>
-{% endif %}
-    <tr>
-        <td>
-            <h1>
-                {% trans "Account Activation" %}
-            </h1>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}You're almost there! Use the link below to activate your account to access engaging, high-quality {{ platform_name }} courses. Note that you will not be able to log back into your account until you have activated it.{% endblocktrans %}
-                <br />
+<%namespace file="../main.html" import="stanford_theme_enabled" />
+<%! from django.utils.translation import ugettext as _ %>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+        .email-content {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .heading {
+            font-size: 20.0pt;
+        }
+
+        .button {
+            background-color: #0ca7aa;
+            border: none;
+            border-radius: 5px;
+            color: white !important;
+            padding: 15px 34px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            min-width: 150px;
+            width: 30%;
+        }
+
+        .button:hover {
+            background-color: #09787a;
+        }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="email-content" dir="${ direction }">
+            <p class="heading">${_("Hello")} ${ name }.. ${_("The last step to start the learning journey at Edraak")}</p>
+
+            <p style="font-size: 16.0pt">
+                ${_("By clicking on the following button you will finish the registration process on Edraak")}:
             </p>
 
-            {% trans "Activate Your Account" as course_cta_text %}
-            {% include "ace_common/edx_ace/common/return_to_course_cta.html" with course_cta_text=course_cta_text course_cta_url=confirm_activation_link %}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}Enjoy learning with {{ platform_name }}.{% endblocktrans %}
-                <br />
-            </p>
-        </td>
-    </tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}If you need help, please use our web form at <a href="{{ support_url }}">{{ support_url }}</a> or email <a href="mailto:{{ support_email }}">{{ support_email }}</a>.{% endblocktrans %}
-                <br />
-            </p>
-        </td>
-    <tr>
+            <a class="button" href="https://${ lms_url }/activate/${ key }">${_("Activate your account now")}</a>
 
-    </tr>
-    <tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}This email message was automatically sent by {{ lms_url }} because someone attempted to create an account on {{ platform_name }} using this email address.{% endblocktrans %}
-                <br />
+            <p style="font-size: 11.0pt">${_("Or copy and paste the activation link to your browser")}:</p>
+            <a href="https://${ lms_url }/activate/${ key }">https://${ lms_url }/activate/${ key }</a>
+
+            <p style="line-height: 1.5">
+                ${_("Note: If you haven't made this request, you don't need to do anything, and you will not receive any further messages from us")}.
+                <br/>
+                ${_("This mail is automated, please do not reply to this email, and if you need any help, you can contact us in the 'help center' on Edraak platform")}.
             </p>
-        </td>
-    </tr>
-</table>
-{% endblock %}
+        </div>
+
+    </body>
+</html>
