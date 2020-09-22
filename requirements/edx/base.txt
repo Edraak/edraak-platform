@@ -254,3 +254,7 @@ google-cloud-storage==1.26.0
 
 # ratelimiter
 -e git+https://github.com/Edraak/django-ratelimit-backend.git@fix/UnicodeEncodeError#egg=django-ratelimit-backend==fix/UnicodeEncodeError
+
+#survey monkey xblock
+-e git+https://github.com/proversity-org/openedx-surveymonkey-xblock.git@d6ffe24d30cf492fc288c24c8a862e517cc41ddb#egg=openedx-surveymonkey-xblock
+
