@@ -18,12 +18,12 @@ from .forms import CourseDetailGetForm, CourseListGetForm
 from .serializers import CourseDetailSerializer, CourseDetailMarketingSerializer, CourseSerializer
 import branding
 
-def get_all_courses(org=None, filter_=None):
+def get_all_courses(org=None, filter_=None, exclude_ended=None):
     """
     Returns a list of courses available, sorted by course.number and optionally
     filtered by org code (case-insensitive).
     """
-    courses = branding.get_visible_courses(org=org, filter_=filter_)
+    courses = branding.get_visible_courses(org=org, filter_=filter_, exclude_ended=exclude_ended)
     return courses
 
 @view_auth_classes(is_authenticated=False)
@@ -280,11 +280,14 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
         form = CourseListGetForm(self.request.query_params, initial={'requesting_user': self.request.user})
         if not form.is_valid():
             raise ValidationError(form.errors)
+        from openedx.core.djangoapps.util.forms import to_bool
+        include_ended = to_bool(self.request.GET.get('include_ended'))
         spec_courses = self.request.GET.get('spec_courses', 'false') in ['true', 'True']
         if spec_courses:
             return get_all_courses(
                 org=form.cleaned_data['org'],
                 filter_=form.cleaned_data['filter_'],
+                exclude_ended=not include_ended,
             )
 
         db_courses = list_courses(
@@ -292,6 +295,7 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
             form.cleaned_data['username'],
             org=form.cleaned_data['org'],
             filter_=form.cleaned_data['filter_'],
+            exclude_ended=not include_ended,
         )
 
         if not settings.FEATURES['ENABLE_COURSEWARE_SEARCH'] or not form.cleaned_data['search_term']:

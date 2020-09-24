@@ -1,6 +1,7 @@
 """
 Declaration of CourseOverview model
 """
+from datetime import datetime
 import json
 import logging
 from urlparse import urlparse, urlunparse
@@ -558,7 +559,7 @@ class CourseOverview(TimeStampedModel):
         log.info('Finished generating course overviews.')
 
     @classmethod
-    def get_all_courses(cls, orgs=None, filter_=None):
+    def get_all_courses(cls, orgs=None, filter_=None, exclude_ended=None):
         """
         Returns all CourseOverview objects in the database.
 
@@ -580,6 +581,10 @@ class CourseOverview(TimeStampedModel):
 
         if filter_:
             course_overviews = course_overviews.filter(**filter_)
+
+        if exclude_ended:
+            _now = datetime.now()
+            course_overviews = course_overviews.exclude(end__lt=_now)
 
         return course_overviews
 
