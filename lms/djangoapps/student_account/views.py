@@ -25,6 +25,7 @@ from edxmako.shortcuts import render_to_response
 from student.models import is_email_retired, get_retired_email_by_email
 from lms.djangoapps.commerce.models import CommerceConfiguration
 from lms.djangoapps.commerce.utils import EcommerceService
+from edraak_marketing_email.models import UnsubscribedUser
 from openedx.core.djangoapps.ace_common.template_context import get_base_template_context
 from openedx.core.djangoapps.commerce.utils import ecommerce_api_client
 from openedx.core.djangoapps.external_auth.login_and_register import login as external_auth_login
@@ -547,6 +548,7 @@ def account_settings_context(request):
         user_orders = []
 
     context = {
+        'user_email': user.email,
         'auth': {},
         'duplicate_provider': None,
         'nav_hidden': True,
@@ -583,6 +585,7 @@ def account_settings_context(request):
             'ENABLE_ACCOUNT_DELETION', settings.FEATURES.get('ENABLE_ACCOUNT_DELETION', False)
         ),
         'extended_profile_fields': _get_extended_profile_fields(),
+        'is_user_subscribed': UnsubscribedUser.is_user_subscribed(user)
     }
 
     enterprise_customer = get_enterprise_customer_for_learner(site=request.site, user=request.user)

@@ -27,12 +27,12 @@
             enterpriseReadonlyAccountFields,
             edxSupportUrl,
             extendedProfileFields,
-            displayAccountDeletion
+            displayAccountDeletion,
         ) {
             var $accountSettingsElement, userAccountModel, userPreferencesModel, aboutSectionsData,
                 accountsSectionData, ordersSectionData, accountSettingsView, showAccountSettingsPage,
                 showLoadingError, orderNumber, getUserField, userFields, timeZoneDropdownField, countryDropdownField,
-                emailFieldView, socialFields, accountDeletionFields, platformData,
+                emailFieldView, socialFields, unsubscribeMarketingEmailFields, accountDeletionFields, platformData,
                 aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, countryFieldView,
                 fullNameFieldData, emailFieldData, countryFieldData, additionalFields, fieldItem;
 
@@ -295,6 +295,14 @@
                 );
             }
             aboutSectionsData.push(socialFields);
+
+            unsubscribeMarketingEmailFields = {
+                title: gettext('Marketing Emails Subscription'),
+                fields: [],
+                // Used so content can be rendered external to Backbone
+                domHookId: 'unsubscribe-marketing-email-container'
+            };
+            aboutSectionsData.push(unsubscribeMarketingEmailFields);
 
             // Add account deletion fields
             if (displayAccountDeletion) {
