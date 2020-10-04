@@ -540,7 +540,7 @@ class DeactivateBySuperuserView(APIView):
         and logs the user out.
         """
         try:
-            username = request.POST['username']
+            username = request.data['username']
 
             if username == settings.RETIREMENT_SERVICE_WORKER_USERNAME:
                 return Response(status=status.HTTP_403_FORBIDDEN)
