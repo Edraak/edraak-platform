@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:33.475564\n"
+"POT-Creation-Date: 2020-10-08 14:25+0000\n"
+"PO-Revision-Date: 2020-10-08 14:26:13.567494\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -3527,6 +3527,24 @@ msgstr ""
 "عرشزمث فخ يثفثقوهرث صاثفاثق صث ساخعمي لهدث غخع ش قثبعري زثذشعسث خب سغسفثو "
 "ثققخق. حمثشسث فقغ شلشهر مشفثق."
 
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid "Subscribe to marketing emails"
+msgstr "سعزسذقهزث فخ وشقنثفهرل ثوشهمس"
+
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid ""
+"Please note: Once your account is unsubscribed from marketing emails, you "
+"will no longer receive emails from edraak.org, or any other site hosted by "
+"Edraak."
+msgstr ""
+"حمثشسث رخفث: خرذث غخعق شذذخعرف هس عرسعزسذقهزثي بقخو وشقنثفهرل ثوشهمس, غخع "
+"صهمم رخ مخرلثق قثذثهدث ثوشهمس بقخو ثيقششن.خقل, خق شرغ خفاثق سهفث اخسفثي زغ "
+"ثيقششن."
+
 #: common/static/bundles/VerticalStudentView.js
 #: lms/static/js/verify_student/views/make_payment_step_view.js
 #: openedx/features/course_bookmarks/static/course_bookmarks/js/views/bookmark_button.js
@@ -6233,6 +6251,10 @@ msgid ""
 msgstr ""
 "ثرفثق غخعق {platform} عسثقرشوث خق فاث عقم فخ غخعق {platform} حشلث. يثمثفث "
 "فاث عقم فخ قثوخدث فاث مهرن."
+
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Marketing Emails Subscription"
+msgstr "وشقنثفهرل ثوشهمس سعزسذقهحفهخر"
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 #: lms/static/js/student_account/views/account_settings_view.js

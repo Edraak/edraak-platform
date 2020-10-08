@@ -7,12 +7,13 @@
 # Translators:
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
 # Lina Bashayreh <lbashayreh@qrf.org>, 2019
+# Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2019
+# Salah Alomari <salomari@qrf.org>, 2020
 # Ali Hasan <ahasan@qrf.org>, 2020
 # Omar Al-Ithawi <i@omardo.com>, 2020
-# Omar Aldabbas <oaldabbas@qrf.org>, 2020
 # Shadi Naif <shadinaif@gmail.com>, 2020
-# Salah Alomari <salomari@qrf.org>, 2020
+# Ahmad Abuwardeh <ahm.abuwardeh@gmail.com>, 2020
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -65,7 +66,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-24 12:03+0000\n"
+"POT-Creation-Date: 2020-10-08 14:18+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Shadi Naif <shadinaif@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -641,7 +642,7 @@ msgstr "هذه {parentCategory} لا تحتوي على {childCategory}"
 #: cms/templates/js/group-configuration-details.underscore
 #: cms/templates/js/partition-group-details.underscore
 msgid "Course Outline"
-msgstr "مخطط المساق"
+msgstr "مخطّط المساق"
 
 #: cms/static/js/views/paged_container.js
 #: common/static/bundles/js/factories/library.js
@@ -3436,25 +3437,24 @@ msgstr "يؤسفنا ان نراك تغادر!"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
 "Please note: Deletion of your account and personal data is permanent and "
-"cannot be undone. EdX will not be able to recover your account or the data "
-"that is deleted."
+"cannot be undone. Edraak will not be able to recover your account or the "
+"data that is deleted."
 msgstr ""
 "يرجى الملاحظة: حذف حسابك وبياناتك الشخصية دائم ولا يمكن التراجع عنه. لن "
 "تتمكن منصة ادراك من استعادة حسابك أو البيانات التي تم حذفها."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
 msgid ""
-"Once your account is deleted, you cannot use it to take courses on the edX "
-"app, edx.org, or any other site hosted by edX. This includes access to "
-"edx.org from your employer’s or university’s system and access to private "
-"sites offered by MIT Open Learning, Wharton Executive Education, and Harvard"
-" Medical School."
+"Once your account is deleted, you cannot use it to take courses on the "
+"Edraak app, edraak.org, or any other site hosted by Edraak."
 msgstr ""
-"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات Edraak"
-" أو Edraak.org أو أي موقع آخر تستضيفه Edraak."
+"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات إدراك "
+"أو edraak.org أو أي موقع آخر تستضيفه إدراك."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3499,9 +3499,10 @@ msgstr "كلمة المرور مطلوبة"
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "You have selected “Delete my account.” Deletion of your account and personal"
-" data is permanent and cannot be undone. EdX will not be able to recover "
+" data is permanent and cannot be undone. Edraak will not be able to recover "
 "your account or the data that is deleted."
 msgstr ""
 "لقد اخترت \"حذف حسابي\". حذف الحساب والبيانات الشخصية نهائي ولا يمكن التراجع"
@@ -3509,15 +3510,41 @@ msgstr ""
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
 msgid ""
 "If you proceed, you will be unable to use this account to take courses on "
-"the edX app, edx.org, or any other site hosted by edX. This includes access "
-"to edx.org from your employer’s or university’s system and access to private"
-" sites offered by MIT Open Learning, Wharton Executive Education, and "
-"Harvard Medical School."
+"the Edraak app, edraak.org, or any other site hosted by Edraak."
 msgstr ""
-"إذا تابعت، لن تتمكن من استخدام حسابك لأخذ مساقات على تطبيقات Edraak أو "
-"Edraak.org أو أي موقع آخر تستضيفه Edraak."
+"إذا تابعت، لن تتمكن من استخدام حسابك لأخذ مساقات على تطبيقات إدراك أو "
+"edraak.org أو أي موقع آخر تستضيفه إدراك."
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
+msgid "Did you open any support cases with Edraak Support Team?"
+msgstr "هل تواصلت مع فريق الدعم الفني لإدراك؟"
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
+msgid ""
+"If so, please make sure that you send an email to info@edraak.org with the "
+"subject \"Deleting my account\" to request deletion of your support data "
+"(tickets, personal information, and any communication that occurred)"
+msgstr ""
+"إذا كانت الإجابة نعم, يرجى التأكد من إرسال بريد الكتروني إلى "
+"\"info@edraak.org\" بعنوان \"حذف حسابي\" لطلب حذف معلومات الدعم الفني الخاصة"
+" بك ( بطاقات الدعم, معلومات خاصة او اي تواصل تم)."
+
+#: common/static/bundles/StudentAccountDeletion.js
+#: common/static/bundles/StudentAccountDeletionInitializer.js
+#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
+msgid ""
+"I confirm that either I don't have any data on Edraak Support, or that I "
+"sent an email to info@edraak.org to delete my support data"
+msgstr ""
+"إنني أؤكد أنني قمت بالتواصل مع فريق الدعم الفني لدى إدراك على البريد "
+"الإلكتروني \"info@edraak.org\" لحذف بياناتي الخاصة في حال تواجدها."
 
 #: common/static/bundles/StudentAccountDeletion.js
 #: common/static/bundles/StudentAccountDeletionInitializer.js
@@ -3562,6 +3589,23 @@ msgid ""
 msgstr ""
 "تعذر تحديد ما إذا كان يجب رد الأموال بسبب خطأ في النظام. الرجاء معاودة "
 "المحاولة في وقت لاحق."
+
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid "Subscribe to marketing emails"
+msgstr "الاشتراك بالرسائل التسويقية"
+
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid ""
+"Please note: Once your account is unsubscribed from marketing emails, you "
+"will no longer receive emails from edraak.org, or any other site hosted by "
+"Edraak."
+msgstr ""
+"يرجى العلم أنه عند إلغاء الاشتراك في الرسائل التسويقية، لن تصلك أي رسائل من "
+"منصة إدراك أو منصة أخرى مستضافة من قبل إدراك"
 
 #: common/static/bundles/VerticalStudentView.js
 #: lms/static/js/verify_student/views/make_payment_step_view.js
@@ -6092,62 +6136,6 @@ msgstr "تم تجاوز نتيجة المسألة بنجاح {user}"
 msgid "Could not override problem score for {user}."
 msgstr "تعذر تجاوز نتيجة المسألة {user}."
 
-#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
-msgid ""
-"Please note: Deletion of your account and personal data is permanent and "
-"cannot be undone. Edraak will not be able to recover your account or the "
-"data that is deleted."
-msgstr ""
-"يرجى الملاحظة: حذف حسابك وبياناتك الشخصية دائم ولا يمكن التراجع عنه. لن "
-"تتمكن منصة ادراك من استعادة حسابك أو البيانات التي تم حذفها."
-
-#: lms/static/js/student_account/components/StudentAccountDeletion.jsx
-msgid ""
-"Once your account is deleted, you cannot use it to take courses on the "
-"Edraak app, edraak.org, or any other site hosted by Edraak."
-msgstr ""
-"بمجرد حذف حسابك ، لن تتمكن من استخدامه لأخذ دورات تدريبية على تطبيقات إدراك "
-"أو edraak.org أو أي موقع آخر تستضيفه إدراك."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"You have selected “Delete my account.” Deletion of your account and personal"
-" data is permanent and cannot be undone. Edraak will not be able to recover "
-"your account or the data that is deleted."
-msgstr ""
-"لقد اخترت \"حذف حسابي\". حذف الحساب والبيانات الشخصية نهائي ولا يمكن التراجع"
-" عنه. لن تتمكن إدراك من استعادة حسابك أو البيانات التي تم حذفها."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"If you proceed, you will be unable to use this account to take courses on "
-"the Edraak app, edraak.org, or any other site hosted by Edraak."
-msgstr ""
-"إذا تابعت، لن تتمكن من استخدام حسابك لأخذ مساقات على تطبيقات إدراك أو "
-"edraak.org أو أي موقع آخر تستضيفه إدراك."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid "Did you open any support cases with Edraak Support Team?"
-msgstr "هل تواصلت مع فريق الدعم الفني لإدراك؟"
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"If so, please make sure that you send an email to info@edraak.org with the "
-"subject \"Deleting my account\" to request deletion of your support data "
-"(tickets, personal information, and any communication that occurred)"
-msgstr ""
-"إذا كانت الإجابة نعم, يرجى التأكد من إرسال بريد الكتروني إلى "
-"\"info@edraak.org\" بعنوان \"حذف حسابي\" لطلب حذف معلومات الدعم الفني الخاصة"
-" بك ( بطاقات الدعم, معلومات خاصة او اي تواصل تم)."
-
-#: lms/static/js/student_account/components/StudentAccountDeletionModal.jsx
-msgid ""
-"I confirm that either I don't have any data on Edraak Support, or that I "
-"sent an email to info@edraak.org to delete my support data"
-msgstr ""
-"إنني أؤكد أنني قمت بالتواصل مع فريق الدعم الفني لدى إدراك على البريد "
-"الإلكتروني \"info@edraak.org\" لحذف بياناتي الخاصة في حال تواجدها."
-
 #: lms/static/js/student_account/tos_modal.js
 msgid "Terms of Service and Honor Code"
 msgstr "شروط الخدمة وميثاق الشرف الأكاديمي"
@@ -6392,6 +6380,10 @@ msgid ""
 msgstr ""
 "أدخل اسم المستخدم في حسابك على {platform} أو عنوان صفتحك على {platform}. "
 "يمكنك أيضاً حذف الرابط."
+
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Marketing Emails Subscription"
+msgstr "الاشتراك بالرسائل التسويقية"
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 #: lms/static/js/student_account/views/account_settings_view.js
