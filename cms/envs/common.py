@@ -1265,6 +1265,9 @@ OPTIONAL_APPS = (
     ('problem_builder', 'openedx.core.djangoapps.content.course_overviews.apps.CourseOverviewsConfig'),
     ('edx_sga', None),
 
+    # Scorm XBlock
+    ('openedxscorm', None),
+
     # edx-ora2
     ('submissions', 'openedx.core.djangoapps.content.course_overviews.apps.CourseOverviewsConfig'),
     ('openassessment', 'openedx.core.djangoapps.content.course_overviews.apps.CourseOverviewsConfig'),

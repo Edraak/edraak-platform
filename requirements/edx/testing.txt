@@ -335,3 +335,6 @@ python-bidi==0.4.0
 wand==0.5.1
 qrcode==6.1
 arabic-reshaper==2.0.14
+
+# openedxscorm XBlock
+-e git+https://github.com/Edraak/openedx-scorm-xblock.git@edraak/hawthorn#egg=openedxscorm
