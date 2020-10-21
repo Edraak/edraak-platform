@@ -61,7 +61,7 @@ def mock_render_to_string(template_name, context):
 
 @attr(shard=2)
 @skip_unless_lms
-class TestAccountApi(UserSettingsEventTestMixin, EmailTemplateTagMixin):
+class TestAccountApi(UserSettingsEventTestMixin, EmailTemplateTagMixin, TestCase):
     """
     These tests specifically cover the parts of the API methods that are not covered by test_views.py.
     This includes the specific types of error raised, and default behavior when optional arguments
@@ -126,6 +126,14 @@ class TestAccountApi(UserSettingsEventTestMixin, EmailTemplateTagMixin):
         request.user = self.user
         with self.assertRaises(UserNotFound):
             get_account_settings(request)
+
+    def test_update_name_en(self):
+        """
+        Test updating our new name_en in the API
+        """
+        update_account_settings(self.user, {"name_en": "Mickey Mouse"})
+        account_settings = get_account_settings(self.default_request)[0]
+        self.assertEqual("Mickey Mouse", account_settings["name_en"])
 
     def test_update_username_provided(self):
         """Test the difference in behavior when a username is supplied to update_account_settings."""
@@ -307,6 +315,7 @@ class AccountSettingsOnCreationTest(TestCase):
             'username': self.USERNAME,
             'email': self.EMAIL,
             'name': u'',
+            'name_en': '',
             'gender': None,
             'goals': None,
             'is_active': False,

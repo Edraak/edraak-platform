@@ -3,6 +3,7 @@
 import datetime
 
 import ddt
+from django.contrib.auth.models import User
 from django.core.cache import cache
 
 from openedx.core.djangolib.testing.utils import CacheIsolationTestCase
@@ -63,7 +64,13 @@ class UserProfilePropertiesTest(CacheIsolationTestCase):
     def test_set_get_default_english_name(self):
         """Test that the English name can be set correctly."""
         self.profile.name_en = 'Mr. Hello World'
-        assert self.profile.name_en == 'Mr. Hello World'
+        self.profile.save()
+        assert User.objects.get(username=self.user.username).profile.name_en == 'Mr. Hello World'
+
+    def test_set_get_default_english_name_must_save_profile(self):
+        """Test that the changing English name needs profile.save()"""
+        self.profile.name_en = 'Mr. Hello World'
+        assert User.objects.get(username=self.user.username).profile.name_en == ''
 
     def test_age_no_birth_year(self):
         """Verify nothing is returned."""

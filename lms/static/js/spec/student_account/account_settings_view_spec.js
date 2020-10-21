@@ -37,6 +37,13 @@ define(['backbone',
                                     title: 'Full Name',
                                     valueAttribute: 'name'
                                 })
+                            },
+                            {
+                                view: new FieldViews.TextFieldView({
+                                    model: model,
+                                    title: 'Full Name In English',
+                                    valueAttribute: 'name_en'
+                                })
                             }
                         ]
                     },
