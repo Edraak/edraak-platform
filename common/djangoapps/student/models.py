@@ -784,7 +784,6 @@ class Registration(models.Model):
                 name=self.user.profile.name,
                 email=self.user.email,
                 blacklisted=blacklisted,
-                username=self.user.username
             )
 
 

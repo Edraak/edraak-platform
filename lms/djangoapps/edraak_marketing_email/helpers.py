@@ -18,7 +18,6 @@ def change_sendinblue_user_state(user):
         blacklisted = not UnsubscribedUser.is_user_subscribed(user=user)
 
         create_contact(
-            username=user.username,
             email=user.email,
             name=user.profile.name,
             blacklisted=blacklisted
