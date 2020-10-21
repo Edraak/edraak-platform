@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:32.979094\n"
+"POT-Creation-Date: 2020-10-08 14:26+0000\n"
+"PO-Revision-Date: 2020-10-08 14:26:12.943005\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -42,6 +42,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 1.3\n"
+
+#: build/lib.linux-x86_64-2.7/cms/urls.py cms/urls.py
+msgid "Studio Administration"
+msgstr ""
+
+#: build/lib.linux-x86_64-2.7/lms/urls.py lms/urls.py
+msgid "LMS Administration"
+msgstr ""
 
 #. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 #. Translators: 'Discussion' refers to the tab in the courseware that leads to
@@ -10007,10 +10015,6 @@ msgstr ""
 msgid "Restoring to this revision will mark the article as deleted."
 msgstr ""
 
-#: lms/urls.py
-msgid "LMS Administration"
-msgstr ""
-
 #: openedx/core/djangoapps/ace_common/apps.py
 msgid "ACE Common"
 msgstr ""
@@ -12077,10 +12081,6 @@ msgstr ""
 
 #: cms/lib/xblock/tagging/tagging.py
 msgid "Dictionary with the available tags"
-msgstr ""
-
-#: cms/urls.py
-msgid "Studio Administration"
 msgstr ""
 
 #: cms/templates/404.html cms/templates/error.html

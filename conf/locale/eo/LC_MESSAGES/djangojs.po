@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:33.475564\n"
+"POT-Creation-Date: 2020-10-08 14:25+0000\n"
+"PO-Revision-Date: 2020-10-08 14:26:13.567494\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -3753,6 +3753,29 @@ msgstr ""
 "Ûnäßlé tö détérmïné whéthér wé shöüld gïvé ýöü ä réfünd ßéçäüsé öf Sýstém "
 "Érrör. Pléäsé trý ägäïn lätér. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
 
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid "Subscribe to marketing emails"
+msgstr "Süßsçrïßé tö märkétïng émäïls Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid ""
+"Please note: Once your account is unsubscribed from marketing emails, you "
+"will no longer receive emails from edraak.org, or any other site hosted by "
+"Edraak."
+msgstr ""
+"Pléäsé nöté: Önçé ýöür äççöünt ïs ünsüßsçrïßéd fröm märkétïng émäïls, ýöü "
+"wïll nö löngér réçéïvé émäïls fröm édrääk.örg, ör äný öthér sïté höstéd ßý "
+"Édrääk. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ "
+"єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм"
+" νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα "
+"¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт"
+" єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт "
+"¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυηт мσ#"
+
 #: common/static/bundles/VerticalStudentView.js
 #: lms/static/js/verify_student/views/make_payment_step_view.js
 #: openedx/features/course_bookmarks/static/course_bookmarks/js/views/bookmark_button.js
@@ -6957,6 +6980,10 @@ msgid ""
 msgstr ""
 "Éntér ýöür {platform} üsérnämé ör thé ÛRL tö ýöür {platform} pägé. Délété "
 "thé ÛRL tö rémövé thé lïnk. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє#"
+
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Marketing Emails Subscription"
+msgstr "Märkétïng Émäïls Süßsçrïptïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 #: lms/static/js/student_account/views/account_settings_view.js

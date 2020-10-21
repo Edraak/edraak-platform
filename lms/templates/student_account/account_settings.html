@@ -45,7 +45,9 @@ from webpack_loader.templatetags.webpack_loader import render_bundle
         enterpriseReadonlyAccountFields = ${ enterprise_readonly_account_fields | n, dump_js_escaped_json },
         edxSupportUrl = '${ edx_support_url | n, js_escaped_string }',
         extendedProfileFields = ${ extended_profile_fields | n, dump_js_escaped_json },
-        displayAccountDeletion = ${ enable_account_deletion | n, dump_js_escaped_json};
+        displayAccountDeletion = ${ enable_account_deletion | n, dump_js_escaped_json},
+        isUserSubscribed = ${ is_user_subscribed | n, dump_js_escaped_json},
+        userEmail = ${ user_email | n, dump_js_escaped_json};
 
     AccountSettingsFactory(
         fieldsData,
@@ -65,14 +67,18 @@ from webpack_loader.templatetags.webpack_loader import render_bundle
         enterpriseReadonlyAccountFields,
         edxSupportUrl,
         extendedProfileFields,
-        displayAccountDeletion
+        displayAccountDeletion,
+        isUserSubscribed,
+        userEmail,
     );
 </%static:require_module>
 
 <script type="text/javascript">
      window.auth = ${ auth | n, dump_js_escaped_json };
      window.isActive = ${ user.is_active | n, dump_js_escaped_json };
+     window.isUserSubscribed = ${ is_user_subscribed | n, dump_js_escaped_json };
+     window.userEmail = ${ user_email | n, dump_js_escaped_json };
 </script>
-<%static:webpack entry="StudentAccountDeletionInitializer">
-</%static:webpack>
+<%static:webpack entry="StudentAccountDeletionInitializer"></%static:webpack>
+<%static:webpack entry="UnsubscribeMarketingEmailInitializer"></%static:webpack>
 </%block>

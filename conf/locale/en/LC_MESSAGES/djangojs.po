@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-12 10:01+0000\n"
-"PO-Revision-Date: 2020-08-12 10:01:33.475564\n"
+"POT-Creation-Date: 2020-10-08 14:25+0000\n"
+"PO-Revision-Date: 2020-10-08 14:26:13.567494\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: en\n"
@@ -3407,6 +3407,21 @@ msgid ""
 "Error. Please try again later."
 msgstr ""
 
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid "Subscribe to marketing emails"
+msgstr ""
+
+#: common/static/bundles/UnsubscribeMarketingEmail.js
+#: common/static/bundles/UnsubscribeMarketingEmailInitializer.js
+#: lms/static/js/student_account/components/UnsubscribeMarketingEmail.jsx
+msgid ""
+"Please note: Once your account is unsubscribed from marketing emails, you "
+"will no longer receive emails from edraak.org, or any other site hosted by "
+"Edraak."
+msgstr ""
+
 #: common/static/bundles/VerticalStudentView.js
 #: lms/static/js/verify_student/views/make_payment_step_view.js
 #: openedx/features/course_bookmarks/static/course_bookmarks/js/views/bookmark_button.js
@@ -5897,6 +5912,10 @@ msgstr ""
 msgid ""
 "Enter your {platform} username or the URL to your {platform} page. Delete "
 "the URL to remove the link."
+msgstr ""
+
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Marketing Emails Subscription"
 msgstr ""
 
 #: lms/static/js/student_account/views/account_settings_factory.js
