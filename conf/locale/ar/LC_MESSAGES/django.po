@@ -10,10 +10,11 @@
 # Omar Aldabbas <oaldabbas@qrf.org>, 2019
 # leena <labualnil@qrf.org>, 2020
 # Salah Alomari <salomari@qrf.org>, 2020
-# Ali Hasan <ahasan@qrf.org>, 2020
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2020
-# Omar Al-Ithawi <i@omardo.com>, 2020
 # Shadi Naif <shadinaif@gmail.com>, 2020
+# Omar Al-Ithawi <i@omardo.com>, 2020
+# Ahmad Abuwardeh <ahm.abuwardeh@gmail.com>, 2020
+# Ali Hasan <ahasan@qrf.org>, 2020
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
@@ -77,7 +78,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-10-08 14:19+0000\n"
+"POT-Creation-Date: 2020-11-02 12:08+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Ali Hasan <ahasan@qrf.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -5291,74 +5292,78 @@ msgstr "أفضل num_top_words كلمات بالنسبة لسحابة الكلم
 #: common/templates/student/edx_ace/accountactivation/email/body.html
 #, python-format
 msgid ""
-"This is a routed Account Activation email for %(routed_user)s "
+" This is a routed Account Activation email for %(routed_user)s "
 "(%(routed_user_email)s): %(routed_profile_name)s"
 msgstr ""
-"هذه رسالة تفعيل حساب موجهة إلى %(routed_user)s (%(routed_user_email)s) "
-"%(routed_profile_name)s"
 
 #: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Account Activation"
-msgstr "تفعيل حساب"
+msgid "Hello"
+msgstr "مرحباً"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "The last step to start your learning journey on Edraak"
+msgstr "الخطوة الأخيرة لبدء رحلتك التعليمية على إدراك"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid ""
+"By clicking on the following button you will finish the registration process"
+" on Edraak:"
+msgstr "بالنقر على زر التفعيل تكون قد أتممت عملية إنشاء حسابك على منصة إدراك"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.html
+msgid "Activate Your Account Now"
+msgstr "فعّل حسابك الآن"
 
 #: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
-msgid ""
-"You're almost there! Use the link below to activate your account to access "
-"engaging, high-quality %(platform_name)s courses. Note that you will not be "
-"able to log back into your account until you have activated it."
-msgstr ""
-"أوشكتَ على الانتهاء! قم بتفعيل حسابك عبر الرابط، لتتمكّن من الوصول إلى "
-"العديد من المساقات الرائعة وعالية الجودة على %(platform_name)s . ننوّه إلى "
-"عدم إمكانية إعادة تسجيل الدخول إلى حسابك حتى تقوم بتفعيله."
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-msgid "Activate Your Account"
-msgstr "فعِّل حسابك"
+msgid "Or copy and paste the activation link to your browser:"
+msgstr "أو انسخ والصق رابط التنشيط في متصفحك"
 
 #: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
-msgid "Enjoy learning with %(platform_name)s."
-msgstr "احظَ بمتعة التعليم مع %(platform_name)s"
-
-#: common/templates/student/edx_ace/accountactivation/email/body.html
-#, python-format
 msgid ""
-"If you need help, please use our web form at <a "
-"href=\"%(support_url)s\">%(support_url)s</a> or email <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>."
+"Note: If you haven't made this request, you don't need to do anything, and "
+"you will not receive any further messages from us."
 msgstr ""
-"إن كنت تحتاج للمساعدة، يرجى الاستعانة بالاستمارة عبر الويب على <a "
-"href=\"%(support_url)s\">%(support_url)s</a>  أو البريد الإلكتروني <a "
-"href=\"mailto:%(support_email)s\">%(support_email)s</a>"
+"ملاحظة: إذا لم تكن قد تقدّمت بهذا الطلب، فلا تحتاج إلى فعل أي شيء، ولن تتلقى"
+" منا أي رسائل أخرى."
 
 #: common/templates/student/edx_ace/accountactivation/email/body.html
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
-#, python-format
 msgid ""
-"This email message was automatically sent by %(lms_url)s because someone "
-"attempted to create an account on %(platform_name)s using this email "
-"address."
+"This mail is automated, please do not reply to this email, and if you need "
+"any help, you can contact us at"
 msgstr ""
-"تمّ إرسال هذه الرسالة عبر البريد الإلكتروني إليك تلقائيًا من قبل "
-"%(lms_url)s، حيث قد حاول أحدهم إنشاء حساب عبر %(platform_name)s باستخدام هذا"
-" البريد الإلكتروني."
+"هذه رسالة آلية، يرجى عدم الرد على هذه الرسالة، لمزيد من الاستفسارات بامكانك "
+"التواصل معنا على "
+
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
+#, python-format
+msgid "Hello %(username)s"
+msgstr "مرحباً %(username)s"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
+#, python-format
+msgid "The last step to start your learning journey on %(platform_name)s"
+msgstr "الخطوة الأخيرة لبدء رحلتك التعليمية على %(platform_name)s"
 
 #: common/templates/student/edx_ace/accountactivation/email/body.txt
 #, python-format
 msgid ""
-"If you need help, please use our web form at %(support_url)s or email "
-"%(support_email)s."
+"By clicking on the following button you will finish the registration process"
+" on %(platform_name)s:"
 msgstr ""
-"إن كنت تحتاج للمساعدة، يرجى الاستعانة بالاستمارة عبر الويب على "
-"%(support_url)s أو البريد الإلكتروني %(support_email)s"
+"بالنقر على زر التفعيل تكون قد أتممت عملية إنشاء حسابك على منصة "
+"%(platform_name)s"
+
+#: common/templates/student/edx_ace/accountactivation/email/body.txt
+msgid "Activate your account now"
+msgstr "فعّل حسابك الآن"
 
 #: common/templates/student/edx_ace/accountactivation/email/subject.txt
 #, python-format
-msgid "Action Required: Activate your %(platform_name)s account"
-msgstr "الإجراء المطلوب: تفعيل حسابك لدى %(platform_name)s"
+msgid "Action Required %(username)s: Activate your Edraak account"
+msgstr "إجراء مطلوب %(username)s : تفعيل حسابك لدى إدراك"
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
 msgid "Email Change"

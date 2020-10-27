@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans trimmed %}Action Required: Activate your {{ platform_name }} account{% endblocktrans %}
+{% blocktrans trimmed %}Action Required {{ username }}: Activate your Edraak account{% endblocktrans %}
 {% endautoescape %}

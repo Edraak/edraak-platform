@@ -3,55 +3,48 @@
 {% load i18n %}
 {% load static %}
 {% block content %}
+
 <table width="100%" align="left" border="0" cellpadding="0" cellspacing="0" role="presentation">
-{% if route_enabled %}
-    <tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}This is a routed Account Activation email for {{ routed_user }} ({{ routed_user_email }}): {{ routed_profile_name }}{% endblocktrans %}
+    <div dir="{{ direction }}"
+         style="
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;"
+    >
+        {% if route_enabled %}
+            <p>{% blocktrans %} This is a routed Account Activation email for {{ routed_user }} ({{ routed_user_email }}): {{ routed_profile_name }}{% endblocktrans %}
                 <br />
+                <br/>
             </p>
-        </td>
-    </tr>
-{% endif %}
-    <tr>
-        <td>
-            <h1>
-                {% trans "Account Activation" %}
-            </h1>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}You're almost there! Use the link below to activate your account to access engaging, high-quality {{ platform_name }} courses. Note that you will not be able to log back into your account until you have activated it.{% endblocktrans %}
-                <br />
-            </p>
+        {% endif %}
 
-            {% trans "Activate Your Account" as course_cta_text %}
-            {% include "ace_common/edx_ace/common/return_to_course_cta.html" with course_cta_text=course_cta_text course_cta_url=confirm_activation_link %}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}Enjoy learning with {{ platform_name }}.{% endblocktrans %}
-                <br />
-            </p>
-        </td>
-    </tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}If you need help, please use our web form at <a href="{{ support_url }}">{{ support_url }}</a> or email <a href="mailto:{{ support_email }}">{{ support_email }}</a>.{% endblocktrans %}
-                <br />
-            </p>
-        </td>
-    <tr>
+        <p class="heading" style="font-size: 23pt;">{{ username }} {% blocktrans %}Hello{% endblocktrans %}</p>
+        <p class="heading" style="font-size: 19pt;">{% blocktrans %}The last step to start your learning journey on Edraak{% endblocktrans %}</p>
 
-    </tr>
-    <tr>
-        <td>
-            <p style="color: rgba(0,0,0,.75);">
-                {% blocktrans %}This email message was automatically sent by {{ lms_url }} because someone attempted to create an account on {{ platform_name }} using this email address.{% endblocktrans %}
-                <br />
-            </p>
-        </td>
-    </tr>
+        <p style="font-size: 16pt;">{% blocktrans %}By clicking on the following button you will finish the registration process on Edraak:{% endblocktrans %}</p>
+        <a class="button" href="{{ lms_url }}/activate/{{ key }}"
+           style="
+            display: inline-block;
+            padding: 15px 34px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0ca7aa;
+            color: white !important;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            min-width: 150px;
+            width: fit-content;"
+        >{% blocktrans %}Activate Your Account Now{% endblocktrans %}</a>
+
+        <p style="font-size: 11pt;">{% blocktrans %}Or copy and paste the activation link to your browser:{% endblocktrans %}</p>
+        <a href="{{ lms_url }}/activate/{{ key }}">{{ lms_url }}/activate/{{ key }}</a>
+
+        <p style="line-height: 1.5;">{% blocktrans %}Note: If you haven't made this request, you don't need to do anything, and you will not receive any further messages from us.{% endblocktrans %}
+            <br/>
+            {% blocktrans %}This mail is automated, please do not reply to this email, and if you need any help, you can contact us at{% endblocktrans %}  <a href="{{ support_url }}">{{ support_url }}</a>
+        </p>
+    </div>
 </table>
 {% endblock %}
