@@ -147,6 +147,14 @@ JWT_AUTH.update({
     'JWT_AUDIENCE': 'lms-key',
 })
 
+####################### Content-Security-Policy Settings ##########################
+CSP_DEFAULT_SRC = ('*.edraak.dev',)
+CSP_CONNECT_SRC = ('*.edraak.dev', 'https://metrics.articulate.com',)
+CSP_IMG_SRC = ('*',)
+CSP_FONT_SRC = ('*', 'data:',)
+CSP_SCRIPT_SRC = ('*', "'unsafe-inline'", "'unsafe-eval'")
+CSP_STYLE_SRC = ('*', "'unsafe-inline'",)
+
 #####################################################################
 from openedx.core.djangoapps.plugins import plugin_settings, constants as plugin_constants
 plugin_settings.add_plugins(__name__, plugin_constants.ProjectType.CMS, plugin_constants.SettingsType.DEVSTACK)

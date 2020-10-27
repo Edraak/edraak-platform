@@ -1166,6 +1166,14 @@ RETIREMENT_SERVICE_WORKER_USERNAME = ENV_TOKENS.get(
 )
 RETIREMENT_STATES = ENV_TOKENS.get('RETIREMENT_STATES', RETIREMENT_STATES)
 
+####################### Content-Security-Policy Settings ##########################
+CSP_DEFAULT_SRC = ENV_TOKENS.get('CSP_DEFAULT_SRC', ("'none'",))
+CSP_CONNECT_SRC = ENV_TOKENS.get('CSP_CONNECT_SRC', ("'none'",))
+CSP_IMG_SRC = ENV_TOKENS.get('CSP_IMG_SRC', ("'none'",))
+CSP_FONT_SRC = ENV_TOKENS.get('CSP_FONT_SRC', ("'none'",))
+CSP_SCRIPT_SRC = ENV_TOKENS.get('CSP_SCRIPT_SRC', ("'none'",))
+CSP_STYLE_SRC = ENV_TOKENS.get('CSP_STYLE_SRC', ("'none'",))
+
 ############################### Plugin Settings ###############################
 
 from openedx.core.djangoapps.plugins import plugin_settings, constants as plugin_constants
