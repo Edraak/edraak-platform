@@ -489,8 +489,6 @@ MIDDLEWARE_CLASSES = [
 
     'method_override.middleware.MethodOverrideMiddleware',
 
-    'csp.middleware.CSPMiddleware',
-
     # Instead of AuthenticationMiddleware, we use a cache-backed version
     'openedx.core.djangoapps.cache_toolbox.middleware.CacheBackedAuthenticationMiddleware',
 

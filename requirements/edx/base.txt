@@ -260,5 +260,3 @@ google-cloud-storage==1.26.0
 
 # openedxscorm XBlock
 -e git+https://github.com/Edraak/openedx-scorm-xblock.git@edraak/hawthorn#egg=openedxscorm
-
-django-csp==3.5
