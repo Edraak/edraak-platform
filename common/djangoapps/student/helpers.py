@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from django.utils import http
 from django.utils.encoding import force_text
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, get_language
 from oauth2_provider.models import AccessToken as dot_access_token
 from oauth2_provider.models import RefreshToken as dot_refresh_token
 from provider.oauth2.models import AccessToken as dop_access_token
@@ -433,9 +433,11 @@ def generate_activation_email_context(user, registration):
     """
     return {
         'name': user.profile.name,
+        'username': user.username,
         'key': registration.activation_key,
         'lms_url': configuration_helpers.get_value('LMS_ROOT_URL', settings.LMS_ROOT_URL),
         'platform_name': configuration_helpers.get_value('PLATFORM_NAME', settings.PLATFORM_NAME),
+        'direction': 'rtl' if get_language() == 'ar' else 'ltr',
         'support_url': configuration_helpers.get_value(
             'ACTIVATION_EMAIL_SUPPORT_LINK', settings.ACTIVATION_EMAIL_SUPPORT_LINK
         ) or settings.SUPPORT_SITE_LINK,

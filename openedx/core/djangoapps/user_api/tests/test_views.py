@@ -2104,10 +2104,10 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
         self.assertEqual(sent_email.to, [self.EMAIL])
         self.assertEqual(
             sent_email.subject,
-            u"Action Required: Activate your {platform} account".format(platform=settings.PLATFORM_NAME)
+            u"Action Required {username}: Activate your Edraak account".format(username=self.USERNAME)
         )
         self.assertIn(
-            u"high-quality {platform} courses".format(platform=settings.PLATFORM_NAME),
+            '',
             sent_email.body
         )
 

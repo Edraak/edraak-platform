@@ -302,7 +302,7 @@ def compose_and_send_activation_email(user, profile, user_registration=None):
 
     root_url = configuration_helpers.get_value('LMS_ROOT_URL', settings.LMS_ROOT_URL)
     msg = compose_activation_email(root_url, user, user_registration, route_enabled, profile.name)
-
+    
     send_activation_email.delay(str(msg))
 
 
@@ -770,7 +770,7 @@ def create_account_with_params(request, params):
     if skip_email:
         registration.activate()
     else:
-        compose_and_send_activation_email(user, profile, registration)
+        compose_and_send_activation_email(user, profile, user_registration=registration)
 
     # Perform operations that are non-critical parts of account creation
     create_or_set_user_attribute_created_on_site(user, request.site)

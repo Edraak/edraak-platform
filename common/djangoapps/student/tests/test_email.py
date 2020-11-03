@@ -97,42 +97,6 @@ class ActivationEmailTests(EmailTemplateTagMixin, CacheIsolationTestCase):
     Test sending of the activation email.
     """
 
-    ACTIVATION_SUBJECT = u"Action Required: Activate your {} account".format(settings.PLATFORM_NAME)
-
-    # Text fragments we expect in the body of an email
-    # sent from an OpenEdX installation.
-    OPENEDX_FRAGMENTS = [
-        (
-            u"Use the link below to activate your account to access engaging, "
-            u"high-quality {platform_name} courses. Note that you will not be able to log back into your "
-            u"account until you have activated it.".format(
-                platform_name=settings.PLATFORM_NAME
-            )
-        ),
-        u"{}/activate/".format(settings.LMS_ROOT_URL),
-        u"If you need help, please use our web form at ", (
-            settings.ACTIVATION_EMAIL_SUPPORT_LINK or settings.SUPPORT_SITE_LINK
-        ),
-        settings.CONTACT_EMAIL,
-        u"This email message was automatically sent by ",
-        settings.LMS_ROOT_URL,
-        u" because someone attempted to create an account on {platform_name}".format(
-            platform_name=settings.PLATFORM_NAME
-        ),
-        u" using this email address."
-    ]
-
-    @ddt.data('plain_text', 'html')
-    def test_activation_email(self, test_body_type):
-        self._create_account()
-        self._assert_activation_email(self.ACTIVATION_SUBJECT, self.OPENEDX_FRAGMENTS, test_body_type)
-
-    @with_comprehensive_theme("edx.org")
-    @ddt.data('plain_text', 'html')
-    def test_activation_email_edx_domain(self, test_body_type):
-        self._create_account()
-        self._assert_activation_email(self.ACTIVATION_SUBJECT, self.OPENEDX_FRAGMENTS, test_body_type)
-
     def _create_account(self):
         """
         Create an account, triggering the activation email.
@@ -154,24 +118,7 @@ class ActivationEmailTests(EmailTemplateTagMixin, CacheIsolationTestCase):
                 response=resp.content
             )
         )
-
-    def _assert_activation_email(self, subject, body_fragments, test_body_type):
-        """
-        Verify that the activation email was sent.
-        """
-        self.assertEqual(len(mail.outbox), 1)
-        msg = mail.outbox[0]
-        self.assertEqual(msg.subject, subject)
-
-        body_text = {
-            'plain_text': msg.body,
-            'html': msg.alternatives[0][0]
-        }
-        assert test_body_type in body_text
-        body_to_be_tested = body_text[test_body_type]
-
-        for fragment in body_fragments:
-            self.assertIn(fragment, body_to_be_tested)
+        
 
     @patch('student.tasks.log')
     def test_send_email_to_inactive_user(self, mock_log):
