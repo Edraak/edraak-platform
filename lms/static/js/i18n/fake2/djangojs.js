@@ -1011,6 +1011,7 @@
     "Free text notes": "F\u0279\u01dd\u01dd \u0287\u01ddx\u0287 n\u00f8\u0287\u01dds", 
     "Frequently Asked Questions": "F\u0279\u01ddbn\u01ddn\u0287l\u028e \u023as\u029e\u01ddd Qn\u01dds\u0287\u1d09\u00f8ns", 
     "Full Name": "Fnll N\u0250\u026f\u01dd", 
+    "Full Name (In English)": "Fnll N\u0250\u026f\u01dd (\u0197n \u0246n\u0183l\u1d09s\u0265)", 
     "Full Profile": "Fnll \u2c63\u0279\u00f8\u025f\u1d09l\u01dd", 
     "Fullscreen": "Fnlls\u0254\u0279\u01dd\u01ddn", 
     "Fully Supported": "Fnll\u028e Sndd\u00f8\u0279\u0287\u01ddd", 

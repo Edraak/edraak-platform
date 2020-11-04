@@ -33,8 +33,8 @@
                 accountsSectionData, ordersSectionData, accountSettingsView, showAccountSettingsPage,
                 showLoadingError, orderNumber, getUserField, userFields, timeZoneDropdownField, countryDropdownField,
                 emailFieldView, socialFields, unsubscribeMarketingEmailFields, accountDeletionFields, platformData,
-                aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, countryFieldView,
-                fullNameFieldData, emailFieldData, countryFieldData, additionalFields, fieldItem;
+                aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, fullnameEnFieldView, countryFieldView,
+                fullNameFieldData, fullNameFieldDataEn, emailFieldData, countryFieldData, additionalFields, fieldItem;
 
             $accountSettingsElement = $('.wrapper-account-settings');
 
@@ -99,6 +99,23 @@
                 };
             }
 
+            fullNameFieldDataEn = {
+                model: userAccountModel,
+                title: gettext('Full Name (In English)'),
+                valueAttribute: 'name_en',
+                helpMessage: gettext('The name that is used for ID verification and that appears on your certificates.'),
+                persistChanges: true
+            };
+            if (syncLearnerProfileData && enterpriseReadonlyAccountFields.fields.indexOf('name_en') !== -1) {
+                fullnameEnFieldView = {
+                    view: new AccountSettingsFieldViews.ReadonlyFieldView(fullNameFieldDataEn)
+                };
+            } else {
+                fullnameEnFieldView = {
+                    view: new AccountSettingsFieldViews.TextFieldView(fullNameFieldDataEn)
+                };
+            }
+
             countryFieldData = {
                 model: userAccountModel,
                 required: true,
@@ -142,6 +159,7 @@
                             })
                         },
                         fullnameFieldView,
+                        fullnameEnFieldView,
                         emailFieldView,
                         {
                             view: new AccountSettingsFieldViews.PasswordFieldView({

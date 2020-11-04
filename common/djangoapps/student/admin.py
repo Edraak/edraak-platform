@@ -27,6 +27,8 @@ from student.models import (
 )
 from student.roles import REGISTERED_ACCESS_ROLES
 from xmodule.modulestore.django import modulestore
+from django.forms import widgets
+
 
 User = get_user_model()  # pylint:disable=invalid-name
 
@@ -217,8 +219,21 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
         return self.has_permission(request, 'has_module_permission')
 
 
+class UserProfileWithNameEnForm(forms.ModelForm):
+    name_en = forms.CharField(required=False, widget=widgets.TextInput)
+
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
+    def save(self, *args, **kwargs):
+        self.instance.name_en = self.cleaned_data['name_en']
+        super(UserProfileWithNameEnForm, self).save()
+
+
 class UserProfileInline(admin.StackedInline):
     """ Inline admin interface for UserProfile model. """
+    form = UserProfileWithNameEnForm
     model = UserProfile
     can_delete = False
     verbose_name_plural = _('User profile')

@@ -110,6 +110,7 @@ class UserReadOnlySerializer(serializers.Serializer):
             "profile_image": None,
             "language_proficiencies": None,
             "name": None,
+            "name_en": None,
             "gender": None,
             "goals": None,
             "year_of_birth": None,
@@ -134,6 +135,7 @@ class UserReadOnlySerializer(serializers.Serializer):
                         user_profile.language_proficiencies.all(), many=True
                     ).data,
                     "name": user_profile.name,
+                    "name_en": user_profile.name_en,
                     "gender": AccountLegacyProfileSerializer.convert_empty_to_None(user_profile.gender),
                     "goals": user_profile.goals,
                     "year_of_birth": user_profile.year_of_birth,
@@ -193,11 +195,12 @@ class AccountLegacyProfileSerializer(serializers.HyperlinkedModelSerializer, Rea
     requires_parental_consent = serializers.SerializerMethodField()
     language_proficiencies = LanguageProficiencySerializer(many=True, required=False)
     social_links = SocialLinkSerializer(many=True, required=False)
+    name_en = serializers.CharField(required=False)
 
     class Meta(object):
         model = UserProfile
         fields = (
-            "name", "gender", "goals", "year_of_birth", "level_of_education", "country", "social_links",
+            "name", "name_en", "gender", "goals", "year_of_birth", "level_of_education", "country", "social_links",
             "mailing_address", "bio", "profile_image", "requires_parental_consent", "language_proficiencies"
         )
         # Currently no read-only field, but keep this so view code doesn't need to know.

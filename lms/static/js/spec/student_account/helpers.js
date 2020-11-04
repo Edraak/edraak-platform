@@ -93,6 +93,7 @@ define(['underscore'], function(_) {
     var DEFAULT_ACCOUNT_SETTINGS_DATA = {
         username: 'student',
         name: 'Student',
+        name_en: 'Student En',
         email: 'student@edx.org',
         level_of_education: null,
         gender: null,

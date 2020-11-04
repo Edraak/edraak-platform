@@ -23,6 +23,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         """
         return user.profile.name
 
+    def get_name_en(self, user):
+        """
+        Return the name attribute from the user profile object if profile exists else none
+        """
+        return user.profile.name_en
+
     def get_preferences(self, user):
         """
         Returns the set of preferences as a dict for the specified user

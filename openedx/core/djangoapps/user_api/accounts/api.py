@@ -147,6 +147,12 @@ def update_account_settings(requesting_user, update, username=None):
         changing_full_name = True
         old_name = existing_user_profile.name
 
+    changing_full_name_en = False
+    old_name_en = None
+    if "name_en" in update:
+        changing_full_name_en = True
+        old_name_en = existing_user_profile.name_en
+
     # Check for fields that are not editable. Marking them read-only causes them to be ignored, but we wish to 400.
     read_only_fields = set(update.keys()).intersection(
         AccountUserSerializer.get_read_only_fields() + AccountLegacyProfileSerializer.get_read_only_fields()
@@ -186,6 +192,15 @@ def update_account_settings(requesting_user, update, username=None):
         except ValidationError as err:
             field_errors["name"] = {
                 "developer_message": u"Error thrown from validate_name: '{}'".format(err.message),
+                "user_message": err.message
+            }
+
+    if changing_full_name_en:
+        try:
+            student_forms.validate_name(update['name_en'])
+        except ValidationError as err:
+            field_errors["name_en"] = {
+                "developer_message": u"Error thrown from validate_name_en: '{}'".format(err.message),
                 "user_message": err.message
             }
 
@@ -230,6 +245,18 @@ def update_account_settings(requesting_user, update, username=None):
             meta['old_names'].append([
                 old_name,
                 u"Name change requested through account API by {0}".format(requesting_user.username),
+                datetime.datetime.now(UTC).isoformat()
+            ])
+            existing_user_profile.set_meta(meta)
+            existing_user_profile.save()
+
+        if old_name_en:
+            meta = existing_user_profile.get_meta()
+            if 'old_names_en' not in meta:
+                meta['old_names_en'] = []
+            meta['old_names_en'].append([
+                old_name_en,
+                u"Name In English change requested through account API by {0}".format(requesting_user.username),
                 datetime.datetime.now(UTC).isoformat()
             ])
             existing_user_profile.set_meta(meta)
