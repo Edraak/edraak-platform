@@ -527,6 +527,9 @@ INSTALLED_APPS += ('edraak_specializations',)
 
 PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
+################ edX Notifier for Edraak ###############
+INSTALLED_APPS += ('djcelery.transport',)
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})
