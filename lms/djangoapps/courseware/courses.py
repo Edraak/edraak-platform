@@ -30,7 +30,9 @@ from lms.djangoapps.courseware.courseware_access_exception import CoursewareAcce
 from lms.djangoapps.courseware.exceptions import CourseAccessRedirect
 from opaque_keys.edx.keys import UsageKey
 from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
+from openedx.core.djangoapps.request_cache import get_request_or_stub
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+from openedx.features.course_experience import course_home_url_name
 from path import Path as path
 from six import text_type
 from static_replace import replace_static_urls
@@ -155,6 +157,10 @@ def check_course_access(course, user, action, check_if_enrolled=False, check_sur
     if check_if_enrolled:
         # If the user is not enrolled, redirect them to the about page
         if not CourseEnrollment.is_enrolled(user, course.id):
+            current_request = get_request_or_stub()
+            if current_request:
+                if current_request.path == reverse(course_home_url_name(course.id), args=[text_type(course.id)]):
+                    return
             raise CourseAccessRedirect(reverse('about_course', args=[unicode(course.id)]))
 
     # Redirect if the user must answer a survey before entering the course.
