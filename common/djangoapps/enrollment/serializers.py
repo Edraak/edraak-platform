@@ -5,10 +5,10 @@ import logging
 
 from rest_framework import serializers
 
-from course_modes.models import CourseMode
-from course_api.serializers import CourseDetailMarketingSerializer as EdraakCourseSerializer
-from student.models import CourseEnrollment
 from bulk_email.models import Optout
+from course_modes.models import CourseMode
+from course_api.serializers import CourseDetailMarketingSerializer
+from student.models import CourseEnrollment
 
 from edraak_specializations.models import CourseSpecializationInfo
 
@@ -107,12 +107,24 @@ class ModeSerializer(serializers.Serializer):
 
 # Edraak: adding custom serializer for enrollments
 class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
-    edraak_course_details = EdraakCourseSerializer(source="course_overview")
+    edraak_course_details = serializers.SerializerMethodField()
     is_certificate_allowed = serializers.SerializerMethodField()
     specialization_slug = serializers.SerializerMethodField()
     subscribed_to_emails = serializers.SerializerMethodField()
     is_completed = serializers.SerializerMethodField()
     is_certificate_available = serializers.SerializerMethodField()
+
+    def get_edraak_course_details(self, obj):
+        context = self.context.copy()
+        CourseDetailMarketingSerializer.update_marketing_context(
+            context=context,
+            course_key=obj.course_id
+        )
+
+        return CourseDetailMarketingSerializer(
+            obj.course_overview,
+            context=context
+        ).data
 
     def _get_user(self):
         request = self.context.get('request')
