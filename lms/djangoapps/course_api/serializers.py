@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils.translation import get_language
 from rest_framework import serializers
 
+from course_api.helpers import get_marketing_data, is_marketing_api_enabled
 from openedx.core.djangoapps.models.course_details import CourseDetails
 from openedx.core.lib.api.fields import AbsoluteURLField
 
@@ -132,6 +133,16 @@ class CourseDetailMarketingSerializer(CourseSerializer):
 
     This allows reuse of the marketing site data, as opposed to duplicating them in the LMS.
     """
+    @staticmethod
+    def update_marketing_context(context, course_key):
+        if is_marketing_api_enabled():
+            lang = 'en'
+            if context.get('request') and hasattr(context['request'], 'LANGUAGE_CODE'):
+                lang = context['request'].LANGUAGE_CODE
+            context['marketing_data'] = get_marketing_data(
+                course_key=course_key,
+                language=lang,
+            )
 
     def get_data_with_marketing_overrides(self, original_serialized_data):
         marketing_data = self.context.get('marketing_data')

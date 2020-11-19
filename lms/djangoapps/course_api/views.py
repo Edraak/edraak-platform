@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.throttling import UserRateThrottle
 
-from course_api.helpers import get_marketing_data, is_marketing_api_enabled
+from course_api.helpers import is_marketing_api_enabled
 from edx_rest_framework_extensions.paginators import NamespacedPageNumberPagination
 from openedx.core.lib.api.view_utils import DeveloperErrorViewMixin, view_auth_classes
 
@@ -18,6 +18,7 @@ from .forms import CourseDetailGetForm, CourseListGetForm
 from .serializers import CourseDetailSerializer, CourseDetailMarketingSerializer, CourseSerializer
 import branding
 
+
 def get_all_courses(org=None, filter_=None, exclude_ended=None):
     """
     Returns a list of courses available, sorted by course.number and optionally
@@ -25,6 +26,7 @@ def get_all_courses(org=None, filter_=None, exclude_ended=None):
     """
     courses = branding.get_visible_courses(org=org, filter_=filter_, exclude_ended=exclude_ended)
     return courses
+
 
 @view_auth_classes(is_authenticated=False)
 class CourseDetailView(DeveloperErrorViewMixin, RetrieveAPIView):
@@ -122,9 +124,9 @@ class CourseDetailView(DeveloperErrorViewMixin, RetrieveAPIView):
     def get_serializer_context(self):
         context = super(CourseDetailView, self).get_serializer_context()
         if is_marketing_api_enabled():
-            context['marketing_data'] = get_marketing_data(
-                course_key=self.kwargs['course_key_string'],
-                language=self.request.LANGUAGE_CODE,
+            CourseDetailMarketingSerializer.update_marketing_context(
+                context=context,
+                course_key=self.kwargs['course_key_string']
             )
         calculate_completion = self.request.GET.get('calculate_completion', 'false') in ['true', 'True']
         context['calculate_completion'] = calculate_completion
