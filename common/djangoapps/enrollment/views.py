@@ -569,6 +569,7 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
         Users who have the global staff permission can access all enrollment data for all
         courses.
         """
+        print('============================================================================================')
         username = request.GET.get('user', request.user.username)
         try:
             enrollment_data = api.get_enrollments(username)

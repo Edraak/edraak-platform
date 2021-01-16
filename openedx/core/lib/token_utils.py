@@ -63,7 +63,7 @@ class JwtBuilder(object):
             'version': self.jwt_auth['JWT_SUPPORTED_VERSION'],
             'sub': anonymous_id_for_user(self.user, None),
         }
-
+        print('.........payload = {}'.format(payload))
         if additional_claims:
             payload.update(additional_claims)
 
@@ -73,7 +73,10 @@ class JwtBuilder(object):
             if handler:
                 handler(payload)
 
-        return self.encode(payload)
+        print('.........payload = {}'.format(payload))
+        the_token = self.encode(payload)
+        print('.........the_token = {}'.format(the_token))
+        return the_token
 
     @cached_property
     def claim_handlers(self):
@@ -114,7 +117,11 @@ class JwtBuilder(object):
             key = self.secret if self.secret else self.jwt_auth['JWT_SECRET_KEY']
             keys.add({'key': key, 'kty': 'oct'})
             algorithm = self.jwt_auth['JWT_ALGORITHM']
-
+        print('.........key = {}'.format(key))
+        print('.........keys = {}'.format(keys))
+        print('.........algorithm = {}'.format(algorithm))
         data = json.dumps(payload)
+        print('.........data = {}'.format(data))
         jws = JWS(data, alg=algorithm)
+        print('.........jws = {}'.format(jws))
         return jws.sign_compact(keys=keys)

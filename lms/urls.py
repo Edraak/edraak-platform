@@ -148,6 +148,7 @@ urlpatterns = [
 # TODO: This needs to move to a separate urls.py once the student_account and
 # student views below find a home together
 if settings.FEATURES.get('ENABLE_COMBINED_LOGIN_REGISTRATION'):
+    print('+++++++++++ENABLE_COMBINED_LOGIN_REGISTRATION')
     # Backwards compatibility with old URL structure, but serve the new views
     urlpatterns += [
         url(r'^login$', student_account_views.login_and_registration_form,
@@ -156,6 +157,7 @@ if settings.FEATURES.get('ENABLE_COMBINED_LOGIN_REGISTRATION'):
             {'initial_mode': 'register'}, name='register_user'),
     ]
 else:
+    print('-----------ENABLE_COMBINED_LOGIN_REGISTRATION')
     # Serve the old views
     urlpatterns += [
         url(r'^login$', student_views.signin_user, name='signin_user'),

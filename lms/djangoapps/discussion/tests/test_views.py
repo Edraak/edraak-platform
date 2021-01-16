@@ -1247,6 +1247,8 @@ class UserProfileTestCase(ForumsEnableMixin, UrlResetMixin, ModuleStoreTestCase)
         self.assertEqual(response_data['discussion_data'][0]['body'], self.TEST_THREAD_TEXT)
 
     def test_html(self, mock_request):
+        from django.conf import settings
+        print(settings.REST_FRAMEWORK)
         self.check_html(mock_request)
 
     def test_ajax(self, mock_request):

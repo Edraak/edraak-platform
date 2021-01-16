@@ -28,9 +28,9 @@ CREDENTIALS_PUBLIC_SERVICE_URL = 'http://localhost:18150'
 OAUTH_OIDC_ISSUER = '{}/oauth2'.format(LMS_ROOT_URL)
 
 DEFAULT_JWT_ISSUER = {
-    'ISSUER': OAUTH_OIDC_ISSUER,
-    'SECRET_KEY': 'lms-secret',
-    'AUDIENCE': 'lms-key',
+    'ISSUER': None,  # OAUTH_OIDC_ISSUER,
+    'SECRET_KEY': SECRET_KEY,
+    'AUDIENCE': None,  # 'lms-key',
 }
 JWT_AUTH.update({
     'JWT_ISSUER': DEFAULT_JWT_ISSUER['ISSUER'],
@@ -40,6 +40,11 @@ JWT_AUTH.update({
         RESTRICTED_APPLICATION_JWT_ISSUER,
     ],
 })
+
+print('===================edx-platform======================')
+print(JWT_AUTH)
+print(SECRET_KEY)
+print('=========================================')
 
 FEATURES.update({
     'AUTOMATIC_AUTH_FOR_TESTING': True,

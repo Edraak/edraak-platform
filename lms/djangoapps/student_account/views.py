@@ -81,16 +81,21 @@ def login_and_registration_form(request, initial_mode="login"):
         initial_mode (string): Either "login" or "register".
 
     """
+    print('---------------------01')
     # Determine the URL to redirect to following login/registration/third_party_auth
     redirect_to = get_next_url_for_login_page(request)
     # If we're already logged in, redirect to the dashboard
+    print('---------------------02')
     if request.user.is_authenticated:
+        print('---------------------03')
         return redirect(redirect_to)
 
+    print('---------------------04')
     if settings.FEATURES.get("ENABLE_EDRAAK_LOGISTRATION", False) and settings.PROGS_URLS:
+        print('---------------------05')
         redirect_to = get_next_url_for_progs_login_page(request, initial_mode)
         return redirect(redirect_to)
-
+    print('---------------------06')
     # Retrieve the form descriptions from the user API
     form_descriptions = _get_form_descriptions(request)
 

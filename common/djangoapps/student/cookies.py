@@ -121,6 +121,29 @@ def set_user_info_cookie(response, request):
         **cookie_settings
     )
 
+    from openedx.core.lib.token_utils import JwtBuilder
+    from rest_framework_jwt.settings import api_settings as jwt_settings
+    jwt_payload_handler = jwt_settings.JWT_PAYLOAD_HANDLER
+    jwt_encode_handler = jwt_settings.JWT_ENCODE_HANDLER
+    print('-----------payload-------')
+    print(jwt_payload_handler(request.user))
+    print('^^^^^^^^^^^payload^^^^^^^')
+    new_token = jwt_encode_handler(jwt_payload_handler(request.user))
+    print('==============new_token = {}'.format(new_token))
+    print('==============jwt_payload_handler = {}'.format(jwt_payload_handler))
+    print('==============jwt_encode_handler = {}'.format(jwt_encode_handler))
+    print('==============JWT_SECRET_KEY = {}'.format(settings.JWT_AUTH.get('JWT_SECRET_KEY', 'None')))
+    print('==============SECRET_KEY = {}'.format(settings.SECRET_KEY))
+
+    new_token = JwtBuilder(request.user).build_token(['email'])
+    print('==============new_token.JwtBuilder = {}'.format(new_token))
+    response.set_cookie(
+        settings.JWT_AUTH['EDRAAK_JWT_COOKIE'].encode('utf-8'),
+        new_token,
+        secure=user_info_cookie_is_secure,
+        **cookie_settings
+    )
+
 
 def set_experiments_is_enterprise_cookie(request, response, experiments_is_enterprise):
     """ Sets the experiments_is_enterprise cookie on the response.

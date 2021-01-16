@@ -2363,6 +2363,11 @@ REST_FRAMEWORK = {
         'service_user': '120/minute',
         'registration_validation': '30/minute',
     },
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
 
@@ -3263,10 +3268,13 @@ RESTRICTED_APPLICATION_JWT_ISSUER = {
     'AUDIENCE': 'change-me',
 }
 
+import datetime
 JWT_AUTH = {
     'JWT_ALGORITHM': 'HS256',
-    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_VERIFY_EXPIRATION': False,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
 
+    'JWT_ALLOW_REFRESH': True,
     'JWT_PAYLOAD_GET_USERNAME_HANDLER': lambda d: d.get('username'),
     'JWT_LEEWAY': 1,
     'JWT_DECODE_HANDLER': 'edx_rest_framework_extensions.utils.jwt_decode_handler',
@@ -3282,6 +3290,7 @@ JWT_AUTH = {
         DEFAULT_JWT_ISSUER,
         RESTRICTED_APPLICATION_JWT_ISSUER,
     ],
+    'EDRAAK_JWT_COOKIE': 'edx-jwt-cookie2',
 }
 
 ################################ Settings for Microsites ################################
