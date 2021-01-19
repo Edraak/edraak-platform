@@ -85,3 +85,10 @@ if not FEATURES.get('ENABLE_EDRAAK_LOGISTRATION'):
 CREDENTIALS_SERVICE_USERNAME = 'credentials_worker'
 
 COURSE_CATALOG_API_URL = 'http://edx.devstack.discovery:18381/api/v1/'
+
+EDRAAK_JWT_SETTINGS = {
+    'EXPIRATION_SECONDS': 60 * 3,
+    'REFRESH_EXPIRATION_SECONDS': 60 * 60 * 24 * 7,
+    'SECRET_KEY': 'dev-dummy-key',
+    'REFRESH_TOKEN_COOKIE_NAME': 'edraak_refresh_token',
+}

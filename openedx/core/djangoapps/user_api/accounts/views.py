@@ -47,6 +47,7 @@ from openedx.core.lib.api.authentication import (
     SessionAuthenticationAllowInactiveUser
 )
 from openedx.core.lib.api.parsers import MergePatchParser
+from student.cookies import delete_logged_in_cookies
 from student.models import (
     CourseEnrollment,
     ManualEnrollmentAudit,
@@ -162,6 +163,7 @@ def deactivate_user(user):
             u'The user "{}" does not exist.'.format(user.username), status=status.HTTP_404_NOT_FOUND
         )
     except Exception as exc:  # pylint: disable=broad-except
+        log.exception('Error in deactivate_user: {err_msg}'.format(err_msg=text_type(exc)))
         return Response(text_type(exc), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -481,8 +483,11 @@ class DeactivateLogoutView(APIView):
                 logout(request)
         except Exception as exc:  # pylint: disable=broad-except
             return Response(text_type(exc), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            response = Response(status=status.HTTP_204_NO_CONTENT)
+            delete_logged_in_cookies(response)
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return response
 
     def _verify_user_password(self, request):
         """
