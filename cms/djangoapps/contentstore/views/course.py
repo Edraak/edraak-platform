@@ -7,6 +7,8 @@ import logging
 import random
 import re
 import requests
+from rest_framework import status
+from rest_framework.exceptions import APIException
 import string  # pylint: disable=deprecated-module
 import urlparse
 
@@ -1357,7 +1359,26 @@ def advanced_settings_handler(request, course_key_string):
                                     course_module.specialization_slug
                                 )
                             )
-                            r = requests.get(url)
+                            try:
+                                r = requests.get(url=url, timeout=settings.EDRAAK_PROGRAMS_API_TIMEOUT)
+                            except requests.exceptions.Timeout:
+                                raise APIException(
+                                    {
+                                        "status_code": status.HTTP_503_SERVICE_UNAVAILABLE,
+                                        "developer_message": "Programs specialization API have timed out."
+                                    },
+                                    code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                                )
+                            except Exception:
+                                log.exception('Something went wrong with the programs specialization API')
+                                raise APIException(
+                                    {
+                                        "status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                        "developer_message": "Programs specialization didn't respond correctly."
+                                    },
+                                    code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                )
+
                             if r.status_code != requests.codes.ok:
                                 return JsonResponseBadRequest([
                                     {

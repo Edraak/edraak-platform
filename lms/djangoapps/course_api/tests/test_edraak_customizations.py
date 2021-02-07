@@ -108,7 +108,11 @@ class GetMarketingDataHelperTestCase(TestCase):
         with mock_requests_get() as mocked_get:
             helpers.get_marketing_data(course_key, 'eo')
             self.assertEquals(mocked_get.call_count, 1)  # Should be called once
-            mocked_get.assert_called_once_with(url=expected_url, headers={'Accept-Language': 'eo'})
+            mocked_get.assert_called_once_with(
+                url=expected_url,
+                headers={'Accept-Language': 'eo'},
+                timeout=4
+            )
 
     def test_valid_response(self):
         with mock_requests_get(status_code=200, body_json={'name': 'My Course'}):
