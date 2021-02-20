@@ -1,0 +1,7 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}Congratulations on doing a great job by getting all requirements to pass{% endblocktrans %}
+{{ course_name }}
+
+{% blocktrans %}You will find your certificate attached to this email! Feel free to share it with your connections on LinkedIn and other platforms.{% endblocktrans %}
+
+{% blocktrans %}{% endblocktrans %}{% endautoescape %}

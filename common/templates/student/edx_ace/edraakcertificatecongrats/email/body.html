@@ -1,0 +1,57 @@
+{% extends 'ace_common/edx_ace/common/base_body.html' %}
+
+{% load i18n %}
+{% load static %}
+{% block content %}
+<table width="100%" align="left" border="0" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+        {% if recommendations|length > 0 %}
+        <td colspan="{{recommendations|length}}">
+        {% else %}
+        <td>
+        {% endif %}
+            <p style="color: rgba(0,0,0,.75);"><h3 style="font-weight: normal">
+                {% blocktrans %}Congratulations on doing a great job by getting all requirements to pass{% endblocktrans %}
+                <br/><br/>
+                {{ course_name }}
+            </h3></p>
+
+            <p style="color: rgba(0,0,0,.75);"><h3 style="font-weight: normal">
+                {% blocktrans %}You will find your certificate attached to this email! Feel free to share it with your connections on LinkedIn and other platforms.{% endblocktrans %}
+                <br/>
+            </h3></p>
+        </td>
+    </tr>
+    {% if recommendations|length > 0 %}
+    <tr>
+        <td colspan="{{recommendations|length}}">
+            <h3 style="font-weight: normal">
+                {% blocktrans %}Learning journey doesn't stop here, and based on your interest in this course, we think you might be interested in these recommended courses as well:
+{% endblocktrans %}
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        {% for course_info in recommendations %}
+            <td style="width: {{ recommendations_width }}%">
+                <a href="{{ course_info.course_url }}">
+                    <img
+                            src="{{ course_info.course_img }}"
+                            alt="{{ course_info.course_name }}"
+                            style="width: 78%; height: auto; margin-left: 10%; margin-right: 10%"
+                    >
+                </a>
+            </td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for course_info2 in recommendations %}
+            <td style="width: {{ recommendations_width }}%">
+                <h3 style="text-align: center">{{ course_info2.course_name }}</h3>
+            </td>
+        {% endfor %}
+    </tr>
+    {% endif %}
+
+</table>
+{% endblock %}

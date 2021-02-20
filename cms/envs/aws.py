@@ -527,6 +527,10 @@ INSTALLED_APPS += ('edraak_specializations',)
 
 PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
+EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL = ENV_TOKENS.get(
+    "EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL", "?utm_source=recengine&utm_medium=email&utm_campaign=certificate"
+)
+
 ################ PUSH NOTIFICATIONS ###############
 
 PARSE_KEYS = AUTH_TOKENS.get("PARSE_KEYS", {})

@@ -125,7 +125,7 @@ def get_certificate_for_user(username, course_key):
 
 
 def generate_user_certificates(student, course_key, course=None, insecure=False, generation_mode='batch',
-                               forced_grade=None):
+                               forced_grade=None, request=None):
     """
     It will add the add-cert request into the xqueue.
 
@@ -167,6 +167,12 @@ def generate_user_certificates(student, course_key, course=None, insecure=False,
     # add_cert returns None and raises AttributeError while accesing cert attributes.
     if cert is None:
         return
+
+    if settings.FEATURES.get('EDRAAK_CERTIFICATES_APP') and request is not None:
+        # importing here to avoid circular imports
+        from lms.djangoapps.edraak_certificates.utils import send_certificate_by_email
+        from django.contrib.sites.models import Site
+        send_certificate_by_email(site=Site.objects.get_current(), request=request, course_key=course_key)
 
     if CertificateStatuses.is_passing_status(cert.status):
         emit_certificate_event('created', student, course_key, course, {
