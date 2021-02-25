@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2021 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2021 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-02 12:10+0000\n"
-"PO-Revision-Date: 2020-11-02 12:10:50.664617\n"
+"POT-Creation-Date: 2021-02-24 12:29+0000\n"
+"PO-Revision-Date: 2021-02-24 12:29:20.894803\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: rtl\n"
@@ -42,14 +42,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 1.3\n"
-
-#: build/lib.linux-x86_64-2.7/cms/urls.py cms/urls.py
-msgid "Studio Administration"
-msgstr "سفعيهخ شيوهرهسفقشفهخر"
-
-#: build/lib.linux-x86_64-2.7/lms/urls.py lms/urls.py
-msgid "LMS Administration"
-msgstr "موس شيوهرهسفقشفهخر"
 
 #. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 #. Translators: 'Discussion' refers to the tab in the courseware that leads to
@@ -5235,6 +5227,36 @@ msgstr "شذفهدشفث غخعق شذذخعرف رخص"
 #, python-format
 msgid "Action Required %(username)s: Activate your Edraak account"
 msgstr "شذفهخر قثضعهقثي %(username)s: شذفهدشفث غخعق ثيقششن شذذخعرف"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.html
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.txt
+msgid ""
+"Congratulations on doing a great job by getting all requirements to pass"
+msgstr ""
+"ذخرلقشفعمشفهخرس خر يخهرل ش لقثشف تخز زغ لثففهرل شمم قثضعهقثوثرفس فخ حشسس"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.html
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.txt
+msgid ""
+"You will find your certificate attached to this email! Feel free to share it"
+" with your connections on LinkedIn and other platforms."
+msgstr ""
+"غخع صهمم بهري غخعق ذثقفهبهذشفث شففشذاثي فخ فاهس ثوشهم! بثثم بقثث فخ ساشقث هف"
+" صهفا غخعق ذخررثذفهخرس خر مهرنثيهر شري خفاثق حمشفبخقوس."
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.html
+msgid ""
+"Learning journey doesn't stop here, and based on your interest in this "
+"course, we think you might be interested in these recommended courses as "
+"well:\n"
+msgstr ""
+"مثشقرهرل تخعقرثغ يخثسر'ف سفخح اثقث, شري زشسثي خر غخعق هرفثقثسف هر فاهس "
+"ذخعقسث, صث فاهرن غخع وهلاف زث هرفثقثسفثي هر فاثسث قثذخووثريثي ذخعقسثس شس "
+"صثمم:\n"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/subject.txt
+msgid "Congratulations! Your Certificate of Completion is Ready"
+msgstr "ذخرلقشفعمشفهخرس! غخعق ذثقفهبهذشفث خب ذخوحمثفهخر هس قثشيغ"
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
 msgid "Email Change"
@@ -11119,6 +11141,10 @@ msgstr "فاهس قثدهسهخر اشس زثثر يثمثفثي."
 msgid "Restoring to this revision will mark the article as deleted."
 msgstr "قثسفخقهرل فخ فاهس قثدهسهخر صهمم وشقن فاث شقفهذمث شس يثمثفثي."
 
+#: lms/urls.py
+msgid "LMS Administration"
+msgstr "موس شيوهرهسفقشفهخر"
+
 #: openedx/core/djangoapps/ace_common/apps.py
 msgid "ACE Common"
 msgstr "شذث ذخووخر"
@@ -13411,6 +13437,10 @@ msgstr "سفعيهخ"
 #: cms/lib/xblock/tagging/tagging.py
 msgid "Dictionary with the available tags"
 msgstr "يهذفهخرشقغ صهفا فاث شدشهمشزمث فشلس"
+
+#: cms/urls.py
+msgid "Studio Administration"
+msgstr "سفعيهخ شيوهرهسفقشفهخر"
 
 #: cms/templates/404.html cms/templates/error.html
 #: lms/templates/static_templates/404.html

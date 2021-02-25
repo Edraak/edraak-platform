@@ -1,8 +1,8 @@
 # #-#-#-#-#  djangojs-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2021 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # Translators:
 # Omar Al-Ithawi <omar.al.dolaimy@gmail.com>, 2017
@@ -13,13 +13,13 @@
 # Ali Hasan <ahasan@qrf.org>, 2020
 # Omar Al-Ithawi <i@omardo.com>, 2020
 # Shadi Naif <shadinaif@gmail.com>, 2020
-# Ahmad Abuwardeh <ahm.abuwardeh@gmail.com>, 2020
+# Ahmad Abuwardeh <ahm.abuwardeh@gmail.com>, 2021
 #
 # #-#-#-#-#  djangojs-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2021 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -31,9 +31,9 @@
 #
 # #-#-#-#-#  underscore.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -49,9 +49,9 @@
 #
 # #-#-#-#-#  underscore-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # Translators:
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2017
@@ -66,7 +66,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-02 12:07+0000\n"
+"POT-Creation-Date: 2021-02-24 12:02+0000\n"
 "PO-Revision-Date: 2017-06-08 09:48+0000\n"
 "Last-Translator: Shadi Naif <shadinaif@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/edraak/teams/27178/ar/)\n"
@@ -6269,6 +6269,10 @@ msgid ""
 "The name that is used for ID verification and that appears on your "
 "certificates."
 msgstr "الاسم المستخدم للتحقق من الهوية والذي سيظهر في شهاداتك."
+
+#: lms/static/js/student_account/views/account_settings_factory.js
+msgid "Full Name (In English)"
+msgstr "الاسم الكامل باللغة الإنجليزية"
 
 #: lms/static/js/student_account/views/account_settings_factory.js
 msgid "Country or Region of Residence"

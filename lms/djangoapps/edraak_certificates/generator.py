@@ -99,6 +99,7 @@ def trans_digits(text):
         .replace('9', u'٩')
     )
 
+
 class EdraakCertificate(object):
     def __init__(self, course, user, course_desc,
                  path_builder=None, preview_mode=None):

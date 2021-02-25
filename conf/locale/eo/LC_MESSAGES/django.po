@@ -1,39 +1,39 @@
 # #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2021 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  django-studio.po (0.1a)  #-#-#-#-#
 # edX translation file.
-# Copyright (C) 2020 EdX
+# Copyright (C) 2021 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  mako.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  mako-studio.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 # #-#-#-#-#  wiki.po (0.1a)  #-#-#-#-#
 # edX translation file
-# Copyright (C) 2020 edX
+# Copyright (C) 2021 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2020.
+# EdX Team <info@edx.org>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-02 12:10+0000\n"
-"PO-Revision-Date: 2020-11-02 12:10:50.664617\n"
+"POT-Creation-Date: 2021-02-24 12:29+0000\n"
+"PO-Revision-Date: 2021-02-24 12:29:20.894803\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -42,14 +42,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 1.3\n"
-
-#: build/lib.linux-x86_64-2.7/cms/urls.py cms/urls.py
-msgid "Studio Administration"
-msgstr "Stüdïö Àdmïnïsträtïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
-
-#: build/lib.linux-x86_64-2.7/lms/urls.py lms/urls.py
-msgid "LMS Administration"
-msgstr "LMS Àdmïnïsträtïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
 
 #. #-#-#-#-#  django-partial.po (0.1a)  #-#-#-#-#
 #. Translators: 'Discussion' refers to the tab in the courseware that leads to
@@ -6074,6 +6066,38 @@ msgid "Action Required %(username)s: Activate your Edraak account"
 msgstr ""
 "Àçtïön Réqüïréd %(username)s: Àçtïväté ýöür Édrääk äççöünt Ⱡ'σяєм ιρѕυм "
 "∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.html
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.txt
+msgid ""
+"Congratulations on doing a great job by getting all requirements to pass"
+msgstr ""
+"Çöngrätülätïöns ön döïng ä gréät jöß ßý géttïng äll réqüïréménts tö päss "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.html
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.txt
+msgid ""
+"You will find your certificate attached to this email! Feel free to share it"
+" with your connections on LinkedIn and other platforms."
+msgstr ""
+"Ýöü wïll fïnd ýöür çértïfïçäté ättäçhéd tö thïs émäïl! Féél fréé tö shäré ït"
+" wïth ýöür çönnéçtïöns ön LïnkédÌn änd öthér plätförms. Ⱡ#"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/body.html
+msgid ""
+"Learning journey doesn't stop here, and based on your interest in this "
+"course, we think you might be interested in these recommended courses as "
+"well:\n"
+msgstr ""
+"Léärnïng jöürnéý döésn't stöp héré, änd ßäséd ön ýöür ïntérést ïn thïs çöürsé, wé thïnk ýöü mïght ßé ïntéréstéd ïn thésé réçömméndéd çöürsés äs wéll:\n"
+" Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι σƒƒι¢ια ∂єѕєяυηт мσłłιт αη#\n"
+
+#: common/templates/student/edx_ace/edraakcertificatecongrats/email/subject.txt
+msgid "Congratulations! Your Certificate of Completion is Ready"
+msgstr ""
+"Çöngrätülätïöns! Ýöür Çértïfïçäté öf Çömplétïön ïs Réädý Ⱡ'σяєм ιρѕυм ∂σłσя "
+"ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
 #: common/templates/student/edx_ace/emailchange/email/body.html
 msgid "Email Change"
@@ -12757,6 +12781,10 @@ msgstr ""
 "Réstörïng tö thïs révïsïön wïll märk thé ärtïçlé äs délétéd. Ⱡ'σяєм ιρѕυм "
 "∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
 
+#: lms/urls.py
+msgid "LMS Administration"
+msgstr "LMS Àdmïnïsträtïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+
 #: openedx/core/djangoapps/ace_common/apps.py
 msgid "ACE Common"
 msgstr "ÀÇÉ Çömmön Ⱡ'σяєм ιρѕυм ∂σłσ#"
@@ -15430,6 +15458,10 @@ msgstr "Stüdïö Ⱡ'σяєм ιρѕυ#"
 msgid "Dictionary with the available tags"
 msgstr ""
 "Dïçtïönärý wïth thé äväïläßlé tägs Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєт#"
+
+#: cms/urls.py
+msgid "Studio Administration"
+msgstr "Stüdïö Àdmïnïsträtïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
 
 #: cms/templates/404.html cms/templates/error.html
 #: lms/templates/static_templates/404.html

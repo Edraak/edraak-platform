@@ -1,7 +1,13 @@
+import json
 import logging
+import requests
+from rest_framework.status import HTTP_200_OK
+from urlparse import urljoin
 
 from courseware.courses import get_course_about_section
 from edraak_certificates.generator import EdraakCertificate
+from edraak_certificates.ace_override import send_with_file
+from edx_ace.recipient import Recipient
 from django.conf import settings
 from django.core.cache import cache
 import os
@@ -11,6 +17,10 @@ from courseware.access import has_access
 from lms.djangoapps.courseware.views.views import is_course_passed
 from opaque_keys.edx import locator
 from xmodule.modulestore.django import modulestore
+from openedx.core.djangoapps.ace_common.template_context import get_base_template_context
+from openedx.core.djangoapps.safe_sessions.middleware import SafeCookieData
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+from student.message_types import EdraakCertificateCongrats
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +41,7 @@ def generate_certificate(request, course_id):
                              path_builder=path_builder)
 
     cert.generate_and_save()
-    return cert.temp_file
+    return cert
 
 
 STATIC_DIR = os.path.join(os.path.dirname(__file__), 'assets')
@@ -225,3 +235,64 @@ def contains_rtl_text(string):
             return True
         else:
             return False
+
+
+def get_recommended_courses(request, language):
+    result = []
+    url = settings.PROGS_URLS.get('RECOMMENDER_URL', None) or None
+    session_id = request.COOKIES[settings.SESSION_COOKIE_NAME]
+    cookies = {
+        settings.SESSION_COOKIE_NAME: unicode(SafeCookieData.create(session_id, request.user.id))
+    }
+    if url:
+        response = requests.get(
+            url=url,
+            params=[('size', 3)],
+            timeout=10,
+            cookies=cookies
+        )
+        if response.status_code == HTTP_200_OK:
+            data = json.loads(response.content)
+            for info in data:
+                added_params = settings.EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL
+                course_url = urljoin(info['course_url'], added_params) if added_params else info['course_url']
+                result.append({
+                    'course_url': course_url,
+                    'course_img': info['course_image'],
+                    'course_name': info['name_{language}'.format(language=language)],
+                })
+        else:
+            raise ValueError('Response no OK: {status}'.format(status=response.status_code))
+    return result
+
+
+def send_certificate_by_email(site, request, course_key):
+    try:
+        cert = generate_certificate(request=request, course_id=str(course_key))
+        language = 'en' if cert.is_english else 'ar'
+        recommended_courses = []
+        try:
+            recommended_courses = get_recommended_courses(request=request, language=language)
+        except Exception as rec_error:  # pylint: disable=broad-except
+            logger.error('Recommender error while generating certificate email: {error_msg}'.format(
+                error_msg=str(rec_error) or ''
+            ))
+
+        user = request.user
+        message_context = get_base_template_context(site)
+        message_context.update({
+            'from_address': configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL),
+            'recommendations': recommended_courses,
+            'recommendations_width': int(100 / len(recommended_courses)) if recommended_courses else 0,
+            'course_name': cert.course_name
+        })
+        msg = EdraakCertificateCongrats().personalize(
+            recipient=Recipient(user.username, user.email),
+            language=language,
+            user_context=message_context,
+        )
+        pdf_file = cert.temp_file
+
+        send_with_file(msg, 'Certificate of Completion.pdf', pdf_file.read(), 'application/pdf')
+    except Exception as e:  # pylint: disable=broad-except
+        logger.error('Sending certificate by email failed: {error_msg}'.format(error_msg=str(e)))

@@ -31,3 +31,10 @@ class AccountActivation(BaseMessageType):
         super(AccountActivation, self).__init__(*args, **kwargs)
 
         self.options['transactional'] = True
+
+
+class EdraakCertificateCongrats(BaseMessageType):
+    def __init__(self, *args, **kwargs):
+        super(EdraakCertificateCongrats, self).__init__(*args, **kwargs)
+
+        self.options['transactional'] = True

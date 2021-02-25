@@ -62,7 +62,7 @@ def issue(request, course_id):
 
             # generate the certificate
             generate_user_certificates(student, course.id,
-                                       course=course, forced_grade=forced_grade)
+                                       course=course, forced_grade=forced_grade, request=request)
             template = 'edraak_certificates/issue.html'
 
     elif certificate_status == CertificateStatuses.downloadable:
@@ -103,7 +103,7 @@ def download(request, course_id):
         certificate_status_for_student(user, course.id)['status']
 
     if certificate_status == CertificateStatuses.downloadable or is_student_pass(user, course_id):
-        pdf_file = generate_certificate(request, course_id)
+        pdf_file = generate_certificate(request, course_id).temp_file
         file_size = os.path.getsize(pdf_file.name)
         wrapper = FileWrapper(pdf_file)
         # `application/octet-stream` is to force download
