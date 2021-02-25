@@ -2,6 +2,7 @@ import json
 import logging
 import requests
 from rest_framework.status import HTTP_200_OK
+import urllib
 from urlparse import urljoin
 
 from courseware.courses import get_course_about_section
@@ -237,6 +238,15 @@ def contains_rtl_text(string):
             return False
 
 
+def get_quoted_url(url):
+    url = url
+    last_slash = url.rfind('/')
+    if last_slash > 1:
+        return '{}{}'.format(url[:last_slash + 1], urllib.quote(url[last_slash + 1:]))
+    else:
+        return urllib.quote(url)
+
+
 def get_recommended_courses(request, language):
     result = []
     url = settings.PROGS_URLS.get('RECOMMENDER_URL', None) or None
@@ -253,12 +263,12 @@ def get_recommended_courses(request, language):
         )
         if response.status_code == HTTP_200_OK:
             data = json.loads(response.content)
+            added_params = settings.EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL
             for info in data:
-                added_params = settings.EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL
                 course_url = urljoin(info['course_url'], added_params) if added_params else info['course_url']
                 result.append({
                     'course_url': course_url,
-                    'course_img': info['course_image'],
+                    'course_img': get_quoted_url(info['course_image'].encode('utf-8')),
                     'course_name': info['name_{language}'.format(language=language)],
                 })
         else:
@@ -271,14 +281,24 @@ def send_certificate_by_email(site, request, course_key):
         cert = generate_certificate(request=request, course_id=str(course_key))
         language = 'en' if cert.is_english else 'ar'
         recommended_courses = []
+        user = request.user
         try:
             recommended_courses = get_recommended_courses(request=request, language=language)
         except Exception as rec_error:  # pylint: disable=broad-except
-            logger.error('Recommender error while generating certificate email: {error_msg}'.format(
-                error_msg=str(rec_error) or ''
+            logger.error('Recommender error while generating certificate email for user {username}: {error_msg}'.format(
+                username=user.username,
+                error_msg='{exception_type}: {msg}'.format(
+                    exception_type=type(rec_error).__name__,
+                    msg=str(rec_error) or '',
+                ),
             ))
+        else:
+            if len(recommended_courses) == 0:
+                logger.warning(
+                    'Recommender returned empty list in certificate email for user {username}'.format(
+                        username=user.username,
+                    ))
 
-        user = request.user
         message_context = get_base_template_context(site)
         message_context.update({
             'from_address': configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL),
