@@ -36,9 +36,9 @@
             <td style="width: {{ recommendations_width }}%">
                 <a href="{{ course_info.course_url }}">
                     <img
-                            src="{{ course_info.course_img }}"
-                            alt="{{ course_info.course_name }}"
-                            style="width: 78%; height: auto; margin-left: 10%; margin-right: 10%"
+                        src="{{ course_info.course_img }}"
+                        alt="{{ course_info.course_name }}"
+                        style="width: 78%; height: auto; margin-left: 10%; margin-right: 10%"
                     >
                 </a>
             </td>
@@ -47,7 +47,11 @@
     <tr>
         {% for course_info2 in recommendations %}
             <td style="width: {{ recommendations_width }}%">
-                <h3 style="text-align: center">{{ course_info2.course_name }}</h3>
+                <a href="{{ course_info2.course_url }}">
+                    <h3 style="text-align: center; width: 78%; height: auto; margin-left: 10%; margin-right: 10%">
+                        {{ course_info2.course_name }}
+                    </h3>
+                </a>
             </td>
         {% endfor %}
     </tr>
