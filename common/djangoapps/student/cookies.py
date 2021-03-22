@@ -13,8 +13,12 @@ from django.urls import NoReverseMatch, reverse
 from django.dispatch import Signal
 from django.utils.http import cookie_date
 
+from edraak_jwt.helpers import get_edraak_refresh_token
 from openedx.core.djangoapps.user_api.accounts.utils import retrieve_last_sitewide_block_completed
 from student.models import CourseEnrollment
+import logging
+log = logging.getLogger(__name__)
+
 
 CREATE_LOGON_COOKIE = Signal(providing_args=['user', 'response'])
 
@@ -91,6 +95,7 @@ def set_logged_in_cookies(request, response, user):
     )
 
     set_user_info_cookie(response, request)
+    set_edraak_jwt_refresh_token_cookie(response, request, user)
 
     # give signal receivers a chance to add cookies
     CREATE_LOGON_COOKIE.send(sender=None, user=user, response=response)
@@ -121,6 +126,25 @@ def set_user_info_cookie(response, request):
         **cookie_settings
     )
 
+
+def set_edraak_jwt_refresh_token_cookie(response, request, user=None):
+    print('from set_edraak_jwt_refresh_token_cookie here is cookies', request.COOKIES)
+    if not user and hasattr(request, 'user'):
+        user = request.user
+    if user and user.is_authenticated:
+        response.set_cookie(
+            settings.EDRAAK_JWT_SETTINGS['REFRESH_TOKEN_COOKIE_NAME'].encode('utf-8'),
+            get_edraak_refresh_token(
+                user=user,
+                session_key=request.session.session_key,
+            ),
+            secure=request.is_secure(),
+            **standard_cookie_settings(request)
+        )
+    else:
+        log.warning(
+            'Unable to auth edraak, no user provided'
+        )
 
 def set_experiments_is_enterprise_cookie(request, response, experiments_is_enterprise):
     """ Sets the experiments_is_enterprise cookie on the response.
@@ -200,7 +224,11 @@ def delete_logged_in_cookies(response):
         HttpResponse
 
     """
-    for cookie_name in [settings.EDXMKTG_LOGGED_IN_COOKIE_NAME, settings.EDXMKTG_USER_INFO_COOKIE_NAME]:
+    for cookie_name in [
+        settings.EDXMKTG_LOGGED_IN_COOKIE_NAME,
+        settings.EDXMKTG_USER_INFO_COOKIE_NAME,
+        settings.EDRAAK_JWT_SETTINGS['REFRESH_TOKEN_COOKIE_NAME']
+    ]:
         response.delete_cookie(
             cookie_name.encode('utf-8'),
             path='/',

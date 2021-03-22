@@ -28,3 +28,10 @@ JWT_AUTH.update({
     'JWT_ISSUER': OAUTH_OIDC_ISSUER,
     'JWT_AUDIENCE': 'lms-key',
 })
+
+EDRAAK_JWT_SETTINGS = {
+    'EXPIRATION_SECONDS': 60 * 3,
+    'REFRESH_EXPIRATION_SECONDS': 60 * 60 * 24 * 7,
+    'SECRET_KEY': 'dev-dummy-key',
+    'REFRESH_TOKEN_COOKIE_NAME': 'edraak_refresh_token',
+}

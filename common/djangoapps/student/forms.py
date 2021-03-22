@@ -70,12 +70,6 @@ class PasswordResetFormNoActive(PasswordResetForm):
         if (retirement_status is None) and any((user.password.startswith(UNUSABLE_PASSWORD_PREFIX))
                for user in self.users_cache):
             raise forms.ValidationError(self.error_messages['unusable'])
-
-        # if not len(self.users_cache):
-        #     raise forms.ValidationError(self.error_messages['unknown'])
-        # if any((user.password.startswith(UNUSABLE_PASSWORD_PREFIX))
-        #        for user in self.users_cache):
-        #     raise forms.ValidationError(self.error_messages['unusable'])
         ########### End of Edraak Specific ##########
 
         return email

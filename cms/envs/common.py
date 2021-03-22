@@ -1186,6 +1186,13 @@ EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE = 10000
 
 FEATURES['ENABLE_EDRAAK_LOGISTRATION'] = False  # Disabled in tests by default
 
+EDRAAK_JWT_SETTINGS = {
+    'EXPIRATION_SECONDS': 60 * 3,
+    'REFRESH_EXPIRATION_SECONDS': 60 * 60 * 24 * 7,
+    'SECRET_KEY': 'dev-dummy-key',
+    'REFRESH_TOKEN_COOKIE_NAME': 'edraak_refresh_token',
+}
+
 ############################## EVENT TRACKING #################################
 
 TRACK_MAX_EVENT = 50000

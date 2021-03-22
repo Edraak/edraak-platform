@@ -2407,6 +2407,13 @@ PROGS_URLS = {}
 # This value must be set to (None) when (EDRAAK_RATELIMIT_APP) feature is defined
 EDRAAK_STUDENTCONFIG_OVERRIDE_RATE_LIMIT_VALUE = 10000
 
+EDRAAK_JWT_SETTINGS = {
+    'EXPIRATION_SECONDS': 60 * 3,
+    'REFRESH_EXPIRATION_SECONDS': 60 * 60 * 24 * 7,
+    'SECRET_KEY': 'dev-dummy-key',
+    'REFRESH_TOKEN_COOKIE_NAME': 'edraak_refresh_token',
+}
+
 ############################# SOCIAL MEDIA SHARING #############################
 # Social Media Sharing on Student Dashboard
 SOCIAL_SHARING_SETTINGS = {

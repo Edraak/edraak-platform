@@ -527,6 +527,8 @@ INSTALLED_APPS += ('edraak_specializations',)
 
 PROGS_URLS = ENV_TOKENS.get('PROGS_URLS', PROGS_URLS)
 
+EDRAAK_JWT_SETTINGS = ENV_TOKENS.get('EDRAAK_JWT_SETTINGS', EDRAAK_JWT_SETTINGS)
+
 EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL = ENV_TOKENS.get(
     "EDRAAK_UTM_PARAMS_CERTIFICATE_EMAIL", "?utm_source=recengine&utm_medium=email&utm_campaign=certificate"
 )

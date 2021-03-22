@@ -56,6 +56,7 @@ from track import views as track_views
 from util import views as util_views
 
 from course_modes.edraak_helpers import get_progs_url
+from edraak_jwt.views import EdraakAccessTokenView
 
 if settings.DEBUG or settings.FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
     django_autodiscover()
@@ -1110,3 +1111,7 @@ if settings.FEATURES.get('ENABLE_API_DOCS'):
     ]
 
 urlpatterns.extend(plugin_urls.get_patterns(plugin_constants.ProjectType.LMS))
+
+urlpatterns += [
+        url(r'^edraak_access_token', EdraakAccessTokenView.as_view(), name='edraak_access_token'),
+    ]

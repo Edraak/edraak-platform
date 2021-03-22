@@ -31,6 +31,10 @@ from rest_framework.views import APIView
 from openedx.core.djangoapps.auth_exchange.forms import AccessTokenExchangeForm
 from openedx.core.djangoapps.oauth_dispatch import adapters
 from openedx.core.lib.api.authentication import OAuth2AuthenticationAllowInactiveUser
+from student.cookies import set_edraak_jwt_refresh_token_cookie
+import logging
+log = logging.getLogger(__name__)
+
 
 
 class AccessTokenExchangeBase(APIView):
@@ -72,7 +76,7 @@ class AccessTokenExchangeBase(APIView):
             edx_access_token = self.get_access_token(request, user, scope, client)  # pylint: disable=no-member
         else:
             edx_access_token = self.create_access_token(request, user, scope, client)
-        return self.access_token_response(edx_access_token)  # pylint: disable=no-member
+        return self.access_token_response(edx_access_token, request)  # pylint: disable=no-member
 
 
 class DOPAccessTokenExchangeView(AccessTokenExchangeBase, DOPAccessTokenView):
@@ -119,11 +123,13 @@ class DOTAccessTokenExchangeView(AccessTokenExchangeBase, DOTAccessTokenView):
         self._populate_create_access_token_request(request, user, scope, client)
         return token_generator.create_token(request, refresh_token=True)
 
-    def access_token_response(self, token):
+    def access_token_response(self, token, request):
         """
         Wrap an access token in an appropriate response
         """
-        return Response(data=token)
+        response = Response(data=token)
+        set_edraak_jwt_refresh_token_cookie(response=response, request=request)
+        return response
 
     def _populate_create_access_token_request(self, request, user, scope, client):
         """
@@ -197,4 +203,6 @@ class LoginWithAccessTokenView(APIView):
             })
 
         login(request, request.user)  # login generates and stores the user's cookies in the session
-        return HttpResponse(status=204)  # cookies stored in the session are returned with the response
+        response = HttpResponse(status=204)  # cookies stored in the session are returned with the response
+        set_edraak_jwt_refresh_token_cookie(response=response, request=request)
+        return response
