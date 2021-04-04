@@ -250,15 +250,12 @@ def get_quoted_url(url):
 def get_recommended_courses(request, language):
     result = []
     url = settings.PROGS_URLS.get('RECOMMENDER_URL', None) or None
-    session_id = request.COOKIES[settings.SESSION_COOKIE_NAME]
-    cookies = {
-        settings.SESSION_COOKIE_NAME: unicode(SafeCookieData.create(session_id, request.user.id))
-    }
+    cookies = request.COOKIES.copy()
     if url:
         response = requests.get(
             url=url,
-            params=[('size', 3)],
-            timeout=10,
+            params={'size': 3},
+            timeout=15,
             cookies=cookies
         )
         if response.status_code == HTTP_200_OK:
