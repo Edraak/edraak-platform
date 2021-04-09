@@ -5,11 +5,20 @@ URLs for student app
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth.views import password_reset_complete
+from django.views.generic.base import RedirectView
+from urlparse import urljoin
 
 from . import views
 
 urlpatterns = [
-    url(r'^logout$', views.LogoutView.as_view(), name='logout'),
+    url(
+        r'^logout$',
+        RedirectView.as_view(
+            url=urljoin(settings.PROGS_URLS.get('ROOT'), 'logout'),
+            permanent=False
+        ),
+        name='logout'
+    ),
 
     # TODO: standardize login
 
