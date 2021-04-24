@@ -825,6 +825,10 @@ class LogoutView(TemplateView):
             return self.default_target
 
     def dispatch(self, request, *args, **kwargs):  # pylint: disable=missing-docstring
+        # We are not using this view unless its a test
+        import os
+        assert os.environ["DJANGO_SETTINGS_MODULE"] in ('lms.envs.test', 'cms.envs.test')
+
         # We do not log here, because we have a handler registered to perform logging on successful logouts.
         request.is_from_logout = True
 
