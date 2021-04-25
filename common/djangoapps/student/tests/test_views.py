@@ -179,7 +179,7 @@ class LogoutTests(TestCase):
 
         # Logging out should remove the session variables, and send a list of logout URLs to the template.
         # The template will handle loading those URLs and redirecting the user. That functionality is not tested here.
-        response = self.client.get(reverse('logout'), **logout_headers)
+        response = self.client.get(reverse('logout_original_for_testing'), **logout_headers)
         self.assertEqual(response.status_code, 200)
         self.assertNotIn(AUTHORIZED_CLIENTS_SESSION_KEY, self.client.session)
 
@@ -201,12 +201,12 @@ class LogoutTests(TestCase):
 
     def assert_logout_redirects_to_root(self):
         """ Verify logging out redirects the user to the homepage. """
-        response = self.client.get(reverse('logout'))
+        response = self.client.get(reverse('logout_original_for_testing'))
         self.assertRedirects(response, '/', fetch_redirect_response=False)
 
     def assert_logout_redirects_with_target(self):
         """ Verify logging out with a redirect_url query param redirects the user to the target. """
-        url = '{}?{}'.format(reverse('logout'), 'redirect_url=/courses')
+        url = '{}?{}'.format(reverse('logout_original_for_testing'), 'redirect_url=/courses')
         response = self.client.get(url)
         self.assertRedirects(response, '/courses', fetch_redirect_response=False)
 
