@@ -249,6 +249,7 @@ arabic-reshaper==2.0.14
 # For gcloud
 gcloud==0.18.3
 google-cloud-storage==1.26.0
+chardet==3.0.4
 
 # For SendinBlue
 -e git+https://github.com/Edraak/APIv3-python-library.git@v6.1.0#egg=sib_api_v3_sdk
