@@ -413,7 +413,7 @@ class SSLClientTest(ModuleStoreTestCase):
                           response.redirect_chain[-1])
         self.assertIn(SESSION_KEY, self.client.session)
         response = self.client.get(
-            reverse('logout_original_for_testing'), follow=True,
+            reverse('logout'), follow=True,
             SSL_CLIENT_S_DN=self.AUTH_DN.format(self.USER_NAME, self.USER_EMAIL)
         )
         # Make sure that even though we logged out, we have logged back in

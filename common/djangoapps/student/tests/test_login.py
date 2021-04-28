@@ -217,7 +217,7 @@ class LoginTest(CacheIsolationTestCase):
     def test_logout_logging(self):
         response, _ = self._login_response('test@edx.org', 'test_password')
         self._assert_response(response, success=True)
-        logout_url = reverse('logout_original_for_testing')
+        logout_url = reverse('logout')
         with patch('student.models.AUDIT_LOG') as mock_audit_log:
             response = self.client.post(logout_url)
         self.assertEqual(response.status_code, 302)
@@ -247,7 +247,7 @@ class LoginTest(CacheIsolationTestCase):
         self.assertIn(settings.EDXMKTG_USER_INFO_COOKIE_NAME, self.client.cookies)
 
         # Log out
-        logout_url = reverse('logout_original_for_testing')
+        logout_url = reverse('logout')
         response = self.client.post(logout_url)
 
         # Check that the marketing site cookies have been deleted
@@ -267,14 +267,14 @@ class LoginTest(CacheIsolationTestCase):
         response, _ = self._login_response('test@edx.org', 'test_password')
         self._assert_response(response, success=True)
 
-        response = self.client.post(reverse('logout_original_for_testing'))
+        response = self.client.post(reverse('logout'))
         self.assertRedirects(response, "/")
 
     @patch.dict("django.conf.settings.FEATURES", {'SQUELCH_PII_IN_LOGS': True})
     def test_logout_logging_no_pii(self):
         response, _ = self._login_response('test@edx.org', 'test_password')
         self._assert_response(response, success=True)
-        logout_url = reverse('logout_original_for_testing')
+        logout_url = reverse('logout')
         with patch('student.models.AUDIT_LOG') as mock_audit_log:
             response = self.client.post(logout_url)
         self.assertEqual(response.status_code, 302)
