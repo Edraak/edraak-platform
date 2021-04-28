@@ -206,7 +206,7 @@ class LoginEnrollmentTestCase(TestCase):
         as expected.
         """
         # should redirect
-        self.assert_request_status_code(302, reverse('logout_original_for_testing'))
+        self.assert_request_status_code(302, reverse('logout'))
 
     def create_account(self, username, email, password):
         """

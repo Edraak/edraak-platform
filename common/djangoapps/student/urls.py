@@ -11,15 +11,7 @@ from urlparse import urljoin
 from . import views
 
 urlpatterns = [
-    url(r'^logout_original_for_testing$', views.LogoutView.as_view(), name='logout_original_for_testing'),
-    url(
-        r'^logout$',
-        RedirectView.as_view(
-            url=urljoin(settings.PROGS_URLS.get('ROOT'), 'logout'),
-            permanent=False
-        ),
-        name='logout'
-    ),
+    url(r'^logout$', views.LogoutView.as_view(), name='logout'),
 
     # TODO: standardize login
 
