@@ -3,7 +3,8 @@ import requests
 from django.conf import settings
 from edxmako.shortcuts import marketing_link
 import logging
-
+from django.core.cache import cache
+import json
 log = logging.getLogger(__name__)
 
 
@@ -50,6 +51,9 @@ def get_marketing_data(course_key, language):
     :returns a course details from the marketing API or None if
     no marketing details found.
     """
+    CACHE_KEY = "MKTG_API_" + str(course_key) + str(language)
+    if cache.get(CACHE_KEY):
+        return cache.get(CACHE_KEY)
     marketing_root_format = marketing_link('COURSE_DETAILS_API_FORMAT')
     url = marketing_root_format.format(course_id=course_key)
 
@@ -61,4 +65,5 @@ def get_marketing_data(course_key, language):
         log.warning('Could not fetch the marketing details from the API. course_key=[%s], status_code=[%s], url=[%s].',
                     course_key, response.status_code, url)
         return {}
+    cache.set(CACHE_KEY, response.json(), 30 * 60)
     return response.json()
