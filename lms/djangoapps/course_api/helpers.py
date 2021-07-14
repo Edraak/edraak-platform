@@ -52,7 +52,7 @@ def get_marketing_data(course_key, language):
     no marketing details found.
     """
     CACHE_KEY = "MKTG_API_" + str(course_key) + str(language)
-    if cache.get(CACHE_KEY):
+    if cache.get(CACHE_KEY) is not None:
         return cache.get(CACHE_KEY)
     marketing_root_format = marketing_link('COURSE_DETAILS_API_FORMAT')
     url = marketing_root_format.format(course_id=course_key)
@@ -60,10 +60,10 @@ def get_marketing_data(course_key, language):
     response = requests.get(url=url, headers={
         'Accept-Language': language,
     })
-
+    data = response.json()
     if response.status_code != 200:
-        log.warning('Could not fetch the marketing details from the API. course_key=[%s], status_code=[%s], url=[%s].',
-                    course_key, response.status_code, url)
-        return {}
-    cache.set(CACHE_KEY, response.json(), 30 * 60)
-    return response.json()
+        log.warning('Could not fetch the marketing details from the API. course_key=[%s], status_code=[%s], url=[%s] data=[%s].',
+                    course_key, response.status_code, url, data)
+        data = {}
+    cache.set(CACHE_KEY, data, 30 * 60)
+    return data
