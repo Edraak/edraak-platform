@@ -114,17 +114,28 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
     is_completed = serializers.SerializerMethodField()
     is_certificate_available = serializers.SerializerMethodField()
 
+    def to_representation(self, *args, **kwargs):
+        Timer.log_time('start to_representation', 3)
+        result = super(self).to_representation(*args, **kwargs)
+        Timer.log_time('end to_representation', 3)
+        return result
+
     def get_edraak_course_details(self, obj):
+        from . import Timer
+        Timer.log_time('start get_edraak_course_details', 4)
+
         context = self.context.copy()
         CourseDetailMarketingSerializer.update_marketing_context(
             context=context,
             course_key=obj.course_id
         )
 
-        return CourseDetailMarketingSerializer(
+        data = CourseDetailMarketingSerializer(
             obj.course_overview,
             context=context
         ).data
+        Timer.log_time('end get_edraak_course_details', 4)
+        return data
 
     def _get_user(self):
         request = self.context.get('request')
@@ -133,6 +144,8 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
         return None
 
     def get_is_certificate_allowed(self, obj):
+        from . import Timer
+        Timer.log_time('start get_is_certificate_allowed', 4)
         # Keep this import local to hide LMS related stuff from pytest when testing CMS
         from edraak_certificates.utils import is_certificate_allowed
 
@@ -144,24 +157,34 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
                 'EDRAAK: Certificate is not allowed because EdraakCourseEnrollmentSerializer cannot find user!'
             )
             allowed = False
-
+        Timer.log_time('end get_is_certificate_allowed', 4)
         return allowed
 
     def get_specialization_slug(self, obj):
+        from . import Timer
+        Timer.log_time('start get_specialization_slug', 4)
         try:
             specialization_info = CourseSpecializationInfo.objects.get(course_id=obj.course_id)
         except CourseSpecializationInfo.DoesNotExist:
             return None
+
+        Timer.log_time('end get_specialization_slug', 4)
         return specialization_info.specialization_slug
 
     def get_subscribed_to_emails(self, obj):
+        from . import Timer
+        Timer.log_time('start get_subscribed_to_emails', 4)
         user = self._get_user()
         if not user or not user.is_authenticated:
             return False
 
-        return not Optout.objects.filter(user=user, course_id=obj.course_id).exists()
+        result = not Optout.objects.filter(user=user, course_id=obj.course_id).exists()
+        Timer.log_time('end get_subscribed_to_emails', 4)
+        return result
 
     def get_is_completed(self, obj):
+        from . import Timer
+        Timer.log_time('start get_is_completed', 4)
         # Keep this import local to hide LMS related stuff from pytest when testing CMS
         from lms.djangoapps.grades.models import PersistentCourseGrade
 
@@ -178,9 +201,12 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
             else:
                 if grade.percent_grade >= obj.course_overview.lowest_passing_grade:
                     completed = True
+        Timer.log_time('end get_is_completed', 4)
         return completed
 
     def get_is_certificate_available(self, obj):
+        from . import Timer
+        Timer.log_time('start get_is_certificate_available', 4)
         # Keep this import local to hide LMS related stuff from pytest when testing CMS
         from lms.djangoapps.certificates.models import CertificateStatuses, GeneratedCertificate
 
@@ -197,6 +223,7 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
                 pass
             else:
                 available = True
+        Timer.log_time('end get_is_certificate_available', 4)
         return available
 
     class Meta(object):
