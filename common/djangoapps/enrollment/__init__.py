@@ -11,7 +11,6 @@ class Timer(object):
     def log_time(cls, name, level):
         import timeit
         time = timeit.default_timer()
-        execution_time = stop - start
 
         if cls.last_time and cls.last_time_name:
             extra = '{time_diff} since {name}'.format(
