@@ -75,7 +75,7 @@ def get_course_enrollments(user_id):
             log.warning(
                 (
                     u"Course enrollments for user %s reference "
-                    u"courses that do not exist (this can occur if a course is deleted). %s"
+                    u"courses that do not exist (this can occur if a course is deleted)."
                 ), user_id,
             )
 
