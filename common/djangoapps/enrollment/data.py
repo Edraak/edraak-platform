@@ -45,43 +45,39 @@ def get_course_enrollments(user_id):
         A serializable list of dictionaries of all aggregated enrollment data for a user.
 
     """
-    from . import Timer
+    from . import time_block
 
-    Timer.log_time('start CourseEnrollment_query', 2)
-    qset = CourseEnrollment.objects.filter(
-        user__username=user_id,  # TODO: Omar user_id is not username
-        is_active=True
-    ).order_by('created')
+    with time_block('CourseEnrollment_query', 2):
+        qset = CourseEnrollment.objects.filter(
+            user__username=user_id,  # TODO: Omar user_id is not username
+            is_active=True
+        ).order_by('created')
 
-    Timer.log_time('end CourseEnrollment_query', 2)
+    with time_block('EdraakCourseEnrollmentSerializer', 2):
+        # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
+        enrollments = EdraakCourseEnrollmentSerializer(
+            qset,
+            many=True,
+            context={'request': get_request_or_stub()}
+        ).data
 
-    # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
-    enrollments = EdraakCourseEnrollmentSerializer(
-        qset,
-        many=True,
-        context={'request': get_request_or_stub()}
-    ).data
+    with time_block('append_enrollments', 2):
+        # Find deleted courses and filter them out of the results
+        deleted = []
+        valid = []
+        for enrollment in enrollments:
+            if enrollment.get("course_details") is not None:
+                valid.append(enrollment)
+            else:
+                deleted.append(enrollment)
 
-    Timer.log_time('end EdraakCourseEnrollmentSerializer', 2)
-
-    # Find deleted courses and filter them out of the results
-    deleted = []
-    valid = []
-    for enrollment in enrollments:
-        if enrollment.get("course_details") is not None:
-            valid.append(enrollment)
-        else:
-            deleted.append(enrollment)
-
-    if deleted:
-        log.warning(
-            (
-                u"Course enrollments for user %s reference "
-                u"courses that do not exist (this can occur if a course is deleted)."
-            ), user_id,
-        )
-
-    Timer.log_time('end get_course_enrollments', 2)
+        if deleted:
+            log.warning(
+                (
+                    u"Course enrollments for user %s reference "
+                    u"courses that do not exist (this can occur if a course is deleted)."
+                ), user_id,
+            )
 
     return valid
 
