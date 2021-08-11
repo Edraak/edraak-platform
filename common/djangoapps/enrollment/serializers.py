@@ -163,11 +163,9 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
             try:
                 specialization_info = CourseSpecializationInfo.objects.get(course_id=obj.course_id)
             except CourseSpecializationInfo.DoesNotExist:
-                specialization_info = None
+                return None
 
-        if specialization_info:
-            return specialization_info.specialization_slug
-        return None
+        return specialization_info.specialization_slug
 
     def get_subscribed_to_emails(self, obj):
         from . import time_block
