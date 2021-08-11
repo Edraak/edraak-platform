@@ -120,11 +120,18 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
             return 0
 
     def get_completed(self, obj):
-        from edraak_certificates.utils import is_student_pass
+        from enrollment import time_block
+        with time_block('CourseSerializer.get_completed', 5):
+            from edraak_certificates.utils import is_student_pass
 
-        request = self.context['request']
-        course_id_str = str(obj.id)
-        return bool(is_student_pass(request.user, course_id_str))
+            request = self.context['request']
+            course_id_str = str(obj.id)
+            return bool(is_student_pass(request.user, course_id_str))
+
+    def to_representation(self, obj):
+        from enrollment import time_block
+        with time_block('CourseSerializer.to_representation', 5):
+            return super(CourseSerializer, self).to_representation(obj)
 
 
 class CourseDetailMarketingSerializer(CourseSerializer):
