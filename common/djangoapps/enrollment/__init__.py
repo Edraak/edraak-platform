@@ -1,6 +1,10 @@
 """
 Enrollment API helpers and settings
 """
+import timeit
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class Timer(object):
@@ -9,7 +13,6 @@ class Timer(object):
 
     @classmethod
     def log_time(cls, name, level):
-        import timeit
         time = timeit.default_timer()
 
         if cls.last_time and cls.last_time_name:
