@@ -117,7 +117,7 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
     def to_representation(self, *args, **kwargs):
         from . import Timer
         Timer.log_time('start to_representation', 3)
-        result = super(self).to_representation(*args, **kwargs)
+        result = super(EdraakCourseEnrollmentSerializer, self).to_representation(*args, **kwargs)
         Timer.log_time('end to_representation', 3)
         return result
 
