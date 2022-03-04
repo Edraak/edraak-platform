@@ -513,6 +513,13 @@ class UserProfile(models.Model):
         if self.gender:
             return self.__enumerable_to_display(self.GENDER_CHOICES, self.gender)
 
+    @property
+    def first_name(self):
+        """Convenience method to return the user's first name."""
+        if not self.name:
+            return ""
+        return self.name.split()[0]
+
     def get_meta(self):  # pylint: disable=missing-docstring
         js_str = self.meta
         if not js_str:
