@@ -615,10 +615,14 @@ CODE_JAIL = {
 ############################ DJANGO_BUILTINS ################################
 # Change DEBUG in your environment settings files, not here
 DEBUG = False
+
+# See comments in the auth_provider configuration.
 SESSION_COOKIE_SECURE = False
 SESSION_SAVE_EVERY_REQUEST = False
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
+# In production, redefined by aws.py
+SESSION_COOKIE_NAME = 'signed_sessionid'
 
 # Site info
 SITE_NAME = "localhost:8001"
