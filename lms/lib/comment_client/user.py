@@ -13,10 +13,10 @@ class User(models.Model):
         'id', 'external_id', 'subscribed_user_ids', 'children', 'course_id',
         'group_id', 'subscribed_thread_ids', 'subscribed_commentable_ids',
         'subscribed_course_ids', 'threads_count', 'comments_count',
-        'default_sort_key', 'name',
+        'default_sort_key'
     ]
 
-    updatable_fields = ['username', 'external_id', 'default_sort_key', 'name']
+    updatable_fields = ['username', 'external_id', 'default_sort_key']
     initializable_fields = updatable_fields
 
     metric_tag_fields = ['course_id']
@@ -29,8 +29,7 @@ class User(models.Model):
     def from_django_user(cls, user):
         return cls(id=str(user.id),
                    external_id=str(user.id),
-                   username=user.username,
-                   name=user.profile.name)
+                   username=user.username)
 
     def read(self, source):
         """
