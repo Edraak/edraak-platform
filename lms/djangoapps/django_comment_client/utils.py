@@ -746,7 +746,7 @@ def prepare_content(content, course_key, is_staff=False, discussion_division_ena
     ]
 
     if (content.get('anonymous') is False) and ((content.get('anonymous_to_peers') is False) or is_staff):
-        fields += ['username', 'user_id']
+        fields += ['username', 'user_id', 'user_full_name']
 
     content = strip_none(extract(content, fields))
 
@@ -755,7 +755,7 @@ def prepare_content(content, course_key, is_staff=False, discussion_division_ena
         endorser = None
         if endorsement["user_id"]:
             try:
-                endorser = User.objects.get(pk=endorsement["user_id"])
+                endorser = User.objects.select_related("profile").get(pk=endorsement["user_id"])
             except User.DoesNotExist:
                 log.error(
                     "User ID %s in endorsement for comment %s but not in our DB.",
@@ -769,6 +769,7 @@ def prepare_content(content, course_key, is_staff=False, discussion_division_ena
                 ("username" in fields or has_permission(endorser, "endorse_comment", course_key))
         ):
             endorsement["username"] = endorser.username
+            endorsement["user_full_name"] = endorser.profile.name
         else:
             del endorsement["user_id"]
 
