@@ -845,7 +845,7 @@ class CommentSerializerDeserializationTest(ForumsEnableMixin, CommentsServiceMoc
         )
         for key in data:
             self.assertEqual(saved[key], data[key])
-        self.assertEqual(saved["endorsed_by"], self.user.username)
+        self.assertEqual(saved["endorsed_by"], self.user.profile.name)
         self.assertEqual(saved["endorsed_at"], "2015-06-05T00:00:00Z")
 
     @ddt.data("", " ")
