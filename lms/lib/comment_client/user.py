@@ -35,10 +35,15 @@ class User(models.Model):
 
     @classmethod
     def from_django_user(cls, user):
+        from student.models import UserProfile
+        try:
+            full_name = user.profile.name
+        except UserProfile.DoesNotExist:
+            full_name = ''
         return cls(id=str(user.id),
                    external_id=str(user.id),
                    username=user.username,
-                   full_name=user.profile.name)
+                   full_name=full_name)
 
     def read(self, source):
         """

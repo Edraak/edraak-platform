@@ -236,6 +236,8 @@ def get_full_name(user_id):
     too often. The name is cached for 1 hour (3600 seconds), expires, but never
     gets invalidated.
     """
+    from student.models import UserProfile
+
     if not user_id:
         return None
 
@@ -248,6 +250,8 @@ def get_full_name(user_id):
     if full_name is None:
         try:
             full_name = User.objects.get(id=user_id).profile.name
+        except UserProfile.DoesNotExist:
+            full_name = ""
         except User.DoesNotExist:
             full_name = user_not_found
         cache.set(cache_key, full_name, cache_timeout)
