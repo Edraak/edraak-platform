@@ -333,7 +333,7 @@ class CommentSerializer(_ContentSerializer):
                     self._is_anonymous(self.context["thread"]) and
                     not self._is_user_privileged(endorser_id)
             ):
-                return DjangoUser.objects.get(id=endorser_id).profile.name
+                return DjangoUser.objects.get(id=endorser_id).username
         return None
 
     def get_endorsed_by_label(self, obj):
