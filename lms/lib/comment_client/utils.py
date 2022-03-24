@@ -208,12 +208,15 @@ def annotate_with_full_name(obj, user_id_field="user_id"):
     annotate_dict_with_full_name(obj.attributes, user_id_field=user_id_field)
 
 
-def annotate_dict_with_full_name(attributes, user_id_field="user_id"):
+def annotate_dict_with_full_name(attributes, user_id_field="user_id", recursive=True):
     """Annotate dict and all its children with user_full_name."""
     full_name = attributes.get("user_full_name")
     if not full_name:
         full_name = get_full_name(attributes.get(user_id_field))
         attributes["user_full_name"] = full_name
+
+    if not recursive:
+        return
 
     child_keys = ["children", "endorsed_responses", "non_endorsed_responses"]
 
