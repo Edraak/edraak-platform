@@ -203,6 +203,14 @@ def annotate_with_full_name(obj, user_id_field="user_id"):
     annotate_dict_with_full_name(obj.attributes, user_id_field=user_id_field)
 
 
+def annotate_response_with_full_name(response):
+    """Annotate API response with full name in place."""
+    collection = response.get('collection', [])
+    if collection:
+        for record in collection:
+            annotate_dict_with_full_name(record)
+
+
 def annotate_dict_with_full_name(attributes, user_id_field="user_id"):
     """Annotate dict and all its children with user_full_name."""
     full_name = attributes.get("user_full_name")

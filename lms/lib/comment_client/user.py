@@ -4,7 +4,9 @@ from six import text_type
 import settings
 import models
 import utils
-from lms.lib.comment_client.utils import annotate_with_full_name
+from lms.lib.comment_client.utils import (
+    annotate_response_with_full_name,
+    annotate_with_full_name)
 
 
 class User(models.Model):
@@ -126,6 +128,7 @@ class User(models.Model):
             metric_tags=self._metric_tags,
             paged_results=True,
         )
+        annotate_response_with_full_name(response)
         return response.get('collection', []), response.get('page', 1), response.get('num_pages', 1)
 
     def subscribed_threads(self, query_params={}):
@@ -142,6 +145,8 @@ class User(models.Model):
             metric_tags=self._metric_tags,
             paged_results=True
         )
+
+        annotate_response_with_full_name(response)
         return utils.CommentClientPaginatedResult(
             collection=response.get('collection', []),
             page=response.get('page', 1),

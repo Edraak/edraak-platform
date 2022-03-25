@@ -7,8 +7,8 @@ from eventtracking import tracker
 
 import utils
 from lms.lib.comment_client.utils import (
-    annotate_dict_with_full_name,
-    annotate_with_full_name)
+    annotate_response_with_full_name, annotate_with_full_name
+)
 
 log = logging.getLogger(__name__)
 
@@ -113,13 +113,9 @@ class Thread(models.Model):
                 )
             )
 
-        collection = response.get('collection', [])
-        if collection:
-            for record in collection:
-                annotate_dict_with_full_name(record)
-
+        annotate_response_with_full_name(response)
         return utils.CommentClientPaginatedResult(
-            collection=collection,
+            collection=response.get('collection', []),
             page=response.get('page', 1),
             num_pages=response.get('num_pages', 1),
             thread_count=response.get('thread_count', 0),
