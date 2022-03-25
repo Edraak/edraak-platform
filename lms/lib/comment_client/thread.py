@@ -114,10 +114,9 @@ class Thread(models.Model):
             )
 
         collection = response.get('collection', [])
-        if isinstance(collection, list):
+        if collection:
             for record in collection:
-                if isinstance(record, dict):
-                    annotate_dict_with_full_name(record, recursive=False)
+                annotate_dict_with_full_name(record)
 
         return utils.CommentClientPaginatedResult(
             collection=collection,
