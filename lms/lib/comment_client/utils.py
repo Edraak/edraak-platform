@@ -198,11 +198,6 @@ def check_forum_heartbeat():
         return 'forum', False, unicode(fail)
 
 
-# User not found sentinel. Keep it in the cache to avoid hitting the database
-# on non-existent or not found user.
-user_not_found = object()
-
-
 def annotate_with_full_name(obj, user_id_field="user_id"):
     """Annotate an object with the author full name in place."""
     annotate_dict_with_full_name(obj.attributes, user_id_field=user_id_field)
@@ -245,9 +240,9 @@ def get_full_name(user_id):
         return None
 
     cache_timeout = 3600
-    cache_key = 'comment_client.get_full_name.{}'.format(user_id)
+    cache_key = 'comment_client.get_full_name.v2.{}'.format(user_id)
     full_name = cache.get(cache_key)
-    if full_name is user_not_found:
+    if is_not_found(full_name):
         return None
 
     if full_name is None:
@@ -256,7 +251,23 @@ def get_full_name(user_id):
         except UserProfile.DoesNotExist:
             full_name = ""
         except User.DoesNotExist:
-            full_name = user_not_found
+            full_name = UserNotFound()
         cache.set(cache_key, full_name, cache_timeout)
 
+    if is_not_found(full_name):
+        return None
+
     return full_name
+
+
+class UserNotFound:
+    """User not found sentinel.
+
+    We store UserNotFound instances in the Redis cache instead of the username
+    to avoid hitting the database when a user is not found."""
+    pass
+
+
+def is_not_found(value):
+    """Return True if the object from the cache is a 'not found' sentinel."""
+    return isinstance(value, UserNotFound)
