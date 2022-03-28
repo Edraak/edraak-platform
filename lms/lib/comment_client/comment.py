@@ -1,7 +1,7 @@
 from lms.lib.comment_client import models, settings
 
 from .thread import Thread, _url_for_flag_abuse_thread, _url_for_unflag_abuse_thread
-from .utils import CommentClientRequestError, perform_request
+from .utils import CommentClientRequestError, annotate_with_full_name, perform_request
 
 
 class Comment(models.Model):
@@ -11,7 +11,7 @@ class Comment(models.Model):
         'endorsed', 'parent_id', 'thread_id', 'username', 'votes', 'user_id',
         'closed', 'created_at', 'updated_at', 'depth', 'at_position_list',
         'type', 'commentable_id', 'abuse_flaggers', 'endorsement',
-        'child_count',
+        'child_count', 'user_full_name',
     ]
 
     updatable_fields = [
@@ -29,6 +29,10 @@ class Comment(models.Model):
     def __init__(self, *args, **kwargs):
         super(Comment, self).__init__(*args, **kwargs)
         self._cached_thread = None
+        self.post_retrieve()
+
+    def post_retrieve(self):
+        annotate_with_full_name(self, user_id_field='user_id')
 
     @property
     def thread(self):

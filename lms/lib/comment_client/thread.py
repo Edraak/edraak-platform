@@ -6,6 +6,9 @@ import models
 from eventtracking import tracker
 
 import utils
+from lms.lib.comment_client.utils import (
+    annotate_response_with_full_name, annotate_with_full_name
+)
 
 log = logging.getLogger(__name__)
 
@@ -21,7 +24,7 @@ class Thread(models.Model):
         'highlighted_body', 'endorsed', 'read', 'group_id', 'group_name', 'pinned',
         'abuse_flaggers', 'resp_skip', 'resp_limit', 'resp_total', 'thread_type',
         'endorsed_responses', 'non_endorsed_responses', 'non_endorsed_resp_total',
-        'context', 'last_activity_at',
+        'context', 'last_activity_at', 'user_full_name',
     ]
 
     # updateable_fields are sent in PUT requests
@@ -42,6 +45,13 @@ class Thread(models.Model):
     base_url = "{prefix}/threads".format(prefix=settings.PREFIX)
     default_retrieve_params = {'recursive': False}
     type = 'thread'
+
+    def __init__(self, *args, **kwargs):
+        super(Thread, self).__init__(*args, **kwargs)
+        self.post_retrieve()
+
+    def post_retrieve(self):
+        annotate_with_full_name(self, user_id_field='user_id')
 
     @classmethod
     def search(cls, query_params):
@@ -103,6 +113,7 @@ class Thread(models.Model):
                 )
             )
 
+        annotate_response_with_full_name(response)
         return utils.CommentClientPaginatedResult(
             collection=response.get('collection', []),
             page=response.get('page', 1),

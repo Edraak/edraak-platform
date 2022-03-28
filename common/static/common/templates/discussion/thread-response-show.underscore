@@ -8,7 +8,7 @@
             <%
             var fmt = null;
             if (thread.get("thread_type") == "question") {
-              if (endorsement.username) {
+              if (endorsement.user_full_name) {
                 // Translators: time_ago is a placeholder for a fuzzy, relative timestamp
                 // like "4 hours ago" or "about a month ago"
                 fmt = gettext("marked as answer %(time_ago)s by %(user)s");
@@ -18,7 +18,7 @@
                 fmt = gettext("marked as answer %(time_ago)s");
               }
             } else {
-              if (endorsement.username) {
+              if (endorsement.user_full_name) {
                 // Translators: time_ago is a placeholder for a fuzzy, relative timestamp
                 // like "4 hours ago" or "about a month ago"
                 fmt = gettext("endorsed %(time_ago)s by %(user)s");

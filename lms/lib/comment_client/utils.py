@@ -6,8 +6,12 @@ from uuid import uuid4
 
 import requests
 from django.utils.translation import get_language
+from django.core.cache import cache
+from django.contrib.auth.models import User
 
 import dogstats_wrapper as dog_stats_api
+
+from openedx.core.djangoapps.request_cache.middleware import request_cached
 from .settings import SERVICE_HOST as COMMENTS_SERVICE
 
 log = logging.getLogger(__name__)
@@ -192,3 +196,83 @@ def check_forum_heartbeat():
             return 'forum', False, res.get('check', 'Forum heartbeat failed')
     except Exception as fail:
         return 'forum', False, unicode(fail)
+
+
+def annotate_with_full_name(obj, user_id_field="user_id"):
+    """Annotate an object with the author full name in place."""
+    annotate_dict_with_full_name(obj.attributes, user_id_field=user_id_field)
+
+
+def annotate_response_with_full_name(response):
+    """Annotate API response with full name in place."""
+    collection = response.get('collection', [])
+    if collection:
+        for record in collection:
+            annotate_dict_with_full_name(record)
+
+
+def annotate_dict_with_full_name(attributes, user_id_field="user_id"):
+    """Annotate dict and all its children with user_full_name."""
+    full_name = attributes.get("user_full_name")
+    if not full_name:
+        full_name = get_full_name(attributes.get(user_id_field))
+        attributes["user_full_name"] = full_name
+
+    child_keys = ["children", "endorsed_responses", "non_endorsed_responses"]
+
+    for child_key in child_keys:
+        children = attributes.get(child_key)
+        if not isinstance(children, list):
+            continue
+        for child in children:
+            if not isinstance(child, dict):
+                continue
+            # All children objects have a "user_id" field, so we hardcode the value
+            annotate_dict_with_full_name(child, user_id_field="user_id")
+
+
+@request_cached
+def get_full_name(user_id):
+    """Return user's full name by its ID.
+
+    The function uses the Django cache functionality to avoid hitting the database
+    too often. The name is cached for 1 hour (3600 seconds), expires, but never
+    gets invalidated.
+    """
+    from student.models import UserProfile
+
+    if not user_id:
+        return None
+
+    cache_timeout = 3600
+    cache_key = 'comment_client.get_full_name.v2.{}'.format(user_id)
+    full_name = cache.get(cache_key)
+    if is_not_found(full_name):
+        return None
+
+    if full_name is None:
+        try:
+            full_name = User.objects.get(id=user_id).profile.name
+        except UserProfile.DoesNotExist:
+            full_name = ""
+        except User.DoesNotExist:
+            full_name = UserNotFound()
+        cache.set(cache_key, full_name, cache_timeout)
+
+    if is_not_found(full_name):
+        return None
+
+    return full_name
+
+
+class UserNotFound:
+    """User not found sentinel.
+
+    We store UserNotFound instances in the Redis cache instead of the username
+    to avoid hitting the database when a user is not found."""
+    pass
+
+
+def is_not_found(value):
+    """Return True if the object from the cache is a 'not found' sentinel."""
+    return isinstance(value, UserNotFound)

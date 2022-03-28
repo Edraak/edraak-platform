@@ -80,7 +80,7 @@
             imageAltText: function() {
                 return StringUtils.interpolate(
                     gettext('Profile image for {username}'),
-                    {username: this.model.get('username')}
+                    {username: this.model.get('user_full_name') || this.model.get('username')}
                 );
             },
 

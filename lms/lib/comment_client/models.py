@@ -63,7 +63,12 @@ class Model(object):
         if not self.retrieved:
             self._retrieve(*args, **kwargs)
             self.retrieved = True
+            self.post_retrieve()
         return self
+
+    def post_retrieve(self):
+        """Optional function to be called after retrieving the object."""
+        pass
 
     def _retrieve(self, *args, **kwargs):
         url = self.url(action='get', params=self.attributes)

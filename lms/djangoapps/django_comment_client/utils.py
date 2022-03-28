@@ -23,7 +23,7 @@ from django_comment_common.utils import get_course_discussion_settings
 from openedx.core.djangoapps.content.course_structures.models import CourseStructure
 from openedx.core.djangoapps.course_groups.cohorts import get_cohort_id, get_cohort_names, is_course_cohorted
 from openedx.core.djangoapps.request_cache.middleware import request_cached
-from student.models import get_user_by_username
+from student.models import UserProfile, get_user_by_username
 from student.roles import GlobalStaff
 from xmodule.modulestore.django import modulestore
 from xmodule.partitions.partitions import ENROLLMENT_TRACK_PARTITION_ID
@@ -746,7 +746,7 @@ def prepare_content(content, course_key, is_staff=False, discussion_division_ena
     ]
 
     if (content.get('anonymous') is False) and ((content.get('anonymous_to_peers') is False) or is_staff):
-        fields += ['username', 'user_id']
+        fields += ['username', 'user_id', 'user_full_name']
 
     content = strip_none(extract(content, fields))
 
@@ -755,7 +755,7 @@ def prepare_content(content, course_key, is_staff=False, discussion_division_ena
         endorser = None
         if endorsement["user_id"]:
             try:
-                endorser = User.objects.get(pk=endorsement["user_id"])
+                endorser = User.objects.select_related("profile").get(pk=endorsement["user_id"])
             except User.DoesNotExist:
                 log.error(
                     "User ID %s in endorsement for comment %s but not in our DB.",
@@ -769,6 +769,10 @@ def prepare_content(content, course_key, is_staff=False, discussion_division_ena
                 ("username" in fields or has_permission(endorser, "endorse_comment", course_key))
         ):
             endorsement["username"] = endorser.username
+            try:
+                endorsement["user_full_name"] = endorser.profile.name
+            except UserProfile.DoesNotExist:
+                endorsement["user_full_name"] = ""
         else:
             del endorsement["user_id"]
 

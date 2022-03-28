@@ -4,6 +4,9 @@ from six import text_type
 import settings
 import models
 import utils
+from lms.lib.comment_client.utils import (
+    annotate_response_with_full_name,
+    annotate_with_full_name)
 
 
 class User(models.Model):
@@ -13,7 +16,7 @@ class User(models.Model):
         'id', 'external_id', 'subscribed_user_ids', 'children', 'course_id',
         'group_id', 'subscribed_thread_ids', 'subscribed_commentable_ids',
         'subscribed_course_ids', 'threads_count', 'comments_count',
-        'default_sort_key'
+        'default_sort_key', 'user_full_name',
     ]
 
     updatable_fields = ['username', 'external_id', 'default_sort_key']
@@ -25,11 +28,24 @@ class User(models.Model):
     default_retrieve_params = {'complete': True}
     type = 'user'
 
+    def __init__(self, *args, **kwargs):
+        super(User, self).__init__(*args, **kwargs)
+        self.post_retrieve()
+
+    def post_retrieve(self):
+        annotate_with_full_name(self, user_id_field='external_id')
+
     @classmethod
     def from_django_user(cls, user):
+        from student.models import UserProfile
+        try:
+            full_name = user.profile.name
+        except UserProfile.DoesNotExist:
+            full_name = ''
         return cls(id=str(user.id),
                    external_id=str(user.id),
-                   username=user.username)
+                   username=user.username,
+                   full_name=full_name)
 
     def read(self, source):
         """
@@ -112,6 +128,7 @@ class User(models.Model):
             metric_tags=self._metric_tags,
             paged_results=True,
         )
+        annotate_response_with_full_name(response)
         return response.get('collection', []), response.get('page', 1), response.get('num_pages', 1)
 
     def subscribed_threads(self, query_params={}):
@@ -128,6 +145,8 @@ class User(models.Model):
             metric_tags=self._metric_tags,
             paged_results=True
         )
+
+        annotate_response_with_full_name(response)
         return utils.CommentClientPaginatedResult(
             collection=response.get('collection', []),
             page=response.get('page', 1),
