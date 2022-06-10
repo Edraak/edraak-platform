@@ -114,17 +114,26 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
     is_completed = serializers.SerializerMethodField()
     is_certificate_available = serializers.SerializerMethodField()
 
-    def get_edraak_course_details(self, obj):
-        context = self.context.copy()
-        CourseDetailMarketingSerializer.update_marketing_context(
-            context=context,
-            course_key=obj.course_id
-        )
+    def to_representation(self, *args, **kwargs):
+        from . import time_block
+        with time_block('to_representation', 3):
+            result = super(EdraakCourseEnrollmentSerializer, self).to_representation(*args, **kwargs)
+        return result
 
-        return CourseDetailMarketingSerializer(
-            obj.course_overview,
-            context=context
-        ).data
+    def get_edraak_course_details(self, obj):
+        from . import time_block
+        with time_block('get_edraak_course_details', 4):
+            context = self.context.copy()
+            CourseDetailMarketingSerializer.update_marketing_context(
+                context=context,
+                course_key=obj.course_id
+            )
+
+            data = CourseDetailMarketingSerializer(
+                obj.course_overview,
+                context=context
+            ).data
+        return data
 
     def _get_user(self):
         request = self.context.get('request')
@@ -133,70 +142,81 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
         return None
 
     def get_is_certificate_allowed(self, obj):
-        # Keep this import local to hide LMS related stuff from pytest when testing CMS
-        from edraak_certificates.utils import is_certificate_allowed
+        from . import time_block
+        with time_block('get_is_certificate_allowed', 4):
+            # Keep this import local to hide LMS related stuff from pytest when testing CMS
+            from edraak_certificates.utils import is_certificate_allowed
 
-        user = self._get_user()
-        if user:
-            allowed = obj.course_overview and is_certificate_allowed(user, obj.course_overview)
-        else:
-            log.warning(
-                'EDRAAK: Certificate is not allowed because EdraakCourseEnrollmentSerializer cannot find user!'
-            )
-            allowed = False
-
+            user = self._get_user()
+            if user:
+                allowed = obj.course_overview and is_certificate_allowed(user, obj.course_overview)
+            else:
+                log.warning(
+                    'EDRAAK: Certificate is not allowed because EdraakCourseEnrollmentSerializer cannot find user!'
+                )
+                allowed = False
         return allowed
 
     def get_specialization_slug(self, obj):
-        try:
-            specialization_info = CourseSpecializationInfo.objects.get(course_id=obj.course_id)
-        except CourseSpecializationInfo.DoesNotExist:
-            return None
+        from . import time_block
+        with time_block('get_specialization_slug', 4):
+            try:
+                specialization_info = CourseSpecializationInfo.objects.get(course_id=obj.course_id)
+            except CourseSpecializationInfo.DoesNotExist:
+                return None
+
         return specialization_info.specialization_slug
 
     def get_subscribed_to_emails(self, obj):
-        user = self._get_user()
-        if not user or not user.is_authenticated:
-            return False
+        from . import time_block
+        with time_block('get_subscribed_to_emails', 4):
+            user = self._get_user()
+            if not user or not user.is_authenticated:
+                return False
 
-        return not Optout.objects.filter(user=user, course_id=obj.course_id).exists()
+            result = not Optout.objects.filter(user=user, course_id=obj.course_id).exists()
+        return result
 
     def get_is_completed(self, obj):
-        # Keep this import local to hide LMS related stuff from pytest when testing CMS
-        from lms.djangoapps.grades.models import PersistentCourseGrade
+        from . import time_block
+        with time_block('get_is_completed', 4):
+            # Keep this import local to hide LMS related stuff from pytest when testing CMS
+            from lms.djangoapps.grades.models import PersistentCourseGrade
 
-        user = self._get_user()
-        completed = False
-        if user:
-            try:
-                grade = PersistentCourseGrade.objects.get(
-                    user_id=user.id,
-                    course_id=obj.course_id,
-                )
-            except PersistentCourseGrade.DoesNotExist:
-                pass
-            else:
-                if grade.percent_grade >= obj.course_overview.lowest_passing_grade:
-                    completed = True
+            user = self._get_user()
+            completed = False
+            if user:
+                try:
+                    grade = PersistentCourseGrade.objects.get(
+                        user_id=user.id,
+                        course_id=obj.course_id,
+                    )
+                except PersistentCourseGrade.DoesNotExist:
+                    pass
+                else:
+                    if grade.percent_grade >= obj.course_overview.lowest_passing_grade:
+                        completed = True
         return completed
 
     def get_is_certificate_available(self, obj):
-        # Keep this import local to hide LMS related stuff from pytest when testing CMS
-        from lms.djangoapps.certificates.models import CertificateStatuses, GeneratedCertificate
+        from . import time_block
+        with time_block('get_is_certificate_available', 4):
+            # Keep this import local to hide LMS related stuff from pytest when testing CMS
+            from lms.djangoapps.certificates.models import CertificateStatuses, GeneratedCertificate
 
-        user = self._get_user()
-        available = False
-        if user:
-            try:
-                _ = GeneratedCertificate.objects.get(
-                    user_id=user.id,
-                    course_id=obj.course_id,
-                    status__in=[CertificateStatuses.downloadable, CertificateStatuses.error],
-                )
-            except GeneratedCertificate.DoesNotExist:
-                pass
-            else:
-                available = True
+            user = self._get_user()
+            available = False
+            if user:
+                try:
+                    _ = GeneratedCertificate.objects.get(
+                        user_id=user.id,
+                        course_id=obj.course_id,
+                        status__in=[CertificateStatuses.downloadable, CertificateStatuses.error],
+                    )
+                except GeneratedCertificate.DoesNotExist:
+                    pass
+                else:
+                    available = True
         return available
 
     class Meta(object):

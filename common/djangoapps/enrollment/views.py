@@ -788,6 +788,8 @@ class EnrollmentListView(APIView, ApiKeyPermissionMixIn):
                 )
 
 
+
+
 @can_disable_rate_limit
 class EdraakCourseListView(APIView, ApiKeyPermissionMixIn):
     """
@@ -815,33 +817,35 @@ class EdraakCourseListView(APIView, ApiKeyPermissionMixIn):
         Example: api/enrollment/v1/edraak_course_list?is_completed=true
             get all enrollments for current user, where courses are completed, regardless of certificate status
         """
-        try:
-            enrollment_data = get_course_enrollments(
-                request.user.username
-            )
-        except CourseEnrollmentError:
-            return Response(
-                status=status.HTTP_400_BAD_REQUEST,
-                data={
-                    "message": (
-                        u"An error occurred while retrieving enrollments for user '{username}'"
-                    ).format(username=request.user.username)
-                }
-            )
-
-        filters = {}
-        try:
-            for parameter_name in ('is_certificate_allowed', 'is_certificate_available', 'is_completed',):
-                self._add_filter(filters=filters, request=request, parameter_name=parameter_name)
-        except ValueError as error:
-            return Response(
-                status=status.HTTP_400_BAD_REQUEST,
-                data={"message": six.text_type(error)}
-            )
-
-        final_data = [enrollment for enrollment in enrollment_data if self._is_enrollment_match(filters, enrollment)]
-
-        return Response(final_data)
+        from . import time_block
+        with time_block('GET_EdraakCourseListView', 0):
+            with time_block('get_course_enrollments', 1):
+                try:
+                    enrollment_data = get_course_enrollments(
+                        request.user.username
+                    )
+                except CourseEnrollmentError:
+                    return Response(
+                        status=status.HTTP_400_BAD_REQUEST,
+                        data={
+                            "message": (
+                                u"An error occurred while retrieving enrollments for user '{username}'"
+                            ).format(username=request.user.username)
+                        }
+                    )
+            filters = {}
+            try:
+                for parameter_name in ('is_certificate_allowed', 'is_certificate_available', 'is_completed',):
+                    self._add_filter(filters=filters, request=request, parameter_name=parameter_name)
+            except ValueError as error:
+                return Response(
+                    status=status.HTTP_400_BAD_REQUEST,
+                    data={"message": six.text_type(error)}
+                )
+            with time_block('api_filtering', 1):
+                final_data = [enrollment for enrollment in enrollment_data if self._is_enrollment_match(filters, enrollment)]
+            response = Response(final_data)
+        return response
 
     def _add_filter(self, filters, request, parameter_name):
         parameter_value = self._get_boolean(request=request, param=parameter_name)

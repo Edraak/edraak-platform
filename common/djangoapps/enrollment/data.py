@@ -45,34 +45,39 @@ def get_course_enrollments(user_id):
         A serializable list of dictionaries of all aggregated enrollment data for a user.
 
     """
-    qset = CourseEnrollment.objects.filter(
-        user__username=user_id,
-        is_active=True
-    ).order_by('created')
+    from . import time_block
 
-    # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
-    enrollments = EdraakCourseEnrollmentSerializer(
-        qset,
-        many=True,
-        context={'request': get_request_or_stub()}
-    ).data
+    with time_block('CourseEnrollment_query', 2):
+        qset = CourseEnrollment.objects.filter(
+            user__username=user_id,  # TODO: Omar user_id is not username
+            is_active=True
+        ).order_by('created')
 
-    # Find deleted courses and filter them out of the results
-    deleted = []
-    valid = []
-    for enrollment in enrollments:
-        if enrollment.get("course_details") is not None:
-            valid.append(enrollment)
-        else:
-            deleted.append(enrollment)
+    with time_block('EdraakCourseEnrollmentSerializer', 2):
+        # Edraak: use EdraakCourseEnrollmentSerializer instead of CourseEnrollmentSerializer
+        enrollments = EdraakCourseEnrollmentSerializer(
+            qset,
+            many=True,
+            context={'request': get_request_or_stub()}
+        ).data
 
-    if deleted:
-        log.warning(
-            (
-                u"Course enrollments for user %s reference "
-                u"courses that do not exist (this can occur if a course is deleted)."
-            ), user_id,
-        )
+    with time_block('append_enrollments', 2):
+        # Find deleted courses and filter them out of the results
+        deleted = []
+        valid = []
+        for enrollment in enrollments:
+            if enrollment.get("course_details") is not None:
+                valid.append(enrollment)
+            else:
+                deleted.append(enrollment)
+
+        if deleted:
+            log.warning(
+                (
+                    u"Course enrollments for user %s reference "
+                    u"courses that do not exist (this can occur if a course is deleted)."
+                ), user_id,
+            )
 
     return valid
 

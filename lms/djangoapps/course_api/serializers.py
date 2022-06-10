@@ -120,11 +120,18 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
             return 0
 
     def get_completed(self, obj):
-        from edraak_certificates.utils import is_student_pass
+        from enrollment import time_block
+        with time_block('CourseSerializer.get_completed', 5):
+            from edraak_certificates.utils import is_student_pass
 
-        request = self.context['request']
-        course_id_str = str(obj.id)
-        return bool(is_student_pass(request.user, course_id_str))
+            request = self.context['request']
+            course_id_str = str(obj.id)
+            return bool(is_student_pass(request.user, course_id_str))
+
+    def to_representation(self, obj):
+        from enrollment import time_block
+        with time_block('CourseSerializer.to_representation', 5):
+            return super(CourseSerializer, self).to_representation(obj)
 
 
 class CourseDetailMarketingSerializer(CourseSerializer):
@@ -135,45 +142,51 @@ class CourseDetailMarketingSerializer(CourseSerializer):
     """
     @staticmethod
     def update_marketing_context(context, course_key):
-        if is_marketing_api_enabled():
-            lang = 'en'
-            if context.get('request') and hasattr(context['request'], 'LANGUAGE_CODE'):
-                lang = context['request'].LANGUAGE_CODE
-            context['marketing_data'] = get_marketing_data(
-                course_key=course_key,
-                language=lang,
-            )
+        from enrollment import time_block
+        with time_block('CourseDetailMarketingSerializer.update_marketing_context', 5):
+            if is_marketing_api_enabled():
+                lang = 'en'
+                if context.get('request') and hasattr(context['request'], 'LANGUAGE_CODE'):
+                    lang = context['request'].LANGUAGE_CODE
+                context['marketing_data'] = get_marketing_data(
+                    course_key=course_key,
+                    language=lang,
+                )
 
     def get_data_with_marketing_overrides(self, original_serialized_data):
-        marketing_data = self.context.get('marketing_data')
-        if not marketing_data:
-            return original_serialized_data
+        from enrollment import time_block
+        with time_block('CourseDetailMarketingSerializer.get_data_with_marketing_overrides', 5):
+            marketing_data = self.context.get('marketing_data')
+            if not marketing_data:
+                return original_serialized_data
 
-        overridden = {}
-        overridden.update(original_serialized_data)
+            overridden = {}
+            overridden.update(original_serialized_data)
 
-        overridden['effort'] = marketing_data['effort']
-        overridden['name'] = marketing_data['name']
-        if get_language() == 'en':
-            overridden['short_description'] = marketing_data['short_description_en']
-        else:
-            overridden['short_description'] = marketing_data['short_description_ar']
-        overridden['overview'] = marketing_data['overview'] or ''
-        overridden['name_en'] = marketing_data['name_en']
-        overridden['name_ar'] = marketing_data['name_ar']
+            overridden['effort'] = marketing_data['effort']
+            overridden['name'] = marketing_data['name']
+            if get_language() == 'en':
+                overridden['short_description'] = marketing_data['short_description_en']
+            else:
+                overridden['short_description'] = marketing_data['short_description_ar']
+            overridden['overview'] = marketing_data['overview'] or ''
+            overridden['name_en'] = marketing_data['name_en']
+            overridden['name_ar'] = marketing_data['name_ar']
 
-        if marketing_data.get('course_image'):
-            overridden['media']['course_image']['uri'] = marketing_data['course_image']
+            if marketing_data.get('course_image'):
+                overridden['media']['course_image']['uri'] = marketing_data['course_image']
 
-        if marketing_data.get('course_video'):
-            overridden['media']['course_video']['uri'] = marketing_data['course_video']
+            if marketing_data.get('course_video'):
+                overridden['media']['course_video']['uri'] = marketing_data['course_video']
 
-        return overridden
+            return overridden
 
     @property
     def data(self):
-        serialized_data = super(CourseDetailMarketingSerializer, self).data
-        return self.get_data_with_marketing_overrides(serialized_data)
+        from enrollment import time_block
+        with time_block('CourseDetailMarketingSerializer.data', 5):
+            serialized_data = super(CourseDetailMarketingSerializer, self).data
+            return self.get_data_with_marketing_overrides(serialized_data)
 
 
 class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-method
