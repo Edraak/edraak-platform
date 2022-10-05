@@ -176,7 +176,7 @@ class EdraakCourseEnrollmentSerializer(CourseEnrollmentSerializer):
             except PersistentCourseGrade.DoesNotExist:
                 pass
             else:
-                if grade.percent_grade >= obj.course_overview.lowest_passing_grade:
+                if grade.percent_grade >= float(obj.course_overview.lowest_passing_grade):
                     completed = True
         return completed
 
