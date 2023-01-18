@@ -167,7 +167,7 @@ mock==1.0.1
 mongoengine==0.10.0
 mysql-python==1.2.5
 networkx==1.7
-newrelic==3.2.2.94
+newrelic==8.5.0
 nltk==3.3.0
 nodeenv==1.1.1
 numpy==1.6.2
