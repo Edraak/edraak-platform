@@ -54,7 +54,7 @@
     "style-loader": "0.18.2",
     "svg-inline-loader": "0.8.0",
     "uglify-js": "2.7.0",
-    "underscore": "1.8.3",
+    "underscore": "1.12.1",
     "underscore.string": "3.3.4",
     "webpack": "2.7.0",
     "webpack-bundle-tracker": "0.2.1",
