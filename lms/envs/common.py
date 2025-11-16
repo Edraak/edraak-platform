@@ -919,7 +919,7 @@ DEBUG = False
 USE_TZ = True
 SESSION_COOKIE_SECURE = False
 SESSION_SAVE_EVERY_REQUEST = False
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_SERIALIZER = 'openedx.core.lib.session_serializers.JSONSessionSerializer'
 
 # CMS base
 CMS_BASE = 'localhost:8001'
