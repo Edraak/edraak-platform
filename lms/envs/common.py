@@ -2660,6 +2660,9 @@ FINANCIAL_REPORTS = {
 }
 
 #### Grading policy change-related settings #####
+# Queue to use for updating grades due to grading policy change
+POLICY_CHANGE_GRADES_ROUTING_KEY = LOW_PRIORITY_QUEUE
+
 # Rate limit for regrading tasks that a grading policy change can kick off
 POLICY_CHANGE_TASK_RATE_LIMIT = '300/h'
 
