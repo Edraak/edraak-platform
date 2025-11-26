@@ -2094,6 +2094,7 @@ INSTALLED_APPS = [
 
     # Site configuration for theming and behavioral modification
     'openedx.core.djangoapps.site_configuration',
+    'openedx.core.djangoapps.theming.apps.ThemingConfig',
 
     # Video module configs (This will be moved to Video once it becomes an XBlock)
     'openedx.core.djangoapps.video_config',
