@@ -18,6 +18,9 @@ class SiteTheme(models.Model):
     def __unicode__(self):
         return self.theme_dir_name
 
+    class Meta:
+        app_label = 'theming'
+
     @staticmethod
     def get_theme(site, default=None):
         """
