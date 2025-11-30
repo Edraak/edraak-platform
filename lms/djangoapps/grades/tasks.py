@@ -34,6 +34,26 @@ from .transformer import GradesTransformer
 
 log = getLogger(__name__)
 
+# Local constants with safe fallbacks.  If the settings module has not yet been
+# configured when this file is imported, these fallbacks will be used.  Once
+# Django is configured, ``settings`` will supply the real values.
+POLICY_CHANGE_GRADES_ROUTING_KEY = getattr(
+    settings,
+    'POLICY_CHANGE_GRADES_ROUTING_KEY',
+    getattr(settings, 'LOW_PRIORITY_QUEUE', 'edx.lms.core.low'),
+)
+RECALCULATE_GRADES_ROUTING_KEY = getattr(
+    settings,
+    'RECALCULATE_GRADES_ROUTING_KEY',
+    getattr(settings, 'LOW_PRIORITY_QUEUE', 'edx.lms.core.low'),
+)
+POLICY_CHANGE_TASK_RATE_LIMIT = getattr(
+    settings,
+    'POLICY_CHANGE_TASK_RATE_LIMIT',
+    '300/h',
+)
+
+# Task constants
 COURSE_GRADE_TIMEOUT_SECONDS = 1200
 KNOWN_RETRY_ERRORS = (  # Errors we expect occasionally, should be resolved on retry
     DatabaseError,
@@ -63,7 +83,8 @@ def compute_all_grades_for_course(**kwargs):
                 'batch_size': batch_size,
             })
             compute_grades_for_course_v2.apply_async(
-                kwargs=kwargs, routing_key=settings.POLICY_CHANGE_GRADES_ROUTING_KEY
+                kwargs=kwargs,
+                routing_key=POLICY_CHANGE_GRADES_ROUTING_KEY,
             )
 
 
@@ -73,7 +94,7 @@ def compute_all_grades_for_course(**kwargs):
     default_retry_delay=RETRY_DELAY_SECONDS,
     max_retries=1,
     time_limit=COURSE_GRADE_TIMEOUT_SECONDS,
-    rate_limit=settings.POLICY_CHANGE_TASK_RATE_LIMIT,
+    rate_limit=POLICY_CHANGE_TASK_RATE_LIMIT,
 )
 def compute_grades_for_course_v2(self, **kwargs):
     """
@@ -121,7 +142,7 @@ def compute_grades_for_course(course_key, offset, batch_size, **kwargs):  # pyli
     time_limit=SUBSECTION_GRADE_TIMEOUT_SECONDS,
     max_retries=2,
     default_retry_delay=RETRY_DELAY_SECONDS,
-    routing_key=settings.POLICY_CHANGE_GRADES_ROUTING_KEY
+    routing_key=POLICY_CHANGE_GRADES_ROUTING_KEY,
 )
 def recalculate_course_and_subsection_grades_for_user(self, **kwargs):  # pylint: disable=unused-argument
     """
@@ -153,7 +174,7 @@ def recalculate_course_and_subsection_grades_for_user(self, **kwargs):  # pylint
     time_limit=SUBSECTION_GRADE_TIMEOUT_SECONDS,
     max_retries=2,
     default_retry_delay=RETRY_DELAY_SECONDS,
-    routing_key=settings.RECALCULATE_GRADES_ROUTING_KEY
+    routing_key=RECALCULATE_GRADES_ROUTING_KEY,
 )
 def recalculate_subsection_grade_v3(self, **kwargs):
     """
