@@ -20,6 +20,8 @@ Common traits:
 import datetime
 import json
 
+from django.apps import AppConfig
+
 import dateutil
 
 from .common import *
@@ -317,10 +319,14 @@ ALL_LANGUAGES = ENV_TOKENS.get('ALL_LANGUAGES', ALL_LANGUAGES)
 USE_I18N = ENV_TOKENS.get('USE_I18N', USE_I18N)
 
 # Additional installed apps
+existing_app_labels = {AppConfig.create(app).label for app in INSTALLED_APPS}
 for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
     # Avoid duplicate app labels (e.g. bookmarks) by skipping apps already present
-    if app not in INSTALLED_APPS:
-        INSTALLED_APPS.append(app)
+    if AppConfig.create(app).label in existing_app_labels:
+        continue
+
+    INSTALLED_APPS.append(app)
+    existing_app_labels.add(AppConfig.create(app).label)
 
 WIKI_ENABLED = ENV_TOKENS.get('WIKI_ENABLED', WIKI_ENABLED)
 
