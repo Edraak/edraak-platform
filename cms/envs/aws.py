@@ -257,16 +257,6 @@ ENV_FEATURES = ENV_TOKENS.get('FEATURES', {})
 for feature, value in ENV_FEATURES.items():
     FEATURES[feature] = value
 
-# Additional installed apps
-existing_app_labels = {AppConfig.create(app).label for app in INSTALLED_APPS}
-for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
-    # Avoid duplicate app labels (e.g. bookmarks) by skipping apps already present
-    if AppConfig.create(app).label in existing_app_labels:
-        continue
-
-    INSTALLED_APPS.append(app)
-    existing_app_labels.add(AppConfig.create(app).label)
-
 WIKI_ENABLED = ENV_TOKENS.get('WIKI_ENABLED', WIKI_ENABLED)
 
 LOGGING = get_logger_config(LOG_DIR,
@@ -654,3 +644,16 @@ plugin_settings.add_plugins(__name__, plugin_constants.ProjectType.CMS, plugin_c
 ########################## Derive Any Derived Settings  #######################
 
 derive_settings(__name__)
+
+# Additional installed apps
+existing_app_labels = {AppConfig.create(app).label for app in INSTALLED_APPS}
+for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
+    try:
+        label = AppConfig.create(app).label
+    except Exception:
+        # Fall back to the final dotted name segment if the app cannot be imported
+        label = app.rsplit('.', 1)[-1].lower()
+    if label in existing_app_labels:
+        continue
+    INSTALLED_APPS.append(app)
+    existing_app_labels.add(label)

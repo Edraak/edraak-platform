@@ -318,15 +318,6 @@ ALL_LANGUAGES = ENV_TOKENS.get('ALL_LANGUAGES', ALL_LANGUAGES)
 
 USE_I18N = ENV_TOKENS.get('USE_I18N', USE_I18N)
 
-# Additional installed apps
-existing_app_labels = {AppConfig.create(app).label for app in INSTALLED_APPS}
-for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
-    # Avoid duplicate app labels (e.g. bookmarks) by skipping apps already present
-    if AppConfig.create(app).label in existing_app_labels:
-        continue
-
-    INSTALLED_APPS.append(app)
-    existing_app_labels.add(AppConfig.create(app).label)
 
 WIKI_ENABLED = ENV_TOKENS.get('WIKI_ENABLED', WIKI_ENABLED)
 
@@ -1196,3 +1187,16 @@ derive_settings(__name__)
 
 # the hosts that the platform is safe to redirect to
 ALLOWED_REDIRECT_HOSTS = ENV_TOKENS.get("SAFE_REDIRECT_HOSTS", [])
+
+# Additional installed apps
+existing_app_labels = {AppConfig.create(app).label for app in INSTALLED_APPS}
+for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
+    try:
+        label = AppConfig.create(app).label
+    except Exception:
+        # Fall back to the final dotted name segment if the app cannot be imported
+        label = app.rsplit('.', 1)[-1].lower()
+    if label in existing_app_labels:
+        continue
+    INSTALLED_APPS.append(app)
+    existing_app_labels.add(label)
