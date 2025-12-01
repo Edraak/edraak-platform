@@ -219,7 +219,7 @@ semantic-version==2.6.0   # via edx-drf-extensions
 shapely==1.2.16
 shortuuid==0.5.0          # via edx-django-oauth2-provider
 simplejson==3.16.0        # via django-rest-swagger, dogapi, mailsnake, sailthru-client, zendesk
-six==1.11.0
+six==1.17.0
 slumber==0.7.1            # via edx-rest-api-client
 social-auth-app-django==3.3.0
 -e git+https://github.com/python-social-auth/social-core.git@9d93069564a60495e0ebd697b33e16fcff14195b#egg=social_auth_core
