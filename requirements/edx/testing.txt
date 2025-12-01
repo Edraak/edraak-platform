@@ -292,7 +292,7 @@ shapely==1.2.16
 shortuuid==0.5.0
 simplejson==3.16.0
 singledispatch==3.4.0.3
-six==1.11.0
+six==1.17.0
 slumber==0.7.1
 social-auth-app-django==3.1.0
 social-auth-core==3.2.0

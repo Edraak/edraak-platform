@@ -304,7 +304,7 @@ shapely==1.2.16
 shortuuid==0.5.0
 simplejson==3.16.0
 singledispatch==3.4.0.3
-six==1.11.0
+six==1.17.0
 slumber==0.7.1
 snakefood==1.4
 snowballstemmer==1.2.1    # via sphinx
