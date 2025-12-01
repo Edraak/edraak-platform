@@ -318,7 +318,9 @@ USE_I18N = ENV_TOKENS.get('USE_I18N', USE_I18N)
 
 # Additional installed apps
 for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
-    INSTALLED_APPS.append(app)
+    # Avoid duplicate app labels (e.g. bookmarks) by skipping apps already present
+    if app not in INSTALLED_APPS:
+        INSTALLED_APPS.append(app)
 
 WIKI_ENABLED = ENV_TOKENS.get('WIKI_ENABLED', WIKI_ENABLED)
 
