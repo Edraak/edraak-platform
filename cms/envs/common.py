@@ -1115,7 +1115,6 @@ INSTALLED_APPS = [
     'survey.apps.SurveyConfig',
     'lms.djangoapps.verify_student.apps.VerifyStudentConfig',
     'completion',
-    'openedx.core.djangoapps.bookmarks.apps.BookmarksConfig',
 
     # Microsite configuration application
     'microsite_configuration',
