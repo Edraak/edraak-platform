@@ -1188,14 +1188,28 @@ derive_settings(__name__)
 # the hosts that the platform is safe to redirect to
 ALLOWED_REDIRECT_HOSTS = ENV_TOKENS.get("SAFE_REDIRECT_HOSTS", [])
 
-# Additional installed apps
-existing_app_labels = {AppConfig.create(app).label for app in INSTALLED_APPS}
-for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
+def _get_app_label(app):
     try:
-        label = AppConfig.create(app).label
+        return AppConfig.create(app).label
     except Exception:
         # Fall back to the final dotted name segment if the app cannot be imported
-        label = app.rsplit('.', 1)[-1].lower()
+        return app.rsplit('.', 1)[-1].lower()
+
+
+# Ensure the base INSTALLED_APPS list does not contain duplicate labels.
+deduped_installed_apps = []
+existing_app_labels = set()
+for app in INSTALLED_APPS:
+    label = _get_app_label(app)
+    if label in existing_app_labels:
+        continue
+    deduped_installed_apps.append(app)
+    existing_app_labels.add(label)
+INSTALLED_APPS = deduped_installed_apps
+
+# Additional installed apps
+for app in ENV_TOKENS.get('ADDL_INSTALLED_APPS', []):
+    label = _get_app_label(app)
     if label in existing_app_labels:
         continue
     INSTALLED_APPS.append(app)
