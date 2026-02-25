@@ -31,6 +31,14 @@ class CourseGradingModel(object):
         Fetch the course grading policy for the given course from persistence and return a CourseGradingModel.
         """
         descriptor = modulestore().get_course(course_key)
+        if descriptor is None or not hasattr(descriptor, 'raw_grader'):
+            # Return an empty model for invalid descriptors (e.g., HiddenDescriptorWithMixins)
+            empty_model = cls.__new__(cls)
+            empty_model.graders = []
+            empty_model.grade_cutoffs = {}
+            empty_model.grace_period = None
+            empty_model.minimum_grade_credit = 0
+            return empty_model
         model = cls(descriptor)
         return model
 
